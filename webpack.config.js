@@ -8,7 +8,7 @@ module.exports = {
   context: path.join(__dirname, './'),
   
   entry: {
-    main: "./client/main.jsx"
+    main: "./client/App.jsx"
   },
   output: {
     path: path.join(__dirname, 'public/build'),

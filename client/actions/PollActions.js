@@ -26,13 +26,11 @@ const PollActions = {
   },
 
   createPoll(poll) {
-    API.createPoll(poll)
-      .then(() =>
-        this.loadPolls()
-      )
-      .catch(err =>
-        console.error(err)
-      );
+    return API.createPoll(poll)
+      .then(({ data }) => {
+        this.loadPolls();
+        return data;
+      })
   },
 
   deletePoll(pollId) {

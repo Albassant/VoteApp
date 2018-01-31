@@ -6,6 +6,7 @@ const passport = require('passport');
 
 //connect to db
 const db = require('./server/config/db.js');
+db.setupConnection();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

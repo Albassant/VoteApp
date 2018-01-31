@@ -1,10 +1,12 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import PollForm from '../components/PollForm.jsx';
 import axios from 'axios';
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 
+import PollsList from '../components/PollsList';
+
+//var tmp = [{ id:"1", name: 'hello'}, { id:"2", name: 'big'}, { id:"3", name: 'small' }, { id:"4", name: 'world'}];
 
 function getStateFromFlux() {
     return {
@@ -37,30 +39,15 @@ class PollsPage extends React.Component {
     PollStore.removeChangeListener(this._onChange);
   }
   
-  handlePollDelete(poll) {
+  handlePollDelete(poll, event) {
+    event.stopPropagation();
     //PollActions.deletePoll(poll.id);
-    console.log("handlePollDelete");
+    console.log("handlePollDelete " + poll.name);
   }
   
-  handlePollClick(poll) {
+  handlePollClick(poll, event) {
     // TODO load selected poll form or visuals
-    console.log("handlePollClick");
-  }
-
-  handlePollSubmit(event) {
-    event.preventDefault();
-    
-    var formData = {
-      options: []
-    };
-    
-    // //collect all data from form for submission
-    // $('#poll form').find('input').each(function() {
-    //   if (this.name == "pollname") formData.pollname = this.value;
-    //   else formData.options.push(this.value);
-    // });
-        
-    PollActions.createPoll(formData);
+    console.log("handlePollClick " + poll.name);
   }
 
   render() {
@@ -69,20 +56,7 @@ class PollsPage extends React.Component {
     );
   }
 }
-//<PollForm polls={this.state.polls} onSubmit={this.handlePollSubmit}/>
+
 export default PollsPage;
-
-
-
-//     render() {
-//         return (
-//             <div className='App'>
-//                 <h2 className='App__header'>NotesApp</h2>
-//                 <NoteEditor onNoteAdd={this.handleNoteAdd} />
-//                 <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
-//             </div>
-//         );
-//     },
-// });
 
 
