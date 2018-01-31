@@ -1,0 +1,1229 @@
+{
+  "{\"filename\":\"/app/server.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server.js",
+      "filenameRelative": "/app/server.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "server.js",
+      "sourceFileName": "server.js",
+      "sourceRoot": "/app",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "server"
+    },
+    "ignored": false,
+    "code": "// where your node app starts\nconst express = require('express');\nconst app = express();\nconst bodyParser = require('body-parser');\nconst passport = require('passport');\n\n//connect to db\nconst db = require('./server/config/db.js');\n\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({ extended: false }));\napp.use(express.static('public'));\n\n// Configure passport middleware\napp.use(passport.initialize());\n\n// load passport strategies\npassport.use('local-register', require('./server/passport/local-register'));\npassport.use('local-login', require('./server/passport/local-login'));\n\n// pass the authenticaion checker middleware\napp.use('/api', require('./server/middleware/auth-check'));\n\n// routes\napp.use('/auth', require('./server/routes/auth'));\napp.use('/api', require('./server/routes/api'));\n\nconst listener = app.listen(process.env.PORT, function () {\n  console.log('Your app is listening on port ' + listener.address().port);\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcnZlci5qcyJdLCJuYW1lcyI6WyJleHByZXNzIiwicmVxdWlyZSIsImFwcCIsImJvZHlQYXJzZXIiLCJwYXNzcG9ydCIsImRiIiwidXNlIiwianNvbiIsInVybGVuY29kZWQiLCJleHRlbmRlZCIsInN0YXRpYyIsImluaXRpYWxpemUiLCJsaXN0ZW5lciIsImxpc3RlbiIsInByb2Nlc3MiLCJlbnYiLCJQT1JUIiwiY29uc29sZSIsImxvZyIsImFkZHJlc3MiLCJwb3J0Il0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBLE1BQU1BLFVBQVVDLFFBQVEsU0FBUixDQUFoQjtBQUNBLE1BQU1DLE1BQU1GLFNBQVo7QUFDQSxNQUFNRyxhQUFhRixRQUFRLGFBQVIsQ0FBbkI7QUFDQSxNQUFNRyxXQUFXSCxRQUFRLFVBQVIsQ0FBakI7O0FBRUE7QUFDQSxNQUFNSSxLQUFLSixRQUFRLHVCQUFSLENBQVg7O0FBRUFDLElBQUlJLEdBQUosQ0FBUUgsV0FBV0ksSUFBWCxFQUFSO0FBQ0FMLElBQUlJLEdBQUosQ0FBUUgsV0FBV0ssVUFBWCxDQUFzQixFQUFFQyxVQUFVLEtBQVosRUFBdEIsQ0FBUjtBQUNBUCxJQUFJSSxHQUFKLENBQVFOLFFBQVFVLE1BQVIsQ0FBZSxRQUFmLENBQVI7O0FBRUE7QUFDQVIsSUFBSUksR0FBSixDQUFRRixTQUFTTyxVQUFULEVBQVI7O0FBRUE7QUFDQVAsU0FBU0UsR0FBVCxDQUFhLGdCQUFiLEVBQStCTCxRQUFRLGtDQUFSLENBQS9CO0FBQ0FHLFNBQVNFLEdBQVQsQ0FBYSxhQUFiLEVBQTRCTCxRQUFRLCtCQUFSLENBQTVCOztBQUVBO0FBQ0FDLElBQUlJLEdBQUosQ0FBUSxNQUFSLEVBQWdCTCxRQUFRLGdDQUFSLENBQWhCOztBQUVBO0FBQ0FDLElBQUlJLEdBQUosQ0FBUSxPQUFSLEVBQWlCTCxRQUFRLHNCQUFSLENBQWpCO0FBQ0FDLElBQUlJLEdBQUosQ0FBUSxNQUFSLEVBQWdCTCxRQUFRLHFCQUFSLENBQWhCOztBQUdBLE1BQU1XLFdBQVdWLElBQUlXLE1BQUosQ0FBV0MsUUFBUUMsR0FBUixDQUFZQyxJQUF2QixFQUE2QixZQUFZO0FBQ3hEQyxVQUFRQyxHQUFSLENBQVksbUNBQW1DTixTQUFTTyxPQUFULEdBQW1CQyxJQUFsRTtBQUNELENBRmdCLENBQWpCIiwiZmlsZSI6InNlcnZlci5qcyIsInNvdXJjZVJvb3QiOiIvYXBwIiwic291cmNlc0NvbnRlbnQiOlsiLy8gd2hlcmUgeW91ciBub2RlIGFwcCBzdGFydHNcbmNvbnN0IGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJyk7XG5jb25zdCBhcHAgPSBleHByZXNzKCk7XG5jb25zdCBib2R5UGFyc2VyID0gcmVxdWlyZSgnYm9keS1wYXJzZXInKTtcbmNvbnN0IHBhc3Nwb3J0ID0gcmVxdWlyZSgncGFzc3BvcnQnKTtcblxuLy9jb25uZWN0IHRvIGRiXG5jb25zdCBkYiA9IHJlcXVpcmUoJy4vc2VydmVyL2NvbmZpZy9kYi5qcycpO1xuXG5hcHAudXNlKGJvZHlQYXJzZXIuanNvbigpKTtcbmFwcC51c2UoYm9keVBhcnNlci51cmxlbmNvZGVkKHsgZXh0ZW5kZWQ6IGZhbHNlIH0pKTtcbmFwcC51c2UoZXhwcmVzcy5zdGF0aWMoJ3B1YmxpYycpKTtcblxuLy8gQ29uZmlndXJlIHBhc3Nwb3J0IG1pZGRsZXdhcmVcbmFwcC51c2UocGFzc3BvcnQuaW5pdGlhbGl6ZSgpKTtcblxuLy8gbG9hZCBwYXNzcG9ydCBzdHJhdGVnaWVzXG5wYXNzcG9ydC51c2UoJ2xvY2FsLXJlZ2lzdGVyJywgcmVxdWlyZSgnLi9zZXJ2ZXIvcGFzc3BvcnQvbG9jYWwtcmVnaXN0ZXInKSk7XG5wYXNzcG9ydC51c2UoJ2xvY2FsLWxvZ2luJywgcmVxdWlyZSgnLi9zZXJ2ZXIvcGFzc3BvcnQvbG9jYWwtbG9naW4nKSk7XG5cbi8vIHBhc3MgdGhlIGF1dGhlbnRpY2Fpb24gY2hlY2tlciBtaWRkbGV3YXJlXG5hcHAudXNlKCcvYXBpJywgcmVxdWlyZSgnLi9zZXJ2ZXIvbWlkZGxld2FyZS9hdXRoLWNoZWNrJykpO1xuXG4vLyByb3V0ZXNcbmFwcC51c2UoJy9hdXRoJywgcmVxdWlyZSgnLi9zZXJ2ZXIvcm91dGVzL2F1dGgnKSk7XG5hcHAudXNlKCcvYXBpJywgcmVxdWlyZSgnLi9zZXJ2ZXIvcm91dGVzL2FwaScpKTtcblxuXG5jb25zdCBsaXN0ZW5lciA9IGFwcC5saXN0ZW4ocHJvY2Vzcy5lbnYuUE9SVCwgZnVuY3Rpb24gKCkge1xuICBjb25zb2xlLmxvZygnWW91ciBhcHAgaXMgbGlzdGVuaW5nIG9uIHBvcnQgJyArIGxpc3RlbmVyLmFkZHJlc3MoKS5wb3J0KTtcbn0pO1xuIl19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "server.js"
+      ],
+      "names": [
+        "express",
+        "require",
+        "app",
+        "bodyParser",
+        "passport",
+        "db",
+        "use",
+        "json",
+        "urlencoded",
+        "extended",
+        "static",
+        "initialize",
+        "listener",
+        "listen",
+        "process",
+        "env",
+        "PORT",
+        "console",
+        "log",
+        "address",
+        "port"
+      ],
+      "mappings": "AAAA;AACA,MAAMA,UAAUC,QAAQ,SAAR,CAAhB;AACA,MAAMC,MAAMF,SAAZ;AACA,MAAMG,aAAaF,QAAQ,aAAR,CAAnB;AACA,MAAMG,WAAWH,QAAQ,UAAR,CAAjB;;AAEA;AACA,MAAMI,KAAKJ,QAAQ,uBAAR,CAAX;;AAEAC,IAAII,GAAJ,CAAQH,WAAWI,IAAX,EAAR;AACAL,IAAII,GAAJ,CAAQH,WAAWK,UAAX,CAAsB,EAAEC,UAAU,KAAZ,EAAtB,CAAR;AACAP,IAAII,GAAJ,CAAQN,QAAQU,MAAR,CAAe,QAAf,CAAR;;AAEA;AACAR,IAAII,GAAJ,CAAQF,SAASO,UAAT,EAAR;;AAEA;AACAP,SAASE,GAAT,CAAa,gBAAb,EAA+BL,QAAQ,kCAAR,CAA/B;AACAG,SAASE,GAAT,CAAa,aAAb,EAA4BL,QAAQ,+BAAR,CAA5B;;AAEA;AACAC,IAAII,GAAJ,CAAQ,MAAR,EAAgBL,QAAQ,gCAAR,CAAhB;;AAEA;AACAC,IAAII,GAAJ,CAAQ,OAAR,EAAiBL,QAAQ,sBAAR,CAAjB;AACAC,IAAII,GAAJ,CAAQ,MAAR,EAAgBL,QAAQ,qBAAR,CAAhB;;AAGA,MAAMW,WAAWV,IAAIW,MAAJ,CAAWC,QAAQC,GAAR,CAAYC,IAAvB,EAA6B,YAAY;AACxDC,UAAQC,GAAR,CAAY,mCAAmCN,SAASO,OAAT,GAAmBC,IAAlE;AACD,CAFgB,CAAjB",
+      "file": "server.js",
+      "sourceRoot": "/app",
+      "sourcesContent": [
+        "// where your node app starts\nconst express = require('express');\nconst app = express();\nconst bodyParser = require('body-parser');\nconst passport = require('passport');\n\n//connect to db\nconst db = require('./server/config/db.js');\n\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({ extended: false }));\napp.use(express.static('public'));\n\n// Configure passport middleware\napp.use(passport.initialize());\n\n// load passport strategies\npassport.use('local-register', require('./server/passport/local-register'));\npassport.use('local-login', require('./server/passport/local-login'));\n\n// pass the authenticaion checker middleware\napp.use('/api', require('./server/middleware/auth-check'));\n\n// routes\napp.use('/auth', require('./server/routes/auth'));\napp.use('/api', require('./server/routes/api'));\n\n\nconst listener = app.listen(process.env.PORT, function () {\n  console.log('Your app is listening on port ' + listener.address().port);\n});\n"
+      ]
+    },
+    "mtime": 1517247907235
+  },
+  "{\"filename\":\"/app/config/db.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/config\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/config/db.js",
+      "filenameRelative": "/app/config/db.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "db.js",
+      "sourceFileName": "db.js",
+      "sourceRoot": "/app/config",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/config",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "db"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nmongoose.Promise = global.Promise;\n\nexports.db = mongoose.connect(process.env.DB_URI, {\n  useMongoClient: true\n  /* other options */\n}, function (error) {\n  if (error) console.error(\"Unable to connect to the mongoDB server. Error: \" + error);\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLmpzIl0sIm5hbWVzIjpbIm1vbmdvb3NlIiwicmVxdWlyZSIsIlByb21pc2UiLCJnbG9iYWwiLCJleHBvcnRzIiwiZGIiLCJjb25uZWN0IiwicHJvY2VzcyIsImVudiIsIkRCX1VSSSIsInVzZU1vbmdvQ2xpZW50IiwiZXJyb3IiLCJjb25zb2xlIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFNQSxXQUFXQyxRQUFRLFVBQVIsQ0FBakI7QUFDQUQsU0FBU0UsT0FBVCxHQUFtQkMsT0FBT0QsT0FBMUI7O0FBRUFFLFFBQVFDLEVBQVIsR0FBYUwsU0FBU00sT0FBVCxDQUFpQkMsUUFBUUMsR0FBUixDQUFZQyxNQUE3QixFQUFxQztBQUNoREMsa0JBQWdCO0FBQ2hCO0FBRmdELENBQXJDLEVBR1YsVUFBU0MsS0FBVCxFQUFnQjtBQUNqQixNQUFJQSxLQUFKLEVBQVdDLFFBQVFELEtBQVIsQ0FBYyxxREFBcURBLEtBQW5FO0FBQ1osQ0FMWSxDQUFiIiwiZmlsZSI6ImRiLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvY29uZmlnIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbW9uZ29vc2UgPSByZXF1aXJlKCdtb25nb29zZScpO1xubW9uZ29vc2UuUHJvbWlzZSA9IGdsb2JhbC5Qcm9taXNlO1xuXG5leHBvcnRzLmRiID0gbW9uZ29vc2UuY29ubmVjdChwcm9jZXNzLmVudi5EQl9VUkksIHtcbiAgdXNlTW9uZ29DbGllbnQ6IHRydWUsXG4gIC8qIG90aGVyIG9wdGlvbnMgKi9cbn0sIGZ1bmN0aW9uKGVycm9yKSB7XG4gIGlmIChlcnJvcikgY29uc29sZS5lcnJvcihcIlVuYWJsZSB0byBjb25uZWN0IHRvIHRoZSBtb25nb0RCIHNlcnZlci4gRXJyb3I6IFwiICsgZXJyb3IpO1xufSk7Il19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "db.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "Promise",
+        "global",
+        "exports",
+        "db",
+        "connect",
+        "process",
+        "env",
+        "DB_URI",
+        "useMongoClient",
+        "error",
+        "console"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACAD,SAASE,OAAT,GAAmBC,OAAOD,OAA1B;;AAEAE,QAAQC,EAAR,GAAaL,SAASM,OAAT,CAAiBC,QAAQC,GAAR,CAAYC,MAA7B,EAAqC;AAChDC,kBAAgB;AAChB;AAFgD,CAArC,EAGV,UAASC,KAAT,EAAgB;AACjB,MAAIA,KAAJ,EAAWC,QAAQD,KAAR,CAAc,qDAAqDA,KAAnE;AACZ,CALY,CAAb",
+      "file": "db.js",
+      "sourceRoot": "/app/config",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nmongoose.Promise = global.Promise;\n\nexports.db = mongoose.connect(process.env.DB_URI, {\n  useMongoClient: true,\n  /* other options */\n}, function(error) {\n  if (error) console.error(\"Unable to connect to the mongoDB server. Error: \" + error);\n});"
+      ]
+    },
+    "mtime": 1515758724688
+  },
+  "{\"filename\":\"/app/models/user.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/models/user.js",
+      "filenameRelative": "/app/models/user.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "user.js",
+      "sourceFileName": "user.js",
+      "sourceRoot": "/app/models",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/models",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "user"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\nconst passportLocalMongoose = require('passport-local-mongoose');\n\nconst UserSchema = new Schema({\n  username: String,\n  password: String\n});\n\nUserSchema.plugin(passportLocalMongoose);\n\nmodule.exports = mongoose.model('User', UserSchema);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVzZXIuanMiXSwibmFtZXMiOlsibW9uZ29vc2UiLCJyZXF1aXJlIiwiU2NoZW1hIiwicGFzc3BvcnRMb2NhbE1vbmdvb3NlIiwiVXNlclNjaGVtYSIsInVzZXJuYW1lIiwiU3RyaW5nIiwicGFzc3dvcmQiLCJwbHVnaW4iLCJtb2R1bGUiLCJleHBvcnRzIiwibW9kZWwiXSwibWFwcGluZ3MiOiJBQUFBLE1BQU1BLFdBQVdDLFFBQVEsVUFBUixDQUFqQjtBQUNBLE1BQU1DLFNBQVNGLFNBQVNFLE1BQXhCO0FBQ0EsTUFBTUMsd0JBQXdCRixRQUFRLHlCQUFSLENBQTlCOztBQUVBLE1BQU1HLGFBQWEsSUFBSUYsTUFBSixDQUFXO0FBQzVCRyxZQUFVQyxNQURrQjtBQUU1QkMsWUFBVUQ7QUFGa0IsQ0FBWCxDQUFuQjs7QUFLQUYsV0FBV0ksTUFBWCxDQUFrQkwscUJBQWxCOztBQUVBTSxPQUFPQyxPQUFQLEdBQWlCVixTQUFTVyxLQUFULENBQWUsTUFBZixFQUF1QlAsVUFBdkIsQ0FBakIiLCJmaWxlIjoidXNlci5qcyIsInNvdXJjZVJvb3QiOiIvYXBwL21vZGVscyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IG1vbmdvb3NlID0gcmVxdWlyZSgnbW9uZ29vc2UnKTtcbmNvbnN0IFNjaGVtYSA9IG1vbmdvb3NlLlNjaGVtYTtcbmNvbnN0IHBhc3Nwb3J0TG9jYWxNb25nb29zZSA9IHJlcXVpcmUoJ3Bhc3Nwb3J0LWxvY2FsLW1vbmdvb3NlJyk7XG5cbmNvbnN0IFVzZXJTY2hlbWEgPSBuZXcgU2NoZW1hKHtcbiAgdXNlcm5hbWU6IFN0cmluZyxcbiAgcGFzc3dvcmQ6IFN0cmluZ1xufSk7XG4gXG5Vc2VyU2NoZW1hLnBsdWdpbihwYXNzcG9ydExvY2FsTW9uZ29vc2UpO1xuIFxubW9kdWxlLmV4cG9ydHMgPSBtb25nb29zZS5tb2RlbCgnVXNlcicsIFVzZXJTY2hlbWEpO1xuIl19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "user.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "Schema",
+        "passportLocalMongoose",
+        "UserSchema",
+        "username",
+        "String",
+        "password",
+        "plugin",
+        "module",
+        "exports",
+        "model"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACA,MAAMC,SAASF,SAASE,MAAxB;AACA,MAAMC,wBAAwBF,QAAQ,yBAAR,CAA9B;;AAEA,MAAMG,aAAa,IAAIF,MAAJ,CAAW;AAC5BG,YAAUC,MADkB;AAE5BC,YAAUD;AAFkB,CAAX,CAAnB;;AAKAF,WAAWI,MAAX,CAAkBL,qBAAlB;;AAEAM,OAAOC,OAAP,GAAiBV,SAASW,KAAT,CAAe,MAAf,EAAuBP,UAAvB,CAAjB",
+      "file": "user.js",
+      "sourceRoot": "/app/models",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\nconst passportLocalMongoose = require('passport-local-mongoose');\n\nconst UserSchema = new Schema({\n  username: String,\n  password: String\n});\n \nUserSchema.plugin(passportLocalMongoose);\n \nmodule.exports = mongoose.model('User', UserSchema);\n"
+      ]
+    },
+    "mtime": 1515758724764
+  },
+  "{\"filename\":\"/app/routes/index.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/routes\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/routes/index.js",
+      "filenameRelative": "/app/routes/index.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "index.js",
+      "sourceFileName": "index.js",
+      "sourceRoot": "/app/routes",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/routes",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "index"
+    },
+    "ignored": false,
+    "code": "//import express from 'express';\nconst express = require('express');\nconst router = express.Router();\nconst path = require('path');\nconst passport = require('passport');\nconst User = require('../models/user.js');\n\nrouter.get(\"/\", (req, res) => {\n  res.render('index', { user: req.user, curr: \"home\" });\n});\n\nrouter.get('/register', (req, res) => {\n  res.render('register', { ref_path: req.query.ref_path, user: req.user, message: req.flash('error') });\n});\n\nrouter.get('/login', (req, res) => {\n  res.render('login', { ref_path: req.query.ref_path, user: req.user, message: req.flash('error') });\n});\n\nrouter.post('/register', (req, res, next) => {\n\n  var redirect = req.body.ref_path ? req.body.ref_path : '/';\n\n  User.register(new User({ username: req.body.username }), req.body.password, function (err) {\n    if (err) {\n      req.flash('error', err.message);\n\n      console.log('error while user register!', err);\n      return res.redirect(\"/register\");\n    }\n\n    passport.authenticate('local')(req, res, () => {\n      req.session.save(err => {\n        if (err) {\n          req.flash('error', err.message);\n          console.log('error while user authentication!', err);\n          return res.redirect(\"/register\");\n        }\n        res.redirect(redirect);\n        console.log('user registered!');\n      });\n    });\n  });\n});\n\nrouter.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {\n\n  var redirect = req.body.ref_path ? req.body.ref_path : '/';\n\n  req.session.save(err => {\n    if (err) {\n      return next(err);\n    }\n    res.redirect(redirect);\n    console.log('user logged in!');\n  });\n});\n\nrouter.get('/logout', (req, res, next) => {\n  req.logout();\n  req.session.save(err => {\n    if (err) {\n      return next(err);\n    }\n    res.redirect('/');\n  });\n});\n\nrouter.get('/settings', (req, res) => {\n  res.render('settings');\n});\n\nmodule.exports = router;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbImV4cHJlc3MiLCJyZXF1aXJlIiwicm91dGVyIiwiUm91dGVyIiwicGF0aCIsInBhc3Nwb3J0IiwiVXNlciIsImdldCIsInJlcSIsInJlcyIsInJlbmRlciIsInVzZXIiLCJjdXJyIiwicmVmX3BhdGgiLCJxdWVyeSIsIm1lc3NhZ2UiLCJmbGFzaCIsInBvc3QiLCJuZXh0IiwicmVkaXJlY3QiLCJib2R5IiwicmVnaXN0ZXIiLCJ1c2VybmFtZSIsInBhc3N3b3JkIiwiZXJyIiwiY29uc29sZSIsImxvZyIsImF1dGhlbnRpY2F0ZSIsInNlc3Npb24iLCJzYXZlIiwiZmFpbHVyZVJlZGlyZWN0IiwiZmFpbHVyZUZsYXNoIiwibG9nb3V0IiwibW9kdWxlIiwiZXhwb3J0cyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQSxNQUFNQSxVQUFVQyxRQUFRLFNBQVIsQ0FBaEI7QUFDQSxNQUFNQyxTQUFTRixRQUFRRyxNQUFSLEVBQWY7QUFDQSxNQUFNQyxPQUFPSCxRQUFRLE1BQVIsQ0FBYjtBQUNBLE1BQU1JLFdBQVdKLFFBQVEsVUFBUixDQUFqQjtBQUNBLE1BQU1LLE9BQU9MLFFBQVEsbUJBQVIsQ0FBYjs7QUFFQUMsT0FBT0ssR0FBUCxDQUFXLEdBQVgsRUFBZ0IsQ0FBQ0MsR0FBRCxFQUFNQyxHQUFOLEtBQWM7QUFDNUJBLE1BQUlDLE1BQUosQ0FBVyxPQUFYLEVBQW9CLEVBQUVDLE1BQU1ILElBQUlHLElBQVosRUFBa0JDLE1BQU0sTUFBeEIsRUFBcEI7QUFDRCxDQUZEOztBQUlBVixPQUFPSyxHQUFQLENBQVcsV0FBWCxFQUF3QixDQUFDQyxHQUFELEVBQU1DLEdBQU4sS0FBYztBQUNwQ0EsTUFBSUMsTUFBSixDQUFXLFVBQVgsRUFBdUIsRUFBRUcsVUFBVUwsSUFBSU0sS0FBSixDQUFVRCxRQUF0QixFQUFnQ0YsTUFBTUgsSUFBSUcsSUFBMUMsRUFBZ0RJLFNBQVNQLElBQUlRLEtBQUosQ0FBVSxPQUFWLENBQXpELEVBQXZC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OztBQUtBdUIsT0FBT0MsT0FBUCxHQUFpQmhDLE1BQWpCIiwiZmlsZSI6ImluZGV4LmpzIiwic291cmNlUm9vdCI6Ii9hcHAvcm91dGVzIiwic291cmNlc0NvbnRlbnQiOlsiLy9pbXBvcnQgZXhwcmVzcyBmcm9tICdleHByZXNzJztcbmNvbnN0IGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJyk7XG5jb25zdCByb3V0ZXIgPSBleHByZXNzLlJvdXRlcigpO1xuY29uc3QgcGF0aCA9IHJlcXVpcmUoJ3BhdGgnKTtcbmNvbnN0IHBhc3Nwb3J0ID0gcmVxdWlyZSgncGFzc3BvcnQnKTtcbmNvbnN0IFVzZXIgPSByZXF1aXJlKCcuLi9tb2RlbHMvdXNlci5qcycpO1xuXG5yb3V0ZXIuZ2V0KFwiL1wiLCAocmVxLCByZXMpID0+IHtcbiAgcmVzLnJlbmRlcignaW5kZXgnLCB7IHVzZXI6IHJlcS51c2VyLCBjdXJyOiBcImhvbWVcIiB9KTtcbn0pO1xuXG5yb3V0ZXIuZ2V0KCcvcmVnaXN0ZXInLCAocmVxLCByZXMpID0+IHtcbiAgcmVzLnJlbmRlcigncmVnaXN0ZXInLCB7IHJlZl9wYXRoOiByZXEucXVlcnkucmVmX3BhdGgsIHVzZXI6IHJlcS51c2VyLCBtZXNzYWdlOiByZXEuZmxhc2goJ2Vycm9yJyl9KTtcbn0pO1xuXG5yb3V0ZXIuZ2V0KCcvbG9naW4nLCAocmVxLCByZXMpID0+IHtcbiAgcmVzLnJlbmRlcignbG9naW4nLCB7IHJlZl9wYXRoOiByZXEucXVlcnkucmVmX3BhdGgsIHVzZXI6IHJlcS51c2VyLCBtZXNzYWdlOiByZXEuZmxhc2goJ2Vycm9yJyl9KTtcbn0pO1xuXG5yb3V0ZXIucG9zdCgnL3JlZ2lzdGVyJywgKHJlcSwgcmVzLCBuZXh0KSA9PiB7XG4gIFxuICB2YXIgcmVkaXJlY3QgPSByZXEuYm9keS5yZWZfcGF0aCA/IHJlcS5ib2R5LnJlZl9wYXRoIDogJy8nO1xuXG4gIFVzZXIucmVnaXN0ZXIobmV3IFVzZXIoe3VzZXJuYW1lOiByZXEuYm9keS51c2VybmFtZX0pLCByZXEuYm9keS5wYXNzd29yZCwgZnVuY3Rpb24oZXJyKSB7XG4gICAgaWYgKGVycikge1xuICAgICAgcmVxLmZsYXNoKCdlcnJvcicsIGVyci5tZXNzYWdlKTtcbiAgICAgIFxuICAgICAgY29uc29sZS5sb2coJ2Vycm9yIHdoaWxlIHVzZXIgcmVnaXN0ZXIhJywgZXJyKTtcbiAgICAgIHJldHVybiByZXMucmVkaXJlY3QoXCIvcmVnaXN0ZXJcIik7XG4gICAgfVxuICAgIFxuICAgIHBhc3Nwb3J0LmF1dGhlbnRpY2F0ZSgnbG9jYWwnKShyZXEsIHJlcywgKCkgPT4ge1xuICAgICAgcmVxLnNlc3Npb24uc2F2ZSgoZXJyKSA9PiB7XG4gICAgICAgICAgaWYgKGVycikge1xuICAgICAgICAgICAgcmVxLmZsYXNoKCdlcnJvcicsIGVyci5tZXNzYWdlKTtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKCdlcnJvciB3aGlsZSB1c2VyIGF1dGhlbnRpY2F0aW9uIScsIGVycik7XG4gICAgICAgICAgICByZXR1cm4gcmVzLnJlZGlyZWN0KFwiL3JlZ2lzdGVyXCIpO1xuICAgICAgICAgIH1cbiAgICAgICAgICByZXMucmVkaXJlY3QocmVkaXJlY3QpO1xuICAgICAgICAgIGNvbnNvbGUubG9nKCd1c2VyIHJlZ2lzdGVyZWQhJyk7XG4gICAgICB9KTtcbiAgICB9KTtcbiAgfSk7XG59KTtcblxucm91dGVyLnBvc3QoJy9sb2dpbicsIHBhc3Nwb3J0LmF1dGhlbnRpY2F0ZSgnbG9jYWwnLCB7IGZhaWx1cmVSZWRpcmVjdDogJy9sb2dpbicsIGZhaWx1cmVGbGFzaDogdHJ1ZSB9KSwgKHJlcSwgcmVzLCBuZXh0KSA9PiB7XG4gIFxuICB2YXIgcmVkaXJlY3QgPSByZXEuYm9keS5yZWZfcGF0aCA/IHJlcS5ib2R5LnJlZl9wYXRoIDogJy8nO1xuICBcbiAgcmVxLnNlc3Npb24uc2F2ZSgoZXJyKSA9PiB7XG4gICAgICAgIGlmIChlcnIpIHtcbiAgICAgICAgICByZXR1cm4gbmV4dChlcnIpO1xuICAgICAgICB9XG4gICAgICAgIHJlcy5yZWRpcmVjdChyZWRpcmVjdCk7XG4gICAgICAgIGNvbnNvbGUubG9nKCd1c2VyIGxvZ2dlZCBpbiEnKTtcbiAgICB9KTtcbn0pO1xuXG5yb3V0ZXIuZ2V0KCcvbG9nb3V0JywgKHJlcSwgcmVzLCBuZXh0KSA9PiB7XG4gICAgcmVxLmxvZ291dCgpO1xuICAgIHJlcS5zZXNzaW9uLnNhdmUoKGVycikgPT4ge1xuICAgICAgICBpZiAoZXJyKSB7XG4gICAgICAgICAgcmV0dXJuIG5leHQoZXJyKTtcbiAgICAgICAgfVxuICAgICAgICByZXMucmVkaXJlY3QoJy8nKTtcbiAgICB9KTtcbn0pO1xuXG5yb3V0ZXIuZ2V0KCcvc2V0dGluZ3MnLCAocmVxLCByZXMpID0+IHtcbiAgcmVzLnJlbmRlcignc2V0dGluZ3MnKTtcbn0pO1xuXG5cbm1vZHVsZS5leHBvcnRzID0gcm91dGVyOyJdfQ==",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "index.js"
+      ],
+      "names": [
+        "express",
+        "require",
+        "router",
+        "Router",
+        "path",
+        "passport",
+        "User",
+        "get",
+        "req",
+        "res",
+        "render",
+        "user",
+        "curr",
+        "ref_path",
+        "query",
+        "message",
+        "flash",
+        "post",
+        "next",
+        "redirect",
+        "body",
+        "register",
+        "username",
+        "password",
+        "err",
+        "console",
+        "log",
+        "authenticate",
+        "session",
+        "save",
+        "failureRedirect",
+        "failureFlash",
+        "logout",
+        "module",
+        "exports"
+      ],
+      "mappings": "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",
+      "file": "index.js",
+      "sourceRoot": "/app/routes",
+      "sourcesContent": [
+        "//import express from 'express';\nconst express = require('express');\nconst router = express.Router();\nconst path = require('path');\nconst passport = require('passport');\nconst User = require('../models/user.js');\n\nrouter.get(\"/\", (req, res) => {\n  res.render('index', { user: req.user, curr: \"home\" });\n});\n\nrouter.get('/register', (req, res) => {\n  res.render('register', { ref_path: req.query.ref_path, user: req.user, message: req.flash('error')});\n});\n\nrouter.get('/login', (req, res) => {\n  res.render('login', { ref_path: req.query.ref_path, user: req.user, message: req.flash('error')});\n});\n\nrouter.post('/register', (req, res, next) => {\n  \n  var redirect = req.body.ref_path ? req.body.ref_path : '/';\n\n  User.register(new User({username: req.body.username}), req.body.password, function(err) {\n    if (err) {\n      req.flash('error', err.message);\n      \n      console.log('error while user register!', err);\n      return res.redirect(\"/register\");\n    }\n    \n    passport.authenticate('local')(req, res, () => {\n      req.session.save((err) => {\n          if (err) {\n            req.flash('error', err.message);\n            console.log('error while user authentication!', err);\n            return res.redirect(\"/register\");\n          }\n          res.redirect(redirect);\n          console.log('user registered!');\n      });\n    });\n  });\n});\n\nrouter.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {\n  \n  var redirect = req.body.ref_path ? req.body.ref_path : '/';\n  \n  req.session.save((err) => {\n        if (err) {\n          return next(err);\n        }\n        res.redirect(redirect);\n        console.log('user logged in!');\n    });\n});\n\nrouter.get('/logout', (req, res, next) => {\n    req.logout();\n    req.session.save((err) => {\n        if (err) {\n          return next(err);\n        }\n        res.redirect('/');\n    });\n});\n\nrouter.get('/settings', (req, res) => {\n  res.render('settings');\n});\n\n\nmodule.exports = router;"
+      ]
+    },
+    "mtime": 1515758724968
+  },
+  "{\"filename\":\"/app/routes/polls.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/routes\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/routes/polls.js",
+      "filenameRelative": "/app/routes/polls.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "polls.js",
+      "sourceFileName": "polls.js",
+      "sourceRoot": "/app/routes",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/routes",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "polls"
+    },
+    "ignored": false,
+    "code": "const express = require('express');\nconst router = express.Router();\nconst path = require('path');\nconst Poll = require('../models/poll.js');\n\nrouter.get(\"/polls\", (req, res) => {\n  var polls = [];\n  if (req.user) {\n    Poll.find({ username: req.user.username }, function (err, doc) {\n      if (doc) {\n        polls = doc;\n        res.render('polls', { user: req.user, polls: polls });\n      } else {\n        console.log({ \"error\": \"Error occured while reading from DB. \" + err });\n        // TODO: show smth on client\n        res.render('polls', { user: req.user, polls: polls });\n      }\n    });\n  } else {\n    res.redirect(\"/\");\n  }\n});\n\nrouter.post('/add', (req, res) => {\n  var newPoll = Poll({\n    name: req.query.pollname,\n    username: req.user.username,\n    questions: req.query.options.map(item => {\n      return { question: item, rating: 0 };\n    }),\n    votedusers: []\n  });\n\n  newPoll.url = \"https://trite-engineer.glitch.me/\" + newPoll.username + \"/\" + encodeURI(newPoll.name);\n\n  newPoll.save(function (err) {\n    // FIXME!! move response handling to client and remove add.pug\n    if (err) console.log(err);\n    //res.render('add', { message : 'Your poll was successfully saved', error : req.flash('error')});\n    // FIXME!!! handle error for client side\n    else {\n        res.send(newPoll.url);\n      }\n  });\n});\n\n// find and send requested poll of specified user\nrouter.get(\"/:username/:pollname\", (req, res) => {\n  var data = {\n    ref_path: req.url,\n    user: req.user,\n    username: req.params.username,\n    pollname: req.params.pollname,\n    voted: false\n\n    //get poll options from DB\n  };Poll.findOne({ username: data.username, name: data.pollname }, { _id: 0 }, (err, doc) => {\n    if (doc) {\n      data.polloptions = doc.questions;\n      if (data.user) data.voted = doc.votedusers.filter(user => user.username === data.user.username).length > 0;\n      res.render('poll', data); //TODO: do not show new page, just send data to client\n    } else {\n      // FIXME handle error on client\n      res.end(JSON.stringify({ \"error\": \"There's no data for specified username and pollname\" }));\n    }\n  });\n});\n\n// handle voting for the poll of specified user\nrouter.put(\"/:username/:pollname\", (req, res) => {\n\n  var username = req.params.username;\n  var pollname = req.params.pollname;\n  var index = req.body.pollopt;\n\n  var inc = {};\n  inc['questions.' + index + \".rating\"] = 1;\n  Poll.findOneAndUpdate({ username: req.params.username, name: req.params.pollname }, { $inc: inc, $push: { votedusers: { username: req.params.username } } }, { _id: 0 }, (err, doc) => {\n    if (err) {\n      console.log(err);\n      res.status(500).json({ error: 'Unable to update poll.' });\n    } else {\n      var data = {\n        ref_path: req.url,\n        user: req.user,\n        username: req.params.username,\n        pollname: req.params.votename,\n        voted: true\n      };\n      data.polloptions = doc.questions;\n      console.log(data);\n      res.send(JSON.stringify(data));\n    }\n  });\n});\n\nrouter.delete(\"/remove/:username/:pollname\", (req, res) => {\n  var username = req.params.username;\n  var pollname = req.params.pollname;\n\n  Poll.findOneAndRemove({ username: username, name: pollname }, err => {\n    if (err) {\n      res.send(err);\n      return console.log(err);\n    }\n    console.log(\"removed\");\n    res.send(null);\n  });\n});\n\nmodule.exports = router;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvbGxzLmpzIl0sIm5hbWVzIjpbImV4cHJlc3MiLCJyZXF1aXJlIiwicm91dGVyIiwiUm91dGVyIiwicGF0aCIsIlBvbGwiLCJnZXQiLCJyZXEiLCJyZXMiLCJwb2xscyIsInVzZXIiLCJmaW5kIiwidXNlcm5hbWUiLCJlcnIiLCJkb2MiLCJyZW5kZXIiLCJjb25zb2xlIiwibG9nIiwicmVkaXJlY3QiLCJwb3N0IiwibmV3UG9sbCIsIm5hbWUiLCJxdWVyeSIsInBvbGxuYW1lIiwicXVlc3Rpb25zIiwib3B0aW9ucyIsIm1hcCIsIml0ZW0iLCJxdWVzdGlvbiIsInJhdGluZyIsInZvdGVkdXNlcnMiLCJ1cmwiLCJlbmNvZGVVUkkiLCJzYXZlIiwic2VuZCIsImRhdGEiLCJyZWZfcGF0aCIsInBhcmFtcyIsInZvdGVkIiwiZmluZE9uZSIsIl9pZCIsInBvbGxvcHRpb25zIiwiZmlsdGVyIiwibGVuZ3RoIiwiZW5kIiwiSlNPTiIsInN0cmluZ2lmeSIsInB1dCIsImluZGV4IiwiYm9keSIsInBvbGxvcHQiLCJpbmMiLCJmaW5kT25lQW5kVXBkYXRlIiwiJGluYyIsIiRwdXNoIiwic3RhdHVzIiwianNvbiIsImVycm9yIiwidm90ZW5hbWUiLCJkZWxldGUiLCJmaW5kT25lQW5kUmVtb3ZlIiwibW9kdWxlIiwiZXhwb3J0cyJdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTUEsVUFBVUMsUUFBUSxTQUFSLENBQWhCO0FBQ0EsTUFBTUMsU0FBU0YsUUFBUUcsTUFBUixFQUFmO0FBQ0EsTUFBTUMsT0FBT0gsUUFBUSxNQUFSLENBQWI7QUFDQSxNQUFNSSxPQUFPSixRQUFRLG1CQUFSLENBQWI7O0FBRUFDLE9BQU9JLEdBQVAsQ0FBVyxRQUFYLEVBQXFCLENBQUNDLEdBQUQsRUFBTUMsR0FBTixLQUFjO0FBQ2pDLE1BQUlDLFFBQVEsRUFBWjtBQUNBLE1BQUlGLElBQUlHLElBQVIsRUFDQTtBQUNFTCxTQUFLTSxJQUFMLENBQVUsRUFBQ0MsVUFBVUwsSUFBSUcsSUFBSixD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akJEO0FBa0JELENBMUJEOztBQTRCQWpDLE9BQU95RCxNQUFQLENBQWMsNkJBQWQsRUFBNkMsQ0FBQ3BELEdBQUQsRUFBTUMsR0FBTixLQUFjO0FBQ3pELE1BQUlJLFdBQVdMLElBQUk4QixNQUFKLENBQVd6QixRQUExQjtBQUNBLE1BQUlXLFdBQVdoQixJQUFJOEIsTUFBSixDQUFXZCxRQUExQjs7QUFFQWxCLE9BQUt1RCxnQkFBTCxDQUFzQixFQUFFaEQsVUFBVUEsUUFBWixFQUFzQlMsTUFBTUUsUUFBNUIsRUFBdEIsRUFBK0RWLEdBQUQsSUFBUztBQUNyRSxRQUFJQSxHQUFKLEVBQVM7QUFDUEwsVUFBSTBCLElBQUosQ0FBU3JCLEdBQVQ7QUFDQSxhQUFPRyxRQUFRQyxHQUFSLENBQVlKLEdBQVosQ0FBUDtBQUNEO0FBQ0RHLFlBQVFDLEdBQVIsQ0FBWSxTQUFaO0FBQ0FULFFBQUkwQixJQUFKLENBQVMsSUFBVDtBQUNELEdBUEQ7QUFRRCxDQVpEOztBQWVBMkIsT0FBT0MsT0FBUCxHQUFpQjVELE1BQWpCIiwiZmlsZSI6InBvbGxzLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvcm91dGVzIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgZXhwcmVzcyA9IHJlcXVpcmUoJ2V4cHJlc3MnKTtcbmNvbnN0IHJvdXRlciA9IGV4cHJlc3MuUm91dGVyKCk7XG5jb25zdCBwYXRoID0gcmVxdWlyZSgncGF0aCcpO1xuY29uc3QgUG9sbCA9IHJlcXVpcmUoJy4uL21vZGVscy9wb2xsLmpzJyk7XG5cbnJvdXRlci5nZXQoXCIvcG9sbHNcIiwgKHJlcSwgcmVzKSA9PiB7ICBcbiAgdmFyIHBvbGxzID0gW107XG4gIGlmIChyZXEudXNlcilcbiAge1xuICAgIFBvbGwuZmluZCh7dXNlcm5hbWU6IHJlcS51c2VyLnVzZXJuYW1lfSwgZnVuY3Rpb24gKGVyciwgZG9jKXtcbiAgICAgIGlmIChkb2MpIHtcbiAgICAgICAgcG9sbHMgPSBkb2M7XG4gICAgICAgIHJlcy5yZW5kZXIoJ3BvbGxzJywgeyB1c2VyOiByZXEudXNlciwgcG9sbHM6IHBvbGxzIH0pO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgY29uc29sZS5sb2coe1wiZXJyb3JcIjpcIkVycm9yIG9jY3VyZWQgd2hpbGUgcmVhZGluZyBmcm9tIERCLiBcIiArIGVycn0pO1xuICAgICAgICAvLyBUT0RPOiBzaG93IHNtdGggb24gY2xpZW50XG4gICAgICAgIHJlcy5yZW5kZXIoJ3BvbGxzJywgeyB1c2VyOiByZXEudXNlciwgcG9sbHM6IHBvbGxzIH0pO1xuICAgICAgfVxuICAgIH0pO1xuICB9XG4gIGVsc2Uge1xuICAgIHJlcy5yZWRpcmVjdChcIi9cIik7XG4gIH1cbn0pO1xuXG5yb3V0ZXIucG9zdCgnL2FkZCcsIChyZXEsIHJlcykgPT4geyAgXG4gIHZhciBuZXdQb2xsID0gUG9sbCh7XG4gICAgICBuYW1lOiByZXEucXVlcnkucG9sbG5hbWUsXG4gICAgICB1c2VybmFtZTogcmVxLnVzZXIudXNlcm5hbWUsXG4gICAgICBxdWVzdGlvbnM6IHJlcS5xdWVyeS5vcHRpb25zLm1hcCgoaXRlbSkgPT4geyByZXR1cm4geyBxdWVzdGlvbjogaXRlbSwgcmF0aW5nOiAwfX0pLFxuICAgICAgdm90ZWR1c2VyczogW11cbiAgICB9KTtcbiAgXG4gIG5ld1BvbGwudXJsID0gXCJodHRwczovL3RyaXRlLWVuZ2luZWVyLmdsaXRjaC5tZS9cIiArIG5ld1BvbGwudXNlcm5hbWUgKyBcIi9cIiArIGVuY29kZVVSSShuZXdQb2xsLm5hbWUpO1xuICBcbiAgbmV3UG9sbC5zYXZlKGZ1bmN0aW9uKGVycikgeyAvLyBGSVhNRSEhIG1vdmUgcmVzcG9uc2UgaGFuZGxpbmcgdG8gY2xpZW50IGFuZCByZW1vdmUgYWRkLnB1Z1xuICAgIGlmIChlcnIpIGNvbnNvbGUubG9nKGVycik7XG4gICAgLy9yZXMucmVuZGVyKCdhZGQnLCB7IG1lc3NhZ2UgOiAnWW91ciBwb2xsIHdhcyBzdWNjZXNzZnVsbHkgc2F2ZWQnLCBlcnJvciA6IHJlcS5mbGFzaCgnZXJyb3InKX0pO1xuICAgIC8vIEZJWE1FISEhIGhhbmRsZSBlcnJvciBmb3IgY2xpZW50IHNpZGVcbiAgICBlbHNlXG4gICAge1xuICAgICAgcmVzLnNlbmQobmV3UG9sbC51cmwpO1xuICAgIH1cbiAgfSk7XG59KTtcblxuLy8gZmluZCBhbmQgc2VuZCByZXF1ZXN0ZWQgcG9sbCBvZiBzcGVjaWZpZWQgdXNlclxucm91dGVyLmdldChcIi86dXNlcm5hbWUvOnBvbGxuYW1lXCIsIChyZXEsIHJlcykgPT4ge1xuICB2YXIgZGF0YSA9IHtcbiAgICByZWZfcGF0aDogcmVxLnVybCxcbiAgICB1c2VyOiByZXEudXNlcixcbiAgICB1c2VybmFtZTogcmVxLnBhcmFtcy51c2VybmFtZSxcbiAgICBwb2xsbmFtZTogcmVxLnBhcmFtcy5wb2xsbmFtZSxcbiAgICB2b3RlZDogZmFsc2VcbiAgfVxuICBcbiAgLy9nZXQgcG9sbCBvcHRpb25zIGZyb20gREJcbiAgUG9sbC5maW5kT25lKHt1c2VybmFtZTogZGF0YS51c2VybmFtZSwgbmFtZTogZGF0YS5wb2xsbmFtZX0sIHtfaWQ6IDB9LCAoZXJyLCBkb2MpID0+IHtcbiAgICBpZiAoZG9jKSB7XG4gICAgICBkYXRhLnBvbGxvcHRpb25zID0gZG9jLnF1ZXN0aW9ucztcbiAgICAgIGlmIChkYXRhLnVzZXIpIGRhdGEudm90ZWQgPSAoZG9jLnZvdGVkdXNlcnMuZmlsdGVyKHVzZXIgPT4gKHVzZXIudXNlcm5hbWUgPT09IGRhdGEudXNlci51c2VybmFtZSkpLmxlbmd0aCA+IDApO1xuICAgICAgcmVzLnJlbmRlcigncG9sbCcsIGRhdGEpOyAvL1RPRE86IGRvIG5vdCBzaG93IG5ldyBwYWdlLCBqdXN0IHNlbmQgZGF0YSB0byBjbGllbnRcbiAgICB9IGVsc2Uge1xuICAgICAgLy8gRklYTUUgaGFuZGxlIGVycm9yIG9uIGNsaWVudFxuICAgICAgcmVzLmVuZChKU09OLnN0cmluZ2lmeSh7XCJlcnJvclwiOiBcIlRoZXJlJ3Mgbm8gZGF0YSBmb3Igc3BlY2lmaWVkIHVzZXJuYW1lIGFuZCBwb2xsbmFtZVwifSkpO1xuICAgIH1cbiAgfSk7XG59KTtcblxuLy8gaGFuZGxlIHZvdGluZyBmb3IgdGhlIHBvbGwgb2Ygc3BlY2lmaWVkIHVzZXJcbnJvdXRlci5wdXQoXCIvOnVzZXJuYW1lLzpwb2xsbmFtZVwiLCAocmVxLCByZXMpID0+IHtcbiAgICBcbiAgdmFyIHVzZXJuYW1lID0gcmVxLnBhcmFtcy51c2VybmFtZTtcbiAgdmFyIHBvbGxuYW1lID0gcmVxLnBhcmFtcy5wb2xsbmFtZTtcbiAgdmFyIGluZGV4ID0gcmVxLmJvZHkucG9sbG9wdDtcbiAgXG4gIHZhciBpbmMgPSB7fTtcbiAgaW5jWyAncXVlc3Rpb25zLicgKyBpbmRleCArIFwiLnJhdGluZ1wiIF0gPSAxO1xuICBQb2xsLmZpbmRPbmVBbmRVcGRhdGUoe3VzZXJuYW1lOiByZXEucGFyYW1zLnVzZXJuYW1lLCBuYW1lOiByZXEucGFyYW1zLnBvbGxuYW1lfSwgeyAkaW5jOiBpbmMsICRwdXNoOiB7IHZvdGVkdXNlcnM6IHt1c2VybmFtZTogcmVxLnBhcmFtcy51c2VybmFtZX19IH0sIHtfaWQ6IDB9LCAoZXJyLCBkb2MpID0+IHtcbiAgICBpZiAoZXJyKSB7XG4gICAgICBjb25zb2xlLmxvZyhlcnIpO1xuICAgICAgcmVzLnN0YXR1cyg1MDApLmpzb24oeyBlcnJvcjogJ1VuYWJsZSB0byB1cGRhdGUgcG9sbC4nfSk7XG4gICAgfSBcbiAgICBlbHNlIHtcbiAgICAgIHZhciBkYXRhID0ge1xuICAgICAgICByZWZfcGF0aDogcmVxLnVybCxcbiAgICAgICAgdXNlcjogcmVxLnVzZXIsXG4gICAgICAgIHVzZXJuYW1lOiByZXEucGFyYW1zLnVzZXJuYW1lLFxuICAgICAgICBwb2xsbmFtZTogcmVxLnBhcmFtcy52b3RlbmFtZSxcbiAgICAgICAgdm90ZWQ6IHRydWVcbiAgICAgIH1cbiAgICAgIGRhdGEucG9sbG9wdGlvbnMgPSBkb2MucXVlc3Rpb25zO1xuICAgICAgY29uc29sZS5sb2coZGF0YSk7XG4gICAgICByZXMuc2VuZChKU09OLnN0cmluZ2lmeShkYXRhKSk7XG4gICAgfVxuICB9KTtcbn0pO1xuXG5yb3V0ZXIuZGVsZXRlKFwiL3JlbW92ZS86dXNlcm5hbWUvOnBvbGxuYW1lXCIsIChyZXEsIHJlcykgPT4ge1xuICB2YXIgdXNlcm5hbWUgPSByZXEucGFyYW1zLnVzZXJuYW1lO1xuICB2YXIgcG9sbG5hbWUgPSByZXEucGFyYW1zLnBvbGxuYW1lO1xuICBcbiAgUG9sbC5maW5kT25lQW5kUmVtb3ZlKHsgdXNlcm5hbWU6IHVzZXJuYW1lLCBuYW1lOiBwb2xsbmFtZSB9LCAoZXJyKSA9PiB7XG4gICAgaWYgKGVycikge1xuICAgICAgcmVzLnNlbmQoZXJyKTtcbiAgICAgIHJldHVybiBjb25zb2xlLmxvZyhlcnIpO1xuICAgIH1cbiAgICBjb25zb2xlLmxvZyhcInJlbW92ZWRcIik7XG4gICAgcmVzLnNlbmQobnVsbCk7XG4gIH0pO1xufSk7XG5cblxubW9kdWxlLmV4cG9ydHMgPSByb3V0ZXI7Il19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "polls.js"
+      ],
+      "names": [
+        "express",
+        "require",
+        "router",
+        "Router",
+        "path",
+        "Poll",
+        "get",
+        "req",
+        "res",
+        "polls",
+        "user",
+        "find",
+        "username",
+        "err",
+        "doc",
+        "render",
+        "console",
+        "log",
+        "redirect",
+        "post",
+        "newPoll",
+        "name",
+        "query",
+        "pollname",
+        "questions",
+        "options",
+        "map",
+        "item",
+        "question",
+        "rating",
+        "votedusers",
+        "url",
+        "encodeURI",
+        "save",
+        "send",
+        "data",
+        "ref_path",
+        "params",
+        "voted",
+        "findOne",
+        "_id",
+        "polloptions",
+        "filter",
+        "length",
+        "end",
+        "JSON",
+        "stringify",
+        "put",
+        "index",
+        "body",
+        "pollopt",
+        "inc",
+        "findOneAndUpdate",
+        "$inc",
+        "$push",
+        "status",
+        "json",
+        "error",
+        "votename",
+        "delete",
+        "findOneAndRemove",
+        "module",
+        "exports"
+      ],
+      "mappings": "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",
+      "file": "polls.js",
+      "sourceRoot": "/app/routes",
+      "sourcesContent": [
+        "const express = require('express');\nconst router = express.Router();\nconst path = require('path');\nconst Poll = require('../models/poll.js');\n\nrouter.get(\"/polls\", (req, res) => {  \n  var polls = [];\n  if (req.user)\n  {\n    Poll.find({username: req.user.username}, function (err, doc){\n      if (doc) {\n        polls = doc;\n        res.render('polls', { user: req.user, polls: polls });\n      } else {\n        console.log({\"error\":\"Error occured while reading from DB. \" + err});\n        // TODO: show smth on client\n        res.render('polls', { user: req.user, polls: polls });\n      }\n    });\n  }\n  else {\n    res.redirect(\"/\");\n  }\n});\n\nrouter.post('/add', (req, res) => {  \n  var newPoll = Poll({\n      name: req.query.pollname,\n      username: req.user.username,\n      questions: req.query.options.map((item) => { return { question: item, rating: 0}}),\n      votedusers: []\n    });\n  \n  newPoll.url = \"https://trite-engineer.glitch.me/\" + newPoll.username + \"/\" + encodeURI(newPoll.name);\n  \n  newPoll.save(function(err) { // FIXME!! move response handling to client and remove add.pug\n    if (err) console.log(err);\n    //res.render('add', { message : 'Your poll was successfully saved', error : req.flash('error')});\n    // FIXME!!! handle error for client side\n    else\n    {\n      res.send(newPoll.url);\n    }\n  });\n});\n\n// find and send requested poll of specified user\nrouter.get(\"/:username/:pollname\", (req, res) => {\n  var data = {\n    ref_path: req.url,\n    user: req.user,\n    username: req.params.username,\n    pollname: req.params.pollname,\n    voted: false\n  }\n  \n  //get poll options from DB\n  Poll.findOne({username: data.username, name: data.pollname}, {_id: 0}, (err, doc) => {\n    if (doc) {\n      data.polloptions = doc.questions;\n      if (data.user) data.voted = (doc.votedusers.filter(user => (user.username === data.user.username)).length > 0);\n      res.render('poll', data); //TODO: do not show new page, just send data to client\n    } else {\n      // FIXME handle error on client\n      res.end(JSON.stringify({\"error\": \"There's no data for specified username and pollname\"}));\n    }\n  });\n});\n\n// handle voting for the poll of specified user\nrouter.put(\"/:username/:pollname\", (req, res) => {\n    \n  var username = req.params.username;\n  var pollname = req.params.pollname;\n  var index = req.body.pollopt;\n  \n  var inc = {};\n  inc[ 'questions.' + index + \".rating\" ] = 1;\n  Poll.findOneAndUpdate({username: req.params.username, name: req.params.pollname}, { $inc: inc, $push: { votedusers: {username: req.params.username}} }, {_id: 0}, (err, doc) => {\n    if (err) {\n      console.log(err);\n      res.status(500).json({ error: 'Unable to update poll.'});\n    } \n    else {\n      var data = {\n        ref_path: req.url,\n        user: req.user,\n        username: req.params.username,\n        pollname: req.params.votename,\n        voted: true\n      }\n      data.polloptions = doc.questions;\n      console.log(data);\n      res.send(JSON.stringify(data));\n    }\n  });\n});\n\nrouter.delete(\"/remove/:username/:pollname\", (req, res) => {\n  var username = req.params.username;\n  var pollname = req.params.pollname;\n  \n  Poll.findOneAndRemove({ username: username, name: pollname }, (err) => {\n    if (err) {\n      res.send(err);\n      return console.log(err);\n    }\n    console.log(\"removed\");\n    res.send(null);\n  });\n});\n\n\nmodule.exports = router;"
+      ]
+    },
+    "mtime": 1515758724996
+  },
+  "{\"filename\":\"/app/models/poll.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/models/poll.js",
+      "filenameRelative": "/app/models/poll.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "poll.js",
+      "sourceFileName": "poll.js",
+      "sourceRoot": "/app/models",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/models",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "poll"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst PollSchema = new Schema({\n  name: String,\n  username: String,\n  questions: [{ question: String, rating: Number, _id: false }],\n  votedusers: [{ username: String, _id: false }],\n  url: String\n});\n\nmodule.exports = mongoose.model('Poll', PollSchema);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvbGwuanMiXSwibmFtZXMiOlsibW9uZ29vc2UiLCJyZXF1aXJlIiwiU2NoZW1hIiwiUG9sbFNjaGVtYSIsIm5hbWUiLCJTdHJpbmciLCJ1c2VybmFtZSIsInF1ZXN0aW9ucyIsInF1ZXN0aW9uIiwicmF0aW5nIiwiTnVtYmVyIiwiX2lkIiwidm90ZWR1c2VycyIsInVybCIsIm1vZHVsZSIsImV4cG9ydHMiLCJtb2RlbCJdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTUEsV0FBV0MsUUFBUSxVQUFSLENBQWpCO0FBQ0EsTUFBTUMsU0FBU0YsU0FBU0UsTUFBeEI7O0FBRUEsTUFBTUMsYUFBYSxJQUFJRCxNQUFKLENBQVc7QUFDNUJFLFFBQU1DLE1BRHNCO0FBRTVCQyxZQUFVRCxNQUZrQjtBQUc1QkUsYUFBVyxDQUFDLEVBQUVDLFVBQVVILE1BQVosRUFBb0JJLFFBQVFDLE1BQTVCLEVBQW9DQyxLQUFJLEtBQXhDLEVBQUQsQ0FIaUI7QUFJNUJDLGNBQVksQ0FBQyxFQUFFTixVQUFVRCxNQUFaLEVBQW9CTSxLQUFJLEtBQXhCLEVBQUQsQ0FKZ0I7QUFLNUJFLE9BQUtSO0FBTHVCLENBQVgsQ0FBbkI7O0FBUUFTLE9BQU9DLE9BQVAsR0FBaUJmLFNBQVNnQixLQUFULENBQWUsTUFBZixFQUF1QmIsVUFBdkIsQ0FBakIiLCJmaWxlIjoicG9sbC5qcyIsInNvdXJjZVJvb3QiOiIvYXBwL21vZGVscyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IG1vbmdvb3NlID0gcmVxdWlyZSgnbW9uZ29vc2UnKTtcbmNvbnN0IFNjaGVtYSA9IG1vbmdvb3NlLlNjaGVtYTtcblxuY29uc3QgUG9sbFNjaGVtYSA9IG5ldyBTY2hlbWEoeyBcbiAgbmFtZTogU3RyaW5nLFxuICB1c2VybmFtZTogU3RyaW5nLFxuICBxdWVzdGlvbnM6IFt7IHF1ZXN0aW9uOiBTdHJpbmcsIHJhdGluZzogTnVtYmVyLCBfaWQ6ZmFsc2UgfV0sXG4gIHZvdGVkdXNlcnM6IFt7IHVzZXJuYW1lOiBTdHJpbmcsIF9pZDpmYWxzZSB9XSxcbiAgdXJsOiBTdHJpbmdcbn0pO1xuXG5tb2R1bGUuZXhwb3J0cyA9IG1vbmdvb3NlLm1vZGVsKCdQb2xsJywgUG9sbFNjaGVtYSk7Il19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "poll.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "Schema",
+        "PollSchema",
+        "name",
+        "String",
+        "username",
+        "questions",
+        "question",
+        "rating",
+        "Number",
+        "_id",
+        "votedusers",
+        "url",
+        "module",
+        "exports",
+        "model"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACA,MAAMC,SAASF,SAASE,MAAxB;;AAEA,MAAMC,aAAa,IAAID,MAAJ,CAAW;AAC5BE,QAAMC,MADsB;AAE5BC,YAAUD,MAFkB;AAG5BE,aAAW,CAAC,EAAEC,UAAUH,MAAZ,EAAoBI,QAAQC,MAA5B,EAAoCC,KAAI,KAAxC,EAAD,CAHiB;AAI5BC,cAAY,CAAC,EAAEN,UAAUD,MAAZ,EAAoBM,KAAI,KAAxB,EAAD,CAJgB;AAK5BE,OAAKR;AALuB,CAAX,CAAnB;;AAQAS,OAAOC,OAAP,GAAiBf,SAASgB,KAAT,CAAe,MAAf,EAAuBb,UAAvB,CAAjB",
+      "file": "poll.js",
+      "sourceRoot": "/app/models",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst PollSchema = new Schema({ \n  name: String,\n  username: String,\n  questions: [{ question: String, rating: Number, _id:false }],\n  votedusers: [{ username: String, _id:false }],\n  url: String\n});\n\nmodule.exports = mongoose.model('Poll', PollSchema);"
+      ]
+    },
+    "mtime": 1515758724728
+  },
+  "{\"filename\":\"/app/server/routes/auth.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/routes\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/routes/auth.js",
+      "filenameRelative": "/app/server/routes/auth.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "auth.js",
+      "sourceFileName": "auth.js",
+      "sourceRoot": "/app/server/routes",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/routes",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "auth"
+    },
+    "ignored": false,
+    "code": "const express = require('express');\nconst validator = require('validator');\nconst passport = require('passport');\nconst querystring = require('querystring');\nconst router = express.Router();\n\nrouter.post('/register', (req, res, next) => {\n  console.log(req.body);\n\n  const validationResult = validateSignupForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n\n  return passport.authenticate('local-register', err => {\n    if (err) {\n      if (err.name === 'MongoError' && err.code === 11000) {\n        // the 11000 Mongo code is for a duplication email error\n        // the 409 HTTP status code is for conflict error\n        return res.status(409).json({\n          success: false,\n          message: 'Check the form for errors.',\n          errors: {\n            email: 'This email is already taken.'\n          }\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.status(200).json({\n      success: true,\n      message: 'You have successfully registered! Now you should be able to log in.'\n    });\n  })(req, res, next);\n});\n\nrouter.post('/login', (req, res, next) => {\n  const validationResult = validateLoginForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n\n  return passport.authenticate('local-login', (err, token, userData) => {\n    if (err) {\n      if (err.name === 'IncorrectCredentialsError') {\n        return res.status(400).json({\n          success: false,\n          message: err.message\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.json({\n      success: true,\n      message: 'You have successfully logged in!',\n      token,\n      user: userData\n    });\n  })(req, res, next);\n});\n\n/**\n * Validate the sign up form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateSignupForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n\n  if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {\n    isFormValid = false;\n    errors.email = 'Please provide a correct email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {\n    isFormValid = false;\n    errors.password = 'Password must have at least 8 characters.';\n  }\n\n  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {\n    isFormValid = false;\n    errors.name = 'Please provide your name.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\n/**\n * Validate the login form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateLoginForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n\n  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {\n    isFormValid = false;\n    errors.email = 'Please provide your email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {\n    isFormValid = false;\n    errors.password = 'Please provide your password.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\nmodule.exports = router;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dGguanMiXSwibmFtZXMiOlsiZXhwcmVzcyIsInJlcXVpcmUiLCJ2YWxpZGF0b3IiLCJwYXNzcG9ydCIsInF1ZXJ5c3RyaW5nIiwicm91dGVyIiwiUm91dGVyIiwicG9zdCIsInJlcSIsInJlcyIsIm5leHQiLCJjb25zb2xlIiwibG9nIiwiYm9keSIsInZhbGlkYXRpb25SZXN1bHQiLCJ2YWxpZGF0ZVNpZ251cEZvcm0iLCJzdWNjZXNzIiwic3RhdHVzIiwianNvbiIsIm1lc3NhZ2UiLCJlcnJvcnMiLCJhdXRoZW50aWNhdGUiLCJlcnIiLCJuYW1lIiwiY29kZSIsImVtYWlsIiwidmFsaWRhdGVMb2dpbkZvcm0iLCJ0b2tlbiIsInVzZXJEYXRhIiwidXNlciIsInBheWxvYWQiLCJpc0Zvcm1WYWxpZCIsImlzRW1haWwiLCJwYXNzd29yZCIsInRyaW0iLCJsZW5ndGgiLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFNQSxVQUFVQyxRQUFRLFNBQVIsQ0FBaEI7QUFDQSxNQUFNQyxZQUFZRCxRQUFRLFdBQVIsQ0FBbEI7QUFDQSxNQUFNRSxXQUFXRixRQUFRLFVBQVIsQ0FBakI7QUFDQSxNQUFNRyxjQUFjSCxRQUFRLGFBQVIsQ0FBcEI7QUFDQSxNQUFNSSxTQUFTTCxRQUFRTSxNQUFSLEVBQWY7O0FBRUFELE9BQU9FLElBQVAsQ0FBWSxXQUFaLEVBQXlCLENBQUNDLEdBQUQsRUFBTUMsR0FBTixFQUFXQyxJQUFYLEtBQW9CO0FBQzNDQyxVQUFRQyxHQUFSLENBQVlKLElBQUlLLElBQWhCOztBQUVBLFFBQU1DLG1CQUFtQkMsbUJBQW1CUCxJQUFJSyxJQUF2QixDQUF6QjtBQUNBLE1BQUksQ0FBQ0MsaUJBQWlCRSxPQUF0QixFQUErQjtBQUM3QixXQUFPUCxJQUFJUSxNQUFKLENBQVcsR0FBWCxFQUFnQkMsSUFBaEIsQ0FBcUI7QUFDMUJGLGVBQVMsS0FEaUI7QUFFMUJHLGVBQVNMLGlCQUFpQkssT0FGQTtBQUcxQkMsY0FBUU4s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LEdBQVA7QUFLRDs7QUFFRGdCLE9BQU9DLE9BQVAsR0FBaUJoQyxNQUFqQiIsImZpbGUiOiJhdXRoLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvc2VydmVyL3JvdXRlcyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJyk7XG5jb25zdCB2YWxpZGF0b3IgPSByZXF1aXJlKCd2YWxpZGF0b3InKTtcbmNvbnN0IHBhc3Nwb3J0ID0gcmVxdWlyZSgncGFzc3BvcnQnKTtcbmNvbnN0IHF1ZXJ5c3RyaW5nID0gcmVxdWlyZSgncXVlcnlzdHJpbmcnKTtcbmNvbnN0IHJvdXRlciA9IGV4cHJlc3MuUm91dGVyKCk7XG5cbnJvdXRlci5wb3N0KCcvcmVnaXN0ZXInLCAocmVxLCByZXMsIG5leHQpID0+IHtcbiAgY29uc29sZS5sb2cocmVxLmJvZHkpO1xuICAgIFxuICBjb25zdCB2YWxpZGF0aW9uUmVzdWx0ID0gdmFsaWRhdGVTaWdudXBGb3JtKHJlcS5ib2R5KTtcbiAgaWYgKCF2YWxpZGF0aW9uUmVzdWx0LnN1Y2Nlc3MpIHtcbiAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDApLmpzb24oe1xuICAgICAgc3VjY2VzczogZmFsc2UsXG4gICAgICBtZXNzYWdlOiB2YWxpZGF0aW9uUmVzdWx0Lm1lc3NhZ2UsXG4gICAgICBlcnJvcnM6IHZhbGlkYXRpb25SZXN1bHQuZXJyb3JzXG4gICAgfSk7XG4gIH1cbiAgXG4gIHJldHVybiBwYXNzcG9ydC5hdXRoZW50aWNhdGUoJ2xvY2FsLXJlZ2lzdGVyJywgKGVycikgPT4ge1xuICAgIGlmIChlcnIpIHtcbiAgICAgIGlmIChlcnIubmFtZSA9PT0gJ01vbmdvRXJyb3InICYmIGVyci5jb2RlID09PSAxMTAwMCkge1xuICAgICAgICAvLyB0aGUgMTEwMDAgTW9uZ28gY29kZSBpcyBmb3IgYSBkdXBsaWNhdGlvbiBlbWFpbCBlcnJvclxuICAgICAgICAvLyB0aGUgNDA5IEhUVFAgc3RhdHVzIGNvZGUgaXMgZm9yIGNvbmZsaWN0IGVycm9yXG4gICAgICAgIHJldHVybiByZXMuc3RhdHVzKDQwOSkuanNvbih7XG4gICAgICAgICAgc3VjY2VzczogZmFsc2UsXG4gICAgICAgICAgbWVzc2FnZTogJ0NoZWNrIHRoZSBmb3JtIGZvciBlcnJvcnMuJyxcbiAgICAgICAgICBlcnJvcnM6IHtcbiAgICAgICAgICAgIGVtYWlsOiAnVGhpcyBlbWFpbCBpcyBhbHJlYWR5IHRha2VuLidcbiAgICAgICAgICB9XG4gICAgICAgIH0pO1xuICAgICAgfVxuXG4gICAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDApLmpzb24oe1xuICAgICAgICBzdWNjZXNzOiBmYWxzZSxcbiAgICAgICAgbWVzc2FnZTogJ0NvdWxkIG5vdCBwcm9jZXNzIHRoZSBmb3JtLidcbiAgICAgIH0pO1xuICAgIH1cblxuICAgIHJldHVybiByZXMuc3RhdHVzKDIwMCkuanNvbih7XG4gICAgICBzdWNjZXNzOiB0cnVlLFxuICAgICAgbWVzc2FnZTogJ1lvdSBoYXZlIHN1Y2Nlc3NmdWxseSByZWdpc3RlcmVkISBOb3cgeW91IHNob3VsZCBiZSBhYmxlIHRvIGxvZyBpbi4nXG4gICAgfSk7XG4gIH0pKHJlcSwgcmVzLCBuZXh0KTtcbn0pO1xuXG5yb3V0ZXIucG9zdCgnL2xvZ2luJywgKHJlcSwgcmVzLCBuZXh0KSA9PiB7XG4gIGNvbnN0IHZhbGlkYXRpb25SZXN1bHQgPSB2YWxpZGF0ZUxvZ2luRm9ybShyZXEuYm9keSk7XG4gIGlmICghdmFsaWRhdGlvblJlc3VsdC5zdWNjZXNzKSB7XG4gICAgcmV0dXJuIHJlcy5zdGF0dXMoNDAwKS5qc29uKHtcbiAgICAgIHN1Y2Nlc3M6IGZhbHNlLFxuICAgICAgbWVzc2FnZTogdmFsaWRhdGlvblJlc3VsdC5tZXNzYWdlLFxuICAgICAgZXJyb3JzOiB2YWxpZGF0aW9uUmVzdWx0LmVycm9yc1xuICAgIH0pO1xuICB9XG5cbiAgcmV0dXJuIHBhc3Nwb3J0LmF1dGhlbnRpY2F0ZSgnbG9jYWwtbG9naW4nLCAoZXJyLCB0b2tlbiwgdXNlckRhdGEpID0+IHtcbiAgICBpZiAoZXJyKSB7XG4gICAgICBpZiAoZXJyLm5hbWUgPT09ICdJbmNvcnJlY3RDcmVkZW50aWFsc0Vycm9yJykge1xuICAgICAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDApLmpzb24oe1xuICAgICAgICAgIHN1Y2Nlc3M6IGZhbHNlLFxuICAgICAgICAgIG1lc3NhZ2U6IGVyci5tZXNzYWdlXG4gICAgICAgIH0pO1xuICAgICAgfVxuXG4gICAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDApLmpzb24oe1xuICAgICAgICBzdWNjZXNzOiBmYWxzZSxcbiAgICAgICAgbWVzc2FnZTogJ0NvdWxkIG5vdCBwcm9jZXNzIHRoZSBmb3JtLidcbiAgICAgIH0pO1xuICAgIH1cblxuICAgIHJldHVybiByZXMuanNvbih7XG4gICAgICBzdWNjZXNzOiB0cnVlLFxuICAgICAgbWVzc2FnZTogJ1lvdSBoYXZlIHN1Y2Nlc3NmdWxseSBsb2dnZWQgaW4hJyxcbiAgICAgIHRva2VuLFxuICAgICAgdXNlcjogdXNlckRhdGFcbiAgICB9KTtcbiAgfSkocmVxLCByZXMsIG5leHQpO1xufSk7XG5cbi8qKlxuICogVmFsaWRhdGUgdGhlIHNpZ24gdXAgZm9ybVxuICpcbiAqIEBwYXJhbSB7b2JqZWN0fSBwYXlsb2FkIC0gdGhlIEhUVFAgYm9keSBtZXNzYWdlXG4gKiBAcmV0dXJucyB7b2JqZWN0fSBUaGUgcmVzdWx0IG9mIHZhbGlkYXRpb24uIE9iamVjdCBjb250YWlucyBhIGJvb2xlYW4gdmFsaWRhdGlvbiByZXN1bHQsXG4gKiAgICAgICAgICAgICAgICAgICBlcnJvcnMgdGlwcywgYW5kIGEgZ2xvYmFsIG1lc3NhZ2UgZm9yIHRoZSB3aG9sZSBmb3JtLlxuICovXG5mdW5jdGlvbiB2YWxpZGF0ZVNpZ251cEZvcm0ocGF5bG9hZCkge1xuICBjb25zdCBlcnJvcnMgPSB7fTtcbiAgbGV0IGlzRm9ybVZhbGlkID0gdHJ1ZTtcbiAgbGV0IG1lc3NhZ2UgPSAnJztcbiAgXG4gIGlmICghcGF5bG9hZCB8fCB0eXBlb2YgcGF5bG9hZC5lbWFpbCAhPT0gJ3N0cmluZycgfHwgIXZhbGlkYXRvci5pc0VtYWlsKHBheWxvYWQuZW1haWwpKSB7XG4gICAgaXNGb3JtVmFsaWQgPSBmYWxzZTtcbiAgICBlcnJvcnMuZW1haWwgPSAnUGxlYXNlIHByb3ZpZGUgYSBjb3JyZWN0IGVtYWlsIGFkZHJlc3MuJztcbiAgfVxuXG4gIGlmICghcGF5bG9hZCB8fCB0eXBlb2YgcGF5bG9hZC5wYXNzd29yZCAhPT0gJ3N0cmluZycgfHwgcGF5bG9hZC5wYXNzd29yZC50cmltKCkubGVuZ3RoIDwgOCkge1xuICAgIGlzRm9ybVZhbGlkID0gZmFsc2U7XG4gICAgZXJyb3JzLnBhc3N3b3JkID0gJ1Bhc3N3b3JkIG11c3QgaGF2ZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMuJztcbiAgfVxuXG4gIGlmICghcGF5bG9hZCB8fCB0eXBlb2YgcGF5bG9hZC5uYW1lICE9PSAnc3RyaW5nJyB8fCBwYXlsb2FkLm5hbWUudHJpbSgpLmxlbmd0aCA9PT0gMCkge1xuICAgIGlzRm9ybVZhbGlkID0gZmFsc2U7XG4gICAgZXJyb3JzLm5hbWUgPSAnUGxlYXNlIHByb3ZpZGUgeW91ciBuYW1lLic7XG4gIH1cblxuICBpZiAoIWlzRm9ybVZhbGlkKSB7XG4gICAgbWVzc2FnZSA9ICdDaGVjayB0aGUgZm9ybSBmb3IgZXJyb3JzLic7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHN1Y2Nlc3M6IGlzRm9ybVZhbGlkLFxuICAgIG1lc3NhZ2UsXG4gICAgZXJyb3JzXG4gIH07XG59XG5cbi8qKlxuICogVmFsaWRhdGUgdGhlIGxvZ2luIGZvcm1cbiAqXG4gKiBAcGFyYW0ge29iamVjdH0gcGF5bG9hZCAtIHRoZSBIVFRQIGJvZHkgbWVzc2FnZVxuICogQHJldHVybnMge29iamVjdH0gVGhlIHJlc3VsdCBvZiB2YWxpZGF0aW9uLiBPYmplY3QgY29udGFpbnMgYSBib29sZWFuIHZhbGlkYXRpb24gcmVzdWx0LFxuICogICAgICAgICAgICAgICAgICAgZXJyb3JzIHRpcHMsIGFuZCBhIGdsb2JhbCBtZXNzYWdlIGZvciB0aGUgd2hvbGUgZm9ybS5cbiAqL1xuZnVuY3Rpb24gdmFsaWRhdGVMb2dpbkZvcm0ocGF5bG9hZCkge1xuICBjb25zdCBlcnJvcnMgPSB7fTtcbiAgbGV0IGlzRm9ybVZhbGlkID0gdHJ1ZTtcbiAgbGV0IG1lc3NhZ2UgPSAnJztcblxuICBpZiAoIXBheWxvYWQgfHwgdHlwZW9mIHBheWxvYWQuZW1haWwgIT09ICdzdHJpbmcnIHx8IHBheWxvYWQuZW1haWwudHJpbSgpLmxlbmd0aCA9PT0gMCkge1xuICAgIGlzRm9ybVZhbGlkID0gZmFsc2U7XG4gICAgZXJyb3JzLmVtYWlsID0gJ1BsZWFzZSBwcm92aWRlIHlvdXIgZW1haWwgYWRkcmVzcy4nO1xuICB9XG5cbiAgaWYgKCFwYXlsb2FkIHx8IHR5cGVvZiBwYXlsb2FkLnBhc3N3b3JkICE9PSAnc3RyaW5nJyB8fCBwYXlsb2FkLnBhc3N3b3JkLnRyaW0oKS5sZW5ndGggPT09IDApIHtcbiAgICBpc0Zvcm1WYWxpZCA9IGZhbHNlO1xuICAgIGVycm9ycy5wYXNzd29yZCA9ICdQbGVhc2UgcHJvdmlkZSB5b3VyIHBhc3N3b3JkLic7XG4gIH1cblxuICBpZiAoIWlzRm9ybVZhbGlkKSB7XG4gICAgbWVzc2FnZSA9ICdDaGVjayB0aGUgZm9ybSBmb3IgZXJyb3JzLic7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHN1Y2Nlc3M6IGlzRm9ybVZhbGlkLFxuICAgIG1lc3NhZ2UsXG4gICAgZXJyb3JzXG4gIH07XG59XG5cbm1vZHVsZS5leHBvcnRzID0gcm91dGVyOyJdfQ==",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "auth.js"
+      ],
+      "names": [
+        "express",
+        "require",
+        "validator",
+        "passport",
+        "querystring",
+        "router",
+        "Router",
+        "post",
+        "req",
+        "res",
+        "next",
+        "console",
+        "log",
+        "body",
+        "validationResult",
+        "validateSignupForm",
+        "success",
+        "status",
+        "json",
+        "message",
+        "errors",
+        "authenticate",
+        "err",
+        "name",
+        "code",
+        "email",
+        "validateLoginForm",
+        "token",
+        "userData",
+        "user",
+        "payload",
+        "isFormValid",
+        "isEmail",
+        "password",
+        "trim",
+        "length",
+        "module",
+        "exports"
+      ],
+      "mappings": "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",
+      "file": "auth.js",
+      "sourceRoot": "/app/server/routes",
+      "sourcesContent": [
+        "const express = require('express');\nconst validator = require('validator');\nconst passport = require('passport');\nconst querystring = require('querystring');\nconst router = express.Router();\n\nrouter.post('/register', (req, res, next) => {\n  console.log(req.body);\n    \n  const validationResult = validateSignupForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n  \n  return passport.authenticate('local-register', (err) => {\n    if (err) {\n      if (err.name === 'MongoError' && err.code === 11000) {\n        // the 11000 Mongo code is for a duplication email error\n        // the 409 HTTP status code is for conflict error\n        return res.status(409).json({\n          success: false,\n          message: 'Check the form for errors.',\n          errors: {\n            email: 'This email is already taken.'\n          }\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.status(200).json({\n      success: true,\n      message: 'You have successfully registered! Now you should be able to log in.'\n    });\n  })(req, res, next);\n});\n\nrouter.post('/login', (req, res, next) => {\n  const validationResult = validateLoginForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n\n  return passport.authenticate('local-login', (err, token, userData) => {\n    if (err) {\n      if (err.name === 'IncorrectCredentialsError') {\n        return res.status(400).json({\n          success: false,\n          message: err.message\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.json({\n      success: true,\n      message: 'You have successfully logged in!',\n      token,\n      user: userData\n    });\n  })(req, res, next);\n});\n\n/**\n * Validate the sign up form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateSignupForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n  \n  if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {\n    isFormValid = false;\n    errors.email = 'Please provide a correct email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {\n    isFormValid = false;\n    errors.password = 'Password must have at least 8 characters.';\n  }\n\n  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {\n    isFormValid = false;\n    errors.name = 'Please provide your name.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\n/**\n * Validate the login form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateLoginForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n\n  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {\n    isFormValid = false;\n    errors.email = 'Please provide your email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {\n    isFormValid = false;\n    errors.password = 'Please provide your password.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\nmodule.exports = router;"
+      ]
+    },
+    "mtime": 1517247907219
+  },
+  "{\"filename\":\"/app/server/config/db.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/config\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/config/db.js",
+      "filenameRelative": "/app/server/config/db.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "db.js",
+      "sourceFileName": "db.js",
+      "sourceRoot": "/app/server/config",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/config",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "db"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nmongoose.Promise = global.Promise;\n\nexports.db = mongoose.connect(process.env.DB_URI, {\n  useMongoClient: true\n  /* other options */\n}, error => {\n  if (error) console.error(\"Unable to connect to the mongoDB server. Error: \" + error);\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLmpzIl0sIm5hbWVzIjpbIm1vbmdvb3NlIiwicmVxdWlyZSIsIlByb21pc2UiLCJnbG9iYWwiLCJleHBvcnRzIiwiZGIiLCJjb25uZWN0IiwicHJvY2VzcyIsImVudiIsIkRCX1VSSSIsInVzZU1vbmdvQ2xpZW50IiwiZXJyb3IiLCJjb25zb2xlIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFNQSxXQUFXQyxRQUFRLFVBQVIsQ0FBakI7QUFDQUQsU0FBU0UsT0FBVCxHQUFtQkMsT0FBT0QsT0FBMUI7O0FBRUFFLFFBQVFDLEVBQVIsR0FBYUwsU0FBU00sT0FBVCxDQUFpQkMsUUFBUUMsR0FBUixDQUFZQyxNQUE3QixFQUFxQztBQUNoREMsa0JBQWdCO0FBQ2hCO0FBRmdELENBQXJDLEVBR1RDLEtBQUQsSUFBVztBQUNaLE1BQUlBLEtBQUosRUFBV0MsUUFBUUQsS0FBUixDQUFjLHFEQUFxREEsS0FBbkU7QUFDWixDQUxZLENBQWIiLCJmaWxlIjoiZGIuanMiLCJzb3VyY2VSb290IjoiL2FwcC9zZXJ2ZXIvY29uZmlnIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbW9uZ29vc2UgPSByZXF1aXJlKCdtb25nb29zZScpO1xubW9uZ29vc2UuUHJvbWlzZSA9IGdsb2JhbC5Qcm9taXNlO1xuXG5leHBvcnRzLmRiID0gbW9uZ29vc2UuY29ubmVjdChwcm9jZXNzLmVudi5EQl9VUkksIHtcbiAgdXNlTW9uZ29DbGllbnQ6IHRydWUsXG4gIC8qIG90aGVyIG9wdGlvbnMgKi9cbn0sIChlcnJvcikgPT4ge1xuICBpZiAoZXJyb3IpIGNvbnNvbGUuZXJyb3IoXCJVbmFibGUgdG8gY29ubmVjdCB0byB0aGUgbW9uZ29EQiBzZXJ2ZXIuIEVycm9yOiBcIiArIGVycm9yKTtcbn0pOyJdfQ==",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "db.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "Promise",
+        "global",
+        "exports",
+        "db",
+        "connect",
+        "process",
+        "env",
+        "DB_URI",
+        "useMongoClient",
+        "error",
+        "console"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACAD,SAASE,OAAT,GAAmBC,OAAOD,OAA1B;;AAEAE,QAAQC,EAAR,GAAaL,SAASM,OAAT,CAAiBC,QAAQC,GAAR,CAAYC,MAA7B,EAAqC;AAChDC,kBAAgB;AAChB;AAFgD,CAArC,EAGTC,KAAD,IAAW;AACZ,MAAIA,KAAJ,EAAWC,QAAQD,KAAR,CAAc,qDAAqDA,KAAnE;AACZ,CALY,CAAb",
+      "file": "db.js",
+      "sourceRoot": "/app/server/config",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nmongoose.Promise = global.Promise;\n\nexports.db = mongoose.connect(process.env.DB_URI, {\n  useMongoClient: true,\n  /* other options */\n}, (error) => {\n  if (error) console.error(\"Unable to connect to the mongoDB server. Error: \" + error);\n});"
+      ]
+    },
+    "mtime": 1517247907051
+  },
+  "{\"filename\":\"/app/server/passport/local-register.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/passport\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/passport/local-register.js",
+      "filenameRelative": "/app/server/passport/local-register.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "local-register.js",
+      "sourceFileName": "local-register.js",
+      "sourceRoot": "/app/server/passport",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/passport",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "local-register"
+    },
+    "ignored": false,
+    "code": "const User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n\n  const userData = {\n    email: email.trim(),\n    password: password.trim(),\n    name: req.body.name.trim()\n  };\n\n  const newUser = new User(userData);\n  newUser.save(err => {\n    if (err) {\n      return done(err);\n    }\n\n    return done(null);\n  });\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvY2FsLXJlZ2lzdGVyLmpzIl0sIm5hbWVzIjpbIlVzZXIiLCJyZXF1aXJlIiwiUGFzc3BvcnRMb2NhbFN0cmF0ZWd5IiwiU3RyYXRlZ3kiLCJtb2R1bGUiLCJleHBvcnRzIiwidXNlcm5hbWVGaWVsZCIsInBhc3N3b3JkRmllbGQiLCJzZXNzaW9uIiwicGFzc1JlcVRvQ2FsbGJhY2siLCJyZXEiLCJlbWFpbCIsInBhc3N3b3JkIiwiZG9uZSIsInVzZXJEYXRhIiwidHJpbSIsIm5hbWUiLCJib2R5IiwibmV3VXNlciIsInNhdmUiLCJlcnIiXSwibWFwcGluZ3MiOiJBQUFBLE1BQU1BLE9BQU9DLFFBQVEsZ0JBQVIsQ0FBYjtBQUNBLE1BQU1DLHdCQUF3QkQsUUFBUSxnQkFBUixFQUEwQkUsUUFBeEQ7O0FBRUE7OztBQUdBQyxPQUFPQyxPQUFQLEdBQWlCLElBQUlILHFCQUFKLENBQTBCO0FBQ3pDSSxpQkFBZSxPQUQwQjtBQUV6Q0MsaUJBQWUsVUFGMEI7QUFHekNDLFdBQVMsS0FIZ0M7QUFJekNDLHFCQUFtQjtBQUpzQixDQUExQixFQUtkLENBQUNDLEdBQUQsRUFBTUMsS0FBTixFQUFhQyxRQUFiLEVBQXVCQyxJQUF2QixLQUFnQzs7QUFFakMsUUFBTUMsV0FBVztBQUNmSCxXQUFPQSxNQUFNSSxJQUFOLEVBRFE7QUFFZkgsY0FBVUEsU0FBU0csSUFBVCxFQUZLO0FBR2ZDLFVBQU1OLElBQUlPLElBQUosQ0FBU0QsSUFBVCxDQUFjRCxJQUFkO0FBSFMsR0FBakI7O0FBTUEsUUFBTUcsVUFBVSxJQUFJbEIsSUFBSixDQUFTYyxRQUFULENBQWhCO0FBQ0FJLFVBQVFDLElBQVIsQ0FBY0MsR0FBRCxJQUFTO0FBQ3BCLFFBQUlBLEdBQUosRUFBUztBQUFFLGFBQU9QLEtBQUtPLEdBQUwsQ0FBUDtBQUFtQjs7QUFFOUIsV0FBT1AsS0FBSyxJQUFMLENBQVA7QUFDRCxHQUpEO0FBS0QsQ0FuQmdCLENBQWpCIiwiZmlsZSI6ImxvY2FsLXJlZ2lzdGVyLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvc2VydmVyL3Bhc3Nwb3J0Iiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgVXNlciA9IHJlcXVpcmUoJy4uL21vZGVscy91c2VyJyk7XG5jb25zdCBQYXNzcG9ydExvY2FsU3RyYXRlZ3kgPSByZXF1aXJlKCdwYXNzcG9ydC1sb2NhbCcpLlN0cmF0ZWd5O1xuXG4vKipcbiAqIFJldHVybiB0aGUgUGFzc3BvcnQgTG9jYWwgU3RyYXRlZ3kgb2JqZWN0LlxuICovXG5tb2R1bGUuZXhwb3J0cyA9IG5ldyBQYXNzcG9ydExvY2FsU3RyYXRlZ3koe1xuICB1c2VybmFtZUZpZWxkOiAnZW1haWwnLFxuICBwYXNzd29yZEZpZWxkOiAncGFzc3dvcmQnLFxuICBzZXNzaW9uOiBmYWxzZSxcbiAgcGFzc1JlcVRvQ2FsbGJhY2s6IHRydWVcbn0sIChyZXEsIGVtYWlsLCBwYXNzd29yZCwgZG9uZSkgPT4ge1xuICBcbiAgY29uc3QgdXNlckRhdGEgPSB7XG4gICAgZW1haWw6IGVtYWlsLnRyaW0oKSxcbiAgICBwYXNzd29yZDogcGFzc3dvcmQudHJpbSgpLFxuICAgIG5hbWU6IHJlcS5ib2R5Lm5hbWUudHJpbSgpXG4gIH07XG5cbiAgY29uc3QgbmV3VXNlciA9IG5ldyBVc2VyKHVzZXJEYXRhKTtcbiAgbmV3VXNlci5zYXZlKChlcnIpID0+IHtcbiAgICBpZiAoZXJyKSB7IHJldHVybiBkb25lKGVycik7IH1cblxuICAgIHJldHVybiBkb25lKG51bGwpO1xuICB9KTtcbn0pOyJdfQ==",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "local-register.js"
+      ],
+      "names": [
+        "User",
+        "require",
+        "PassportLocalStrategy",
+        "Strategy",
+        "module",
+        "exports",
+        "usernameField",
+        "passwordField",
+        "session",
+        "passReqToCallback",
+        "req",
+        "email",
+        "password",
+        "done",
+        "userData",
+        "trim",
+        "name",
+        "body",
+        "newUser",
+        "save",
+        "err"
+      ],
+      "mappings": "AAAA,MAAMA,OAAOC,QAAQ,gBAAR,CAAb;AACA,MAAMC,wBAAwBD,QAAQ,gBAAR,EAA0BE,QAAxD;;AAEA;;;AAGAC,OAAOC,OAAP,GAAiB,IAAIH,qBAAJ,CAA0B;AACzCI,iBAAe,OAD0B;AAEzCC,iBAAe,UAF0B;AAGzCC,WAAS,KAHgC;AAIzCC,qBAAmB;AAJsB,CAA1B,EAKd,CAACC,GAAD,EAAMC,KAAN,EAAaC,QAAb,EAAuBC,IAAvB,KAAgC;;AAEjC,QAAMC,WAAW;AACfH,WAAOA,MAAMI,IAAN,EADQ;AAEfH,cAAUA,SAASG,IAAT,EAFK;AAGfC,UAAMN,IAAIO,IAAJ,CAASD,IAAT,CAAcD,IAAd;AAHS,GAAjB;;AAMA,QAAMG,UAAU,IAAIlB,IAAJ,CAASc,QAAT,CAAhB;AACAI,UAAQC,IAAR,CAAcC,GAAD,IAAS;AACpB,QAAIA,GAAJ,EAAS;AAAE,aAAOP,KAAKO,GAAL,CAAP;AAAmB;;AAE9B,WAAOP,KAAK,IAAL,CAAP;AACD,GAJD;AAKD,CAnBgB,CAAjB",
+      "file": "local-register.js",
+      "sourceRoot": "/app/server/passport",
+      "sourcesContent": [
+        "const User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n  \n  const userData = {\n    email: email.trim(),\n    password: password.trim(),\n    name: req.body.name.trim()\n  };\n\n  const newUser = new User(userData);\n  newUser.save((err) => {\n    if (err) { return done(err); }\n\n    return done(null);\n  });\n});"
+      ]
+    },
+    "mtime": 1517247907183
+  },
+  "{\"filename\":\"/app/server/models/user.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/models/user.js",
+      "filenameRelative": "/app/server/models/user.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "user.js",
+      "sourceFileName": "user.js",
+      "sourceRoot": "/app/server/models",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/models",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "user"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nconst bcrypt = require('bcrypt');\nconst Schema = mongoose.Schema;\n\n// define the User model schema\nconst UserSchema = new Schema({\n  email: {\n    type: String,\n    index: { unique: true }\n  },\n  password: String,\n  name: String,\n  polls: [{ type: Schema.Types.ObjectId, ref: 'Poll' }]\n});\n\n/**\n * Compare the passed password with the value in the database. A model method.\n *\n * @param {string} password\n * @returns {object} callback\n */\nUserSchema.methods.comparePassword = function comparePassword(password, callback) {\n  bcrypt.compare(password, this.password, callback);\n};\n\n/**\n * The pre-save hook method.\n */\nUserSchema.pre('save', function saveHook(next) {\n  const user = this;\n\n  // proceed further only if the password is modified or the user is new\n  if (!user.isModified('password')) return next();\n\n  return bcrypt.genSalt((saltError, salt) => {\n    if (saltError) {\n      return next(saltError);\n    }\n\n    return bcrypt.hash(user.password, salt, (hashError, hash) => {\n      if (hashError) {\n        return next(hashError);\n      }\n\n      // replace a password string with hash value\n      user.password = hash;\n\n      return next();\n    });\n  });\n});\n\nmodule.exports = mongoose.model('User', UserSchema);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVzZXIuanMiXSwibmFtZXMiOlsibW9uZ29vc2UiLCJyZXF1aXJlIiwiYmNyeXB0IiwiU2NoZW1hIiwiVXNlclNjaGVtYSIsImVtYWlsIiwidHlwZSIsIlN0cmluZyIsImluZGV4IiwidW5pcXVlIiwicGFzc3dvcmQiLCJuYW1lIiwicG9sbHMiLCJUeXBlcyIsIk9iamVjdElkIiwicmVmIiwibWV0aG9kcyIsImNvbXBhcmVQYXNzd29yZCIsImNhbGxiYWNrIiwiY29tcGFyZSIsInByZSIsInNhdmVIb29rIiwibmV4dCIsInVzZXIiLCJpc01vZGlmaWVkIiwiZ2VuU2FsdCIsInNhbHRFcnJvciIsInNhbHQiLCJoYXNoIiwiaGFzaEVycm9yIiwibW9kdWxlIiwiZXhwb3J0cyIsIm1vZGVsIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFNQSxXQUFXQyxRQUFRLFVBQVIsQ0FBakI7QUFDQSxNQUFNQyxTQUFTRCxRQUFRLFFBQVIsQ0FBZjtBQUNBLE1BQU1FLFNBQVNILFNBQVNHLE1BQXhCOztBQUVBO0FBQ0EsTUFBTUMsYUFBYSxJQUFJRCxNQUFKLENBQVc7QUFDNUJFLFNBQU87QUFDTEMsVUFBTUMsTUFERDtBQUVMQyxXQUFPLEVBQUVDLFFBQVEsSUFBVjtBQUZGLEdBRHFCO0FBSzVCQyxZQUFVSCxNQUxrQjtBQU01QkksUUFBTUosTUFOc0I7QUFPNUJLLFNBQU8sQ0FBQyxFQUFFTixNQUFNSCxPQUFPVSxLQUFQLENBQWFDLFFBQXJCLEVBQStCQyxLQUFLLE1BQXBDLEVBQUQ7QUFQcUIsQ0FBWCxDQUFuQjs7QUFXQTs7Ozs7O0FBTUFYLFdBQVdZLE9BQVgsQ0FBbUJDLGVBQW5CLEdBQXFDLFNBQVNBLGVBQVQsQ0FBeUJQLFFBQXpCLEVBQW1DUSxRQUFuQyxFQUE2QztBQUNoRmhCLFNBQU9pQixPQUFQLENBQWVULFFBQWYsRUFBeUIsS0FBS0EsUUFBOUIsRUFBd0NRLFFBQXhDO0FBQ0QsQ0FGRDs7QUFLQTs7O0FBR0FkLFdBQVdnQixHQUFYLENBQWUsTUFBZixFQUF1QixTQUFTQyxRQUFULENBQWtCQyxJQUFsQixFQUF3QjtBQUM3QyxRQUFNQyxPQUFPLElBQWI7O0FBRUE7QUFDQSxNQUFJLENBQUNBLEtBQUtDLFVBQUwsQ0FBZ0IsVUFBaEIsQ0FBTCxFQUFrQyxPQUFPRixNQUFQOztBQUdsQyxTQUFPcEIsT0FBT3VCLE9BQVAsQ0FBZSxDQUFDQyxTQUFELEVBQVlDLElBQVosS0FBcUI7QUFDekMsUUFBSUQsU0FBSixFQUFlO0FBQUUsYUFBT0osS0FBS0ksU0FBTCxDQUFQO0FBQXlCOztBQUUxQyxXQUFPeEIsT0FBTzBCLElBQVAsQ0FBWUwsS0FBS2IsUUFBakIsRUFBMkJpQixJQUEzQixFQUFpQyxDQUFDRSxTQUFELEVBQVlELElBQVosS0FBcUI7QUFDM0QsVUFBSUMsU0FBSixFQUFlO0FBQUUsZUFBT1AsS0FBS08sU0FBTCxDQUFQO0FBQXlCOztBQUUxQztBQUNBTixXQUFLYixRQUFMLEdBQWdCa0IsSUFBaEI7O0FBRUEsYUFBT04sTUFBUDtBQUNELEtBUE0sQ0FBUDtBQVFELEdBWE0sQ0FBUDtBQVlELENBbkJEOztBQXNCQVEsT0FBT0MsT0FBUCxHQUFpQi9CLFNBQVNnQyxLQUFULENBQWUsTUFBZixFQUF1QjVCLFVBQXZCLENBQWpCIiwiZmlsZSI6InVzZXIuanMiLCJzb3VyY2VSb290IjoiL2FwcC9zZXJ2ZXIvbW9kZWxzIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbW9uZ29vc2UgPSByZXF1aXJlKCdtb25nb29zZScpO1xuY29uc3QgYmNyeXB0ID0gcmVxdWlyZSgnYmNyeXB0Jyk7XG5jb25zdCBTY2hlbWEgPSBtb25nb29zZS5TY2hlbWE7XG5cbi8vIGRlZmluZSB0aGUgVXNlciBtb2RlbCBzY2hlbWFcbmNvbnN0IFVzZXJTY2hlbWEgPSBuZXcgU2NoZW1hKHtcbiAgZW1haWw6IHtcbiAgICB0eXBlOiBTdHJpbmcsXG4gICAgaW5kZXg6IHsgdW5pcXVlOiB0cnVlIH1cbiAgfSxcbiAgcGFzc3dvcmQ6IFN0cmluZyxcbiAgbmFtZTogU3RyaW5nLFxuICBwb2xsczogW3sgdHlwZTogU2NoZW1hLlR5cGVzLk9iamVjdElkLCByZWY6ICdQb2xsJyB9XVxufSk7XG5cblxuLyoqXG4gKiBDb21wYXJlIHRoZSBwYXNzZWQgcGFzc3dvcmQgd2l0aCB0aGUgdmFsdWUgaW4gdGhlIGRhdGFiYXNlLiBBIG1vZGVsIG1ldGhvZC5cbiAqXG4gKiBAcGFyYW0ge3N0cmluZ30gcGFzc3dvcmRcbiAqIEByZXR1cm5zIHtvYmplY3R9IGNhbGxiYWNrXG4gKi9cblVzZXJTY2hlbWEubWV0aG9kcy5jb21wYXJlUGFzc3dvcmQgPSBmdW5jdGlvbiBjb21wYXJlUGFzc3dvcmQocGFzc3dvcmQsIGNhbGxiYWNrKSB7XG4gIGJjcnlwdC5jb21wYXJlKHBhc3N3b3JkLCB0aGlzLnBhc3N3b3JkLCBjYWxsYmFjayk7XG59O1xuXG5cbi8qKlxuICogVGhlIHByZS1zYXZlIGhvb2sgbWV0aG9kLlxuICovXG5Vc2VyU2NoZW1hLnByZSgnc2F2ZScsIGZ1bmN0aW9uIHNhdmVIb29rKG5leHQpIHtcbiAgY29uc3QgdXNlciA9IHRoaXM7XG5cbiAgLy8gcHJvY2VlZCBmdXJ0aGVyIG9ubHkgaWYgdGhlIHBhc3N3b3JkIGlzIG1vZGlmaWVkIG9yIHRoZSB1c2VyIGlzIG5ld1xuICBpZiAoIXVzZXIuaXNNb2RpZmllZCgncGFzc3dvcmQnKSkgcmV0dXJuIG5leHQoKTtcblxuXG4gIHJldHVybiBiY3J5cHQuZ2VuU2FsdCgoc2FsdEVycm9yLCBzYWx0KSA9PiB7XG4gICAgaWYgKHNhbHRFcnJvcikgeyByZXR1cm4gbmV4dChzYWx0RXJyb3IpOyB9XG5cbiAgICByZXR1cm4gYmNyeXB0Lmhhc2godXNlci5wYXNzd29yZCwgc2FsdCwgKGhhc2hFcnJvciwgaGFzaCkgPT4ge1xuICAgICAgaWYgKGhhc2hFcnJvcikgeyByZXR1cm4gbmV4dChoYXNoRXJyb3IpOyB9XG5cbiAgICAgIC8vIHJlcGxhY2UgYSBwYXNzd29yZCBzdHJpbmcgd2l0aCBoYXNoIHZhbHVlXG4gICAgICB1c2VyLnBhc3N3b3JkID0gaGFzaDtcblxuICAgICAgcmV0dXJuIG5leHQoKTtcbiAgICB9KTtcbiAgfSk7XG59KTtcblxuXG5tb2R1bGUuZXhwb3J0cyA9IG1vbmdvb3NlLm1vZGVsKCdVc2VyJywgVXNlclNjaGVtYSk7Il19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "user.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "bcrypt",
+        "Schema",
+        "UserSchema",
+        "email",
+        "type",
+        "String",
+        "index",
+        "unique",
+        "password",
+        "name",
+        "polls",
+        "Types",
+        "ObjectId",
+        "ref",
+        "methods",
+        "comparePassword",
+        "callback",
+        "compare",
+        "pre",
+        "saveHook",
+        "next",
+        "user",
+        "isModified",
+        "genSalt",
+        "saltError",
+        "salt",
+        "hash",
+        "hashError",
+        "module",
+        "exports",
+        "model"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACA,MAAMC,SAASD,QAAQ,QAAR,CAAf;AACA,MAAME,SAASH,SAASG,MAAxB;;AAEA;AACA,MAAMC,aAAa,IAAID,MAAJ,CAAW;AAC5BE,SAAO;AACLC,UAAMC,MADD;AAELC,WAAO,EAAEC,QAAQ,IAAV;AAFF,GADqB;AAK5BC,YAAUH,MALkB;AAM5BI,QAAMJ,MANsB;AAO5BK,SAAO,CAAC,EAAEN,MAAMH,OAAOU,KAAP,CAAaC,QAArB,EAA+BC,KAAK,MAApC,EAAD;AAPqB,CAAX,CAAnB;;AAWA;;;;;;AAMAX,WAAWY,OAAX,CAAmBC,eAAnB,GAAqC,SAASA,eAAT,CAAyBP,QAAzB,EAAmCQ,QAAnC,EAA6C;AAChFhB,SAAOiB,OAAP,CAAeT,QAAf,EAAyB,KAAKA,QAA9B,EAAwCQ,QAAxC;AACD,CAFD;;AAKA;;;AAGAd,WAAWgB,GAAX,CAAe,MAAf,EAAuB,SAASC,QAAT,CAAkBC,IAAlB,EAAwB;AAC7C,QAAMC,OAAO,IAAb;;AAEA;AACA,MAAI,CAACA,KAAKC,UAAL,CAAgB,UAAhB,CAAL,EAAkC,OAAOF,MAAP;;AAGlC,SAAOpB,OAAOuB,OAAP,CAAe,CAACC,SAAD,EAAYC,IAAZ,KAAqB;AACzC,QAAID,SAAJ,EAAe;AAAE,aAAOJ,KAAKI,SAAL,CAAP;AAAyB;;AAE1C,WAAOxB,OAAO0B,IAAP,CAAYL,KAAKb,QAAjB,EAA2BiB,IAA3B,EAAiC,CAACE,SAAD,EAAYD,IAAZ,KAAqB;AAC3D,UAAIC,SAAJ,EAAe;AAAE,eAAOP,KAAKO,SAAL,CAAP;AAAyB;;AAE1C;AACAN,WAAKb,QAAL,GAAgBkB,IAAhB;;AAEA,aAAON,MAAP;AACD,KAPM,CAAP;AAQD,GAXM,CAAP;AAYD,CAnBD;;AAsBAQ,OAAOC,OAAP,GAAiB/B,SAASgC,KAAT,CAAe,MAAf,EAAuB5B,UAAvB,CAAjB",
+      "file": "user.js",
+      "sourceRoot": "/app/server/models",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nconst bcrypt = require('bcrypt');\nconst Schema = mongoose.Schema;\n\n// define the User model schema\nconst UserSchema = new Schema({\n  email: {\n    type: String,\n    index: { unique: true }\n  },\n  password: String,\n  name: String,\n  polls: [{ type: Schema.Types.ObjectId, ref: 'Poll' }]\n});\n\n\n/**\n * Compare the passed password with the value in the database. A model method.\n *\n * @param {string} password\n * @returns {object} callback\n */\nUserSchema.methods.comparePassword = function comparePassword(password, callback) {\n  bcrypt.compare(password, this.password, callback);\n};\n\n\n/**\n * The pre-save hook method.\n */\nUserSchema.pre('save', function saveHook(next) {\n  const user = this;\n\n  // proceed further only if the password is modified or the user is new\n  if (!user.isModified('password')) return next();\n\n\n  return bcrypt.genSalt((saltError, salt) => {\n    if (saltError) { return next(saltError); }\n\n    return bcrypt.hash(user.password, salt, (hashError, hash) => {\n      if (hashError) { return next(hashError); }\n\n      // replace a password string with hash value\n      user.password = hash;\n\n      return next();\n    });\n  });\n});\n\n\nmodule.exports = mongoose.model('User', UserSchema);"
+      ]
+    },
+    "mtime": 1517247907139
+  },
+  "{\"filename\":\"/app/server/passport/local-login.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/passport\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/passport/local-login.js",
+      "filenameRelative": "/app/server/passport/local-login.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "local-login.js",
+      "sourceFileName": "local-login.js",
+      "sourceRoot": "/app/server/passport",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/passport",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "local-login"
+    },
+    "ignored": false,
+    "code": "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n  const userData = {\n    email: email.trim(),\n    password: password.trim()\n  };\n\n  // find a user by email address\n  return User.findOne({ email: userData.email }, (err, user) => {\n    if (err) {\n      return done(err);\n    }\n\n    if (!user) {\n      const error = new Error('Incorrect email or password');\n      error.name = 'IncorrectCredentialsError';\n\n      return done(error);\n    }\n\n    // check if a hashed user's password is equal to a value saved in the database\n    return user.comparePassword(userData.password, (passwordErr, isMatch) => {\n      if (err) {\n        return done(err);\n      }\n\n      if (!isMatch) {\n        const error = new Error('Incorrect email or password');\n        error.name = 'IncorrectCredentialsError';\n\n        return done(error);\n      }\n\n      // create a token string\n      const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET);\n      const data = { name: user.name };\n\n      return done(null, token, data);\n    });\n  });\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvY2FsLWxvZ2luLmpzIl0sIm5hbWVzIjpbImp3dCIsInJlcXVpcmUiLCJVc2VyIiwiUGFzc3BvcnRMb2NhbFN0cmF0ZWd5IiwiU3RyYXRlZ3kiLCJtb2R1bGUiLCJleHBvcnRzIiwidXNlcm5hbWVGaWVsZCIsInBhc3N3b3JkRmllbGQiLCJzZXNzaW9uIiwicGFzc1JlcVRvQ2FsbGJhY2siLCJyZXEiLCJlbWFpbCIsInBhc3N3b3JkIiwiZG9uZSIsInVzZXJEYXRhIiwidHJpbSIsImZpbmRPbmUiLCJlcnIiLCJ1c2VyIiwiZXJyb3IiLCJFcnJvciIsIm5hbWUiLCJjb21wYXJlUGFzc3dvcmQiLCJwYXNzd29yZEVyciIsImlzTWF0Y2giLCJ0b2tlbiIsInNpZ24iLCJzdWIiLCJfaWQiLCJwcm9jZXNzIiwiZW52IiwiSldUX1NFQ1JFVCIsImRhdGEiXSwibWFwcGluZ3MiOiJBQUFBLE1BQU1BLE1BQU1DLFFBQVEsY0FBUixDQUFaO0FBQ0EsTUFBTUMsT0FBT0QsUUFBUSxnQkFBUixDQUFiO0FBQ0EsTUFBTUUsd0JBQXdCRixRQUFRLGdCQUFSLEVBQTBCRyxRQUF4RDs7QUFHQTs7O0FBR0FDLE9BQU9DLE9BQVAsR0FBaUIsSUFBSUgscUJBQUosQ0FBMEI7QUFDekNJLGlCQUFlLE9BRDBCO0FBRXpDQyxpQkFBZSxVQUYwQjtBQUd6Q0MsV0FBUyxLQUhnQztBQUl6Q0MscUJBQW1CO0FBSnNCLENBQTFCLEVBS2QsQ0FBQ0MsR0FBRCxFQUFNQyxLQUFOLEVBQWFDLFFBQWIsRUFBdUJDLElBQXZCLEtBQWdDO0FBQ2pDLFFBQU1DLFdBQVc7QUFDZkgsV0FBT0EsTUFBTUksSUFBTixFQURRO0FBRWZILGNBQVVBLFNBQVNHLElBQVQ7QUFGSyxHQUFqQjs7QUFLQTtBQUNBLFNBQU9kLEtBQUtlLE9BQUwsQ0FBYSxFQUFFTCxPQUFPRyxTQUFTSCxLQUFsQixFQUFiLEVBQXdDLENBQUNNLEdBQUQsRUFBTUMsSUFBTixLQUFlO0FBQzVELFFBQUlELEdBQUosRUFBUztBQUFFLGFBQU9KLEtBQUtJLEdBQUwsQ0FBUDtBQUFtQjs7QUFFOUIsUUFBSSxDQUFDQyxJQUFMLEVBQVc7QUFDVCxZQUFNQyxRQUFRLElBQUlDLEtBQUosQ0FBVSw2QkFBVixDQUFkO0FBQ0FELFlBQU1FLElBQU4sR0FBYSwyQkFBYjs7QUFFQSxhQUFPUixLQUFLTSxLQUFMLENBQVA7QUFDRDs7QUFFRDtBQUNBLFdBQU9ELEtBQUtJLGVBQUwsQ0FBcUJSLFNBQVNGLFFBQTlCLEVBQXdDLENBQUNXLFdBQUQsRUFBY0MsT0FBZCxLQUEwQjtBQUN2RSxVQUFJUCxHQUFKLEVBQVM7QUFBRSxlQUFPSixLQUFLSSxHQUFMLENBQVA7QUFBbUI7O0FBRTlCLFVBQUksQ0FBQ08sT0FBTCxFQUFjO0FBQ1osY0FBTUwsUUFBUSxJQUFJQyxLQUFKLENBQVUsNkJBQVYsQ0FBZDtBQUNBRCxjQUFNRSxJQUFOLEdBQWEsMkJBQWI7O0FBRUEsZUFBT1IsS0FBS00sS0FBTCxDQUFQO0FBQ0Q7O0FBRUQ7QUFDQSxZQUFNTSxRQUFRMUIsSUFBSTJCLElBQUosQ0FBUyxFQUFFQyxLQUFLVCxLQUFLVSxHQUFaLEVBQVQsRUFBNEJDLFFBQVFDLEdBQVIsQ0FBWUMsVUFBeEMsQ0FBZDtBQUNBLFlBQU1DLE9BQU8sRUFBRVgsTUFBTUgsS0FBS0csSUFBYixFQUFiOztBQUVBLGFBQU9SLEtBQUssSUFBTCxFQUFXWSxLQUFYLEVBQWtCTyxJQUFsQixDQUFQO0FBQ0QsS0FmTSxDQUFQO0FBZ0JELEdBM0JNLENBQVA7QUE0QkQsQ0F4Q2dCLENBQWpCIiwiZmlsZSI6ImxvY2FsLWxvZ2luLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvc2VydmVyL3Bhc3Nwb3J0Iiwic291cmNlc0NvbnRlbnQiOlsiY29uc3Qgand0ID0gcmVxdWlyZSgnanNvbndlYnRva2VuJyk7XG5jb25zdCBVc2VyID0gcmVxdWlyZSgnLi4vbW9kZWxzL3VzZXInKTtcbmNvbnN0IFBhc3Nwb3J0TG9jYWxTdHJhdGVneSA9IHJlcXVpcmUoJ3Bhc3Nwb3J0LWxvY2FsJykuU3RyYXRlZ3k7XG5cblxuLyoqXG4gKiBSZXR1cm4gdGhlIFBhc3Nwb3J0IExvY2FsIFN0cmF0ZWd5IG9iamVjdC5cbiAqL1xubW9kdWxlLmV4cG9ydHMgPSBuZXcgUGFzc3BvcnRMb2NhbFN0cmF0ZWd5KHtcbiAgdXNlcm5hbWVGaWVsZDogJ2VtYWlsJyxcbiAgcGFzc3dvcmRGaWVsZDogJ3Bhc3N3b3JkJyxcbiAgc2Vzc2lvbjogZmFsc2UsXG4gIHBhc3NSZXFUb0NhbGxiYWNrOiB0cnVlXG59LCAocmVxLCBlbWFpbCwgcGFzc3dvcmQsIGRvbmUpID0+IHtcbiAgY29uc3QgdXNlckRhdGEgPSB7XG4gICAgZW1haWw6IGVtYWlsLnRyaW0oKSxcbiAgICBwYXNzd29yZDogcGFzc3dvcmQudHJpbSgpXG4gIH07XG5cbiAgLy8gZmluZCBhIHVzZXIgYnkgZW1haWwgYWRkcmVzc1xuICByZXR1cm4gVXNlci5maW5kT25lKHsgZW1haWw6IHVzZXJEYXRhLmVtYWlsIH0sIChlcnIsIHVzZXIpID0+IHtcbiAgICBpZiAoZXJyKSB7IHJldHVybiBkb25lKGVycik7IH1cblxuICAgIGlmICghdXNlcikge1xuICAgICAgY29uc3QgZXJyb3IgPSBuZXcgRXJyb3IoJ0luY29ycmVjdCBlbWFpbCBvciBwYXNzd29yZCcpO1xuICAgICAgZXJyb3IubmFtZSA9ICdJbmNvcnJlY3RDcmVkZW50aWFsc0Vycm9yJztcblxuICAgICAgcmV0dXJuIGRvbmUoZXJyb3IpO1xuICAgIH1cblxuICAgIC8vIGNoZWNrIGlmIGEgaGFzaGVkIHVzZXIncyBwYXNzd29yZCBpcyBlcXVhbCB0byBhIHZhbHVlIHNhdmVkIGluIHRoZSBkYXRhYmFzZVxuICAgIHJldHVybiB1c2VyLmNvbXBhcmVQYXNzd29yZCh1c2VyRGF0YS5wYXNzd29yZCwgKHBhc3N3b3JkRXJyLCBpc01hdGNoKSA9PiB7XG4gICAgICBpZiAoZXJyKSB7IHJldHVybiBkb25lKGVycik7IH1cblxuICAgICAgaWYgKCFpc01hdGNoKSB7XG4gICAgICAgIGNvbnN0IGVycm9yID0gbmV3IEVycm9yKCdJbmNvcnJlY3QgZW1haWwgb3IgcGFzc3dvcmQnKTtcbiAgICAgICAgZXJyb3IubmFtZSA9ICdJbmNvcnJlY3RDcmVkZW50aWFsc0Vycm9yJztcblxuICAgICAgICByZXR1cm4gZG9uZShlcnJvcik7XG4gICAgICB9XG5cbiAgICAgIC8vIGNyZWF0ZSBhIHRva2VuIHN0cmluZ1xuICAgICAgY29uc3QgdG9rZW4gPSBqd3Quc2lnbih7IHN1YjogdXNlci5faWQgfSwgcHJvY2Vzcy5lbnYuSldUX1NFQ1JFVCk7XG4gICAgICBjb25zdCBkYXRhID0geyBuYW1lOiB1c2VyLm5hbWUgfTtcblxuICAgICAgcmV0dXJuIGRvbmUobnVsbCwgdG9rZW4sIGRhdGEpO1xuICAgIH0pO1xuICB9KTtcbn0pO1xuIl19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "local-login.js"
+      ],
+      "names": [
+        "jwt",
+        "require",
+        "User",
+        "PassportLocalStrategy",
+        "Strategy",
+        "module",
+        "exports",
+        "usernameField",
+        "passwordField",
+        "session",
+        "passReqToCallback",
+        "req",
+        "email",
+        "password",
+        "done",
+        "userData",
+        "trim",
+        "findOne",
+        "err",
+        "user",
+        "error",
+        "Error",
+        "name",
+        "comparePassword",
+        "passwordErr",
+        "isMatch",
+        "token",
+        "sign",
+        "sub",
+        "_id",
+        "process",
+        "env",
+        "JWT_SECRET",
+        "data"
+      ],
+      "mappings": "AAAA,MAAMA,MAAMC,QAAQ,cAAR,CAAZ;AACA,MAAMC,OAAOD,QAAQ,gBAAR,CAAb;AACA,MAAME,wBAAwBF,QAAQ,gBAAR,EAA0BG,QAAxD;;AAGA;;;AAGAC,OAAOC,OAAP,GAAiB,IAAIH,qBAAJ,CAA0B;AACzCI,iBAAe,OAD0B;AAEzCC,iBAAe,UAF0B;AAGzCC,WAAS,KAHgC;AAIzCC,qBAAmB;AAJsB,CAA1B,EAKd,CAACC,GAAD,EAAMC,KAAN,EAAaC,QAAb,EAAuBC,IAAvB,KAAgC;AACjC,QAAMC,WAAW;AACfH,WAAOA,MAAMI,IAAN,EADQ;AAEfH,cAAUA,SAASG,IAAT;AAFK,GAAjB;;AAKA;AACA,SAAOd,KAAKe,OAAL,CAAa,EAAEL,OAAOG,SAASH,KAAlB,EAAb,EAAwC,CAACM,GAAD,EAAMC,IAAN,KAAe;AAC5D,QAAID,GAAJ,EAAS;AAAE,aAAOJ,KAAKI,GAAL,CAAP;AAAmB;;AAE9B,QAAI,CAACC,IAAL,EAAW;AACT,YAAMC,QAAQ,IAAIC,KAAJ,CAAU,6BAAV,CAAd;AACAD,YAAME,IAAN,GAAa,2BAAb;;AAEA,aAAOR,KAAKM,KAAL,CAAP;AACD;;AAED;AACA,WAAOD,KAAKI,eAAL,CAAqBR,SAASF,QAA9B,EAAwC,CAACW,WAAD,EAAcC,OAAd,KAA0B;AACvE,UAAIP,GAAJ,EAAS;AAAE,eAAOJ,KAAKI,GAAL,CAAP;AAAmB;;AAE9B,UAAI,CAACO,OAAL,EAAc;AACZ,cAAML,QAAQ,IAAIC,KAAJ,CAAU,6BAAV,CAAd;AACAD,cAAME,IAAN,GAAa,2BAAb;;AAEA,eAAOR,KAAKM,KAAL,CAAP;AACD;;AAED;AACA,YAAMM,QAAQ1B,IAAI2B,IAAJ,CAAS,EAAEC,KAAKT,KAAKU,GAAZ,EAAT,EAA4BC,QAAQC,GAAR,CAAYC,UAAxC,CAAd;AACA,YAAMC,OAAO,EAAEX,MAAMH,KAAKG,IAAb,EAAb;;AAEA,aAAOR,KAAK,IAAL,EAAWY,KAAX,EAAkBO,IAAlB,CAAP;AACD,KAfM,CAAP;AAgBD,GA3BM,CAAP;AA4BD,CAxCgB,CAAjB",
+      "file": "local-login.js",
+      "sourceRoot": "/app/server/passport",
+      "sourcesContent": [
+        "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n  const userData = {\n    email: email.trim(),\n    password: password.trim()\n  };\n\n  // find a user by email address\n  return User.findOne({ email: userData.email }, (err, user) => {\n    if (err) { return done(err); }\n\n    if (!user) {\n      const error = new Error('Incorrect email or password');\n      error.name = 'IncorrectCredentialsError';\n\n      return done(error);\n    }\n\n    // check if a hashed user's password is equal to a value saved in the database\n    return user.comparePassword(userData.password, (passwordErr, isMatch) => {\n      if (err) { return done(err); }\n\n      if (!isMatch) {\n        const error = new Error('Incorrect email or password');\n        error.name = 'IncorrectCredentialsError';\n\n        return done(error);\n      }\n\n      // create a token string\n      const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET);\n      const data = { name: user.name };\n\n      return done(null, token, data);\n    });\n  });\n});\n"
+      ]
+    },
+    "mtime": 1517247907163
+  },
+  "{\"filename\":\"/app/server/middleware/auth-check.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/middleware\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/middleware/auth-check.js",
+      "filenameRelative": "/app/server/middleware/auth-check.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "auth-check.js",
+      "sourceFileName": "auth-check.js",
+      "sourceRoot": "/app/server/middleware",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/middleware",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "auth-check"
+    },
+    "ignored": false,
+    "code": "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\n\n/**\n *  The Auth Checker middleware function.\n */\nmodule.exports = (req, res, next) => {\n  if (!req.headers.authorization) {\n    return res.status(401).end();\n  }\n\n  // get the last part from a authorization header string like \"bearer token-value\"\n  const token = req.headers.authorization.split(' ')[1];\n\n  // decode the token using a secret key-phrase\n  return jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {\n    // the 401 code is for unauthorized status\n    if (err) {\n      return res.status(401).end();\n    }\n\n    const userId = decoded.sub;\n\n    // check if a user exists\n    return User.findById(userId, (userErr, user) => {\n      if (userErr || !user) {\n        return res.status(401).end();\n      }\n\n      req.user = {\n        id: userId\n      };\n\n      return next();\n    });\n  });\n};\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dGgtY2hlY2suanMiXSwibmFtZXMiOlsiand0IiwicmVxdWlyZSIsIlVzZXIiLCJtb2R1bGUiLCJleHBvcnRzIiwicmVxIiwicmVzIiwibmV4dCIsImhlYWRlcnMiLCJhdXRob3JpemF0aW9uIiwic3RhdHVzIiwiZW5kIiwidG9rZW4iLCJzcGxpdCIsInZlcmlmeSIsInByb2Nlc3MiLCJlbnYiLCJKV1RfU0VDUkVUIiwiZXJyIiwiZGVjb2RlZCIsInVzZXJJZCIsInN1YiIsImZpbmRCeUlkIiwidXNlckVyciIsInVzZXIiLCJpZCJdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTUEsTUFBTUMsUUFBUSxjQUFSLENBQVo7QUFDQSxNQUFNQyxPQUFPRCxRQUFRLGdCQUFSLENBQWI7O0FBRUE7OztBQUdBRSxPQUFPQyxPQUFQLEdBQWlCLENBQUNDLEdBQUQsRUFBTUMsR0FBTixFQUFXQyxJQUFYLEtBQW9CO0FBQ25DLE1BQUksQ0FBQ0YsSUFBSUcsT0FBSixDQUFZQyxhQUFqQixFQUFnQztBQUM5QixXQUFPSCxJQUFJSSxNQUFKLENBQVcsR0FBWCxFQUFnQkMsR0FBaEIsRUFBUDtBQUNEOztBQUVEO0FBQ0EsUUFBTUMsUUFBUVAsSUFBSUcsT0FBSixDQUFZQyxhQUFaLENBQTBCSSxLQUExQixDQUFnQyxHQUFoQyxFQUFxQyxDQUFyQyxDQUFkOztBQUVBO0FBQ0EsU0FBT2IsSUFBSWMsTUFBSixDQUFXRixLQUFYLEVBQWtCRyxRQUFRQyxHQUFSLENBQVlDLFVBQTlCLEVBQTBDLENBQUNDLEdBQUQsRUFBTUMsT0FBTixLQUFrQjtBQUNqRTtBQUNBLFFBQUlELEdBQUosRUFBUztBQUFFLGFBQU9aLElBQUlJLE1BQUosQ0FBVyxHQUFYLEVBQWdCQyxHQUFoQixFQUFQO0FBQStCOztBQUUxQyxVQUFNUyxTQUFTRCxRQUFRRSxHQUF2Qjs7QUFFQTtBQUNBLFdBQU9uQixLQUFLb0IsUUFBTCxDQUFjRixNQUFkLEVBQXNCLENBQUNHLE9BQUQsRUFBVUMsSUFBVixLQUFtQjtBQUM5QyxVQUFJRCxXQUFXLENBQUNDLElBQWhCLEVBQXNCO0FBQ3BCLGVBQU9sQixJQUFJSSxNQUFKLENBQVcsR0FBWCxFQUFnQkMsR0FBaEIsRUFBUDtBQUNEOztBQUVETixVQUFJbUIsSUFBSixHQUFXO0FBQ1RDLFlBQUlMO0FBREssT0FBWDs7QUFJQSxhQUFPYixNQUFQO0FBQ0QsS0FWTSxDQUFQO0FBV0QsR0FsQk0sQ0FBUDtBQW1CRCxDQTVCRCIsImZpbGUiOiJhdXRoLWNoZWNrLmpzIiwic291cmNlUm9vdCI6Ii9hcHAvc2VydmVyL21pZGRsZXdhcmUiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBqd3QgPSByZXF1aXJlKCdqc29ud2VidG9rZW4nKTtcbmNvbnN0IFVzZXIgPSByZXF1aXJlKCcuLi9tb2RlbHMvdXNlcicpO1xuXG4vKipcbiAqICBUaGUgQXV0aCBDaGVja2VyIG1pZGRsZXdhcmUgZnVuY3Rpb24uXG4gKi9cbm1vZHVsZS5leHBvcnRzID0gKHJlcSwgcmVzLCBuZXh0KSA9PiB7XG4gIGlmICghcmVxLmhlYWRlcnMuYXV0aG9yaXphdGlvbikge1xuICAgIHJldHVybiByZXMuc3RhdHVzKDQwMSkuZW5kKCk7XG4gIH1cblxuICAvLyBnZXQgdGhlIGxhc3QgcGFydCBmcm9tIGEgYXV0aG9yaXphdGlvbiBoZWFkZXIgc3RyaW5nIGxpa2UgXCJiZWFyZXIgdG9rZW4tdmFsdWVcIlxuICBjb25zdCB0b2tlbiA9IHJlcS5oZWFkZXJzLmF1dGhvcml6YXRpb24uc3BsaXQoJyAnKVsxXTtcblxuICAvLyBkZWNvZGUgdGhlIHRva2VuIHVzaW5nIGEgc2VjcmV0IGtleS1waHJhc2VcbiAgcmV0dXJuIGp3dC52ZXJpZnkodG9rZW4sIHByb2Nlc3MuZW52LkpXVF9TRUNSRVQsIChlcnIsIGRlY29kZWQpID0+IHtcbiAgICAvLyB0aGUgNDAxIGNvZGUgaXMgZm9yIHVuYXV0aG9yaXplZCBzdGF0dXNcbiAgICBpZiAoZXJyKSB7IHJldHVybiByZXMuc3RhdHVzKDQwMSkuZW5kKCk7IH1cblxuICAgIGNvbnN0IHVzZXJJZCA9IGRlY29kZWQuc3ViO1xuXG4gICAgLy8gY2hlY2sgaWYgYSB1c2VyIGV4aXN0c1xuICAgIHJldHVybiBVc2VyLmZpbmRCeUlkKHVzZXJJZCwgKHVzZXJFcnIsIHVzZXIpID0+IHtcbiAgICAgIGlmICh1c2VyRXJyIHx8ICF1c2VyKSB7XG4gICAgICAgIHJldHVybiByZXMuc3RhdHVzKDQwMSkuZW5kKCk7XG4gICAgICB9XG5cbiAgICAgIHJlcS51c2VyID0ge1xuICAgICAgICBpZDogdXNlcklkXG4gICAgICB9O1xuICAgICAgXG4gICAgICByZXR1cm4gbmV4dCgpO1xuICAgIH0pO1xuICB9KTtcbn07Il19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "auth-check.js"
+      ],
+      "names": [
+        "jwt",
+        "require",
+        "User",
+        "module",
+        "exports",
+        "req",
+        "res",
+        "next",
+        "headers",
+        "authorization",
+        "status",
+        "end",
+        "token",
+        "split",
+        "verify",
+        "process",
+        "env",
+        "JWT_SECRET",
+        "err",
+        "decoded",
+        "userId",
+        "sub",
+        "findById",
+        "userErr",
+        "user",
+        "id"
+      ],
+      "mappings": "AAAA,MAAMA,MAAMC,QAAQ,cAAR,CAAZ;AACA,MAAMC,OAAOD,QAAQ,gBAAR,CAAb;;AAEA;;;AAGAE,OAAOC,OAAP,GAAiB,CAACC,GAAD,EAAMC,GAAN,EAAWC,IAAX,KAAoB;AACnC,MAAI,CAACF,IAAIG,OAAJ,CAAYC,aAAjB,EAAgC;AAC9B,WAAOH,IAAII,MAAJ,CAAW,GAAX,EAAgBC,GAAhB,EAAP;AACD;;AAED;AACA,QAAMC,QAAQP,IAAIG,OAAJ,CAAYC,aAAZ,CAA0BI,KAA1B,CAAgC,GAAhC,EAAqC,CAArC,CAAd;;AAEA;AACA,SAAOb,IAAIc,MAAJ,CAAWF,KAAX,EAAkBG,QAAQC,GAAR,CAAYC,UAA9B,EAA0C,CAACC,GAAD,EAAMC,OAAN,KAAkB;AACjE;AACA,QAAID,GAAJ,EAAS;AAAE,aAAOZ,IAAII,MAAJ,CAAW,GAAX,EAAgBC,GAAhB,EAAP;AAA+B;;AAE1C,UAAMS,SAASD,QAAQE,GAAvB;;AAEA;AACA,WAAOnB,KAAKoB,QAAL,CAAcF,MAAd,EAAsB,CAACG,OAAD,EAAUC,IAAV,KAAmB;AAC9C,UAAID,WAAW,CAACC,IAAhB,EAAsB;AACpB,eAAOlB,IAAII,MAAJ,CAAW,GAAX,EAAgBC,GAAhB,EAAP;AACD;;AAEDN,UAAImB,IAAJ,GAAW;AACTC,YAAIL;AADK,OAAX;;AAIA,aAAOb,MAAP;AACD,KAVM,CAAP;AAWD,GAlBM,CAAP;AAmBD,CA5BD",
+      "file": "auth-check.js",
+      "sourceRoot": "/app/server/middleware",
+      "sourcesContent": [
+        "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\n\n/**\n *  The Auth Checker middleware function.\n */\nmodule.exports = (req, res, next) => {\n  if (!req.headers.authorization) {\n    return res.status(401).end();\n  }\n\n  // get the last part from a authorization header string like \"bearer token-value\"\n  const token = req.headers.authorization.split(' ')[1];\n\n  // decode the token using a secret key-phrase\n  return jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {\n    // the 401 code is for unauthorized status\n    if (err) { return res.status(401).end(); }\n\n    const userId = decoded.sub;\n\n    // check if a user exists\n    return User.findById(userId, (userErr, user) => {\n      if (userErr || !user) {\n        return res.status(401).end();\n      }\n\n      req.user = {\n        id: userId\n      };\n      \n      return next();\n    });\n  });\n};"
+      ]
+    },
+    "mtime": 1517247907079
+  },
+  "{\"filename\":\"/app/server/routes/api.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/routes\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/routes/api.js",
+      "filenameRelative": "/app/server/routes/api.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "api.js",
+      "sourceFileName": "api.js",
+      "sourceRoot": "/app/server/routes",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/routes",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "api"
+    },
+    "ignored": false,
+    "code": "const express = require('express');\nconst router = express.Router();\nconst Poll = require('../models/poll.js');\n\nrouter.get('/test', (req, res) => {\n  res.status(200).json({\n    message: \"You're authorized to see this secret message.\"\n  });\n});\n\nrouter.get('/polls', (req, res) => {\n  var polls = [];\n\n  Poll.find({ user: req.user.id }, (err, polls) => {\n    if (polls) {\n      console.log(polls);\n      res.status(200).json({ data: polls });\n    } else {\n      console.error(err);\n      res.end();\n    }\n  });\n});\n\nrouter.post('/polls', (req, res) => {\n  var newPoll = Poll({\n    name: req.query.pollname,\n    user: req.user,\n    questions: req.query.options.map(item => {\n      return { question: item, rating: 0 };\n    }),\n    votedusers: []\n  });\n\n  newPoll.url = \"https://trite-engineer.glitch.me/\" + newPoll.user + \"/\" + encodeURI(newPoll.name);\n\n  newPoll.save(function (err) {\n    if (err) {\n      if (err.name === 'MongoError' && err.code === 11000) {\n        // the 11000 Mongo code is for a duplication error\n        // the 409 HTTP status code is for conflict error\n        return res.status(409).json({\n          success: false,\n          message: 'You have already a poll with the same name.'\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.status(200).json({\n      success: true,\n      message: 'Congratulations! Your poll has been saved successfully. Here\\'s a link to your poll',\n      url: newPoll.url\n    });\n  });\n});\n\nmodule.exports = router;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwaS5qcyJdLCJuYW1lcyI6WyJleHByZXNzIiwicmVxdWlyZSIsInJvdXRlciIsIlJvdXRlciIsIlBvbGwiLCJnZXQiLCJyZXEiLCJyZXMiLCJzdGF0dXMiLCJqc29uIiwibWVzc2FnZSIsInBvbGxzIiwiZmluZCIsInVzZXIiLCJpZCIsImVyciIsImNvbnNvbGUiLCJsb2ciLCJkYXRhIiwiZXJyb3IiLCJlbmQiLCJwb3N0IiwibmV3UG9sbCIsIm5hbWUiLCJxdWVyeSIsInBvbGxuYW1lIiwicXVlc3Rpb25zIiwib3B0aW9ucyIsIm1hcCIsIml0ZW0iLCJxdWVzdGlvbiIsInJhdGluZyIsInZvdGVkdXNlcnMiLCJ1cmwiLCJlbmNvZGVVUkkiLCJzYXZlIiwiY29kZSIsInN1Y2Nlc3MiLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiQUFBQSxNQUFNQSxVQUFVQyxRQUFRLFNBQVIsQ0FBaEI7QUFDQSxNQUFNQyxTQUFTRixRQUFRRyxNQUFSLEVBQWY7QUFDQSxNQUFNQyxPQUFPSCxRQUFRLG1CQUFSLENBQWI7O0FBRUFDLE9BQU9HLEdBQVAsQ0FBVyxPQUFYLEVBQW9CLENBQUNDLEdBQUQsRUFBTUMsR0FBTixLQUFjO0FBQ2hDQSxNQUFJQyxNQUFKLENBQVcsR0FBWCxFQUFnQkMsSUFBaEIsQ0FBcUI7QUFDbkJDLGFBQVM7QUFEVSxHQUFyQjtBQUdELENBSkQ7O0FBTUFSLE9BQU9HLEdBQVAsQ0FBVyxRQUFYLEVBQXFCLENBQUNDLEdBQUQsRUFBTUMsR0FBTixLQUFjO0FBQ2pDLE1BQUlJLFFBQVEsRUFBWjs7QUFFQVAsT0FBS1EsSUFBTCxDQUFVLEVBQUNDLE1BQU1QLElBQUlPLElBQUosQ0FBU0MsRUFBaEIsRUFBVixFQUErQixDQUFDQyxHQUFELEVBQU1KLEtBQU4sS0FBZ0I7QUFDN0MsUUFBSUEsS0FBSixFQUFXO0FBQ1RLLGNBQVFDLEdBQVIsQ0FBWU4sS0FBWjtBQUNBSixVQUFJQyxNQUFKLENBQVcsR0FBWCxFQUFnQkMsSUFBaEIsQ0FBcUIsRUFBRVMsTUFBTVAsS0FBUixFQUFyQjtBQUNELEtBSEQsTUFJSztBQUNISyxjQUFRRyxLQUFSLENBQWNKLEdBQWQ7QUFDQVIsVUFBSWEsR0FBSjtBQUNEO0FBQ0YsR0FURDtBQVVELENBYkQ7O0FBZUFsQixPQUFPbUIsSUFBUCxDQUFZLFFBQVosRUFBc0IsQ0FBQ2YsR0FBRCxFQUFNQyxHQUFOLEtBQWM7QUFDbEMsTUFBSWUsVUFBVWxCLEtBQUs7QUFDZm1CLFVBQU1qQixJQUFJa0IsS0FBSixDQUFVQyxRQUREO0FBRWZaLFVBQU1QLElBQUlPLElBRks7QUFHZmEsZUFBV3BCLElBQUlrQixLQUFKLENBQVVHLE9BQVYsQ0FBa0JDLEdBQWxCLENBQXVCQyxJQUFELElBQVU7QUFBRSxhQUFPLEVBQUVDLFVBQVVELElBQVosRUFBa0JFLFFBQVEsQ0FBMUIsRUFBUDtBQUFvQyxLQUF0RSxDQUhJO0FBSWZDLGdCQUFZO0FBSkcsR0FBTCxDQUFkOztBQU9BVixVQUFRVyxHQUFSLEdBQWMsc0NBQXNDWCxRQUFRVCxJQUE5QyxHQUFxRCxHQUFyRCxHQUEyRHFCLFVBQVVaLFFBQVFDLElBQWxCLENBQXpFOztBQUVBRCxVQUFRYSxJQUFSLENBQWEsVUFBU3BCLEdBQVQsRUFBYztBQUN6QixRQUFJQSxHQUFKLEVBQVM7QUFDUCxVQUFJQSxJQUFJUSxJQUFKLEtBQWEsWUFBYixJQUE2QlIsSUFBSXFCLElBQUosS0FBYSxLQUE5QyxFQUFxRDtBQUNuRDtBQUNBO0FBQ0EsZUFBTzdCLElBQUlDLE1BQUosQ0FBVyxHQUFYLEVBQWdCQyxJQUFoQixDQUFxQjtBQUMxQjRCLG1CQUFTLEtBRGlCO0FBRTFCM0IsbUJBQVM7QUFGaUIsU0FBckIsQ0FBUDtBQUlEOztBQUVELGFBQU9ILElBQUlDLE1BQUosQ0FBVyxHQUFYLEVBQWdCQyxJQUFoQixDQUFxQjtBQUMxQjRCLGlCQUFTLEtBRGlCO0FBRTFCM0IsaUJBQVM7QUFGaUIsT0FBckIsQ0FBUDtBQUlEOztBQUVELFdBQU9ILElBQUlDLE1BQUosQ0FBVyxHQUFYLEVBQWdCQyxJQUFoQixDQUFxQjtBQUMxQjRCLGVBQVMsSUFEaUI7QUFFMUIzQixlQUFTLHFGQUZpQjtBQUcxQnVCLFdBQUtYLFFBQVFXO0FBSGEsS0FBckIsQ0FBUDtBQUtELEdBdEJEO0FBd0JELENBbENEOztBQW9DQUssT0FBT0MsT0FBUCxHQUFpQnJDLE1BQWpCIiwiZmlsZSI6ImFwaS5qcyIsInNvdXJjZVJvb3QiOiIvYXBwL3NlcnZlci9yb3V0ZXMiLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpO1xuY29uc3Qgcm91dGVyID0gZXhwcmVzcy5Sb3V0ZXIoKTtcbmNvbnN0IFBvbGwgPSByZXF1aXJlKCcuLi9tb2RlbHMvcG9sbC5qcycpO1xuXG5yb3V0ZXIuZ2V0KCcvdGVzdCcsIChyZXEsIHJlcykgPT4geyAgXG4gIHJlcy5zdGF0dXMoMjAwKS5qc29uKHtcbiAgICBtZXNzYWdlOiBcIllvdSdyZSBhdXRob3JpemVkIHRvIHNlZSB0aGlzIHNlY3JldCBtZXNzYWdlLlwiXG4gIH0pO1xufSk7XG5cbnJvdXRlci5nZXQoJy9wb2xscycsIChyZXEsIHJlcykgPT4ge1xuICB2YXIgcG9sbHMgPSBbXTtcbiAgXG4gIFBvbGwuZmluZCh7dXNlcjogcmVxLnVzZXIuaWR9LCAoZXJyLCBwb2xscykgPT4ge1xuICAgIGlmIChwb2xscykge1xuICAgICAgY29uc29sZS5sb2cocG9sbHMpO1xuICAgICAgcmVzLnN0YXR1cygyMDApLmpzb24oeyBkYXRhOiBwb2xsc30pO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgIGNvbnNvbGUuZXJyb3IoZXJyKTtcbiAgICAgIHJlcy5lbmQoKTtcbiAgICB9XG4gIH0pO1xufSk7XG5cbnJvdXRlci5wb3N0KCcvcG9sbHMnLCAocmVxLCByZXMpID0+IHtcbiAgdmFyIG5ld1BvbGwgPSBQb2xsKHtcbiAgICAgIG5hbWU6IHJlcS5xdWVyeS5wb2xsbmFtZSxcbiAgICAgIHVzZXI6IHJlcS51c2VyLFxuICAgICAgcXVlc3Rpb25zOiByZXEucXVlcnkub3B0aW9ucy5tYXAoKGl0ZW0pID0+IHsgcmV0dXJuIHsgcXVlc3Rpb246IGl0ZW0sIHJhdGluZzogMH19KSxcbiAgICAgIHZvdGVkdXNlcnM6IFtdXG4gICAgfSk7XG4gIFxuICBuZXdQb2xsLnVybCA9IFwiaHR0cHM6Ly90cml0ZS1lbmdpbmVlci5nbGl0Y2gubWUvXCIgKyBuZXdQb2xsLnVzZXIgKyBcIi9cIiArIGVuY29kZVVSSShuZXdQb2xsLm5hbWUpO1xuICBcbiAgbmV3UG9sbC5zYXZlKGZ1bmN0aW9uKGVycikgeyBcbiAgICBpZiAoZXJyKSB7XG4gICAgICBpZiAoZXJyLm5hbWUgPT09ICdNb25nb0Vycm9yJyAmJiBlcnIuY29kZSA9PT0gMTEwMDApIHtcbiAgICAgICAgLy8gdGhlIDExMDAwIE1vbmdvIGNvZGUgaXMgZm9yIGEgZHVwbGljYXRpb24gZXJyb3JcbiAgICAgICAgLy8gdGhlIDQwOSBIVFRQIHN0YXR1cyBjb2RlIGlzIGZvciBjb25mbGljdCBlcnJvclxuICAgICAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDkpLmpzb24oe1xuICAgICAgICAgIHN1Y2Nlc3M6IGZhbHNlLFxuICAgICAgICAgIG1lc3NhZ2U6ICdZb3UgaGF2ZSBhbHJlYWR5IGEgcG9sbCB3aXRoIHRoZSBzYW1lIG5hbWUuJ1xuICAgICAgICB9KTtcbiAgICAgIH1cblxuICAgICAgcmV0dXJuIHJlcy5zdGF0dXMoNDAwKS5qc29uKHtcbiAgICAgICAgc3VjY2VzczogZmFsc2UsXG4gICAgICAgIG1lc3NhZ2U6ICdDb3VsZCBub3QgcHJvY2VzcyB0aGUgZm9ybS4nXG4gICAgICB9KTtcbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIHJlcy5zdGF0dXMoMjAwKS5qc29uKHtcbiAgICAgIHN1Y2Nlc3M6IHRydWUsXG4gICAgICBtZXNzYWdlOiAnQ29uZ3JhdHVsYXRpb25zISBZb3VyIHBvbGwgaGFzIGJlZW4gc2F2ZWQgc3VjY2Vzc2Z1bGx5LiBIZXJlXFwncyBhIGxpbmsgdG8geW91ciBwb2xsJyxcbiAgICAgIHVybDogbmV3UG9sbC51cmxcbiAgICB9KTtcbiAgfSk7XG4gIFxufSk7XG5cbm1vZHVsZS5leHBvcnRzID0gcm91dGVyO1xuIl19",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "api.js"
+      ],
+      "names": [
+        "express",
+        "require",
+        "router",
+        "Router",
+        "Poll",
+        "get",
+        "req",
+        "res",
+        "status",
+        "json",
+        "message",
+        "polls",
+        "find",
+        "user",
+        "id",
+        "err",
+        "console",
+        "log",
+        "data",
+        "error",
+        "end",
+        "post",
+        "newPoll",
+        "name",
+        "query",
+        "pollname",
+        "questions",
+        "options",
+        "map",
+        "item",
+        "question",
+        "rating",
+        "votedusers",
+        "url",
+        "encodeURI",
+        "save",
+        "code",
+        "success",
+        "module",
+        "exports"
+      ],
+      "mappings": "AAAA,MAAMA,UAAUC,QAAQ,SAAR,CAAhB;AACA,MAAMC,SAASF,QAAQG,MAAR,EAAf;AACA,MAAMC,OAAOH,QAAQ,mBAAR,CAAb;;AAEAC,OAAOG,GAAP,CAAW,OAAX,EAAoB,CAACC,GAAD,EAAMC,GAAN,KAAc;AAChCA,MAAIC,MAAJ,CAAW,GAAX,EAAgBC,IAAhB,CAAqB;AACnBC,aAAS;AADU,GAArB;AAGD,CAJD;;AAMAR,OAAOG,GAAP,CAAW,QAAX,EAAqB,CAACC,GAAD,EAAMC,GAAN,KAAc;AACjC,MAAII,QAAQ,EAAZ;;AAEAP,OAAKQ,IAAL,CAAU,EAACC,MAAMP,IAAIO,IAAJ,CAASC,EAAhB,EAAV,EAA+B,CAACC,GAAD,EAAMJ,KAAN,KAAgB;AAC7C,QAAIA,KAAJ,EAAW;AACTK,cAAQC,GAAR,CAAYN,KAAZ;AACAJ,UAAIC,MAAJ,CAAW,GAAX,EAAgBC,IAAhB,CAAqB,EAAES,MAAMP,KAAR,EAArB;AACD,KAHD,MAIK;AACHK,cAAQG,KAAR,CAAcJ,GAAd;AACAR,UAAIa,GAAJ;AACD;AACF,GATD;AAUD,CAbD;;AAeAlB,OAAOmB,IAAP,CAAY,QAAZ,EAAsB,CAACf,GAAD,EAAMC,GAAN,KAAc;AAClC,MAAIe,UAAUlB,KAAK;AACfmB,UAAMjB,IAAIkB,KAAJ,CAAUC,QADD;AAEfZ,UAAMP,IAAIO,IAFK;AAGfa,eAAWpB,IAAIkB,KAAJ,CAAUG,OAAV,CAAkBC,GAAlB,CAAuBC,IAAD,IAAU;AAAE,aAAO,EAAEC,UAAUD,IAAZ,EAAkBE,QAAQ,CAA1B,EAAP;AAAoC,KAAtE,CAHI;AAIfC,gBAAY;AAJG,GAAL,CAAd;;AAOAV,UAAQW,GAAR,GAAc,sCAAsCX,QAAQT,IAA9C,GAAqD,GAArD,GAA2DqB,UAAUZ,QAAQC,IAAlB,CAAzE;;AAEAD,UAAQa,IAAR,CAAa,UAASpB,GAAT,EAAc;AACzB,QAAIA,GAAJ,EAAS;AACP,UAAIA,IAAIQ,IAAJ,KAAa,YAAb,IAA6BR,IAAIqB,IAAJ,KAAa,KAA9C,EAAqD;AACnD;AACA;AACA,eAAO7B,IAAIC,MAAJ,CAAW,GAAX,EAAgBC,IAAhB,CAAqB;AAC1B4B,mBAAS,KADiB;AAE1B3B,mBAAS;AAFiB,SAArB,CAAP;AAID;;AAED,aAAOH,IAAIC,MAAJ,CAAW,GAAX,EAAgBC,IAAhB,CAAqB;AAC1B4B,iBAAS,KADiB;AAE1B3B,iBAAS;AAFiB,OAArB,CAAP;AAID;;AAED,WAAOH,IAAIC,MAAJ,CAAW,GAAX,EAAgBC,IAAhB,CAAqB;AAC1B4B,eAAS,IADiB;AAE1B3B,eAAS,qFAFiB;AAG1BuB,WAAKX,QAAQW;AAHa,KAArB,CAAP;AAKD,GAtBD;AAwBD,CAlCD;;AAoCAK,OAAOC,OAAP,GAAiBrC,MAAjB",
+      "file": "api.js",
+      "sourceRoot": "/app/server/routes",
+      "sourcesContent": [
+        "const express = require('express');\nconst router = express.Router();\nconst Poll = require('../models/poll.js');\n\nrouter.get('/test', (req, res) => {  \n  res.status(200).json({\n    message: \"You're authorized to see this secret message.\"\n  });\n});\n\nrouter.get('/polls', (req, res) => {\n  var polls = [];\n  \n  Poll.find({user: req.user.id}, (err, polls) => {\n    if (polls) {\n      console.log(polls);\n      res.status(200).json({ data: polls});\n    }\n    else {\n      console.error(err);\n      res.end();\n    }\n  });\n});\n\nrouter.post('/polls', (req, res) => {\n  var newPoll = Poll({\n      name: req.query.pollname,\n      user: req.user,\n      questions: req.query.options.map((item) => { return { question: item, rating: 0}}),\n      votedusers: []\n    });\n  \n  newPoll.url = \"https://trite-engineer.glitch.me/\" + newPoll.user + \"/\" + encodeURI(newPoll.name);\n  \n  newPoll.save(function(err) { \n    if (err) {\n      if (err.name === 'MongoError' && err.code === 11000) {\n        // the 11000 Mongo code is for a duplication error\n        // the 409 HTTP status code is for conflict error\n        return res.status(409).json({\n          success: false,\n          message: 'You have already a poll with the same name.'\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n    \n    return res.status(200).json({\n      success: true,\n      message: 'Congratulations! Your poll has been saved successfully. Here\\'s a link to your poll',\n      url: newPoll.url\n    });\n  });\n  \n});\n\nmodule.exports = router;\n"
+      ]
+    },
+    "mtime": 1517247907199
+  },
+  "{\"filename\":\"/app/server/models/poll.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
+    "metadata": {
+      "usedHelpers": [],
+      "marked": [],
+      "modules": {
+        "imports": [],
+        "exports": {
+          "exported": [],
+          "specifiers": []
+        }
+      }
+    },
+    "options": {
+      "filename": "/app/server/models/poll.js",
+      "filenameRelative": "/app/server/models/poll.js",
+      "env": {},
+      "retainLines": false,
+      "highlightCode": true,
+      "suppressDeprecationMessages": false,
+      "presets": [],
+      "plugins": [],
+      "ignore": [],
+      "code": true,
+      "metadata": true,
+      "ast": false,
+      "comments": true,
+      "compact": "auto",
+      "minified": false,
+      "sourceMaps": "both",
+      "sourceMapTarget": "poll.js",
+      "sourceFileName": "poll.js",
+      "sourceRoot": "/app/server/models",
+      "babelrc": false,
+      "sourceType": "module",
+      "moduleRoot": "/app/server/models",
+      "moduleIds": false,
+      "passPerPreset": false,
+      "parserOpts": false,
+      "generatorOpts": false,
+      "basename": "poll"
+    },
+    "ignored": false,
+    "code": "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst PollSchema = new Schema({\n  name: String,\n  user: { type: Schema.Types.ObjectId, ref: 'User' },\n  questions: [{ question: String, rating: Number, _id: false }],\n  votedusers: [{ type: Schema.Types.ObjectId, ref: 'User' }],\n  url: String\n});\n\nmodule.exports = mongoose.model('Poll', PollSchema);\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvbGwuanMiXSwibmFtZXMiOlsibW9uZ29vc2UiLCJyZXF1aXJlIiwiU2NoZW1hIiwiUG9sbFNjaGVtYSIsIm5hbWUiLCJTdHJpbmciLCJ1c2VyIiwidHlwZSIsIlR5cGVzIiwiT2JqZWN0SWQiLCJyZWYiLCJxdWVzdGlvbnMiLCJxdWVzdGlvbiIsInJhdGluZyIsIk51bWJlciIsIl9pZCIsInZvdGVkdXNlcnMiLCJ1cmwiLCJtb2R1bGUiLCJleHBvcnRzIiwibW9kZWwiXSwibWFwcGluZ3MiOiJBQUFBLE1BQU1BLFdBQVdDLFFBQVEsVUFBUixDQUFqQjtBQUNBLE1BQU1DLFNBQVNGLFNBQVNFLE1BQXhCOztBQUVBLE1BQU1DLGFBQWEsSUFBSUQsTUFBSixDQUFXO0FBQzVCRSxRQUFNQyxNQURzQjtBQUU1QkMsUUFBTSxFQUFFQyxNQUFNTCxPQUFPTSxLQUFQLENBQWFDLFFBQXJCLEVBQStCQyxLQUFLLE1BQXBDLEVBRnNCO0FBRzVCQyxhQUFXLENBQUMsRUFBRUMsVUFBVVAsTUFBWixFQUFvQlEsUUFBUUMsTUFBNUIsRUFBb0NDLEtBQUssS0FBekMsRUFBRCxDQUhpQjtBQUk1QkMsY0FBWSxDQUFDLEVBQUVULE1BQU1MLE9BQU9NLEtBQVAsQ0FBYUMsUUFBckIsRUFBK0JDLEtBQUssTUFBcEMsRUFBRCxDQUpnQjtBQUs1Qk8sT0FBS1o7QUFMdUIsQ0FBWCxDQUFuQjs7QUFRQWEsT0FBT0MsT0FBUCxHQUFpQm5CLFNBQVNvQixLQUFULENBQWUsTUFBZixFQUF1QmpCLFVBQXZCLENBQWpCIiwiZmlsZSI6InBvbGwuanMiLCJzb3VyY2VSb290IjoiL2FwcC9zZXJ2ZXIvbW9kZWxzIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbW9uZ29vc2UgPSByZXF1aXJlKCdtb25nb29zZScpO1xuY29uc3QgU2NoZW1hID0gbW9uZ29vc2UuU2NoZW1hO1xuXG5jb25zdCBQb2xsU2NoZW1hID0gbmV3IFNjaGVtYSh7IFxuICBuYW1lOiBTdHJpbmcsXG4gIHVzZXI6IHsgdHlwZTogU2NoZW1hLlR5cGVzLk9iamVjdElkLCByZWY6ICdVc2VyJyB9LFxuICBxdWVzdGlvbnM6IFt7IHF1ZXN0aW9uOiBTdHJpbmcsIHJhdGluZzogTnVtYmVyLCBfaWQ6IGZhbHNlIH1dLFxuICB2b3RlZHVzZXJzOiBbeyB0eXBlOiBTY2hlbWEuVHlwZXMuT2JqZWN0SWQsIHJlZjogJ1VzZXInIH1dLFxuICB1cmw6IFN0cmluZ1xufSk7XG5cbm1vZHVsZS5leHBvcnRzID0gbW9uZ29vc2UubW9kZWwoJ1BvbGwnLCBQb2xsU2NoZW1hKTsiXX0=",
+    "ast": null,
+    "map": {
+      "version": 3,
+      "sources": [
+        "poll.js"
+      ],
+      "names": [
+        "mongoose",
+        "require",
+        "Schema",
+        "PollSchema",
+        "name",
+        "String",
+        "user",
+        "type",
+        "Types",
+        "ObjectId",
+        "ref",
+        "questions",
+        "question",
+        "rating",
+        "Number",
+        "_id",
+        "votedusers",
+        "url",
+        "module",
+        "exports",
+        "model"
+      ],
+      "mappings": "AAAA,MAAMA,WAAWC,QAAQ,UAAR,CAAjB;AACA,MAAMC,SAASF,SAASE,MAAxB;;AAEA,MAAMC,aAAa,IAAID,MAAJ,CAAW;AAC5BE,QAAMC,MADsB;AAE5BC,QAAM,EAAEC,MAAML,OAAOM,KAAP,CAAaC,QAArB,EAA+BC,KAAK,MAApC,EAFsB;AAG5BC,aAAW,CAAC,EAAEC,UAAUP,MAAZ,EAAoBQ,QAAQC,MAA5B,EAAoCC,KAAK,KAAzC,EAAD,CAHiB;AAI5BC,cAAY,CAAC,EAAET,MAAML,OAAOM,KAAP,CAAaC,QAArB,EAA+BC,KAAK,MAApC,EAAD,CAJgB;AAK5BO,OAAKZ;AALuB,CAAX,CAAnB;;AAQAa,OAAOC,OAAP,GAAiBnB,SAASoB,KAAT,CAAe,MAAf,EAAuBjB,UAAvB,CAAjB",
+      "file": "poll.js",
+      "sourceRoot": "/app/server/models",
+      "sourcesContent": [
+        "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst PollSchema = new Schema({ \n  name: String,\n  user: { type: Schema.Types.ObjectId, ref: 'User' },\n  questions: [{ question: String, rating: Number, _id: false }],\n  votedusers: [{ type: Schema.Types.ObjectId, ref: 'User' }],\n  url: String\n});\n\nmodule.exports = mongoose.model('Poll', PollSchema);"
+      ]
+    },
+    "mtime": 1517247907111
+  }
+}
