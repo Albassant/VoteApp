@@ -24,7 +24,14 @@ class PollsPage extends React.Component {
   }
   
   _onChange() {
-    this.setState(getStateFromFlux());
+    let state = getStateFromFlux();
+    
+    state.polls.forEach(poll => {
+      var date = new Date(poll.createdAt);
+      poll.createdAt = date.toLocaleDateString('en-GB');
+    });
+    
+    this.setState(state);
   }
 
   componentWillMount() {

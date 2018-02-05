@@ -16,7 +16,7 @@ class PollStore extends EventEmitter {
         // Registers action handler with the Dispatcher.
         AppDispatcher.register(this._registerToActions.bind(this));
     }
- 
+
     // Switches over the action's type when an action is dispatched.
     _registerToActions(action) {
         switch(action.type) {

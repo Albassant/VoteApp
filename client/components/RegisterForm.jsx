@@ -1,67 +1,74 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import { withStyles } from 'material-ui/styles';
+import { Card, CardText, CardHeader, CardContent } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-import { withRouter } from 'react-router-dom';
+import styles from '../styles';
 
-const RegisterForm = ({onSubmit, onChange, errors, user, router}) => (
-  <MuiThemeProvider>
-    <Card className = "container">
-      <form action = "/" onSubmit = {onSubmit}>
-        <h2 className = "card-heading">Register</h2>
+function RegisterForm(props) {
+  const { classes, successMessage, errors, onChange, onSubmit, user } = props;
+  return (
+    <Card>
+    <CardHeader title="Register" />
+    <form action = "/" onSubmit = {onSubmit}>
 
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
+      {errors.summary && <p>{errors.summary}</p>}
 
-        <div className="field-line">
-          <TextField
-            floatingLabelText="Name"
-            name="name"
-            errorText = {errors.name}
-            onChange = {onChange}
-            value = {user.name}
-          />
-        </div>
+      <div>
+        <TextField
+          label="Name"
+          name="name"
+          onChange={onChange}
+          error={errors.name}
+          value={errors && errors.name || user.name}
+        />
+      </div>
 
-        <div className="field-line">
-          <TextField
-            floatingLabelText = "Email"
-            name = "email"
-            errorText = {errors.email}
-            onChange = {onChange}
-            value = {user.email}
-          />
-        </div>
+      <div>
+        <TextField
+          label="Email"
+          name="email"
+          error={errors.email}
+          onChange={onChange}
+          value={errors && errors.email || user.email}
+        />
+      </div>
 
-        <div className="field-line">
-          <TextField
-            floatingLabelText = "Password"
-            type = "password"
-            name = "password"
-            onChange = {onChange}
-            errorText = {errors.password}
-            value = {user.password}
-          />
-        </div>
+      <div>
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          onChange={onChange}
+          error={errors.password}
+          value={errors && errors.password || user.password}
+        />
+      </div>
 
-        <div className="button-line">
-          <RaisedButton type = "submit" label = "Create New Account" primary />
-        </div>
+      <div>
+        <Button variant='raised' type="submit" color='primary'>Create New Account</Button>
+      </div>
 
-        <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
-      </form>
-    </Card>
-  </MuiThemeProvider>
-);
+      <CardContent>
+        <Typography component="p">
+          Already have an account? <Link to={'/login'}>Log in</Link>
+        </Typography>
+      </CardContent>
+    </form>
+  </Card>
+  );
+}
 
 RegisterForm.propTypes = {
+  classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
 
-export default RegisterForm;
+export default withStyles(styles)(RegisterForm);

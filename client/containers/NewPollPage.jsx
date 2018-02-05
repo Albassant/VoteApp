@@ -11,11 +11,8 @@ class NewPollPage extends React.Component {
   constructor(props) {
     super(props);
     
-    let successMessage = localStorage.getItem('successMessage') || '';
-    localStorage.removeItem('successMessage');
-    
     this.state = {
-      successMessage,
+      message: '',
       poll: {
         name: '',
         options: ['', '']
@@ -38,19 +35,15 @@ class NewPollPage extends React.Component {
     PollActions.createPoll(this.state.poll)
       .then(data => {
         console.log(data);
+      //save successMessage here
+        this.props.history.replace('/mypolls');
       })
       .catch(error => {
         console.log(error);
         if (error.response) {
-          const errors = error.response.data.errors;
-          errors.summary = error.response.data.message;
           this.setState({
-            errors
+            message: error.response.data.message
           });
-          console.log(error.response.data);
-        }
-        else {
-          console.log("catch error: " + error);
         }
     });
   }
@@ -104,7 +97,7 @@ class NewPollPage extends React.Component {
               onChangeOptions={this.changePollOptions}
               onAddOption={this.addPollOption}
               onRemoveOption={this.removePollOption}
-              successMessage={this.state.successMessage}
+              errorMessage={this.state.message}
               poll={this.state.poll}
               valid={this.state.valid}
             />)

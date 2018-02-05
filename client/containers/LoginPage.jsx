@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
     
     axios.post('/auth/login', formData)
     .then(response => {
-      this.setState({ errors: {} });      
+      //this.setState({ errors: {} });      
       Auth.authenticateUser(response.data.token); // save the token
       this.props.history.replace('/'); // change the current URL to /
     })

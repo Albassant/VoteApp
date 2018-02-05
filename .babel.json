@@ -79,7 +79,7 @@
         "// where your node app starts\nconst express = require('express');\nconst app = express();\nconst bodyParser = require('body-parser');\nconst passport = require('passport');\n\n//connect to db\nconst db = require('./server/config/db.js');\ndb.setupConnection();\n\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({ extended: false }));\napp.use(express.static('public'));\n\n// Configure passport middleware\napp.use(passport.initialize());\n\n// load passport strategies\npassport.use('local-register', require('./server/passport/local-register'));\npassport.use('local-login', require('./server/passport/local-login'));\n\n// pass the authenticaion checker middleware\napp.use('/api', require('./server/middleware/auth-check'));\n\n// routes\napp.use('/auth', require('./server/routes/auth'));\napp.use('/api', require('./server/routes/api'));\n\n\nconst listener = app.listen(process.env.PORT, function () {\n  console.log('Your app is listening on port ' + listener.address().port);\n});\n"
       ]
     },
-    "mtime": 1517399138350
+    "mtime": 1517828986364
   },
   "{\"filename\":\"/app/config/db.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/config\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -617,7 +617,7 @@
         "const express = require('express');\nconst validator = require('validator');\nconst passport = require('passport');\nconst querystring = require('querystring');\nconst router = express.Router();\n\nrouter.post('/register', (req, res, next) => {\n  console.log(req.body);\n    \n  const validationResult = validateSignupForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n  \n  return passport.authenticate('local-register', (err) => {\n    if (err) {\n      if (err.name === 'MongoError' && err.code === 11000) {\n        // the 11000 Mongo code is for a duplication email error\n        // the 409 HTTP status code is for conflict error\n        return res.status(409).json({\n          success: false,\n          message: 'Check the form for errors.',\n          errors: {\n            email: 'This email is already taken.'\n          }\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.status(200).json({\n      success: true,\n      message: 'You have successfully registered! Now you should be able to log in.'\n    });\n  })(req, res, next);\n});\n\nrouter.post('/login', (req, res, next) => {\n  const validationResult = validateLoginForm(req.body);\n  if (!validationResult.success) {\n    return res.status(400).json({\n      success: false,\n      message: validationResult.message,\n      errors: validationResult.errors\n    });\n  }\n\n  return passport.authenticate('local-login', (err, token, userData) => {\n    if (err) {\n      if (err.name === 'IncorrectCredentialsError') {\n        return res.status(400).json({\n          success: false,\n          message: err.message\n        });\n      }\n\n      return res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    }\n\n    return res.json({\n      success: true,\n      message: 'You have successfully logged in!',\n      token,\n      user: userData\n    });\n  })(req, res, next);\n});\n\n/**\n * Validate the sign up form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateSignupForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n  \n  if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {\n    isFormValid = false;\n    errors.email = 'Please provide a correct email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {\n    isFormValid = false;\n    errors.password = 'Password must have at least 8 characters.';\n  }\n\n  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {\n    isFormValid = false;\n    errors.name = 'Please provide your name.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\n/**\n * Validate the login form\n *\n * @param {object} payload - the HTTP body message\n * @returns {object} The result of validation. Object contains a boolean validation result,\n *                   errors tips, and a global message for the whole form.\n */\nfunction validateLoginForm(payload) {\n  const errors = {};\n  let isFormValid = true;\n  let message = '';\n\n  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {\n    isFormValid = false;\n    errors.email = 'Please provide your email address.';\n  }\n\n  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {\n    isFormValid = false;\n    errors.password = 'Please provide your password.';\n  }\n\n  if (!isFormValid) {\n    message = 'Check the form for errors.';\n  }\n\n  return {\n    success: isFormValid,\n    message,\n    errors\n  };\n}\n\nmodule.exports = router;"
       ]
     },
-    "mtime": 1517398578920
+    "mtime": 1517828986192
   },
   "{\"filename\":\"/app/server/config/db.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/config\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -690,7 +690,7 @@
         "const mongoose = require('mongoose');\nmongoose.Promise = global.Promise;\n\nexports.setupConnection = function() {\n  mongoose.connect(process.env.DB_URI, \n                   { \n                    useMongoClient: true, \n                    /* other options */\n                   }, \n                   (error) => \n                   {\n                      if (error) console.error(\"Unable to connect to the mongoDB server. Error: \" + error);\n                   }\n  );\n};\n\n\n"
       ]
     },
-    "mtime": 1517399553606
+    "mtime": 1517828985848
   },
   "{\"filename\":\"/app/server/passport/local-register.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/passport\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -771,7 +771,7 @@
         "const User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n  \n  const userData = {\n    email: email.trim(),\n    password: password.trim(),\n    name: req.body.name.trim()\n  };\n\n  const newUser = new User(userData);\n  newUser.save((err) => {\n    if (err) { return done(err); }\n\n    return done(null);\n  });\n});"
       ]
     },
-    "mtime": 1517398578896
+    "mtime": 1517828986040
   },
   "{\"filename\":\"/app/server/models/user.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -864,7 +864,7 @@
         "const mongoose = require('mongoose');\nconst bcrypt = require('bcrypt');\nconst Schema = mongoose.Schema;\n\n// define the User model schema\nconst UserSchema = new Schema({\n  email: {\n    type: String,\n    index: { unique: true }\n  },\n  password: String,\n  name: String,\n  polls: [{ type: Schema.Types.ObjectId, ref: 'Poll' }]\n});\n\n\n/**\n * Compare the passed password with the value in the database. A model method.\n *\n * @param {string} password\n * @returns {object} callback\n */\nUserSchema.methods.comparePassword = function comparePassword(password, callback) {\n  bcrypt.compare(password, this.password, callback);\n};\n\n\n/**\n * The pre-save hook method.\n */\nUserSchema.pre('save', function saveHook(next) {\n  const user = this;\n\n  // proceed further only if the password is modified or the user is new\n  if (!user.isModified('password')) return next();\n\n\n  return bcrypt.genSalt((saltError, salt) => {\n    if (saltError) { return next(saltError); }\n\n    return bcrypt.hash(user.password, salt, (hashError, hash) => {\n      if (hashError) { return next(hashError); }\n\n      // replace a password string with hash value\n      user.password = hash;\n\n      return next();\n    });\n  });\n});\n\n\nmodule.exports = mongoose.model('User', UserSchema);"
       ]
     },
-    "mtime": 1517398578880
+    "mtime": 1517828985960
   },
   "{\"filename\":\"/app/server/passport/local-login.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/passport\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -958,7 +958,7 @@
         "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\nconst PassportLocalStrategy = require('passport-local').Strategy;\n\n\n/**\n * Return the Passport Local Strategy object.\n */\nmodule.exports = new PassportLocalStrategy({\n  usernameField: 'email',\n  passwordField: 'password',\n  session: false,\n  passReqToCallback: true\n}, (req, email, password, done) => {\n  const userData = {\n    email: email.trim(),\n    password: password.trim()\n  };\n\n  // find a user by email address\n  return User.findOne({ email: userData.email }, (err, user) => {\n    if (err) { return done(err); }\n\n    if (!user) {\n      const error = new Error('Incorrect email');\n      error.name = 'IncorrectCredentialsError';\n\n      return done(error);\n    }\n\n    // check if a hashed user's password is equal to a value saved in the database\n    return user.comparePassword(userData.password, (passwordErr, isMatch) => {\n      if (err) { return done(err); }\n\n      if (!isMatch) {\n        const error = new Error('Incorrect password');\n        error.name = 'IncorrectCredentialsError';\n\n        return done(error);\n      }\n\n      // create a token string\n      const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET);\n      const data = { name: user.name };\n\n      return done(null, token, data);\n    });\n  });\n});\n"
       ]
     },
-    "mtime": 1517415951195
+    "mtime": 1517828986000
   },
   "{\"filename\":\"/app/server/middleware/auth-check.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/middleware\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -1044,7 +1044,7 @@
         "const jwt = require('jsonwebtoken');\nconst User = require('../models/user');\n\n/**\n *  The Auth Checker middleware function.\n */\nmodule.exports = (req, res, next) => {\n  if (!req.headers.authorization) {\n    return res.status(401).end();\n  }\n\n  // get the last part from a authorization header string like \"bearer token-value\"\n  const token = req.headers.authorization.split(' ')[1];\n\n  // decode the token using a secret key-phrase\n  return jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {\n    // the 401 code is for unauthorized status\n    if (err) { return res.status(401).end(); }\n\n    const userId = decoded.sub;\n\n    // check if a user exists\n    return User.findById(userId, (userErr, user) => {\n      if (userErr || !user) {\n        return res.status(401).end();\n      }\n\n      req.user = {\n        id: userId\n      };\n      \n      return next();\n    });\n  });\n};"
       ]
     },
-    "mtime": 1517398578868
+    "mtime": 1517828985876
   },
   "{\"filename\":\"/app/server/routes/api.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/routes\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -1134,7 +1134,7 @@
         "const express = require('express');\nconst router = express.Router();\nconst db = require('../utils/databaseUtils.js');\n\nrouter.get('/polls', (req, res) => {\n  db.listPolls(req.user.id)\n    .then(data => res.send(data))\n    .catch(err => {\n      console.error(err);\n      res.end();\n    });\n});\n\nrouter.post('/polls', (req, res) => {\n  db.createPoll(req.user.id, req.body)\n    .then(data => {\n      res.status(200).json({\n        success: true,\n        message: 'Congratulations! Your poll has been saved successfully. Here\\'s a link to your poll',\n        url: `https://trite-engineer.glitch.me/${data.id}`\n      });\n    })\n    .catch(err => {\n      console.log(err);\n      res.status(400).json({\n        success: false,\n        message: 'Could not process the form.'\n      });\n    })\n});\n\n// validator.isMongoId(str) - for deletion\n\nmodule.exports = router;\n"
       ]
     },
-    "mtime": 1517416209245
+    "mtime": 1517828986096
   },
   "{\"filename\":\"/app/server/models/poll.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/models\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -1216,7 +1216,7 @@
         "const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst PollSchema = new Schema({ \n  name: String,\n  user: { type: Schema.Types.ObjectId, ref: 'User' },\n  questions: [{ question: String, rating: Number, _id: false }],\n  votedusers: [{ type: Schema.Types.ObjectId, ref: 'User' }],\n  createdAt : { type: Date }\n});\n\nmodule.exports = mongoose.model('Poll', PollSchema);\n\n"
       ]
     },
-    "mtime": 1517406374197
+    "mtime": 1517828985908
   },
   "{\"filename\":\"/app/server/utils/databaseUtils.js\",\"env\":{},\"retainLines\":false,\"highlightCode\":true,\"suppressDeprecationMessages\":false,\"presets\":[],\"plugins\":[],\"ignore\":[],\"code\":true,\"metadata\":true,\"ast\":true,\"comments\":true,\"compact\":\"auto\",\"minified\":false,\"sourceRoot\":\"/app/server/utils\",\"babelrc\":true,\"sourceType\":\"module\",\"moduleIds\":false,\"passPerPreset\":false,\"parserOpts\":false,\"generatorOpts\":false}:6.26.0": {
     "metadata": {
@@ -1300,6 +1300,6 @@
         "const Poll = require('../models/poll.js');\n\nexports.listPolls= function(id) {\n  return Poll.find({ user: id })\n}\n\nexports.createPoll = function(id, data) {\n  const poll = new Poll({\n      name: data.name,\n      user: id,\n      questions: data.options.map((item) => { return { question: item, rating: 0}}),\n      votedusers: [],\n      createdAt: new Date()\n    });\n\n    return poll.save();\n}\n\nexports.deleteNote = function(id) {\n    return Poll.findById(id).remove();\n}"
       ]
     },
-    "mtime": 1517406351349
+    "mtime": 1517828986232
   }
 }
