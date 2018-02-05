@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Auth from './modules/Auth';
 
 import Header from './containers/Header.jsx';
-import Main from './containers/Main.jsx';
 
 import LogoutPage from './containers/LogoutPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
@@ -22,7 +21,9 @@ ReactDOM.render((
     <Router>
       <div className="root">
         <Route component={Header} />
-        <Route component={Main} />
+
+        <Route exact path="/" component={HomePage}/> 
+        
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />
       </div>
@@ -35,6 +36,7 @@ ReactDOM.render((
       <MuiThemeProvider theme={theme}>
        </MuiThemeProvider>
        
+       <Route component={Main} />
        
       <Route exact path="/" component={HomePage}/> 
       <Route path="/register" component={RegisterPage} />

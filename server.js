@@ -26,6 +26,8 @@ app.use('/api', require('./server/middleware/auth-check'));
 app.use('/auth', require('./server/routes/auth'));
 app.use('/api', require('./server/routes/api'));
 
+app.use('/', (req, res) => { res.redirect('/') });
+
 
 const listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);

@@ -2,47 +2,70 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
-import Card, { CardText, CardHeader, CardContent } from 'material-ui/Card';
+import Card, { CardText, CardHeader, CardContent, CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-import styles from '../styles';
+//import styles from '../styles';
+
+const styles = {
+  container: {
+    width: '400px',
+    margin: '0 auto',
+    textAlign: 'center',
+  },
+  actions: {
+    justifyContent: 'center',
+  },
+  field: {
+    margin: '20px 40px'
+  },
+  title: {
+    marginTop: '20px',
+    paddingTop: '20px'
+  }
+}
 
 function LoginForm(props) {
   const { classes, successMessage, errors, onChange, onSubmit, user } = props;
-  return(
-    <Card>
-      <CardHeader title="Log In" />
+  return (
+    <Card className={classes.container}>
+      <Typography variant='title' className={classes.title}>
+        Log in
+      </Typography>
+      
       <form action="/" onSubmit={onSubmit}>
 
         {successMessage && <p>{successMessage}</p>}
         {errors.summary && <p>{errors.summary}</p>}
 
-        <div>
+        <div className={classes.field}>
           <TextField
             label="Email"
             name="email"
-            error={errors.mail}
             onChange={onChange}
-            value= {errors && errors.email || user.email}
+            error={!!errors.email}
+            value={user.email}
+            fullWidth
           />
         </div>
 
-        <div>
+        <div className={classes.field}>
           <TextField
             label="Password"
             type="password"
             name="password"
             onChange={onChange}
-            error={errors.password}
-            value= {errors && errors.password || user.password}
+            error={!!errors.password}
+            value={user.password}
+            fullWidth
           />
         </div>
 
-        <div>
+        <CardActions className={classes.actions}>
           <Button variant='raised' type="submit" color='primary'>Log in</Button>
-        </div>
+        </CardActions>
 
          <CardContent>
           <Typography component="p">
