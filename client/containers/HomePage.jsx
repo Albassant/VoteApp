@@ -9,22 +9,22 @@ import Grid from 'material-ui/Grid';
 
 const styles = {
   container: {
-    margin: 0,
-    textAlign: 'center',
+    
     backgroundColor: '#3f51b5',
     color: 'rgb(255, 255, 255)',
-    minHeight: '90vh',
-    maxHeight: '90vh',
-    flexGrow: 1,
-  },
-  align: {
+    
+    minHeight: '87vh',
+    maxHeight: '87vh',
+    
+    display: 'flex',
     alignItems: 'center',
-  },
-  justify: {
     justifyContent: 'center',
+    
+    textAlign: 'center'
   },
-  separate: {
-    marginTop: '20px'
+  actions: {
+    justifyContent: 'center',
+    marginTop: 20
   }
 };
 
@@ -34,44 +34,26 @@ class HomePage extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        { !Auth.isUserAuthenticated() && 
-          <Grid alignContent='center' alignItems='center'>
-            
-            <Typography variant='display1' color='inherit'>
-              Welcome to VoteApp!
-            </Typography>
-            <Typography variant='subheading' color='inherit'>
-              Here you can create your own polls, manage and share them.
-            </Typography>
-            <Typography variant='subheading' color='inherit'>
-              And vote on everyone's polls!
-            </Typography>
-            <Typography variant='subheading' color='inherit' className={classes.separate}>
-              But first, you need to log in to start working on your polls
-            </Typography>
-            
-            <CardActions className={classes.justify}>
-              <Button variant='raised' onClick={() => this.props.history.push('/login')}>Log in</Button>
-              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/register')}>Register</Button>  
-            </CardActions> 
-          </Grid>   
-        }
-        { Auth.isUserAuthenticated() &&
-          <div className={classes.container}>
-            <CardHeader 
-              classes={{
-                title: classes.title,
-                subheader: classes.subheader,
-              }}
-              title="My VoteApp"
-              subheader="View your polls or create a new one"
-            />
+        <div>
+          <Typography variant='display2' color='inherit'>
+            VoteApp!
+          </Typography>
+          <Typography variant='headline' color='inherit'>
+            Create poll voting contests and view the results in real time
+          </Typography>
+          { !Auth.isUserAuthenticated() && 
             <CardActions className={classes.actions}>
-              <Button variant='raised' color="primary" onClick={() => this.props.history.push('/new')}>New Poll</Button>
-              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/mypolls')}>My Polls</Button>  
+                <Button variant='raised' onClick={() => this.props.history.push('/login')}>Log in</Button>
+                <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/register')}>Register</Button>  
             </CardActions> 
-          </div>
-        }
+          }
+          { Auth.isUserAuthenticated() &&
+            <CardActions className={classes.actions}>
+              <Button variant='raised' onClick={() => this.props.history.push('/mypolls')}>My Polls</Button>
+              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/new')}>New Poll</Button>  
+            </CardActions> 
+          }
+        </div>
       </div>
     );
   }

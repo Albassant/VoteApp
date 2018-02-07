@@ -24,7 +24,7 @@ class Header extends React.Component {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.logo} variant='display1' type="title" color="inherit" onClick={() => this.props.history.push('/')}>
-            VoteApp
+            VoteApp!
           </Typography>
 
           { !Auth.isUserAuthenticated() &&

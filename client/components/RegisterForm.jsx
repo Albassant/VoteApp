@@ -47,6 +47,7 @@ function RegisterForm(props) {
              error={!!errors.name}
              value={user.name}
              fullWidth
+             autoFocus={true}
            />
         </div>
                

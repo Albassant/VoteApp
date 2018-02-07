@@ -21,6 +21,9 @@ class PollsPage extends React.Component {
     super(props);
     this.state = getStateFromFlux();
     this._onChange = this._onChange.bind(this);
+    
+    this.handleAddNewPoll = this.handleAddNewPoll.bind(this);
+    this.handlePollClick = this.handlePollClick.bind(this);
   }
   
   _onChange() {
@@ -48,18 +51,27 @@ class PollsPage extends React.Component {
   
   handlePollDelete(poll, event) {
     event.stopPropagation();
-    //PollActions.deletePoll(poll.id);
-    console.log("handlePollDelete " + poll.name);
+    PollActions.deletePoll(poll._id);
   }
   
   handlePollClick(poll, event) {
     // TODO load selected poll form or visuals
+    this.props.history.push(`/vote/${poll._id}`);
     console.log("handlePollClick " + poll.name);
+  }
+  
+  handleAddNewPoll() {
+    this.props.history.push('/new');
   }
 
   render() {
     return (
-      <PollsList polls={this.state.polls} onClick={this.handlePollClick} onDelete={this.handlePollDelete} />
+      <PollsList 
+        polls={this.state.polls} 
+        onClick={this.handlePollClick} 
+        onDelete={this.handlePollDelete} 
+        onCreateNew={this.handleAddNewPoll} 
+      />
     );
   }
 }

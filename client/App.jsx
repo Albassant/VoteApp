@@ -12,6 +12,7 @@ import RegisterPage from './containers/RegisterPage.jsx';
 import HomePage from './containers/HomePage.jsx';
 import PollsPage from './containers/PollsPage.jsx';
 import NewPollPage from './containers/NewPollPage.jsx';
+import VotingPage from './containers/VotingPage.jsx';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './styles';
@@ -26,6 +27,12 @@ ReactDOM.render((
         
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/logout" component={LogoutPage} />
+        
+        <Route path="/mypolls" component={PollsPage} />
+        <Route path="/new" component={NewPollPage} />
+        
+        <Route path="/vote/:id" component={VotingPage} />
       </div>
     </Router>
   

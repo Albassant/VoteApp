@@ -12,5 +12,14 @@ export default {
 
   deletePoll(pollId) {
     return axios.delete(`api/polls/${pollId}`, { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+  },
+  
+  loadPoll(pollId) {
+    return axios.get(`api/polls/${pollId}`, { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+  },
+  
+  updatePoll(pollId, data) {
+    return axios.put(`api/polls/${pollId}`, data, { headers: {'Authorization': `bearer ${Auth.getToken()}`,
+                                                  'Content-Type': "text/plain"}});
   }
 }

@@ -24,13 +24,33 @@ const PollActions = {
         })
       );
   },
+  
+  loadPoll(pollId) {
+    return API.loadPoll(pollId)
+      .then(() => console.log('voted'))
+      .catch(err =>
+          console.error(err)
+        );
+  },
 
   createPoll(poll) {
     return API.createPoll(poll)
       .then(({ data }) => {
         this.loadPolls();
-        return data;
       })
+      .catch(err =>
+        console.error(err)
+      );
+  },
+  
+  updatePoll(pollId, optionIdx) {
+    return API.updatePoll(pollId, optionIdx)
+      .then(({ data }) => {
+        this.loadPolls();
+      })
+      .catch(err =>
+        console.error(err)
+      );
   },
 
   deletePoll(pollId) {

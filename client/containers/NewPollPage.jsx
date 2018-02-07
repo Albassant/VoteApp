@@ -32,20 +32,8 @@ class NewPollPage extends React.Component {
     event.preventDefault();
     console.log('processForm');
     
-    PollActions.createPoll(this.state.poll)
-      .then(data => {
-        console.log(data);
-      //save successMessage here
-        this.props.history.replace('/mypolls');
-      })
-      .catch(error => {
-        console.log(error);
-        if (error.response) {
-          this.setState({
-            message: error.response.data.message
-          });
-        }
-    });
+    PollActions.createPoll(this.state.poll);
+    this.props.history.replace('/mypolls');
   }
   
   changePollName(event) {

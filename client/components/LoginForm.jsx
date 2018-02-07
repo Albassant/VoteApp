@@ -48,6 +48,7 @@ function LoginForm(props) {
             error={!!errors.email}
             value={user.email}
             fullWidth
+            autoFocus={true}
           />
         </div>
 

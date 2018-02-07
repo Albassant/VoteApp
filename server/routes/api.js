@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const validator = require('validator');
 const db = require('../utils/databaseUtils.js');
 
 router.get('/polls', (req, res) => {
@@ -9,6 +10,26 @@ router.get('/polls', (req, res) => {
       console.error(err);
       res.end();
     });
+});
+
+router.get('/polls/:id', (req, res) => {
+  db.listPolls(req.params.id)
+    .then(data => res.send(data))
+    .catch(err => {
+      console.error(err);
+      res.end();
+    });
+});
+
+router.put('/polls/:id', (req, res) => {
+  console.log('hello');
+//   var pollId = req.params.id;
+//   var option = req.body;
+//   var user = req.user;
+  
+//   console.log(option);
+//   res.end();
+  
 });
 
 router.post('/polls', (req, res) => {
@@ -29,6 +50,16 @@ router.post('/polls', (req, res) => {
     })
 });
 
-// validator.isMongoId(str) - for deletion
+router.delete('/polls/:id', (req, res) => {
+  console.log('delete ' + req.params.id);
+  
+  db.deletePoll(req.params.id)
+    .then(data => res.send(data))
+    .catch(err => {
+      console.log(err);
+      res.end();
+  });
+});
+
 
 module.exports = router;
