@@ -43,7 +43,7 @@ function VotingForm(props) {
         {poll.name}
       </Typography>
       
-      <form action="/polls" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
 
         <FormControl component="fieldset">
           <RadioGroup
@@ -68,7 +68,7 @@ function VotingForm(props) {
         
         <CardContent>
           <Typography component="p">
-            <Link to={'/mypolls'}>Back to polls</Link>
+            <Link to={'/polls'}>Back to polls</Link>
           </Typography>
         </CardContent>
       </form>

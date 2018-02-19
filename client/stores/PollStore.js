@@ -56,6 +56,10 @@ class PollStore extends EventEmitter {
     getPolls() {
         return _polls;
     }
+  
+    getPoll(id) {
+        return _polls.find(item => item._id === id);
+    }
 
     emitChange() {
         this.emit(CHANGE_EVENT);

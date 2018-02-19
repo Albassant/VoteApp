@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Auth from './modules/Auth';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './containers/Header.jsx';
+import Footer from './containers/Footer.jsx';
 
 import LogoutPage from './containers/LogoutPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
@@ -29,27 +29,17 @@ ReactDOM.render((
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
         
-        <Route path="/mypolls" component={PollsPage} />
-        <Route path="/new" component={NewPollPage} />
+        <Route exact path="/polls" component={PollsPage} />
+        <Route exact path="/polls/new" component={NewPollPage} />
         
-        <Route path="/vote/:id" component={VotingPage} />
+        <Route path="/polls/:id" component={VotingPage} />
+        
+        
       </div>
     </Router>
   
   ), 
   document.getElementById('root')
 );
-/*
-      <MuiThemeProvider theme={theme}>
-       </MuiThemeProvider>
-       
-       <Route component={Main} />
-       
-      <Route exact path="/" component={HomePage}/> 
-      <Route path="/register" component={RegisterPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/logout" component={LogoutPage} />
-      
-      <Route path="/mypolls" component={PollsPage} />
-      <Route path="/new" component={NewPollPage} />     
-*/
+
+//<Route component={Footer} />

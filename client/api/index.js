@@ -1,25 +1,32 @@
 import axios from 'axios';
 import Auth from '../modules/Auth';
 
+const HTTP = axios.create({
+  baseURL: `https://spotless-needle.glitch.me/api/`,
+  headers: {
+    Authorization: `Bearer ${Auth.getToken()}`
+  }
+})
+
 export default {
   listPolls() {
-    return axios.get('api/polls', { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+    return HTTP.get('polls');
   },
 
   createPoll(data) {
-    return axios.post('api/polls', data, { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+    return HTTP.post('polls', data);
   },
 
   deletePoll(pollId) {
-    return axios.delete(`api/polls/${pollId}`, { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+    return HTTP.delete(`polls/${pollId}`);
   },
   
   loadPoll(pollId) {
-    return axios.get(`api/polls/${pollId}`, { headers: {'Authorization': `bearer ${Auth.getToken()}`} });
+    return HTTP.get(`polls/${pollId}`);
   },
   
   updatePoll(pollId, data) {
-    return axios.put(`api/polls/${pollId}`, data, { headers: {'Authorization': `bearer ${Auth.getToken()}`,
-                                                  'Content-Type': "text/plain"}});
+    console.log(data);
+    return HTTP.put(`polls/${pollId}`, data);
   }
 }

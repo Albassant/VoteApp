@@ -7,16 +7,14 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
+
 const styles = {
   container: {
-    
-    backgroundColor: '#3f51b5',
-    color: 'rgb(255, 255, 255)',
-    
-    minHeight: '87vh',
-    maxHeight: '87vh',
-    
+    flex: '0 0 auto',
     display: 'flex',
+    backgroundColor: '#3f51b5',
+    color: '#fff',
+    minHeight: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
     
@@ -33,6 +31,7 @@ class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+      
       <div className={classes.container}>
         <div>
           <Typography variant='display2' color='inherit'>
@@ -49,12 +48,13 @@ class HomePage extends React.Component {
           }
           { Auth.isUserAuthenticated() &&
             <CardActions className={classes.actions}>
-              <Button variant='raised' onClick={() => this.props.history.push('/mypolls')}>My Polls</Button>
+              <Button variant='raised' onClick={() => this.props.history.push('/polls')}>My Polls</Button>
               <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/new')}>New Poll</Button>  
             </CardActions> 
           }
         </div>
       </div>
+      
     );
   }
   

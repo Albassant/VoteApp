@@ -35,6 +35,7 @@ module.exports = (req, res, next) => {
         id: userId
       };
       
+      console.log('authorisation successful');
       return next();
     });
   });

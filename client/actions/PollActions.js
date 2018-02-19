@@ -25,9 +25,11 @@ const PollActions = {
       );
   },
   
-  loadPoll(pollId) {
+  getPoll(pollId) {
     return API.loadPoll(pollId)
-      .then(() => console.log('voted'))
+      .then(({ data }) => {
+        console.log('received poll data');
+      })
       .catch(err =>
           console.error(err)
         );
@@ -44,6 +46,7 @@ const PollActions = {
   },
   
   updatePoll(pollId, optionIdx) {
+    console.log("pollId: " + pollId + " optionIdx: " + optionIdx);
     return API.updatePoll(pollId, optionIdx)
       .then(({ data }) => {
         this.loadPolls();
