@@ -5,7 +5,7 @@ const db = require('../utils/databaseUtils.js');
 
 router.get('/polls', (req, res) => {
   db.listPolls(req.user.id)
-    .then(data => res.send(data))
+    .then(data => res.status(200).send(data))
     .catch(err => {
       console.error(err);
       res.end();
@@ -13,8 +13,9 @@ router.get('/polls', (req, res) => {
 });
 
 router.get('/polls/:id', (req, res) => {
-  db.listPolls(req.params.id)
-    .then(data => res.send(data))
+  console.log('hello');
+  db.findPoll(req.params.id)
+    .then(data => res.status(200).send(data))
     .catch(err => {
       console.error(err);
       res.end();
@@ -22,14 +23,17 @@ router.get('/polls/:id', (req, res) => {
 });
 
 router.put('/polls/:id', (req, res) => {
-  console.log('hello');
-//   var pollId = req.params.id;
-//   var option = req.body;
-//   var user = req.user;
+  var pollId = req.params.id;
+  var index = req.body.index;
+  var userId = req.user.id;
   
-//   console.log(option);
-//   res.end();
-  
+  console.log(index);
+  db.findAndUpdatePoll(pollId, index, userId)
+    .then(data => res.status(200).send(data))
+    .catch(err => {
+      console.error(err);
+      res.end();
+    });
 });
 
 router.post('/polls', (req, res) => {
@@ -51,10 +55,8 @@ router.post('/polls', (req, res) => {
 });
 
 router.delete('/polls/:id', (req, res) => {
-  console.log('delete ' + req.params.id);
-  
   db.deletePoll(req.params.id)
-    .then(data => res.send(data))
+    .then(data => res.status(200).send(data))
     .catch(err => {
       console.log(err);
       res.end();

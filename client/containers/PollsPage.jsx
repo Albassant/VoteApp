@@ -49,22 +49,26 @@ class PollsPage extends React.Component {
     PollStore.removeChangeListener(this._onChange);
   }
   
+  componentWillReceiveProps(props) {
+    this.setState(getStateFromFlux());
+  }
+  
   handlePollDelete(poll, event) {
     event.stopPropagation();
     PollActions.deletePoll(poll._id);
   }
   
   handlePollClick(poll, event) {
-    // TODO load selected poll form or visuals
-    this.props.history.push(`/vote/${poll._id}`);
+    this.props.history.push(`/polls/${poll._id}`);
     console.log("handlePollClick " + poll.name);
   }
   
   handleAddNewPoll() {
-    this.props.history.push('/new');
+    this.props.history.push('/polls/new');
   }
 
   render() {
+    console.log(this.state.polls);
     return (
       <PollsList 
         polls={this.state.polls} 

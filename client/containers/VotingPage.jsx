@@ -22,23 +22,28 @@ class VotingPage extends React.Component {
 
   componentWillMount() {
     const { match: { params } } = this.props;
-    
-    //FIXME check if it's not loading at the moment
-    const polls = PollStore.getPolls();
-    let poll = polls.find(poll => poll._id === params.id);
+    let poll = PollStore.getPoll(params.id);
     if (poll) {
       this.setState({ poll });
     }
     else {
-      // API request for specified poll
+      
+      // create store for response data
+      
+      // check if user has already voted (server-side)
+      // and show either voting form or statistics
+      // TODO: poll owner can access statistics any time
     }
   }
-  
   
   processForm(event) {
     event.preventDefault();
     console.log('processForm');
+    
     PollActions.updatePoll(this.state.poll._id, { index: this.state.option });
+    
+    // TODO: show voting statistics instead
+    this.props.history.replace('/polls');
   }
   
   changeOption(event) {
