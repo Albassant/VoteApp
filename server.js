@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
+require('dotenv').config();
 //connect to db
 const db = require('./server/config/db.js');
 db.setupConnection();
