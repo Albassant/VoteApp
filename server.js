@@ -6,6 +6,7 @@ const passport = require('passport');
 
 //connect to db
 const db = require('./server/config/db.js');
+db.setupConnection();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +25,8 @@ app.use('/api', require('./server/middleware/auth-check'));
 // routes
 app.use('/auth', require('./server/routes/auth'));
 app.use('/api', require('./server/routes/api'));
+
+app.use('/', (req, res) => { res.redirect('/') });
 
 
 const listener = app.listen(process.env.PORT, function () {

@@ -1,67 +1,99 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardText, CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
-import { withRouter } from 'react-router-dom';
+//import styles from '../styles';
 
-const RegisterForm = ({onSubmit, onChange, errors, user, router}) => (
-  <MuiThemeProvider>
-    <Card className = "container">
-      <form action = "/" onSubmit = {onSubmit}>
-        <h2 className = "card-heading">Register</h2>
+const styles = {
+  container: {
+    width: '400px',
+    margin: '0 auto',
+    textAlign: 'center',
+  },
+  actions: {
+    justifyContent: 'center',
+  },
+  field: {
+    margin: '20px 40px'
+  },
+  title: {
+    marginTop: '20px',
+    paddingTop: '20px'
+  }
+}
 
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
 
-        <div className="field-line">
+function RegisterForm(props) {
+  const { classes, errors, onChange, onSubmit, user } = props;
+  return (
+    <Card className={classes.container}>
+      <Typography variant='title' className={classes.title}>
+        Register
+      </Typography>
+      <form action="/" onSubmit={onSubmit}>
+
+        {errors.summary && <p>{errors.summary}</p>}
+
+        <div className={classes.field}>
+           <TextField
+             label="Name"
+             name="name"
+             onChange={onChange}
+             error={!!errors.name}
+             value={user.name}
+             fullWidth
+             autoFocus={true}
+           />
+        </div>
+               
+        <div className={classes.field}>
           <TextField
-            floatingLabelText="Name"
-            name="name"
-            errorText = {errors.name}
-            onChange = {onChange}
-            value = {user.name}
+            label="Email"
+            name="email"
+            onChange={onChange}
+            error={!!errors.email}
+            value={user.email}
+            fullWidth
           />
         </div>
 
-        <div className="field-line">
+        <div className={classes.field}>
           <TextField
-            floatingLabelText = "Email"
-            name = "email"
-            errorText = {errors.email}
-            onChange = {onChange}
-            value = {user.email}
+            label="Password"
+            type="password"
+            name="password"
+            onChange={onChange}
+            error={!!errors.password}
+            value={user.password}
+            fullWidth
           />
         </div>
 
-        <div className="field-line">
-          <TextField
-            floatingLabelText = "Password"
-            type = "password"
-            name = "password"
-            onChange = {onChange}
-            errorText = {errors.password}
-            value = {user.password}
-          />
-        </div>
+        <CardActions className={classes.actions}>
+          <Button variant='raised' type="submit" color='primary'>Register</Button>
+        </CardActions>
 
-        <div className="button-line">
-          <RaisedButton type = "submit" label = "Create New Account" primary />
-        </div>
-
-        <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
+         <CardContent>
+          <Typography component="p">
+            Already have an account? <Link to={'/login'}>Log in</Link>
+          </Typography>
+        </CardContent>
       </form>
     </Card>
-  </MuiThemeProvider>
-);
+  )
+};
 
 RegisterForm.propTypes = {
+  classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
 
-export default RegisterForm;
+export default withStyles(styles)(RegisterForm);

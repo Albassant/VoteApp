@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
     
     axios.post('/auth/login', formData)
     .then(response => {
-      this.setState({ errors: {} });      
+      //this.setState({ errors: {} });      
       Auth.authenticateUser(response.data.token); // save the token
       this.props.history.replace('/'); // change the current URL to /
     })
@@ -61,9 +61,7 @@ class LoginPage extends React.Component {
     const user = this.state.user;
     user[field] = event.target.value;
 
-    this.setState({
-      user
-    });
+    this.setState({ user });
   }
 
   render() {

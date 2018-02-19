@@ -1,12 +1,7 @@
-WORK IN PROGRESS
+Work in Progress
+
 
 Voting Application
 -------------------
 
 \ ゜o゜)ノ
-=======
-
-freecodecamp project
-
-
-

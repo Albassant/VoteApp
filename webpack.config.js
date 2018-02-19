@@ -8,7 +8,7 @@ module.exports = {
   context: path.join(__dirname, './'),
   
   entry: {
-    main: "./client/main.jsx"
+    main: "./client/App.jsx"
   },
   output: {
     path: path.join(__dirname, 'public/build'),
@@ -32,8 +32,6 @@ module.exports = {
                 loader: "style-loader" // creates style nodes from JS strings 
             }, {
                 loader: "css-loader" // translates CSS into CommonJS 
-            }, {
-                loader: "less-loader" // compiles Less to CSS 
             }]
       },
       {
@@ -42,7 +40,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'stage-1', 'stage-2']
+            presets: ['env', 'react', 'stage-3']
           }
         }
       },
@@ -52,7 +50,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'stage-1', 'stage-2']
+            presets: ['env', 'react', 'stage-3']
           }
         }
       }

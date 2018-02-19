@@ -1,63 +1,89 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardText, CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
+//import styles from '../styles';
 
-const LoginForm = ({
-  onSubmit,
-  onChange,
-  errors,
-  successMessage,
-  user
-}) => (
-  <MuiThemeProvider>
-    <Card className="container">
+const styles = {
+  container: {
+    width: '400px',
+    margin: '0 auto',
+    textAlign: 'center',
+  },
+  actions: {
+    justifyContent: 'center',
+  },
+  field: {
+    margin: '20px 40px'
+  },
+  title: {
+    marginTop: '20px',
+    paddingTop: '20px'
+  }
+}
+
+function LoginForm(props) {
+  const { classes, successMessage, errors, onChange, onSubmit, user } = props;
+  return (
+    <Card className={classes.container}>
+      <Typography variant='title' className={classes.title}>
+        Log in
+      </Typography>
+      
       <form action="/" onSubmit={onSubmit}>
-        <h2 className="card-heading">Login</h2>
 
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
+        {successMessage && <p>{successMessage}</p>}
+        {errors.summary && <p>{errors.summary}</p>}
 
-        <div className="field-line">
+        <div className={classes.field}>
           <TextField
-            floatingLabelText="Email"
+            label="Email"
             name="email"
-            errorText={errors.email}
             onChange={onChange}
+            error={!!errors.email}
             value={user.email}
+            fullWidth
+            autoFocus={true}
           />
         </div>
 
-        <div className="field-line">
+        <div className={classes.field}>
           <TextField
-            floatingLabelText="Password"
+            label="Password"
             type="password"
             name="password"
             onChange={onChange}
-            errorText={errors.password}
+            error={!!errors.password}
             value={user.password}
+            fullWidth
           />
         </div>
 
-        <div className="button-line">
-          <RaisedButton type="submit" label="Log in" primary />
-        </div>
+        <CardActions className={classes.actions}>
+          <Button variant='raised' type="submit" color='primary'>Log in</Button>
+        </CardActions>
 
-        <CardText>Not registered yet? <Link to={'/register'}>Sign up</Link></CardText>
+         <CardContent>
+          <Typography component="p">
+            Not registered yet? <Link to={'/register'}>Register</Link>
+          </Typography>
+        </CardContent>
       </form>
     </Card>
-  </MuiThemeProvider>
-);
+  )
+};
 
 LoginForm.propTypes = {
+  classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
 
-export default LoginForm;
+export default withStyles(styles)(LoginForm);

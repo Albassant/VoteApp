@@ -1,63 +1,120 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import { withStyles } from 'material-ui/styles';
+import Card, { CardText, CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import Icon from 'material-ui/Icon';
 
+const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
-const PollForm = ({
-  onSubmit,
-  onChange,
-  errors,
-  successMessage,
-  user
-}) => (
-  <MuiThemeProvider>
-    <Card className="container">
-      <form action="/" onSubmit={onSubmit}>
-        <h2 className="card-heading">Login</h2>
+const styles = {
+  container: {
+    width: '40%',
+    minWidth: '350px',
+    margin: '10px auto',
+    textAlign: 'center',
+  },
+  actions: {
+    justifyContent: 'center',
+  },
+  field: {
+    margin: '20px auto',
+    position: 'relative', 
+    display: 'inline-block',
+    width: '80%'
+  },
+  icons: {
+    position: 'absolute', 
+    right: '10px', 
+    top: '10px', 
+    cursor: 'pointer'
+  },
+  title: {
+    margin: '20px 0',
+    paddingTop: '20px'
+  }
+}
 
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
+function PollForm(props) {
+  const { classes, 
+          onSubmit,
+          onChangeName,
+          onChangeOptions,
+          onAddOption,
+          onRemoveOption,
+          poll,
+          valid,
+          errorMessage } = props;
+  return (
+    <Card className={classes.container}>
+      <Typography variant='title' className={classes.title}>
+        New Poll
+      </Typography>
+      
+      <form action="/polls" onSubmit={onSubmit}>
 
-        <div className="field-line">
+        {errorMessage.length > 0 && <p>{errorMessage}</p>}
+
+        <Typography variant="subheading">Name your poll</Typography>
+        <div className={classes.field}>
           <TextField
-            floatingLabelText="Email"
-            name="email"
-            errorText={errors.email}
-            onChange={onChange}
-            value={user.email}
+            name="name"
+            label={hints[0]}
+            onChange={onChangeName}
+            value={poll.name}
+            fullWidth
+            multiline
+            autoFocus={true}
           />
         </div>
+        
+        <Typography variant="subheading">Options</Typography>
+        {
+          poll.options.map((opt, i) => 
+             <div key={i} className={classes.field}>
+              <TextField
+                name={`${i}`}
+                onChange={onChangeOptions}
+                label={i < 3 && hints[i+1] || 'Your Option'}
+                value={opt}
+                fullWidth
+                multiline
+              />
+              { 
+                i > 1 && 
+                <Icon color="secondary" className={classes.icons} onClick={onRemoveOption}>remove_circle_outline</Icon>
+              }
+            </div>
+          )
+        }
 
-        <div className="field-line">
-          <TextField
-            floatingLabelText="Password"
-            type="password"
-            name="password"
-            onChange={onChange}
-            errorText={errors.password}
-            value={user.password}
-          />
-        </div>
-
-        <div className="button-line">
-          <RaisedButton type="submit" label="Log in" primary />
-        </div>
-
-        <CardText>Not registered yet? <Link to={'/register'}>Sign up</Link></CardText>
+        <CardActions className={classes.actions}>
+          <Button variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
+          <Button variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
+        </CardActions>
+        
+        <CardContent>
+          <Typography component="p">
+            <Link to={'/mypolls'}>Back to polls</Link>
+          </Typography>
+        </CardContent>
       </form>
     </Card>
-  </MuiThemeProvider>
-);
+  )
+};
 
 PollForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  onChangeName: PropTypes.func.isRequired,
+  onChangeOptions: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  poll: PropTypes.object.isRequired,
+  valid: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default PollForm;
+export default withStyles(styles)(PollForm);
+
