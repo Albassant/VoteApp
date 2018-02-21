@@ -29,11 +29,11 @@ ReactDOM.render((
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
 
-        <Route exact path="/polls" component={PollsPage} />
-        <Route exact path="/polls/new" component={NewPollPage} />
-
-        <Route exact path="/polls/:id" component={VotingPage} />
-
+      <Switch>
+        <Route path="/polls/new" component={NewPollPage} />
+        <Route path="/polls/:id" component={VotingPage} />
+        <Route path="/polls" component={PollsPage} />
+      </Switch>
       </div>
     </Router>
 
