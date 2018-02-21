@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
@@ -16,9 +17,9 @@ const styles = {
     textAlign: 'center',
   },
   icons: {
-    position: 'absolute', 
-    right: '10px', 
-    top: '10px', 
+    position: 'absolute',
+    right: '10px',
+    top: '10px',
     cursor: 'pointer'
   },
   title: {
@@ -27,37 +28,40 @@ const styles = {
   },
   actions: {
     justifyContent: 'center',
+  },
+  link: {
+    textDecoration: 'none'
+  },
+  white: {
+    color: '#fff'
   }
 }
 
 function PollsList (props) {
   const { polls,
           onDelete,
-          onClick,
-          onCreateNew,
-          successMessage,
           classes
         } = props;
   return (
     <Card className={classes.container}>
       <Typography variant='title' className={classes.title}>My Polls</Typography>
         <List className="list">
-        { 
-          polls.map((poll, key) => 
-            <ListItem 
-              key={key} 
-              button
-              onClick={(event) => onClick(poll, event)}>
-              <ListItemText primary={poll.name} secondary={poll.createdAt} />
-              <ListItemSecondaryAction>
-                <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
-              </ListItemSecondaryAction>
-            </ListItem>)
+        {
+          polls.map((poll, key) =>
+            <Link key={key} to={`/polls/${poll._id}`} className={classes.link}>
+              <ListItem button>
+                <ListItemText primary={poll.name} secondary={poll.createdAt} />
+                <ListItemSecondaryAction>
+                  <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </Link>
+          )
         }
       </List>
       <CardActions className={classes.actions}>
-        <Button variant='raised' color="secondary" onClick={() => onCreateNew()}>Create New</Button>  
-      </CardActions> 
+        <Button variant='raised' color='secondary'><Link to={'/polls/new'} className={`${classes.link} ${classes.white}`}>Create New</Link></Button>
+      </CardActions>
     </Card>
   )
 };
@@ -65,9 +69,7 @@ function PollsList (props) {
 PollsList.propTypes = {
   classes: PropTypes.object.isRequired,
   polls: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onCreateNew: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(PollsList);

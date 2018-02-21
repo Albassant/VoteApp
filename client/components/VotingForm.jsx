@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
@@ -31,7 +32,7 @@ const styles = {
 }
 
 function VotingForm(props) {
-  const { classes, 
+  const { classes,
           onSubmit,
           onChange,
           poll,
@@ -42,7 +43,7 @@ function VotingForm(props) {
       <Typography variant='title' className={classes.title}>
         {poll.name}
       </Typography>
-      
+
       <form onSubmit={onSubmit}>
 
         <FormControl component="fieldset">
@@ -52,20 +53,20 @@ function VotingForm(props) {
             value={optionIdx}
             onChange={onChange}
           >
-            {
-            poll.questions.map((option, key) => 
-              <FormControlLabel 
-              key={key} 
+            { poll.questions ?
+            poll.questions.map((option, key) =>
+              <FormControlLabel
+              key={key}
               value={`${key}`} control={<Radio />} label={option.question} />
-             ) 
+             ) : null
             }
           </RadioGroup>
         </FormControl>
-        
+
         <CardActions className={classes.actions}>
           <Button variant='raised' type="submit" color='primary'>Submit</Button>
         </CardActions>
-        
+
         <CardContent>
           <Typography component="p">
             <Link to={'/polls'}>Back to polls</Link>

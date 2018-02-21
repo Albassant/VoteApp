@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 
 import { withStyles } from 'material-ui/styles';
@@ -11,7 +12,7 @@ import Button from 'material-ui/Button';
 import cyan from 'material-ui/colors/cyan';
 
 const styles = {
-  
+
 };
 
 class Footer extends React.Component {

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
@@ -22,14 +23,14 @@ const styles = {
   },
   field: {
     margin: '20px auto',
-    position: 'relative', 
+    position: 'relative',
     display: 'inline-block',
     width: '80%'
   },
   icons: {
-    position: 'absolute', 
-    right: '10px', 
-    top: '10px', 
+    position: 'absolute',
+    right: '10px',
+    top: '10px',
     cursor: 'pointer'
   },
   title: {
@@ -39,7 +40,7 @@ const styles = {
 }
 
 function PollForm(props) {
-  const { classes, 
+  const { classes,
           onSubmit,
           onChangeName,
           onChangeOptions,
@@ -53,7 +54,7 @@ function PollForm(props) {
       <Typography variant='title' className={classes.title}>
         New Poll
       </Typography>
-      
+
       <form action="/polls" onSubmit={onSubmit}>
 
         {errorMessage.length > 0 && <p>{errorMessage}</p>}
@@ -70,10 +71,10 @@ function PollForm(props) {
             autoFocus={true}
           />
         </div>
-        
+
         <Typography variant="subheading">Options</Typography>
         {
-          poll.options.map((opt, i) => 
+          poll.options.map((opt, i) =>
              <div key={i} className={classes.field}>
               <TextField
                 name={`${i}`}
@@ -83,8 +84,8 @@ function PollForm(props) {
                 fullWidth
                 multiline
               />
-              { 
-                i > 1 && 
+              {
+                i > 1 &&
                 <Icon color="secondary" className={classes.icons} onClick={onRemoveOption}>remove_circle_outline</Icon>
               }
             </div>
@@ -95,10 +96,10 @@ function PollForm(props) {
           <Button variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
           <Button variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
         </CardActions>
-        
+
         <CardContent>
           <Typography component="p">
-            <Link to={'/mypolls'}>Back to polls</Link>
+            <Link to={'/polls'}>Back to polls</Link>
           </Typography>
         </CardContent>
       </form>

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 
 import { withStyles } from 'material-ui/styles';
@@ -17,7 +18,7 @@ const styles = {
     minHeight: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
-    
+
     textAlign: 'center'
   },
   actions: {
@@ -27,11 +28,11 @@ const styles = {
 };
 
 class HomePage extends React.Component {
-  
+
   render() {
     const { classes } = this.props;
     return (
-      
+
       <div className={classes.container}>
         <div>
           <Typography variant='display2' color='inherit'>
@@ -40,24 +41,24 @@ class HomePage extends React.Component {
           <Typography variant='headline' color='inherit'>
             Create poll voting contests and view the results in real time
           </Typography>
-          { !Auth.isUserAuthenticated() && 
+          { !Auth.isUserAuthenticated() &&
             <CardActions className={classes.actions}>
                 <Button variant='raised' onClick={() => this.props.history.push('/login')}>Log in</Button>
-                <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/register')}>Register</Button>  
-            </CardActions> 
+                <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/register')}>Register</Button>
+            </CardActions>
           }
           { Auth.isUserAuthenticated() &&
             <CardActions className={classes.actions}>
               <Button variant='raised' onClick={() => this.props.history.push('/polls')}>My Polls</Button>
-              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/new')}>New Poll</Button>  
-            </CardActions> 
+              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/new')}>New Poll</Button>
+            </CardActions>
           }
         </div>
       </div>
-      
+
     );
   }
-  
+
 }
 
 HomePage.propTypes = {

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
 import axios from 'axios';
 import Auth from '../modules/Auth';
@@ -11,7 +11,7 @@ class LoginPage extends React.Component {
 
     let successMessage = localStorage.getItem('successMessage') || '';
     localStorage.removeItem('successMessage');
-    
+
     // set the initial component state
     this.state = {
       errors: {},
@@ -33,14 +33,14 @@ class LoginPage extends React.Component {
    */
   processForm(event) {
     event.preventDefault();
-    
+
     var formData = querystring.stringify({ // create a string for an HTTP body message
                 "email": this.state.user.email,
                 "password": this.state.user.password });
-    
+
     axios.post('/auth/login', formData)
     .then(response => {
-      //this.setState({ errors: {} });      
+      //this.setState({ errors: {} });
       Auth.authenticateUser(response.data.token); // save the token
       this.props.history.replace('/'); // change the current URL to /
     })

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import RegisterForm from '../components/RegisterForm.jsx';
 import axios from 'axios';
 import querystring from 'querystring';
@@ -48,12 +48,12 @@ class RegisterPage extends React.Component {
     event.preventDefault();
 
     // create a string for an HTTP body message
-    var formData = querystring.stringify({ 
+    var formData = querystring.stringify({
                 "name": this.state.user.name,
                 "email": this.state.user.email,
                 "password": this.state.user.password
               });
-    
+
     console.log(formData);
     axios.post('/auth/register', formData)
     .then(response => {

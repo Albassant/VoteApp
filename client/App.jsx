@@ -18,28 +18,28 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from './styles';
 
 ReactDOM.render((
-  
+
     <Router>
       <div className="root">
         <Route component={Header} />
 
-        <Route exact path="/" component={HomePage}/> 
-        
+        <Route exact path="/" component={HomePage}/>
+
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
-        
+
         <Route exact path="/polls" component={PollsPage} />
         <Route exact path="/polls/new" component={NewPollPage} />
-        
-        <Route path="/polls/:id" component={VotingPage} />
-        
-        
+
+        <Route exact path="/polls/:id" component={VotingPage} />
+
       </div>
     </Router>
-  
-  ), 
+
+  ),
   document.getElementById('root')
 );
 
 //<Route component={Footer} />
+//

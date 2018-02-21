@@ -4,52 +4,62 @@ import ActionTypes from '../constants';
 import API from '../api';
 
 const PollActions = {
-  
+
   loadPolls() {
     AppDispatcher.dispatch({
-      type: ActionTypes.LOAD_POLLS_REQUEST
+      type: ActionTypes.RECEIVE_POLLS_REQUEST
     });
 
-    API.listPolls()
+    API.receivePolls()
       .then(({ data }) =>
         AppDispatcher.dispatch({
-          type: ActionTypes.LOAD_POLLS_SUCCESS,
+          type: ActionTypes.RECEIVE_POLLS_SUCCESS,
           polls: data
         })
       )
       .catch(err =>
         AppDispatcher.dispatch({
-          type: ActionTypes.LOAD_POLLS_FAIL,
+          type: ActionTypes.RECEIVE_POLLS_FAIL,
           error: err
         })
       );
   },
-  
+
   getPoll(pollId) {
-    return API.loadPoll(pollId)
-      .then(({ data }) => {
-        console.log('received poll data');
-      })
+    AppDispatcher.dispatch({
+      type: ActionTypes.GET_POLL_REQUEST
+    });
+
+    API.getPoll(pollId)
+      .then(({ data }) =>
+        AppDispatcher.dispatch({
+          type: ActionTypes.GET_POLL_SUCCESS,
+          poll: data
+        })
+      )
       .catch(err =>
-          console.error(err)
-        );
+        AppDispatcher.dispatch({
+          type: ActionTypes.GET_POLL_FAIL,
+          error: err
+        })
+      );
   },
 
   createPoll(poll) {
     return API.createPoll(poll)
       .then(({ data }) => {
-        this.loadPolls();
+        this.receivePolls();
       })
       .catch(err =>
         console.error(err)
       );
   },
-  
+
   updatePoll(pollId, optionIdx) {
     console.log("pollId: " + pollId + " optionIdx: " + optionIdx);
     return API.updatePoll(pollId, optionIdx)
       .then(({ data }) => {
-        this.loadPolls();
+        this.receivePolls();
       })
       .catch(err =>
         console.error(err)
@@ -59,7 +69,7 @@ const PollActions = {
   deletePoll(pollId) {
     API.deletePoll(pollId)
       .then(() =>
-        this.loadPolls()
+        this.receivePolls()
       )
       .catch(err =>
         console.error(err)

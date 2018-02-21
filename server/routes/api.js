@@ -4,6 +4,9 @@ const validator = require('validator');
 const db = require('../utils/databaseUtils.js');
 
 router.get('/polls', (req, res) => {
+
+  console.log('user', req.user);
+
   db.listPolls(req.user.id)
     .then(data => res.status(200).send(data))
     .catch(err => {
@@ -26,7 +29,7 @@ router.put('/polls/:id', (req, res) => {
   var pollId = req.params.id;
   var index = req.body.index;
   var userId = req.user.id;
-  
+
   console.log(index);
   db.findAndUpdatePoll(pollId, index, userId)
     .then(data => res.status(200).send(data))
@@ -42,7 +45,7 @@ router.post('/polls', (req, res) => {
       res.status(200).json({
         success: true,
         message: 'Congratulations! Your poll has been saved successfully. Here\'s a link to your poll',
-        url: `https://trite-engineer.glitch.me/${data.id}`
+        url: `https://voteapp-albassant.c9users.io/${data.id}`
       });
     })
     .catch(err => {

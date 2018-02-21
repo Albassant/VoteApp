@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
@@ -34,7 +35,7 @@ function LoginForm(props) {
       <Typography variant='title' className={classes.title}>
         Log in
       </Typography>
-      
+
       <form action="/" onSubmit={onSubmit}>
 
         {successMessage && <p>{successMessage}</p>}
