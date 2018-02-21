@@ -10,10 +10,12 @@ import Typography from 'material-ui/Typography';
 
 const styles = {
   container: {
-    width: '40%',
+    width: '50%',
     minWidth: '350px',
     margin: '10px auto',
     textAlign: 'center',
+    paddingLeft: '40px',
+    paddingRight: '40px'
   },
   actions: {
     justifyContent: 'center',

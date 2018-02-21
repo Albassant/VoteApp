@@ -12,7 +12,8 @@ import TextField from 'material-ui/TextField';
 
 const styles = {
   container: {
-    width: '400px',
+    width: '25%',
+    minWidth: '350px',
     margin: '0 auto',
     textAlign: 'center',
   },

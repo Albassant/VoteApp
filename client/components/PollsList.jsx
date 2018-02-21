@@ -11,10 +11,12 @@ import Icon from 'material-ui/Icon';
 
 const styles = {
   container: {
-    width: '40%',
+    width: '50%',
     minWidth: '350px',
     margin: '0 auto',
     textAlign: 'center',
+    paddingLeft: '40px',
+    paddingRight: '40px'
   },
   icons: {
     position: 'absolute',

@@ -13,7 +13,7 @@ const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
 const styles = {
   container: {
-    width: '40%',
+    width: '50%',
     minWidth: '350px',
     margin: '10px auto',
     textAlign: 'center',
