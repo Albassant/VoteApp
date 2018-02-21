@@ -4,15 +4,14 @@ exports.listPolls = function(userId) {
   return Poll.find({ user: userId })
 }
 
-exports.findPoll = function(id) {
-  console.log(id);
-  return Poll.findById(id);
+exports.findPoll = function(pollId) {
+  return Poll.findById(pollId).select('_id name user questions votedusers createdAt');
 }
 
 exports.findAndUpdatePoll = function(id, index, user) {
   var inc = {};
   inc[ 'questions.' + index + ".rating" ] = 1;
-  return Poll.findByIdAndUpdate(id, { $inc: inc, $push: { votedusers: user} });  
+  return Poll.findByIdAndUpdate(id, { $inc: inc, $push: { votedusers: user} });
 }
 
 exports.createPoll = function(userId, data) {

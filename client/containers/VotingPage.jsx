@@ -42,9 +42,7 @@ class VotingPage extends React.Component {
     PollStore.addChangeListener(this._onChange);
     PollActions.getPoll(params.id);
 
-     // check if user has already voted (server-side)
-      // and show either voting form or statistics
-      // TODO: poll owner can access statistics any time
+    // TODO: poll owner can access chart any time
   }
 
   componentWillUnmount() {
@@ -53,12 +51,7 @@ class VotingPage extends React.Component {
 
   processForm(event) {
     event.preventDefault();
-    console.log('processForm');
-
     PollActions.updatePoll(this.state.poll._id, { index: this.state.option });
-
-    // TODO: show voting chart
-
   }
 
   changeOption(event) {
@@ -72,15 +65,21 @@ class VotingPage extends React.Component {
 
       return (
         this.state.poll ?
+          this.state.poll.voted ?
+          <PollChart
+            title={this.state.poll.name}
+            labels={this.state.poll.questions.map(q => q.question)}
+            data={this.state.poll.questions.map(q => q.rating)}
+          />
+          :
           <PollForm
             onSubmit={this.processForm}
             onChange={this.changeOption}
             optionIdx={this.state.option}
             poll={this.state.poll}
+            showChart={this.state.poll.owner}
           />
           : null
-
-
       )
   }
 }
@@ -88,9 +87,5 @@ class VotingPage extends React.Component {
 export default VotingPage;
 
 /*
-<PollChart
-          title={this.state.poll.name}
-          labels={this.state.poll.questions.map(q => q.question)}
-          data={this.state.poll.questions.map(q => q.rating)}
-        />
+
 */

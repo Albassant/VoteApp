@@ -36,7 +36,7 @@ function VotingForm(props) {
           onSubmit,
           onChange,
           poll,
-          optionIdx,
+          optionIdx
         } = props;
   return (
     <Card className={classes.container}>
@@ -80,7 +80,6 @@ function VotingForm(props) {
 VotingForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   poll: PropTypes.object.isRequired,
   optionIdx: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired

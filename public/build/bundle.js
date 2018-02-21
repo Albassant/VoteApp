@@ -18635,7 +18635,7 @@ var PollActions = {
     return _api2.default.createPoll(poll).then(function (_ref3) {
       var data = _ref3.data;
 
-      _this.receivePolls();
+      _this.loadPolls();
     }).catch(function (err) {
       return console.error(err);
     });
@@ -18647,7 +18647,7 @@ var PollActions = {
     return _api2.default.updatePoll(pollId, optionIdx).then(function (_ref4) {
       var data = _ref4.data;
 
-      _this2.receivePolls();
+      _this2.getPoll(pollId);
     }).catch(function (err) {
       return console.error(err);
     });
@@ -18656,7 +18656,7 @@ var PollActions = {
     var _this3 = this;
 
     _api2.default.deletePoll(pollId).then(function () {
-      return _this3.receivePolls();
+      return _this3.loadPolls();
     }).catch(function (err) {
       return console.error(err);
     });
@@ -70311,6 +70311,8 @@ var _Auth = __webpack_require__(46);
 
 var _Auth2 = _interopRequireDefault(_Auth);
 
+var _reactRouterDom = __webpack_require__(63);
+
 var _styles = __webpack_require__(42);
 
 var _Card = __webpack_require__(67);
@@ -70352,6 +70354,15 @@ var styles = {
   actions: {
     justifyContent: 'center',
     marginTop: 20
+  },
+  link: {
+    textDecoration: 'none'
+  },
+  white: {
+    color: '#fff'
+  },
+  black: {
+    color: 'rgba(0, 0, 0, 0.87)'
   }
 };
 
@@ -70367,8 +70378,6 @@ var HomePage = function (_React$Component) {
   _createClass(HomePage, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var classes = this.props.classes;
 
       return _react2.default.createElement(
@@ -70392,17 +70401,21 @@ var HomePage = function (_React$Component) {
             { className: classes.actions },
             _react2.default.createElement(
               _Button2.default,
-              { variant: 'raised', onClick: function onClick() {
-                  return _this2.props.history.push('/login');
-                } },
-              'Log in'
+              { variant: 'raised' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/login', className: classes.link + ' ' + classes.black },
+                'Log in'
+              )
             ),
             _react2.default.createElement(
               _Button2.default,
-              { variant: 'raised', color: 'secondary', onClick: function onClick() {
-                  return _this2.props.history.push('/register');
-                } },
-              'Register'
+              { variant: 'raised', color: 'secondary' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/register', className: classes.link + ' ' + classes.white },
+                'Register'
+              )
             )
           ),
           _Auth2.default.isUserAuthenticated() && _react2.default.createElement(
@@ -70410,17 +70423,21 @@ var HomePage = function (_React$Component) {
             { className: classes.actions },
             _react2.default.createElement(
               _Button2.default,
-              { variant: 'raised', onClick: function onClick() {
-                  return _this2.props.history.push('/polls');
-                } },
-              'My Polls'
+              { variant: 'raised' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/polls', className: classes.link + ' ' + classes.black },
+                'My Polls'
+              )
             ),
             _react2.default.createElement(
               _Button2.default,
-              { variant: 'raised', color: 'secondary', onClick: function onClick() {
-                  return _this2.props.history.push('/new');
-                } },
-              'New Poll'
+              { variant: 'raised', color: 'secondary' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/polls/new', className: classes.link + ' ' + classes.white },
+                'New Poll'
+              )
             )
           )
         )
@@ -72414,22 +72431,22 @@ function PollsList(props) {
       { className: 'list' },
       polls.map(function (poll, key) {
         return _react2.default.createElement(
-          _reactRouterDom.Link,
-          { key: key, to: '/polls/' + poll._id, className: classes.link },
+          _List.ListItem,
+          { button: true, key: key },
           _react2.default.createElement(
-            _List.ListItem,
-            { button: true },
-            _react2.default.createElement(_List.ListItemText, { primary: poll.name, secondary: poll.createdAt }),
+            _reactRouterDom.Link,
+            { to: '/polls/' + poll._id, className: classes.link },
+            _react2.default.createElement(_List.ListItemText, { primary: poll.name, secondary: poll.createdAt })
+          ),
+          _react2.default.createElement(
+            _List.ListItemSecondaryAction,
+            null,
             _react2.default.createElement(
-              _List.ListItemSecondaryAction,
-              null,
-              _react2.default.createElement(
-                _Icon2.default,
-                { color: 'secondary', className: classes.icons, onClick: function onClick(event) {
-                    return onDelete(poll, event);
-                  } },
-                'remove_circle_outline'
-              )
+              _Icon2.default,
+              { color: 'secondary', className: classes.icons, onClick: function onClick(event) {
+                  return onDelete(poll, event);
+                } },
+              'remove_circle_outline'
             )
           )
         );
@@ -73012,9 +73029,7 @@ var VotingPage = function (_React$Component) {
       _PollStore2.default.addChangeListener(this._onChange);
       _PollActions2.default.getPoll(params.id);
 
-      // check if user has already voted (server-side)
-      // and show either voting form or statistics
-      // TODO: poll owner can access statistics any time
+      // TODO: poll owner can access chart any time
     }
   }, {
     key: 'componentWillUnmount',
@@ -73025,12 +73040,7 @@ var VotingPage = function (_React$Component) {
     key: 'processForm',
     value: function processForm(event) {
       event.preventDefault();
-      console.log('processForm');
-
       _PollActions2.default.updatePoll(this.state.poll._id, { index: this.state.option });
-
-      // TODO: show voting statistics instead
-      //this.props.history.replace('/polls');
     }
   }, {
     key: 'changeOption',
@@ -73044,11 +73054,20 @@ var VotingPage = function (_React$Component) {
     value: function render() {
       console.log("render of voting page", this.state.poll);
 
-      return this.state.poll ? _react2.default.createElement(_VotingForm2.default, {
+      return this.state.poll ? this.state.poll.voted ? _react2.default.createElement(_VotingChart2.default, {
+        title: this.state.poll.name,
+        labels: this.state.poll.questions.map(function (q) {
+          return q.question;
+        }),
+        data: this.state.poll.questions.map(function (q) {
+          return q.rating;
+        })
+      }) : _react2.default.createElement(_VotingForm2.default, {
         onSubmit: this.processForm,
         onChange: this.changeOption,
         optionIdx: this.state.option,
-        poll: this.state.poll
+        poll: this.state.poll,
+        showChart: this.state.poll.owner
       }) : null;
     }
   }]);
@@ -73059,11 +73078,7 @@ var VotingPage = function (_React$Component) {
 exports.default = VotingPage;
 
 /*
-<PollChart
-          title={this.state.poll.name}
-          labels={this.state.poll.questions.map(q => q.question)}
-          data={this.state.poll.questions.map(q => q.rating)}
-        />
+
 */
 
 /***/ }),
@@ -73076,8 +73091,6 @@ exports.default = VotingPage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _VotingForm$propTypes;
 
 var _react = __webpack_require__(2);
 
@@ -73118,8 +73131,6 @@ var _Icon = __webpack_require__(180);
 var _Icon2 = _interopRequireDefault(_Icon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
@@ -73201,10 +73212,13 @@ function VotingForm(props) {
   );
 };
 
-VotingForm.propTypes = (_VotingForm$propTypes = {
+VotingForm.propTypes = {
   onSubmit: _propTypes2.default.func.isRequired,
-  onChange: _propTypes2.default.func.isRequired
-}, _defineProperty(_VotingForm$propTypes, 'onSubmit', _propTypes2.default.func.isRequired), _defineProperty(_VotingForm$propTypes, 'poll', _propTypes2.default.object.isRequired), _defineProperty(_VotingForm$propTypes, 'optionIdx', _propTypes2.default.string.isRequired), _defineProperty(_VotingForm$propTypes, 'classes', _propTypes2.default.object.isRequired), _VotingForm$propTypes);
+  onChange: _propTypes2.default.func.isRequired,
+  poll: _propTypes2.default.object.isRequired,
+  optionIdx: _propTypes2.default.string.isRequired,
+  classes: _propTypes2.default.object.isRequired
+};
 
 exports.default = (0, _styles.withStyles)(styles)(VotingForm);
 
@@ -74209,7 +74223,7 @@ exports.default = RadioGroup;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(2);
@@ -74222,68 +74236,116 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactChartjs = __webpack_require__(777);
 
+var _reactRouterDom = __webpack_require__(63);
+
+var _styles = __webpack_require__(42);
+
+var _Card = __webpack_require__(67);
+
+var _Card2 = _interopRequireDefault(_Card);
+
+var _Typography = __webpack_require__(30);
+
+var _Typography2 = _interopRequireDefault(_Typography);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var styles = {
+  container: {
+    width: '40%',
+    minWidth: '350px',
+    margin: '10px auto',
+    textAlign: 'center'
+  },
+  actions: {
+    justifyContent: 'center'
+  },
+  title: {
+    margin: '20px 0',
+    paddingTop: '20px'
+  }
+};
+
 function VotingChart(_ref) {
-    var title = _ref.title,
-        labels = _ref.labels,
-        data = _ref.data;
-    //labels, data
-    var chartData = {
-        labels: labels,
-        datasets: [{
-            label: 'hello',
-            data: data,
-            backgroundColor: ['#ffb300', '#ffd54f']
-        }]
-    };
+  var title = _ref.title,
+      labels = _ref.labels,
+      data = _ref.data,
+      classes = _ref.classes;
 
-    var options = {
-        title: {
-            display: true,
-            text: title,
-            fontSize: 24
-        },
-        legend: {
-            display: false
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    min: 0,
-                    callback: function callback(value, index, values) {
-                        if (Math.floor(value) === value) {
-                            return value;
-                        }
-                    }
-                }
-            }]
-        }
-    };
+  var chartData = {
+    labels: labels,
+    datasets: [{
+      label: 'hello',
+      data: data,
+      backgroundColor: ['#ffb300', '#ffd54f']
+    }]
+  };
 
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reactChartjs.Bar, _defineProperty({ data: chartData,
-            width: 50,
-            height: 25,
-            options: {
-                maintainAspectRatio: false
+  var options = {
+    title: {
+      display: true,
+      text: title,
+      fontSize: 24
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          callback: function callback(value, index, values) {
+            if (Math.floor(value) === value) {
+              return value;
             }
-        }, 'options', options))
-    );
+          }
+        }
+      }]
+    }
+
+    /*
+    <Typography variant='title' className={classes.title}>
+          {title}
+        </Typography>
+    */
+
+  };return _react2.default.createElement(
+    _Card2.default,
+    { className: classes.container },
+    _react2.default.createElement(_reactChartjs.Bar, _defineProperty({ data: chartData,
+      width: 50,
+      height: 25,
+      options: {
+        maintainAspectRatio: false
+      }
+    }, 'options', options)),
+    _react2.default.createElement(
+      _Card.CardContent,
+      null,
+      _react2.default.createElement(
+        _Typography2.default,
+        { component: 'p' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/polls' },
+          'Back to polls'
+        )
+      )
+    )
+  );
 }
 
 VotingChart.propTypes = {
-    title: _propTypes2.default.string.isRequired,
-    labels: _propTypes2.default.array.isRequired,
-    data: _propTypes2.default.array.isRequired
+  title: _propTypes2.default.string.isRequired,
+  labels: _propTypes2.default.array.isRequired,
+  data: _propTypes2.default.array.isRequired,
+  classes: _propTypes2.default.object.isRequired
 };
 
-exports.default = VotingChart;
+exports.default = (0, _styles.withStyles)(styles)(VotingChart);
 
 /***/ }),
 /* 777 */
