@@ -48,7 +48,7 @@ const PollActions = {
   createPoll(poll) {
     return API.createPoll(poll)
       .then(({ data }) => {
-        this.receivePolls();
+        this.loadPolls();
       })
       .catch(err =>
         console.error(err)
@@ -59,7 +59,7 @@ const PollActions = {
     console.log("pollId: " + pollId + " optionIdx: " + optionIdx);
     return API.updatePoll(pollId, optionIdx)
       .then(({ data }) => {
-        this.receivePolls();
+        this.getPoll(pollId);
       })
       .catch(err =>
         console.error(err)
@@ -69,7 +69,7 @@ const PollActions = {
   deletePoll(pollId) {
     API.deletePoll(pollId)
       .then(() =>
-        this.receivePolls()
+        this.loadPolls()
       )
       .catch(err =>
         console.error(err)

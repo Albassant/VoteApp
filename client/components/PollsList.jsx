@@ -48,14 +48,14 @@ function PollsList (props) {
         <List className="list">
         {
           polls.map((poll, key) =>
-            <Link key={key} to={`/polls/${poll._id}`} className={classes.link}>
-              <ListItem button>
+            <ListItem button key={key}>
+              <Link  to={`/polls/${poll._id}`} className={classes.link}>
                 <ListItemText primary={poll.name} secondary={poll.createdAt} />
-                <ListItemSecondaryAction>
-                  <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </Link>
+              </Link>
+              <ListItemSecondaryAction>
+                <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
+              </ListItemSecondaryAction>
+            </ListItem>
           )
         }
       </List>

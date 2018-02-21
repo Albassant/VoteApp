@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
 import Card, { CardHeader, CardActions } from 'material-ui/Card';
@@ -24,6 +25,15 @@ const styles = {
   actions: {
     justifyContent: 'center',
     marginTop: 20
+  },
+  link: {
+    textDecoration: 'none'
+  },
+  white: {
+    color: '#fff'
+  },
+  black: {
+    color: 'rgba(0, 0, 0, 0.87)'
   }
 };
 
@@ -43,14 +53,22 @@ class HomePage extends React.Component {
           </Typography>
           { !Auth.isUserAuthenticated() &&
             <CardActions className={classes.actions}>
-                <Button variant='raised' onClick={() => this.props.history.push('/login')}>Log in</Button>
-                <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/register')}>Register</Button>
+                <Button variant='raised'>
+                  <Link to={'/login'} className={`${classes.link} ${classes.black}`}>Log in</Link>
+                </Button>
+                <Button variant='raised' color="secondary">
+                  <Link to={'/register'} className={`${classes.link} ${classes.white}`}>Register</Link>
+                </Button>
             </CardActions>
           }
           { Auth.isUserAuthenticated() &&
             <CardActions className={classes.actions}>
-              <Button variant='raised' onClick={() => this.props.history.push('/polls')}>My Polls</Button>
-              <Button variant='raised' color="secondary" onClick={() => this.props.history.push('/new')}>New Poll</Button>
+              <Button variant='raised'>
+                <Link to={'/polls'} className={`${classes.link} ${classes.black}`}>My Polls</Link>
+              </Button>
+              <Button variant='raised' color="secondary">
+                <Link to={'/polls/new'} className={`${classes.link} ${classes.white}`}>New Poll</Link>
+              </Button>
             </CardActions>
           }
         </div>

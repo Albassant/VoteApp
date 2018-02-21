@@ -21,7 +21,7 @@ class VotingPage extends React.Component {
 
     this.state = {
       poll: getPollDataFromFlux(),
-      option: ''
+      option: '',
     }
     this._onChange = this._onChange.bind(this);
 
@@ -57,8 +57,8 @@ class VotingPage extends React.Component {
 
     PollActions.updatePoll(this.state.poll._id, { index: this.state.option });
 
-    // TODO: show voting statistics instead
-    //this.props.history.replace('/polls');
+    // TODO: show voting chart
+
   }
 
   changeOption(event) {
