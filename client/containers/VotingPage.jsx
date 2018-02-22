@@ -61,31 +61,25 @@ class VotingPage extends React.Component {
   }
 
   render() {
-    console.log("render of voting page", this.state.poll);
-
-      return (
-        this.state.poll ?
-          this.state.poll.voted ?
-          <PollChart
-            title={this.state.poll.name}
-            labels={this.state.poll.questions.map(q => q.question)}
-            data={this.state.poll.questions.map(q => q.rating)}
-          />
-          :
-          <PollForm
-            onSubmit={this.processForm}
-            onChange={this.changeOption}
-            optionIdx={this.state.option}
-            poll={this.state.poll}
-            showChart={this.state.poll.owner}
-          />
-          : null
-      )
+     return (
+      this.state.poll ?
+        this.state.poll.voted ?
+        <PollChart
+          title={this.state.poll.name}
+          labels={this.state.poll.questions.map(q => q.question)}
+          data={this.state.poll.questions.map(q => q.rating)}
+        />
+        :
+        <PollForm
+          onSubmit={this.processForm}
+          onChange={this.changeOption}
+          optionIdx={this.state.option}
+          poll={this.state.poll}
+          showChart={this.state.poll.owner}
+        />
+        : null
+    )
   }
 }
 
 export default VotingPage;
-
-/*
-
-*/

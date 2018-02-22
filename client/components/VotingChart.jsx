@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
@@ -30,9 +30,8 @@ function VotingChart ({ title, labels, data, classes }) {
   const chartData = {
     labels: labels,
     datasets: [{
-      label: 'hello',
-      data: data,
-      backgroundColor: ['#ffb300', '#ffd54f']
+      label: 'Votes',
+      data: data
     }]
   };
 
@@ -58,13 +57,28 @@ function VotingChart ({ title, labels, data, classes }) {
         }
       }]
     }
-  }
+  };
+
+  const plugins = [{
+      beforeDatasetsDraw  : function(chart) {
+        const labels = chart.data.labels;
+        const meta = chart.data.datasets[0]._meta;
+        const key = Object.keys(meta)[0];
+
+        labels.forEach(function(e, i) {
+          var bar = meta[key].data[i]._model;
+          bar.backgroundColor = i % 2 == 0 ? '#ffb300' : '#ffd54f';
+        });
+      }
+   }];
 
   /*
   <Typography variant='title' className={classes.title}>
         {title}
       </Typography>
   */
+
+  console.log('redraw chart');
 
   return (
     <Card className={classes.container}>
@@ -76,6 +90,8 @@ function VotingChart ({ title, labels, data, classes }) {
           maintainAspectRatio: false
         }}
         options={options}
+        plugins={plugins}
+        redraw={true}
       />
 
       <CardContent>
