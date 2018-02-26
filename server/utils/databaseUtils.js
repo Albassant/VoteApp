@@ -9,9 +9,20 @@ exports.findPoll = function(pollId) {
 }
 
 exports.findAndUpdatePoll = function(id, index, user) {
-  var inc = {};
+  const conditions = {
+    _id: id,
+    'votedusers': { $ne: user }
+  };
+
+  const inc = {};
   inc[ 'questions.' + index + ".rating" ] = 1;
-  return Poll.findByIdAndUpdate(id, { $inc: inc, $push: { votedusers: user} });
+
+  const update = {
+    $inc: inc,
+    $push: { votedusers: user }
+  };
+
+  return Poll.findOneAndUpdate(conditions, update);
 }
 
 exports.createPoll = function(userId, data) {
