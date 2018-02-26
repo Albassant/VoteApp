@@ -8,7 +8,7 @@ class LogoutPage extends React.Component {
     // clear token
     Auth.deauthenticateUser();
     // change the current URL to /
-    this.props.history.replace('/');
+    this.props.history.replace('/'); //FIXME!!! think about this scenario
   }
 
   render() {

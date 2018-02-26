@@ -41,10 +41,12 @@ class LoginPage extends React.Component {
     axios.post('/auth/login', formData)
     .then(response => {
       //this.setState({ errors: {} });
+      console.log('token', response.data.token);
       Auth.authenticateUser(response.data.token); // save the token
-      this.props.history.replace('/'); // change the current URL to /
+      this.props.history.replace('/'); // change the current URL to / //FIXME!!! redirect to proper place
     })
     .catch(error => {
+      console.log(error);
       const errors = error.response.data.errors || {};
       errors.summary = error.response.data.message;
       this.setState({ errors });

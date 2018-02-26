@@ -66,7 +66,7 @@ class RegisterPage extends React.Component {
       // set a message
       localStorage.setItem('successMessage', response.data.message);
       // make a redirect
-      this.props.history.replace('/login');
+      this.props.history.replace('/login'); // FIXME!!! think about this scenario
     })
     .catch(error => {
       if (error.response) {

@@ -3,6 +3,9 @@ import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
 
+import NewPollPage from './NewPollPage';
+import LoadingIndicator from '../components/LoadingIndicator.jsx';
+
 function getStateFromFlux() {
     return {
         isLoading: PollStore.isLoading(),
@@ -15,10 +18,11 @@ class PollsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = getStateFromFlux();
-    this._onChange = this._onChange.bind(this);
 
-    this.handleAddNewPoll = this.handleAddNewPoll.bind(this);
-    this.handlePollClick = this.handlePollClick.bind(this);
+    this.state.showNewPollDialog = false;
+
+    this._onChange = this._onChange.bind(this);
+    this.toggleNewPollDialog = this.toggleNewPollDialog.bind(this);
   }
 
   _onChange() {
@@ -46,24 +50,31 @@ class PollsPage extends React.Component {
     PollActions.deletePoll(poll._id);
   }
 
-  handlePollClick(poll, event) {
-    this.props.history.push(`/polls/${poll._id}`); // TODO: use Link from router-dom
-  }
-
-  handleAddNewPoll() {
-    this.props.history.push('/polls/new');
+  toggleNewPollDialog() {
+    const newState = !this.state.showNewPollDialog;
+    this.setState( { showNewPollDialog: newState  });
   }
 
   render() {
     return (
-      <PollsList
-        polls={this.state.polls}
-        onDelete={this.handlePollDelete}
-      />
+      this.state.isLoading ?
+        <LoadingIndicator /> :
+        <div>
+          <PollsList
+            polls={this.state.polls}
+            onDelete={this.handlePollDelete}
+            onNewPollClick={this.toggleNewPollDialog}
+          />
+          <NewPollPage show={this.state.showNewPollDialog} onClose={this.toggleNewPollDialog} />
+        </div>
     );
   }
 }
 
 export default PollsPage;
+
+/*
+
+*/
 
 

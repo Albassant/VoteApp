@@ -4,6 +4,7 @@ import axios from 'axios';
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 
+import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import PollForm from '../components/VotingForm.jsx';
 import PollChart from '../components/VotingChart.jsx';
 
@@ -41,8 +42,6 @@ class VotingPage extends React.Component {
     console.log(params);
     PollStore.addChangeListener(this._onChange);
     PollActions.getPoll(params.id);
-
-    // TODO: poll owner can access chart any time
   }
 
   componentWillUnmount() {
@@ -61,23 +60,29 @@ class VotingPage extends React.Component {
   }
 
   render() {
-     return (
-      this.state.poll ?
-        this.state.poll.voted ?
-        <PollChart
-          title={this.state.poll.name}
-          labels={this.state.poll.questions.map(q => q.question)}
-          data={this.state.poll.questions.map(q => q.rating)}
-        />
-        :
-        <PollForm
-          onSubmit={this.processForm}
-          onChange={this.changeOption}
-          optionIdx={this.state.option}
-          poll={this.state.poll}
-          showChart={this.state.poll.owner}
-        />
-        : null
+    if(!this.state.poll) return null;
+
+    return (
+      this.state.isLoading ?
+      <LoadingIndicator /> :
+      <div>
+        { !this.state.poll.voted &&
+            <PollForm
+              onSubmit={this.processForm}
+              onChange={this.changeOption}
+              optionIdx={this.state.option}
+              poll={this.state.poll}
+              showChart={this.state.poll.owner} // FIXME!!!!!!!!!!!!!!!!!!!
+            />
+        }
+        { (this.state.poll.voted || this.state.poll.owner) &&
+            <PollChart
+              title={this.state.poll.name}
+              labels={this.state.poll.questions.map(q => q.question)}
+              data={this.state.poll.questions.map(q => q.rating)}
+            />
+        }
+      </div>
     )
   }
 }

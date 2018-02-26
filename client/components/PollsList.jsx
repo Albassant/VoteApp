@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions } from 'material-ui/Card';
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemSecondaryAction, ListItemText, ListItemIcon } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
@@ -42,6 +43,7 @@ const styles = {
 function PollsList (props) {
   const { polls,
           onDelete,
+          onNewPollClick,
           classes
         } = props;
   return (
@@ -54,15 +56,17 @@ function PollsList (props) {
               <Link  to={`/polls/${poll._id}`} className={classes.link}>
                 <ListItemText primary={poll.name} secondary={poll.createdAt} />
               </Link>
+
               <ListItemSecondaryAction>
                 <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
               </ListItemSecondaryAction>
+
             </ListItem>
           )
         }
       </List>
       <CardActions className={classes.actions}>
-        <Button variant='raised' color='secondary'><Link to={'/polls/new'} className={`${classes.link} ${classes.white}`}>Create New</Link></Button>
+        <Button variant='raised' color='secondary' onClick={onNewPollClick}>Create New</Button>
       </CardActions>
     </Card>
   )

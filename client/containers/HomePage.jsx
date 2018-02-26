@@ -66,9 +66,6 @@ class HomePage extends React.Component {
               <Button variant='raised'>
                 <Link to={'/polls'} className={`${classes.link} ${classes.black}`}>My Polls</Link>
               </Button>
-              <Button variant='raised' color="secondary">
-                <Link to={'/polls/new'} className={`${classes.link} ${classes.white}`}>New Poll</Link>
-              </Button>
             </CardActions>
           }
         </div>

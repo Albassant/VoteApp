@@ -1,13 +1,11 @@
 import React from 'react';
-import Auth from '../modules/Auth';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import PollActions from '../actions/PollActions';
-import PollStore from '../stores/PollStore';
 
-import PollForm from '../components/PollForm.jsx';
+import PollFormDialog from '../components/PollFormDialog';
+
 
 class NewPollPage extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -33,7 +31,7 @@ class NewPollPage extends React.Component {
     console.log('processForm');
 
     PollActions.createPoll(this.state.poll);
-    this.props.history.replace('/polls');
+    this.props.onClose();
   }
 
   changePollName(event) {
@@ -60,7 +58,7 @@ class NewPollPage extends React.Component {
     }
 
     if (~poll.options.findIndex(option => option.length === 0)) {
-      return this.setState({valid: false});
+      return this.setState({ valid: false });
     }
 
     return this.setState({ valid: true });
@@ -79,17 +77,24 @@ class NewPollPage extends React.Component {
   }
 
   render() {
-    return (<PollForm
-              onSubmit={this.processForm}
-              onChangeName={this.changePollName}
-              onChangeOptions={this.changePollOptions}
-              onAddOption={this.addPollOption}
-              onRemoveOption={this.removePollOption}
-              errorMessage={this.state.message}
-              poll={this.state.poll}
-              valid={this.state.valid}
-            />)
+    return (
+      <PollFormDialog show={this.props.show}
+        onClose={this.props.onClose}
+        poll={this.state.poll}
+        onChangeName={this.changePollName}
+        onChangeOptions={this.changePollOptions}
+        onRemoveOption={this.removePollOption}
+        onAddOption={this.addPollOption}
+        valid={this.state.valid}
+        onSubmit={this.processForm}
+      />
+    )
   }
 }
+
+NewPollPage.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default NewPollPage;
