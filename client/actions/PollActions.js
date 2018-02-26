@@ -46,18 +46,24 @@ const PollActions = {
   },
 
   createPoll(poll) {
-    return API.createPoll(poll)
+    API.createPoll(poll)
       .then(({ data }) => {
         this.loadPolls();
+        AppDispatcher.dispatch({
+          type: ActionTypes.ADD_NEW_POLL_SUCCESS,
+          data: data
+        })
       })
       .catch(err =>
-        console.error(err)
+        AppDispatcher.dispatch({
+          type: ActionTypes.ADD_NEW_POLL_FAIL,
+          error: err
+        })
       );
   },
 
   updatePoll(pollId, optionIdx) {
-    console.log("pollId: " + pollId + " optionIdx: " + optionIdx);
-    return API.updatePoll(pollId, optionIdx)
+    API.updatePoll(pollId, optionIdx)
       .then(({ data }) => {
         this.getPoll(pollId);
       })

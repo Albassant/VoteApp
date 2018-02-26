@@ -6,7 +6,7 @@ const db = require('../utils/databaseUtils.js');
 router.get('/polls', (req, res) => {
   db.listPolls(req.user.id)
     .then(data => { res.status(200).send(data)
-      console.log('listPolls', data);
+     // console.log('listPolls', data);
     })
     .catch(err => {
       console.error(err);
@@ -15,7 +15,6 @@ router.get('/polls', (req, res) => {
 });
 
 router.get('/polls/:id', (req, res) => {
-  console.log('hello');
   const userId = req.user.id;
   db.findPoll(req.params.id, userId)
     .then(data => {
@@ -26,7 +25,7 @@ router.get('/polls/:id', (req, res) => {
       delete data.votedusers;
       delete data.user;
       //endoftodo
-      console.log('findPoll', data);
+     // console.log('findPoll', data);
       res.status(200).send(data)
     })
     .catch(err => {
@@ -42,8 +41,14 @@ router.put('/polls/:id', (req, res) => {
 
   console.log(index);
   db.findAndUpdatePoll(pollId, index, userId)
-    .then(data => {res.status(200).send(data)
-      console.log('findAndUpdatePoll', data);
+    .then(data => {
+      if (data === null) {
+        return res.status(400).json({
+          success: false,
+          message: 'User can vote only once.'
+        });
+      }
+      return res.status(200).send(data)
     })
     .catch(err => {
       console.error(err);
@@ -71,9 +76,7 @@ router.post('/polls', (req, res) => {
 
 router.delete('/polls/:id', (req, res) => {
   db.deletePoll(req.params.id)
-    .then(data => {res.status(200).send(data)
-      console.log('deletePoll', data);
-    })
+    .then(data => res.status(200).send(data))
     .catch(err => {
       console.log(err);
       res.end();
