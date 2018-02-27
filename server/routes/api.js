@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const validator = require('validator');
 const db = require('../utils/databaseUtils.js');
 
 router.get('/polls', (req, res) => {
+  console.log('hello');
   db.listPolls(req.user.id)
     .then(data => { res.status(200).send(data)
      // console.log('listPolls', data);
