@@ -3,7 +3,7 @@ import Auth from '../modules/Auth';
 
 const HTTP = function() {
   return axios.create({
-    baseURL: `https://voteapp-albassant.c9users.io/api/`,
+    baseURL: `https://voteapp-albassant.c9users.io/`,
     headers: {
       Authorization: `Bearer ${Auth.getToken()}`
     }
@@ -11,24 +11,28 @@ const HTTP = function() {
 }
 
 export default {
+  receiveAllPolls() {
+    return HTTP().get('all/polls');
+  },
+
   receivePolls() {
-    return HTTP().get('polls');
+    return HTTP().get('api/polls');
   },
 
   createPoll(data) {
-    return HTTP().post('polls', data);
+    return HTTP().post('api/polls', data);
   },
 
   deletePoll(pollId) {
-    return HTTP().delete(`polls/${pollId}`);
+    return HTTP().delete(`api/polls/${pollId}`);
   },
 
   getPoll(pollId) {
-    return HTTP().get(`polls/${pollId}`);
+    return HTTP().get(`api/polls/${pollId}`);
   },
 
   updatePoll(pollId, data) {
     console.log(data);
-    return HTTP().put(`polls/${pollId}`, data);
+    return HTTP().put(`api/polls/${pollId}`, data);
   }
 }

@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
+import LoginPage from './LoginPage.jsx';
 
 const styles = {
   container: {
@@ -34,6 +35,9 @@ const styles = {
   },
   black: {
     color: 'rgba(0, 0, 0, 0.87)'
+  },
+  title: {
+    marginBottom: '0.35em',
   }
 };
 
@@ -42,35 +46,27 @@ class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-
-      <div className={classes.container}>
-        <div>
-          <Typography variant='display2' color='inherit'>
-            VoteApp!
-          </Typography>
-          <Typography variant='headline' color='inherit'>
-            Create poll voting contests and view the results in real time
-          </Typography>
-          { !Auth.isUserAuthenticated() &&
-            <CardActions className={classes.actions}>
-                <Button variant='raised'>
-                  <Link to={'/login'} className={`${classes.link} ${classes.black}`}>Log in</Link>
-                </Button>
-                <Button variant='raised' color="secondary">
-                  <Link to={'/register'} className={`${classes.link} ${classes.white}`}>Register</Link>
-                </Button>
-            </CardActions>
-          }
-          { Auth.isUserAuthenticated() &&
+      <div>
+        <div className={classes.container}>
+          <div>
+            <img src="/logo.png" width='280px' alt="VoteApp logo" />
+            <Typography variant='display2' color='inherit' className={classes.title}>
+              VoteApp!
+            </Typography>
+            <Typography variant='headline' color='inherit'>
+              free web-based application for poll voting contests creation
+            </Typography>
+            <Typography variant='headline' color='inherit'>
+              and viewing the results in real time
+            </Typography>
             <CardActions className={classes.actions}>
               <Button variant='raised'>
-                <Link to={'/polls'} className={`${classes.link} ${classes.black}`}>My Polls</Link>
+                <Link to={'/public/polls'} className={`${classes.link} ${classes.black}`}>View Polls</Link>
               </Button>
             </CardActions>
-          }
+          </div>
         </div>
       </div>
-
     );
   }
 

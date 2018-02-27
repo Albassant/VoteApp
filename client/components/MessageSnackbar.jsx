@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 
 const styles = theme => ({
   close: {
@@ -29,7 +30,9 @@ const MessageSnackbar = ({ show, message, classes, handleClose, showActionButton
       <Button key="copy" color="secondary" size="small" onClick={handleAction} hidden={!showActionButton}>
         Copy Link
       </Button>,
-      <Icon key="close" onClick={handleClose}>close</Icon>
+      <IconButton key="close" onClick={handleClose}>
+        <CloseIcon />
+      </IconButton>
     ]}
   />
 )

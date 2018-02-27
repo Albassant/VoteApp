@@ -8,6 +8,7 @@ const MESSAGE_RECEIVED = 'message_received';
 
 let _polls = [];
 let _poll = {};
+let _allPolls = [];
 
 let _loadingError = null;
 let _isLoading = true;
@@ -23,6 +24,28 @@ class PollStore extends EventEmitter {
     // Switches over the action's type when an action is dispatched.
     _registerToActions(action) {
         switch(action.type) {
+        case AppConstants.RECEIVE_ALL_POLLS_REQUEST: {
+            _isLoading = true;
+            console.log('polls requested');
+            this.emitChange();
+            break;
+        }
+
+        case AppConstants.RECEIVE_ALL_POLLS_SUCCESS: {
+            _isLoading = false;
+            _allPolls = action.polls;
+            _loadingError = null;
+            console.log('polls loaded');
+            this.emitChange();
+            break;
+        }
+
+        case AppConstants.RECEIVE_ALL_POLLS_FAIL: {
+            _loadingError = action.error;
+            this.emitChange();
+            break;
+        }
+
         case AppConstants.RECEIVE_POLLS_REQUEST: {
             _isLoading = true;
             console.log('polls requested');
@@ -88,6 +111,10 @@ class PollStore extends EventEmitter {
 
     getPolls() {
         return _polls;
+    }
+
+    getAllPolls() {
+        return _allPolls;
     }
 
     getPoll(id) {

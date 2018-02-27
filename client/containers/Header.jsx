@@ -32,7 +32,7 @@ class Header extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <AppBar position="static">
+      <AppBar position="fixed" elevation={0}>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />

@@ -5,6 +5,26 @@ import API from '../api';
 
 const PollActions = {
 
+  loadAllPolls() {
+    AppDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_ALL_POLLS_REQUEST
+    });
+
+    API.receiveAllPolls()
+      .then(({ data }) =>
+        AppDispatcher.dispatch({
+          type: ActionTypes.RECEIVE_ALL_POLLS_SUCCESS,
+          polls: data
+        })
+      )
+      .catch(err =>
+        AppDispatcher.dispatch({
+          type: ActionTypes.RECEIVE_ALL_POLLS_FAIL,
+          error: err
+        })
+      );
+  },
+
   loadPolls() {
     AppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_POLLS_REQUEST

@@ -29,6 +29,8 @@ ReactDOM.render((
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
 
+        <Route path="/public/polls" render={(props) => <PollsPage {...props} isPublic /> } />
+
       <Switch>
         <Route path="/polls/new" component={NewPollPage} />
         <Route path="/polls/:id" component={VotingPage} />

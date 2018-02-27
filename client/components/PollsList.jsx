@@ -8,7 +8,8 @@ import Card, { CardActions } from 'material-ui/Card';
 import List, { ListItem, ListItemSecondaryAction, ListItemText, ListItemIcon } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 
 const styles = {
   container: {
@@ -46,6 +47,11 @@ function PollsList (props) {
           onNewPollClick,
           classes
         } = props;
+
+
+  console.log(polls);
+
+
   return (
     <Card className={classes.container}>
       <Typography variant='title' className={classes.title}>My Polls</Typography>
@@ -57,17 +63,22 @@ function PollsList (props) {
                 <ListItemText primary={poll.name} secondary={poll.createdAt} />
               </Link>
 
-              <ListItemSecondaryAction>
-                <Icon color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>remove_circle_outline</Icon>
-              </ListItemSecondaryAction>
-
+              { onDelete &&
+                <ListItemSecondaryAction>
+                  <IconButton color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>
+                    <RemoveIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              }
             </ListItem>
           )
         }
       </List>
-      <CardActions className={classes.actions}>
-        <Button variant='raised' color='secondary' onClick={onNewPollClick}>Create New</Button>
-      </CardActions>
+      { onNewPollClick &&
+        <CardActions className={classes.actions}>
+          <Button variant='raised' color='secondary' onClick={onNewPollClick}>Create New</Button>
+        </CardActions>
+      }
     </Card>
   )
 };
@@ -75,7 +86,6 @@ function PollsList (props) {
 PollsList.propTypes = {
   classes: PropTypes.object.isRequired,
   polls: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(PollsList);

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
-import Icon from 'material-ui/Icon';
+import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 import Typography from 'material-ui/Typography';
 import Dialog, {
   DialogActions,
@@ -86,7 +87,9 @@ const PollFormDialog = ({ show,
               />
               {
                 i > 1 &&
-                <Icon color="secondary" className={classes.icons} onClick={onRemoveOption}>remove_circle_outline</Icon>
+                <IconButton color="secondary" className={classes.icons} onClick={onRemoveOption}>
+                  <RemoveIcon />
+                </IconButton>
               }
           </div>
         )
