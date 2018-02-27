@@ -15,10 +15,11 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 const styles = {
   logo: {
-    flex: 1,
+    marginRight: 'auto',
     cursor: 'pointer'
   },
   menuButton: {
+    height: '48px',
     marginLeft: -12,
     marginRight: 20,
   },

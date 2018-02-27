@@ -4,24 +4,33 @@ import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardActions } from 'material-ui/Card';
+import Card, { CardHeader, CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
-import LoginPage from './LoginPage.jsx';
+import PollIcon from 'material-ui-icons/Assignment';
+import VoteIcon from 'material-ui-icons/Assessment';
+import ShareIcon from 'material-ui-icons/Share';
+
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+
 
 const styles = {
   container: {
-    flex: '0 0 auto',
     display: 'flex',
     backgroundColor: '#3f51b5',
     color: '#fff',
     minHeight: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
-
-    textAlign: 'center'
+    textAlign: 'center',
+    boxSizing: 'border-box'
+  },
+  content: {
+    flex: '1 0 100%',
+    display: 'block'
   },
   actions: {
     justifyContent: 'center',
@@ -30,14 +39,39 @@ const styles = {
   link: {
     textDecoration: 'none'
   },
-  white: {
-    color: '#fff'
-  },
   black: {
     color: 'rgba(0, 0, 0, 0.87)'
   },
+  blackLight: {
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
+  orange: {
+    color: '#ffb300'
+  },
   title: {
     marginBottom: '0.35em',
+  },
+  optionsContainer: {
+    display: 'flex',
+    padding: '32px',
+    // minHeight: '800px',
+    justifyContent: 'space-evenly',
+    textAlign: 'center',
+    marginTop: '32px',
+    flexWrap: 'wrap'
+  },
+  option: {
+    flex: 1,
+    minWidth: '300px',
+    maxWidth: '30%'
+  },
+  icon: {
+    marginTop: '16px',
+    width: '72px',
+    height: '72px'
+  },
+  title: {
+    marginBottom: '16px'
   }
 };
 
@@ -64,6 +98,35 @@ class HomePage extends React.Component {
                 <Link to={'/public/polls'} className={`${classes.link} ${classes.black}`}>View Polls</Link>
               </Button>
             </CardActions>
+          </div>
+        </div>
+        <div className={classes.optionsContainer}>
+          <div className={classes.option}>
+            <PollIcon className={`${classes.icon} ${classes.orange}`} />
+            <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
+              Create
+            </Typography>
+            <Typography component="p">
+              Create polls any time anywhere with our online application. No need to install anything, just sign up and start working!
+            </Typography>
+          </div>
+          <div className={classes.option}>
+            <VoteIcon className={`${classes.icon} ${classes.orange}`} />
+            <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
+              View
+            </Typography>
+            <Typography component="p">
+              View results of voting on live graphs at any time in easy to understand format for your own polls and for polls you have voted
+            </Typography>
+          </div>
+          <div className={classes.option}>
+            <ShareIcon className={`${classes.icon} ${classes.orange}`} />
+            <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
+              Share
+            </Typography>
+            <Typography component="p">
+              Share your polls and polls you like with your friends via direct link or via popular social networks in one-click way
+            </Typography>
           </div>
         </div>
       </div>

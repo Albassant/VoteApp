@@ -9,32 +9,33 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
-import cyan from 'material-ui/colors/cyan';
 
 const styles = {
-
+  footer: {
+    display: 'block'
+  }
 };
 
 class Footer extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <footer class="footer">
-        <div class="mainContainer">
-          <h2 class="block header">Quick Links</h2>
-          <div class="block container">
-            <div class="listContainer">
-              <div class="listResponsive">
-                <ul class="list">
-                  <li class="listItem">
-                    <a class="listLink" href="https://github.com/Albassant/VoteApp/">GitHub</a>
+      <footer className={classes.footer}>
+        <div>
+          <h2>Quick Links</h2>
+          <div>
+            <div>
+              <div>
+                <ul>
+                  <li>
+                    <a href="https://github.com/Albassant/VoteApp/">GitHub</a>
                   </li>
                 </ul>
               </div>
-              <div class="listResponsive">
-                <ul class="list">
-                  <li class="listItem">
-                    <a class="listLink" href="/discover-more/community/">Glitch Source</a>
+              <div>
+                <ul>
+                  <li>
+                    <a href="/discover-more/community/">Glitch Source</a>
                   </li>
                 </ul>
               </div>

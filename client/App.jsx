@@ -36,6 +36,8 @@ ReactDOM.render((
         <Route path="/polls/:id" component={VotingPage} />
         <Route path="/polls" component={PollsPage} />
       </Switch>
+
+      <Route component={Footer} />
       </div>
     </Router>
 
@@ -43,5 +45,5 @@ ReactDOM.render((
   document.getElementById('root')
 );
 
-//<Route component={Footer} />
+//
 //
