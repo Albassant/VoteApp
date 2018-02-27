@@ -1,7 +1,11 @@
 const Poll = require('../models/poll.js');
 
+exports.listAllPolls = function() {
+  return Poll.find().sort('-createdAt');
+}
+
 exports.listPolls = function(userId) {
-  return Poll.find({ user: userId })
+  return Poll.find({ user: userId }).sort('-createdAt');
 }
 
 exports.findPoll = function(pollId) {
