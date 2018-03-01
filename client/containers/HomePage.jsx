@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { withStyles } from 'material-ui/styles';
 import Card, { CardHeader, CardActions, CardContent, CardMedia } from 'material-ui/Card';
@@ -13,16 +14,32 @@ import PollIcon from 'material-ui-icons/Assignment';
 import VoteIcon from 'material-ui-icons/Assessment';
 import ShareIcon from 'material-ui-icons/Share';
 
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
+import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
+const drawerWidth = 240;
 
-const styles = {
+const styles = theme => ({
+  main: {
+    flexGrow: 1,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: 0,
+    // minHeight: '100vh'
+  },
+  mainShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: drawerWidth
+  },
   container: {
     display: 'flex',
     backgroundColor: '#3f51b5',
     color: '#fff',
-    minHeight: '90vh',
+    minHeight: '95vh',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
@@ -53,17 +70,19 @@ const styles = {
   },
   optionsContainer: {
     display: 'flex',
-    padding: '32px',
-    // minHeight: '800px',
+    minHeight: '400px',
     justifyContent: 'space-evenly',
+    alignItems: 'center',
     textAlign: 'center',
-    marginTop: '32px',
     flexWrap: 'wrap'
   },
   option: {
     flex: 1,
     minWidth: '300px',
-    maxWidth: '30%'
+    maxWidth: '20%',
+    [theme.breakpoints.between('xs', 'sm')]: {
+      minWidth: '60%',
+    },
   },
   icon: {
     marginTop: '16px',
@@ -73,14 +92,13 @@ const styles = {
   title: {
     marginBottom: '16px'
   }
-};
+});
 
 class HomePage extends React.Component {
-
   render() {
-    const { classes } = this.props;
+    const { classes, openDrawer } = this.props;
     return (
-      <div>
+      <div className={ classNames(classes.main, {[classes.mainShift]: openDrawer}) }>
         <div className={classes.container}>
           <div>
             <img src="/logo.png" width='280px' alt="VoteApp logo" />
@@ -132,11 +150,10 @@ class HomePage extends React.Component {
       </div>
     );
   }
-
 }
 
 HomePage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomePage);
+export default withMenuWrapper(withStyles(styles, {withTheme: true})(HomePage));

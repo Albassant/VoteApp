@@ -1,5 +1,5 @@
 import React from 'react';
-import PollStore from '../stores/PollStore';
+import PollStore from '../../stores/PollStore';
 
 function withSubscription(WrappedComponent, selectData, fetchData) {
   return class extends React.Component {

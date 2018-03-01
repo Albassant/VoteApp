@@ -5,6 +5,7 @@ import PublicPollList from './PublicPollList';
 import UserPollList from './UserPollList';
 import NewPollPage from './NewPollPage';
 
+import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
 class PollsPage extends React.Component {
 
@@ -43,6 +44,6 @@ class PollsPage extends React.Component {
   }
 }
 
-export default PollsPage;
+export default withMenuWrapper(PollsPage);
 
 
