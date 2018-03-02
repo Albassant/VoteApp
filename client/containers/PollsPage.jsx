@@ -30,7 +30,7 @@ class PollsPage extends React.Component {
 
   render() {
     return (
-      this.state.isPublic ?
+      this.props.isPublic ?
       <PublicPollList />
       :
       <div>

@@ -5,8 +5,8 @@ import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
-import PollForm from '../components/VotingForm.jsx';
-import PollChart from '../components/VotingChart.jsx';
+import VotingForm from '../components/VotingForm.jsx';
+import VotingChart from '../components/VotingChart.jsx';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
@@ -69,16 +69,15 @@ class VotingPage extends React.Component {
       <LoadingIndicator /> :
       <div>
         { !this.state.poll.voted &&
-            <PollForm
+            <VotingForm
               onSubmit={this.processForm}
               onChange={this.changeOption}
               optionIdx={this.state.option}
               poll={this.state.poll}
-              showChart={this.state.poll.owner} // FIXME!!!!!!!!!!!!!!!!!!!
             />
         }
         { (this.state.poll.voted || this.state.poll.owner) &&
-            <PollChart
+            <VotingChart
               title={this.state.poll.name}
               labels={this.state.poll.questions.map(q => q.question)}
               data={this.state.poll.questions.map(q => q.rating)}
