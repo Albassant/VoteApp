@@ -7,8 +7,8 @@ import NewPollPage from './NewPollPage';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
-class PollsPage extends React.Component {
 
+class PollsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,13 +30,14 @@ class PollsPage extends React.Component {
 
   render() {
     return (
-      this.props.isPublic ?
+      this.state.isPublic ?
       <PublicPollList />
       :
       <div>
         <UserPollList
           onDelete={this.handlePollDelete}
           onClick={this.toggleNewPollDialog}
+          openDrawer={this.props.openDrawer}
         />
         <NewPollPage show={this.state.showNewPollDialog} onClose={this.toggleNewPollDialog} />
       </div>

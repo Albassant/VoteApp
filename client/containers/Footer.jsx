@@ -5,28 +5,15 @@ import classNames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
-const drawerWidth = 240;
+import Shiftable from './HOCs/Shiftable.jsx';
+
 
 const styles = theme => ({
-   footer: {
-    flexGrow: 1,
+  footer: {
     backgroundColor: '#e0e0e0',
     color: 'rgba(0, 0, 0, 0.87)',
     padding: '16px',
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: 0,
   },
-  footerShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: drawerWidth
-  },
-
   title: {
     padding: '16px',
   },
@@ -35,7 +22,8 @@ const styles = theme => ({
     marginLeft: '16px'
   },
   item: {
-    marginBottom: '16px'
+    marginBottom: '16px',
+    fontSize: '0.85rem'
   },
   link: {
     color: 'inherit',
@@ -46,7 +34,8 @@ const styles = theme => ({
   },
   copyContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    fontSize: '0.85rem'
   }
 });
 
@@ -54,8 +43,9 @@ class Footer extends React.Component {
   render() {
     const { classes, openDrawer } = this.props;
     return (
-      <footer className={classNames(classes.footer, {[classes.footerShift]: openDrawer})}>
-        <Typography className={classes.title} variant='title' color="inherit" gutterBottom>Quick Links</Typography>
+      <Shiftable shift={openDrawer}>
+      <footer className={classes.footer}>
+        <Typography className={classes.title} variant='subheading' color="inherit" gutterBottom>Quick Links</Typography>
         <div className={classes.container}>
           <div className={classes.item}>
             <a className={classes.link} href="https://github.com/Albassant/VoteApp/">GitHub</a>
@@ -68,6 +58,7 @@ class Footer extends React.Component {
           <Typography variant='body2' color="inherit" className={classes.copyright}>freeCodeCamp challenge by Valentina</Typography>
         </div>
       </footer>
+      </Shiftable>
     );
   }
 }
@@ -77,4 +68,4 @@ Footer.propTypes = {
   openDrawer: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles, {withTheme: true})(Footer);
+export default withStyles(styles, { withTheme: true })(Footer);

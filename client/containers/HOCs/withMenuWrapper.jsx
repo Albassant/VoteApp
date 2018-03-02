@@ -1,12 +1,13 @@
 import React from 'react';
 import Menu from '../MenuWrapper.jsx';
 
+
 function withMenuWrapper(WrappedComponent) {
   return class extends React.Component {
     render() {
       return (
         <Menu>
-          <WrappedComponent />
+          <WrappedComponent {...this.props} />
         </Menu>
       )
     }

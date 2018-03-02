@@ -11,10 +11,12 @@ class PublicPollList extends React.Component {
   render() {
     return (
       this.props.isLoading ?
-      <LoadingIndicator /> :
+      <LoadingIndicator />
+      :
       <PollsList
-          polls={this.props.data}
-        />
+        polls={this.props.data}
+        {...this.props}
+      />
     );
   }
 }

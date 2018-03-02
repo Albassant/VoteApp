@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Auth from '../modules/Auth';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 
 import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import { CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
 
 import PollIcon from 'material-ui-icons/Assignment';
 import VoteIcon from 'material-ui-icons/Assessment';
@@ -16,25 +13,8 @@ import ShareIcon from 'material-ui-icons/Share';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
-const drawerWidth = 240;
 
 const styles = theme => ({
-  main: {
-    flexGrow: 1,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: 0,
-    // minHeight: '100vh'
-  },
-  mainShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: drawerWidth
-  },
   container: {
     display: 'flex',
     backgroundColor: '#3f51b5',
@@ -96,9 +76,9 @@ const styles = theme => ({
 
 class HomePage extends React.Component {
   render() {
-    const { classes, openDrawer } = this.props;
+    const { classes } = this.props;
     return (
-      <div className={ classNames(classes.main, {[classes.mainShift]: openDrawer}) }>
+      <div>
         <div className={classes.container}>
           <div>
             <img src="/logo.png" width='280px' alt="VoteApp logo" />
@@ -156,4 +136,4 @@ HomePage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withMenuWrapper(withStyles(styles, {withTheme: true})(HomePage));
+export default withMenuWrapper(withStyles(styles, { withTheme: true })(HomePage));

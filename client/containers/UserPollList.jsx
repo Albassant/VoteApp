@@ -11,12 +11,14 @@ class UserPollList extends React.Component {
   render() {
     return (
       this.props.isLoading ?
-      <LoadingIndicator /> :
+      <LoadingIndicator />
+      :
       <PollsList
-          polls={this.props.data}
-          onDelete={this.props.onDelete}
-          onNewPollClick={this.props.onClick}
-        />
+        polls={this.props.data}
+        onDelete={this.props.onDelete}
+        onNewPollClick={this.props.onClick}
+        {...this.props}
+      />
     );
   }
 }

@@ -20,6 +20,8 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 
+import Shiftable from './HOCs/Shiftable.jsx';
+
 
 const drawerWidth = 240;
 
@@ -96,7 +98,9 @@ class MenuWrapper extends React.Component {
       <div className={classes.root}>
         <Header openDrawer={this.state.open} handleDrawerOpen={this.handleDrawerOpen} />
         { drawer }
-        { React.cloneElement(this.props.children, { openDrawer: this.state.open })}
+        <Shiftable shift={this.state.open}>
+          { React.cloneElement(this.props.children, {openDrawer: this.state.open}) }
+        </Shiftable>
         <Footer openDrawer={this.state.open} />
       </div>
     );

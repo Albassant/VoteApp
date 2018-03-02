@@ -8,6 +8,8 @@ import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import PollForm from '../components/VotingForm.jsx';
 import PollChart from '../components/VotingChart.jsx';
 
+import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
+
 function getPollDataFromFlux() {
     return {
         isLoading: PollStore.isLoading(),
@@ -38,7 +40,7 @@ class VotingPage extends React.Component {
 
    componentDidMount() {
     console.log('did mount');
-    const { match: {params } } = this.props;
+    const { match: { params } } = this.props;
     console.log(params);
     PollStore.addChangeListener(this._onChange);
     PollActions.getPoll(params.id);
@@ -87,4 +89,4 @@ class VotingPage extends React.Component {
   }
 }
 
-export default VotingPage;
+export default withMenuWrapper(VotingPage);
