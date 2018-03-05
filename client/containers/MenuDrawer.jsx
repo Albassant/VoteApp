@@ -25,7 +25,9 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
-
+  item: {
+    textDecoration: 'none'
+  }
 });
 
 const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
@@ -44,26 +46,26 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
 
       <List>
         <ListItem button>
-            <Link to='/public/polls'>
+            <Link to='/public/polls' className={classes.item}>
               <ListItemText primary="Explore Polls" />
             </Link>
           </ListItem>
         { Auth.isUserAuthenticated() &&
           <ListItem button>
-            <Link to='/polls'>
+            <Link to='/polls' className={classes.item}>
               <ListItemText primary="My Polls" />
             </Link>
           </ListItem>
         }
         { Auth.isUserAuthenticated() &&
           <ListItem button>
-            <Link to='/polls/new'>
+            <Link to='/polls/new' className={classes.item}>
               <ListItemText primary="New Poll" />
             </Link>
           </ListItem>
         }
         <ListItem button>
-          <Link to='/'>
+          <Link to='/' className={classes.item}>
             <ListItemText primary="About" />
           </Link>
         </ListItem>

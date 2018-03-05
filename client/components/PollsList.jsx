@@ -65,8 +65,8 @@ function PollsList (props) {
           <List className="list">
           {
             polls.map((poll, key) =>
-            <div>
-              <ListItem button key={key}>
+            <div key={key}>
+              <ListItem button>
                 <Link  to={`/polls/${poll._id}`} className={classes.link}>
                   <ListItemText primary={poll.name} secondary={poll.createdAt} />
                 </Link>
