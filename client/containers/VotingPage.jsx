@@ -1,20 +1,35 @@
 import React from 'react';
-import Auth from '../modules/Auth';
-import axios from 'axios';
+
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
+import PropTypes from 'prop-types';
 
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import VotingForm from '../components/VotingForm.jsx';
 import VotingChart from '../components/VotingChart.jsx';
+import VotingShare from '../components/VotingShare.jsx';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
+import { withStyles } from 'material-ui/styles';
+
+const footerHeight = 182;
+
+const styles = {
+  container: {
+    flex: 1,
+    minHeight: `calc(100vh - ${footerHeight}px)`,
+    paddingTop: '84px',
+    paddingBottom: '64px',
+    boxSizing: 'border-box'
+  },
+}
+
 function getPollDataFromFlux() {
-    return {
-        isLoading: PollStore.isLoading(),
-        poll: PollStore.getPoll()
-    };
+  return {
+    isLoading: PollStore.isLoading(),
+    poll: PollStore.getPoll()
+  };
 }
 
 class VotingPage extends React.Component {
@@ -33,15 +48,12 @@ class VotingPage extends React.Component {
   }
 
   _onChange() {
-    console.log( 'on change' );
     let poll = getPollDataFromFlux().poll;
     this.setState({ poll });
   }
 
    componentDidMount() {
-    console.log('did mount');
     const { match: { params } } = this.props;
-    console.log(params);
     PollStore.addChangeListener(this._onChange);
     PollActions.getPoll(params.id);
   }
@@ -61,31 +73,50 @@ class VotingPage extends React.Component {
     console.log(this.state.option);
   }
 
+  handleCopyToClipboard() {
+    console.log('on copy to clipboard');
+  }
+
   render() {
-    if(!this.state.poll) return null;
+    const { poll } = this.state;
+    const { classes } = this.props;
+
+    if (!poll) return null;
 
     return (
       this.state.isLoading ?
       <LoadingIndicator /> :
-      <div>
-        { !this.state.poll.voted &&
-            <VotingForm
-              onSubmit={this.processForm}
-              onChange={this.changeOption}
-              optionIdx={this.state.option}
-              poll={this.state.poll}
-            />
+      <div className={classes.container}>
+        { !poll.voted &&
+          <VotingForm
+            onSubmit={this.processForm}
+            onChange={this.changeOption}
+            optionIdx={this.state.option}
+            poll={poll}
+          />
         }
-        { (this.state.poll.voted || this.state.poll.owner) &&
-            <VotingChart
-              title={this.state.poll.name}
-              labels={this.state.poll.questions.map(q => q.question)}
-              data={this.state.poll.questions.map(q => q.rating)}
-            />
+        { (poll.voted || poll.owner) &&
+          <VotingChart
+            title={poll.name}
+            labels={poll.questions.map(q => q.question)}
+            data={poll.questions.map(q => q.rating)}
+          />
+        }
+        { (poll.voted || poll.owner) &&
+          <VotingShare
+            onCopyClick={this.handleCopyToClipboard}
+            url={poll.url}
+            description={poll.name}
+          />
         }
       </div>
     )
   }
 }
 
-export default withMenuWrapper(VotingPage);
+VotingPage.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+
+export default withMenuWrapper(withStyles(styles)(VotingPage));

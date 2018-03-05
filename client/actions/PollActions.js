@@ -71,7 +71,7 @@ const PollActions = {
         this.loadPolls();
         AppDispatcher.dispatch({
           type: ActionTypes.ADD_NEW_POLL_SUCCESS,
-          data: data
+          poll: data
         })
       })
       .catch(err =>

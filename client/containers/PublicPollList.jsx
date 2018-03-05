@@ -3,7 +3,7 @@ import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
 
-//FIXME: create withLoadingIndicator HOC
+//TODO: create withLoadingIndicator HOC
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import withSubscription from './HOCs/withSubscription.jsx';
 
@@ -15,6 +15,7 @@ class PublicPollList extends React.Component {
       :
       <PollsList
         polls={this.props.data}
+        title='All Polls'
         {...this.props}
       />
     );

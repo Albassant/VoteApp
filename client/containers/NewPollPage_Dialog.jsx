@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PollActions from '../actions/PollActions';
-import PollStore from '../stores/PollStore';
 
-import PollForm from '../components/PollForm';
-import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
+import PollFormDialog from '../components/PollFormDialog';
+
 
 class NewPollPage extends React.Component {
   constructor(props) {
@@ -24,21 +24,14 @@ class NewPollPage extends React.Component {
     this.addPollOption = this.addPollOption.bind(this);
     this.removePollOption = this.removePollOption.bind(this);
     this.formValidation = this.formValidation.bind(this);
-
-    this._handleMessageReceived = this._handleMessageReceived.bind(this);
   }
 
   processForm(event) {
     event.preventDefault();
-    PollStore.addMessageReceivedListener(this._handleMessageReceived);
+    console.log('processForm');
+
     PollActions.createPoll(this.state.poll);
-  }
-
-  _handleMessageReceived() {
-    PollStore.removeMessageReceivedListener(this._handleMessageReceived);
-
-    const poll = PollStore.getPoll();
-    this.props.history.push(`/polls/${poll._id}`);
+    this.props.onClose();
   }
 
   changePollName(event) {
@@ -85,7 +78,8 @@ class NewPollPage extends React.Component {
 
   render() {
     return (
-      <PollForm
+      <PollFormDialog show={this.props.show}
+        onClose={this.props.onClose}
         poll={this.state.poll}
         onChangeName={this.changePollName}
         onChangeOptions={this.changePollOptions}
@@ -98,4 +92,9 @@ class NewPollPage extends React.Component {
   }
 }
 
-export default withMenuWrapper(NewPollPage);
+NewPollPage.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
+
+export default NewPollPage;

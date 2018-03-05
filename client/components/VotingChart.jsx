@@ -72,17 +72,8 @@ function VotingChart ({ title, labels, data, classes }) {
       }
    }];
 
-  /*
-  <Typography variant='title' className={classes.title}>
-        {title}
-      </Typography>
-  */
-
-  console.log('redraw chart');
-
   return (
     <Card className={classes.container}>
-
       <Bar data={chartData}
         width={50}
         height={25}
@@ -93,12 +84,6 @@ function VotingChart ({ title, labels, data, classes }) {
         plugins={plugins}
         redraw={true}
       />
-
-      <CardContent>
-        <Typography component="p">
-        <Link to={'/polls'}>Back to polls</Link>
-        </Typography>
-      </CardContent>
     </Card>
   );
 }

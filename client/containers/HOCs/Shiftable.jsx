@@ -13,6 +13,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: 0,
+    height: '100%'
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

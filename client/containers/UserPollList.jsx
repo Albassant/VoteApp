@@ -16,7 +16,7 @@ class UserPollList extends React.Component {
       <PollsList
         polls={this.props.data}
         onDelete={this.props.onDelete}
-        onNewPollClick={this.props.onClick}
+        title='My Polls '
         {...this.props}
       />
     );

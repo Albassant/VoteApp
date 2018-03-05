@@ -54,15 +54,12 @@ class RegisterPage extends React.Component {
                 "password": this.state.user.password
               });
 
-    console.log(formData);
     axios.post('/auth/register', formData)
     .then(response => {
       this.setState({
           errors: {}
         });
 
-      console.log(this.state.errors);
-      console.log('The form is valid');
       // set a message
       localStorage.setItem('successMessage', response.data.message);
       // make a redirect

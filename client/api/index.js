@@ -32,7 +32,6 @@ export default {
   },
 
   updatePoll(pollId, data) {
-    console.log(data);
     return HTTP().put(`api/polls/${pollId}`, data);
   }
 }

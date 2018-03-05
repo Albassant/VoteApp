@@ -26,7 +26,6 @@ class PollStore extends EventEmitter {
         switch(action.type) {
         case AppConstants.RECEIVE_ALL_POLLS_REQUEST: {
             _isLoading = true;
-            console.log('polls requested');
             this.emitChange();
             break;
         }
@@ -35,7 +34,6 @@ class PollStore extends EventEmitter {
             _isLoading = false;
             _allPolls = action.polls;
             _loadingError = null;
-            console.log('polls loaded');
             this.emitChange();
             break;
         }
@@ -48,7 +46,6 @@ class PollStore extends EventEmitter {
 
         case AppConstants.RECEIVE_POLLS_REQUEST: {
             _isLoading = true;
-            console.log('polls requested');
             this.emitChange();
             break;
         }
@@ -57,7 +54,6 @@ class PollStore extends EventEmitter {
             _isLoading = false;
             _polls = action.polls;
             _loadingError = null;
-            console.log('polls loaded');
             this.emitChange();
             break;
         }
@@ -71,14 +67,12 @@ class PollStore extends EventEmitter {
         case AppConstants.GET_POLL_REQUEST: {
             _isLoading = true;
             this.emitChange();
-            console.log('poll requested');
         }
 
         case AppConstants.GET_POLL_SUCCESS: {
             _isLoading = false;
             _poll = action.poll;
             _loadingError = null;
-            console.log('poll loaded');
             this.emitChange();
             break;
         }
@@ -90,11 +84,13 @@ class PollStore extends EventEmitter {
         }
 
         case AppConstants.ADD_NEW_POLL_SUCCESS: {
+            _poll = action.poll;
             this.emitMessageReceived();
             break;
         }
 
         case AppConstants.ADD_NEW_POLL_FAIL: {
+            _loadingError = action.error;
             this.emitMessageReceived();
             break;
         }
@@ -109,6 +105,10 @@ class PollStore extends EventEmitter {
         return _isLoading;
     }
 
+    getError() {
+        return _loadingError;
+    }
+
     getPolls() {
         return _polls;
     }
@@ -117,7 +117,7 @@ class PollStore extends EventEmitter {
         return _allPolls;
     }
 
-    getPoll(id) {
+    getPoll() {
         return _poll;
     }
 
@@ -145,7 +145,7 @@ class PollStore extends EventEmitter {
     }
 
     // Removes the listener from the MESSAGE_RECEIVED event.
-    removeReceivedListener(callback) {
+    removeMessageReceivedListener(callback) {
         this.removeListener(MESSAGE_RECEIVED, callback);
     }
 }
