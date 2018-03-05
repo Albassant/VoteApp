@@ -10,14 +10,15 @@ const styles = theme => ({
   close: {
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
+    color: '#fff'
   },
 });
 
 const MessageSnackbar = ({ show, message, classes, handleClose, showActionButton, handleAction }) => (
   <Snackbar
     anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
+      vertical: 'bottom',
+      horizontal: 'center',
     }}
     open={show}
     autoHideDuration={6000}
@@ -27,10 +28,7 @@ const MessageSnackbar = ({ show, message, classes, handleClose, showActionButton
     }}
     message={<span id="message-id">{message}</span>}
     action={[
-      <Button key="copy" color="secondary" size="small" onClick={handleAction} hidden={!showActionButton}>
-        Copy Link
-      </Button>,
-      <IconButton key="close" onClick={handleClose}>
+      <IconButton key="close" aria-label="Close" className={classes.close} onClick={handleClose}>
         <CloseIcon />
       </IconButton>
     ]}
@@ -43,4 +41,11 @@ MessageSnackbar.propTypes = {
   handleClose: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(MessageSnackbar);
+export default withStyles(styles, {withTheme: true})(MessageSnackbar);
+
+/*
+<Button key="copy" color="secondary" size="small" onClick={handleAction} hidden={!showActionButton}>
+        Copy Link
+      </Button>,
+
+*/

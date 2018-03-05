@@ -22,6 +22,7 @@ router.get('/polls/:id', (req, res) => {
       data = data.toObject();
       data.owner = data.user == userId;
       data.voted = Boolean(data.votedusers.find(el => el == userId));
+      data.url = `https://voteapp-albassant.c9users.io/polls/${data._id}`;
       delete data.votedusers;
       delete data.user;
       //endoftodo
@@ -57,14 +58,19 @@ router.put('/polls/:id', (req, res) => {
 });
 
 router.post('/polls', (req, res) => {
+  const userId = req.user.id;
   db.createPoll(req.user.id, req.body)
-    .then(data =>
-      res.status(200).json({
-        success: true,
-        message: 'Congratulations! Your poll has been saved successfully. Here\'s a link to your poll',
-        url: `https://voteapp-albassant.c9users.io/${data.id}`
-      })
-    )
+    .then(data => {
+      //TODO do something with this weird code
+      data = data.toObject();
+      data.owner = data.user == userId;
+      data.voted = Boolean(data.votedusers.find(el => el == userId));
+      data.url = `https://voteapp-albassant.c9users.io/polls/${data._id}`;
+      delete data.votedusers;
+      delete data.user;
+      res.status(200).send(data)
+
+    })
     .catch(err => {
       console.log(err);
       res.status(400).json({

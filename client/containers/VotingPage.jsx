@@ -8,6 +8,7 @@ import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import VotingForm from '../components/VotingForm.jsx';
 import VotingChart from '../components/VotingChart.jsx';
 import VotingShare from '../components/VotingShare.jsx';
+import MessageSnackbar from '../components/MessageSnackbar.jsx';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
@@ -40,11 +41,15 @@ class VotingPage extends React.Component {
     this.state = {
       poll: getPollDataFromFlux(),
       option: '',
+      showSnackbar: false
     }
     this._onChange = this._onChange.bind(this);
 
     this.processForm = this.processForm.bind(this);
     this.changeOption = this.changeOption.bind(this);
+
+    this.handleCopyToClipboard = this.handleCopyToClipboard.bind(this);
+    this.handleHideSnackbar = this.handleHideSnackbar.bind(this);
   }
 
   _onChange() {
@@ -75,16 +80,21 @@ class VotingPage extends React.Component {
 
   handleCopyToClipboard() {
     console.log('on copy to clipboard');
+    this.setState({ showSnackbar: true });
+  }
+
+  handleHideSnackbar() {
+    this.setState({ showSnackbar: false });
   }
 
   render() {
-    const { poll } = this.state;
+    const { poll, isLoading, showSnackbar } = this.state;
     const { classes } = this.props;
 
     if (!poll) return null;
 
     return (
-      this.state.isLoading ?
+      isLoading ?
       <LoadingIndicator /> :
       <div className={classes.container}>
         { !poll.voted &&
@@ -109,6 +119,7 @@ class VotingPage extends React.Component {
             description={poll.name}
           />
         }
+        <MessageSnackbar show={showSnackbar} handleClose={this.handleHideSnackbar} message='The poll link has been copied to clipboard'/>
       </div>
     )
   }
