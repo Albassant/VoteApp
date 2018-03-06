@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import Auth from '../modules/Auth';
 import querystring from 'querystring';
 
-import LoginFormDialog from '../components/LoginFormDialog.jsx';
 import LoginForm from '../components/LoginForm.jsx';
 
 
@@ -81,24 +79,4 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage.propTypes = {
-  show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-
 export default LoginPage;
-/*
-
-*/
-
-/*
-
-<LoginFormDialog
-        show={this.props.show}
-        onClose={this.props.onClose}
-        onSubmit = {this.processForm}
-        onChange = {this.changeUser}
-        errors = {this.state.errors}
-        user = {this.state.user}
-      />
-*/

@@ -9,7 +9,7 @@ import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 
 
 const drawerWidth = 240;
@@ -45,25 +45,26 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
      <Divider />
 
       <List>
-        <ListItem button>
-            <Link to='/public/polls' className={classes.item}>
-              <ListItemText primary="Explore Polls" />
-            </Link>
-          </ListItem>
         { Auth.isUserAuthenticated() &&
-          <ListItem button>
-            <Link to='/polls' className={classes.item}>
-              <ListItemText primary="My Polls" />
-            </Link>
-          </ListItem>
-        }
-        { Auth.isUserAuthenticated() &&
+        <div>
           <ListItem button>
             <Link to='/polls/new' className={classes.item}>
               <ListItemText primary="New Poll" />
             </Link>
           </ListItem>
+          <ListItem button>
+            <Link to='/polls' className={classes.item}>
+              <ListItemText primary="My Polls" />
+            </Link>
+          </ListItem>
+          <Divider />
+        </div>
         }
+        <ListItem button>
+            <Link to='/public/polls' className={classes.item}>
+              <ListItemText primary="Explore Polls" />
+            </Link>
+          </ListItem>
         <ListItem button>
           <Link to='/' className={classes.item}>
             <ListItemText primary="About" />
