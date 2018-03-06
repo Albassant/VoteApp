@@ -1,7 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import Auth from '../modules/Auth';
 import querystring from 'querystring';
+
+import UserActions from '../actions/UserActions';
+import UserStore from '../stores/UserStore';
 
 import LoginForm from '../components/LoginForm.jsx';
 
@@ -11,13 +13,10 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
-    let successMessage = localStorage.getItem('successMessage') || '';
-    localStorage.removeItem('successMessage');
-
     // set the initial component state
     this.state = {
-      errors: {},
-      successMessage,
+      errors: UserStore.getErrors(),
+      message: UserStore.getMessage(),
       user: {
         email: '',
         password: ''
@@ -26,6 +25,23 @@ class LoginPage extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
+    this._onResponseReceived = this._onResponseReceived.bind(this);
+  }
+
+  componentDidMount() {
+    UserStore.addChangeListener(this._onResponseReceived);
+  }
+
+  componentWillUnmount() {
+    UserStore.removeChangeListener(this._onResponseReceived);
+  }
+
+  _onResponseReceived() {
+    this.setState({ errors: UserStore.getErrors(), message: UserStore.getMessage() }, () => {
+      if (UserStore.isSuccessful()) {
+        this.props.history.replace('/'); //FIXME replace with link user wanted to open at first
+      }
+    });
   }
 
   /**
@@ -40,17 +56,7 @@ class LoginPage extends React.Component {
                 "email": this.state.user.email,
                 "password": this.state.user.password });
 
-    axios.post('/auth/login', formData)
-    .then(response => {
-      //this.setState({ errors: {} });
-      Auth.authenticateUser(response.data.token); // save the token
-      this.props.history.replace('/'); // change the current URL to / //FIXME!!! redirect to proper place
-    })
-    .catch(error => {
-      const errors = error.response.data.errors || {};
-      errors.summary = error.response.data.message;
-      this.setState({ errors });
-    });
+    UserActions.login(formData);
   }
 
   /**
@@ -72,7 +78,7 @@ class LoginPage extends React.Component {
         onSubmit = {this.processForm}
         onChange = {this.changeUser}
         errors = {this.state.errors}
-        successMessage={this.state.successMessage}
+        message={this.state.message}
         user = {this.state.user}
       />
     );

@@ -96,7 +96,7 @@ class PollStore extends EventEmitter {
         }
 
         default: {
-            console.log('No such handler');
+            console.log('No such handler in PollStore');
         }
       }
     }

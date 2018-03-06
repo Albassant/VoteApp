@@ -7,6 +7,7 @@ import Card, { CardContent, CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import green from 'material-ui/colors/green';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 
@@ -35,12 +36,16 @@ const styles = {
   title: {
     marginTop: '20px',
     paddingTop: '20px'
+  },
+  message: {
+    color: green[500],
+    marginTop: '10px'
   }
 }
 
 
 function RegisterForm(props) {
-  const { classes, errors, onChange, onSubmit, user } = props;
+  const { classes, errors, message, onChange, onSubmit, user } = props;
   return (
     <div className={classes.container}>
       <Card className={classes.content}>
@@ -49,14 +54,16 @@ function RegisterForm(props) {
         </Typography>
         <form action="/" onSubmit={onSubmit}>
 
-          {errors.summary && <p>{errors.summary}</p>}
+          { message && <Typography variant='body2' className={classes.message}>{message}</Typography> }
+          { errors.summary && <Typography variant='body2' color='error'>{errors.summary}</Typography> }
 
           <div className={classes.field}>
              <TextField
                label="Name"
                name="name"
                onChange={onChange}
-               error={!!errors.name}
+               error={Boolean(errors.name)}
+               helperText={errors.name}
                value={user.name}
                fullWidth
                autoFocus={true}
@@ -68,7 +75,8 @@ function RegisterForm(props) {
               label="Email"
               name="email"
               onChange={onChange}
-              error={!!errors.email}
+              error={Boolean(errors.email)}
+              helperText={errors.email}
               value={user.email}
               fullWidth
             />
@@ -80,7 +88,8 @@ function RegisterForm(props) {
               type="password"
               name="password"
               onChange={onChange}
-              error={!!errors.password}
+              error={Boolean(errors.password)}
+              helperText={errors.password}
               value={user.password}
               fullWidth
             />

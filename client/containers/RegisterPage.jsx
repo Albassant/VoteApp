@@ -1,19 +1,17 @@
 import React from 'react';
 import RegisterForm from '../components/RegisterForm.jsx';
-import axios from 'axios';
 import querystring from 'querystring';
 
-class RegisterPage extends React.Component {
+import UserActions from '../actions/UserActions';
+import UserStore from '../stores/UserStore';
 
-  /**
-   * Class constructor.
-   */
+class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // set the initial component state
     this.state = {
-      errors: {},
+      errors: UserStore.getErrors(),
+      message: UserStore.getMessage(),
       user: {
         email: '',
         name: '',
@@ -23,6 +21,7 @@ class RegisterPage extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
+    this._onResponseReceived = this._onResponseReceived.bind(this);
   }
 
   /**
@@ -36,6 +35,15 @@ class RegisterPage extends React.Component {
     user[field] = event.target.value;
 
     this.setState({ user });
+  }
+
+  _onResponseReceived() {
+    UserStore.removeChangeListener(this._onResponseReceived);
+    this.setState({ errors: UserStore.getErrors(), message: UserStore.getMessage() }, () => {
+      if (UserStore.isSuccessful()) {
+        this.props.history.replace('/login');
+      }
+    });
   }
 
   /**
@@ -53,31 +61,8 @@ class RegisterPage extends React.Component {
                 "email": this.state.user.email,
                 "password": this.state.user.password
               });
-
-    axios.post('/auth/register', formData)
-    .then(response => {
-      this.setState({
-          errors: {}
-        });
-
-      // set a message
-      localStorage.setItem('successMessage', response.data.message);
-      // make a redirect
-      this.props.history.replace('/login'); // FIXME!!! think about this scenario
-    })
-    .catch(error => {
-      if (error.response) {
-        const errors = error.response.data.errors;
-        errors.summary = error.response.data.message;
-        this.setState({
-          errors
-        });
-        console.log(error.response.data);
-      }
-      else {
-        console.log("catch error: " + error);
-      }
-    });
+    UserStore.addChangeListener(this._onResponseReceived);
+    UserActions.register(formData);
   }
 
   /**
@@ -90,6 +75,7 @@ class RegisterPage extends React.Component {
         onChange = {this.changeUser}
         errors = {this.state.errors}
         user = {this.state.user}
+        message = {this.state.message}
       />
     );
   }

@@ -7,6 +7,7 @@ import Card, { CardContent, CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import green from 'material-ui/colors/green';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 
@@ -35,11 +36,15 @@ const styles = {
   title: {
     marginTop: '20px',
     paddingTop: '20px'
+  },
+  message: {
+    color: green[500],
+    marginTop: '10px'
   }
 }
 
 function LoginForm(props) {
-  const { classes, successMessage, errors, onChange, onSubmit, user } = props;
+  const { classes, message, errors, onChange, onSubmit, user } = props;
   return (
     <div className={classes.container}>
       <Card className={classes.content}>
@@ -49,15 +54,16 @@ function LoginForm(props) {
 
         <form action="/" onSubmit={onSubmit}>
 
-          {successMessage && <p>{successMessage}</p>}
-          {errors.summary && <p>{errors.summary}</p>}
+          { message && <Typography variant='body2' className={classes.message}>{message}</Typography> }
+          { errors.summary && <Typography variant='body2' color='error'>{errors.summary}</Typography> }
 
           <div className={classes.field}>
             <TextField
               label="Email"
               name="email"
               onChange={onChange}
-              error={!!errors.email}
+              error={Boolean(errors.email)}
+              helperText={errors.email}
               value={user.email}
               fullWidth
               autoFocus={true}
@@ -70,7 +76,8 @@ function LoginForm(props) {
               type="password"
               name="password"
               onChange={onChange}
-              error={!!errors.password}
+              error={Boolean(errors.password)}
+              helperText={errors.password}
               value={user.password}
               fullWidth
             />
