@@ -22,10 +22,17 @@ function withSubscription(WrappedComponent, selectData, fetchData) {
     }
 
     handleChange() {
-      this.setState({
+      let state = {
         data: selectData(),
         isLoading: PollStore.isLoading()
+      };
+
+      state.data.forEach(item => {
+      var date = new Date(item.createdAt);
+        item.createdAt = date.toLocaleDateString('en-GB');
       });
+
+      this.setState(state);
     }
 
     render() {

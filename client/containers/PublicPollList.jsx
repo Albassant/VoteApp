@@ -2,6 +2,7 @@ import React from 'react';
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
+import NoPollsView from '../components/NoPollsView';
 
 //TODO: create withLoadingIndicator HOC
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
