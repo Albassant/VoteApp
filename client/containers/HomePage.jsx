@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Auth from '../modules/Auth';
 
 import { withStyles } from 'material-ui/styles';
 import { CardActions } from 'material-ui/Card';
@@ -34,7 +35,8 @@ const styles = theme => ({
     marginTop: 20
   },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    fontWeight: '500'
   },
   black: {
     color: 'rgba(0, 0, 0, 0.87)'
@@ -71,9 +73,12 @@ const styles = theme => ({
   },
   title: {
     marginBottom: '16px'
+  },
+  button: {
+    backgroundColor: '#fff',
   }
 });
-
+// ${classes.black}
 class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
@@ -86,44 +91,55 @@ class HomePage extends React.Component {
               VoteApp!
             </Typography>
             <Typography variant='headline' color='inherit'>
-              free web-based application for poll voting contests creation
+              Poll creation and voting have never been easier!
             </Typography>
+
+            { !Auth.isUserAuthenticated() &&
             <Typography variant='headline' color='inherit'>
-              and viewing the results in real time
+              No need to install anything, just sign up and start working
             </Typography>
+            }
             <CardActions className={classes.actions}>
-              <Button variant='raised'>
-                <Link to={'/public/polls'} className={`${classes.link} ${classes.black}`}>View Polls</Link>
+            { Auth.isUserAuthenticated() ?
+              <Button variant='raised' className={classes.button}>
+                <Link to={'/polls'} className={`${classes.link} ${classes.black}`}>My Polls</Link>
               </Button>
+              :
+              <Button variant='raised' className={classes.button}>
+                <Link to={'/register'} className={`${classes.link} ${classes.black}`}>Get Started</Link>
+              </Button>
+            }
             </CardActions>
+
+
           </div>
         </div>
         <div className={classes.optionsContainer}>
           <div className={classes.option}>
             <PollIcon className={`${classes.icon} ${classes.orange}`} />
             <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-              Create
+              Create efficient polls
             </Typography>
             <Typography component="p">
-              Create polls any time anywhere with our online application. No need to install anything, just sign up and start working!
-            </Typography>
-          </div>
-          <div className={classes.option}>
-            <VoteIcon className={`${classes.icon} ${classes.orange}`} />
-            <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-              View
-            </Typography>
-            <Typography component="p">
-              View results of voting on live graphs at any time in easy to understand format for your own polls and for polls you have voted
+              Easy to create polls. Just name your poll, add as many options as you want and save it with one click.
             </Typography>
           </div>
           <div className={classes.option}>
             <ShareIcon className={`${classes.icon} ${classes.orange}`} />
             <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-              Share
+              Share to get results
             </Typography>
             <Typography component="p">
-              Share your polls and polls you like with your friends via direct link or via popular social networks in one-click way
+              Share your polls and polls you like with your friends via direct link or via popular social networks in a one-click way
+            </Typography>
+          </div>
+          <div className={classes.option}>
+            <VoteIcon className={`${classes.icon} ${classes.orange}`} />
+            <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
+              Collect accurate results
+            </Typography>
+            <Typography component="p">
+              View results of voting on live graphs at any time in easy to understand format.
             </Typography>
           </div>
         </div>
