@@ -9,15 +9,22 @@ import withSubscription from './HOCs/withSubscription.jsx';
 
 class PublicPollList extends React.Component {
   render() {
+    const hasPolls = this.props.data.length > 0;
     return (
       this.props.isLoading ?
       <LoadingIndicator />
       :
-      <PollsList
-        polls={this.props.data}
-        title='All Polls'
-        {...this.props}
-      />
+      <div>
+        { hasPolls ?
+          <PollsList
+            polls={this.props.data}
+            title='All Polls'
+            {...this.props}
+          />
+          :
+          <NoPollsView title='All Polls' description="Uh oh, it seems no one has created a poll yet... You can be the first!" />
+        }
+      </div>
     );
   }
 }

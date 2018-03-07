@@ -20,7 +20,7 @@ const PollActions = {
       .catch(err =>
         AppDispatcher.dispatch({
           type: ActionTypes.RECEIVE_ALL_POLLS_FAIL,
-          error: err
+          error: err.response.data.error
         })
       );
   },
@@ -37,11 +37,13 @@ const PollActions = {
           polls: data
         })
       )
-      .catch(err =>
+      .catch(err => {
+
+        console.log(err);
         AppDispatcher.dispatch({
           type: ActionTypes.RECEIVE_POLLS_FAIL,
           error: err
-        })
+        })}
       );
   },
 
@@ -60,7 +62,7 @@ const PollActions = {
       .catch(err =>
         AppDispatcher.dispatch({
           type: ActionTypes.GET_POLL_FAIL,
-          error: err
+          error: err.response.data.error
         })
       );
   },
@@ -77,7 +79,7 @@ const PollActions = {
       .catch(err =>
         AppDispatcher.dispatch({
           type: ActionTypes.ADD_NEW_POLL_FAIL,
-          error: err
+          error: err.response.data.error
         })
       );
   },
@@ -88,7 +90,7 @@ const PollActions = {
         this.getPoll(pollId);
       })
       .catch(err =>
-        console.error(err)
+        console.error(err.response.data.error)
       );
   },
 
@@ -98,7 +100,7 @@ const PollActions = {
         this.loadPolls()
       )
       .catch(err =>
-        console.error(err)
+        console.error(err.response.data.error)
       );
   }
 };
