@@ -60,7 +60,7 @@ function NoPollsView (props) {
         <Typography variant='title' className={classes.title}>
           {title}
         </Typography>
-        <Typography variant='Subheading' className={classes.title}>
+        <Typography variant='subheading' className={classes.title}>
           {description}
         </Typography>
         <CardActions className={classes.actions}>
