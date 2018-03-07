@@ -1,6 +1,8 @@
-* {
+html, body {
   margin: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-html, body { height: 100%}
+canvas {
+  width: 100% !important;
+}
