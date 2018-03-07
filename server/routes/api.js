@@ -5,12 +5,14 @@ const db = require('../utils/databaseUtils.js');
 router.get('/polls', (req, res) => {
   console.log('hello');
   db.listPolls(req.user.id)
-    .then(data => { res.status(200).send(data)
-     // console.log('listPolls', data);
+    .then(data => {
+      res.status(200).send(data)
     })
     .catch(err => {
       console.error(err);
-      res.end();
+      res.status(400).json({
+        message: 'Could not load the polls'
+      });
     });
 });
 
@@ -31,7 +33,9 @@ router.get('/polls/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.end();
+      res.status(400).json({
+        message: 'Could not load the poll'
+      });
     });
 });
 
@@ -44,16 +48,18 @@ router.put('/polls/:id', (req, res) => {
   db.findAndUpdatePoll(pollId, index, userId)
     .then(data => {
       if (data === null) {
-        return res.status(400).json({
-          success: false,
-          message: 'User can vote only once.'
-        });
+        const error = new Error('Unfortunately, you can vote only once!');
+        error.name = 'MultipleVotingError';
+        throw error;
       }
       return res.status(200).send(data)
     })
     .catch(err => {
       console.error(err);
-      res.end();
+      const message = err.name === 'MultipleVotingError' ? err.message : 'Could not process the form';
+      res.status(400).json({
+        message: message
+      });
     });
 });
 
@@ -74,7 +80,6 @@ router.post('/polls', (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(400).json({
-        success: false,
         message: 'Could not process the form.'
       });
     })
@@ -84,9 +89,11 @@ router.delete('/polls/:id', (req, res) => {
   db.deletePoll(req.params.id)
     .then(data => res.status(200).send(data))
     .catch(err => {
-      console.log(err);
-      res.end();
-  });
+        console.log(err);
+        res.status(400).json({
+        message: 'Could not delete the poll.'
+      });
+    });
 });
 
 
