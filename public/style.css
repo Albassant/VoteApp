@@ -2,8 +2,3 @@ html, body {
   margin: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
-
-canvas {
-  width: 100% !important;
-  height: auto !important;
-}

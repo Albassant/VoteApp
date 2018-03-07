@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
+
 
 import { withStyles } from 'material-ui/styles';
-import Card, { CardText, CardHeader, CardContent, CardActions } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import Card from 'material-ui/Card';
 
 
 const styles = {
@@ -23,8 +22,14 @@ const styles = {
   title: {
     margin: '20px 0',
     paddingTop: '20px'
+  },
+  content: {
+    position: 'relative',
+    width:'100%',
+    height:'auto',
   }
 };
+
 
 function VotingChart ({ title, labels, data, classes }) {
   const chartData = {
@@ -74,16 +79,18 @@ function VotingChart ({ title, labels, data, classes }) {
 
   return (
     <Card className={classes.container}>
+    <div className={classes.content}>
       <Bar data={chartData}
         width={50}
         height={25}
         options={{
-          maintainAspectRatio: false
+          maintainAspectRatio: true,
+          responsive: true,
         }}
         options={options}
         plugins={plugins}
-        redraw={true}
       />
+      </div>
     </Card>
   );
 }
