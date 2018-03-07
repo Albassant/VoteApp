@@ -26,7 +26,11 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   item: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+      color: "rgba(0, 0, 0, 0.54)"
+    },
   }
 });
 
