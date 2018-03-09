@@ -45,9 +45,13 @@ const styles = theme => ({
   hide: {
     display: 'none',
   },
-  logo: {
+  leftGroup: {
     flex: 1,
-    cursor: 'pointer'
+  },
+  logo: {
+    display: 'inline-flex',
+    cursor: 'pointer',
+    marginRight: '10px'
   },
   link: {
     textDecoration: 'none',
@@ -101,17 +105,28 @@ class Header extends React.Component {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant='title'
-            color="inherit"
-            noWrap
-            className={classes.logo}
-          >
-            <Link className={classNames(classes.link, classes.white)} to={'/'}>
-              VoteApp!
-            </Link>
-          </Typography>
-
+          <div className={classes.leftGroup}>
+            <Typography
+              variant='title'
+              color="inherit"
+              noWrap
+              className={classes.logo}
+            >
+              <Link className={classNames(classes.link, classes.white)} to={'/'}>
+                VoteApp!
+              </Link>
+            </Typography>
+            <Button color="inherit">
+              <Link to={'/'} className={classNames(classes.link, classes.white)}>
+                About
+              </Link>
+            </Button>
+            <Button color="inherit">
+              <Link to={'/public/polls'} className={classNames(classes.link, classes.white)}>
+                Polls
+              </Link>
+            </Button>
+          </div>
            {Auth.isUserAuthenticated() && (
               <div>
                 <IconButton
@@ -165,7 +180,6 @@ class Header extends React.Component {
                 </Button>
               </div>
             }
-
         </Toolbar>
       </AppBar>
     );

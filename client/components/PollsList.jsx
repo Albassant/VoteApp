@@ -10,26 +10,16 @@ import IconButton from 'material-ui/IconButton';
 import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 import Divider from 'material-ui/Divider';
 
-const footerHeight = 182;
 
 const styles = {
   container: {
-    flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%'
+
   },
   content: {
     position: 'relative',
-    width: '50%',
+    width: '100%',
     minWidth: '350px',
     textAlign: 'center',
-    paddingLeft: '40px',
-    paddingRight: '40px',
   },
   icons: {
     position: 'absolute',
@@ -51,38 +41,36 @@ const styles = {
     color: '#fff'
   }
 }
-
+//<Typography variant='title' className={classes.title}>{title}</Typography>
 function PollsList (props) {
   const { polls,
           onDelete,
-          title,
           classes,
         } = props;
   return (
     <div className={classes.container}>
       <Card className={classes.content} elevation={0}>
-        <Typography variant='title' className={classes.title}>{title}</Typography>
-          <List className="list">
-          {
-            polls.map((poll, key) =>
-            <div key={key}>
-              <ListItem button>
-                <Link  to={`/polls/${poll._id}`} className={classes.link}>
-                  <ListItemText primary={poll.name} secondary={poll.createdAt} />
-                </Link>
+        <List className="list">
+        {
+          polls.map((poll, key) =>
+          <div key={key}>
+            <ListItem button>
+              <Link  to={`/polls/${poll._id}`} className={classes.link}>
+                <ListItemText primary={poll.name} secondary={poll.createdAt} />
+              </Link>
 
-                { onDelete &&
-                  <ListItemSecondaryAction>
-                    <IconButton color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>
-                      <RemoveIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                }
-              </ListItem>
-              <Divider />
-            </div>
-            )
-          }
+              { onDelete &&
+                <ListItemSecondaryAction>
+                  <IconButton color="secondary" className={classes.icons} onClick={(event) => onDelete(poll, event)}>
+                    <RemoveIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              }
+            </ListItem>
+            <Divider />
+          </div>
+          )
+        }
         </List>
       </Card>
     </div>
@@ -92,7 +80,7 @@ function PollsList (props) {
 PollsList.propTypes = {
   classes: PropTypes.object.isRequired,
   polls: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired
+  // title: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(PollsList);

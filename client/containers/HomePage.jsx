@@ -100,15 +100,9 @@ class HomePage extends React.Component {
             </Typography>
             }
             <CardActions className={classes.actions}>
-            { Auth.isUserAuthenticated() ?
               <Button variant='raised' className={classes.button}>
-                <Link to={'/polls'} className={`${classes.link} ${classes.black}`}>My Polls</Link>
+                <Link to={ Auth.isUserAuthenticated() ? '/polls' : '/register' } className={`${classes.link} ${classes.black}`}>Get Started</Link>
               </Button>
-              :
-              <Button variant='raised' className={classes.button}>
-                <Link to={'/register'} className={`${classes.link} ${classes.black}`}>Get Started</Link>
-              </Button>
-            }
             </CardActions>
 
 

@@ -56,19 +56,14 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
               <ListItemText primary="New Poll" />
             </Link>
           </ListItem>
-          <ListItem button>
-            <Link to='/polls' className={classes.item}>
-              <ListItemText primary="My Polls" />
-            </Link>
-          </ListItem>
-          <Divider />
         </div>
         }
         <ListItem button>
             <Link to='/public/polls' className={classes.item}>
-              <ListItemText primary="Explore Polls" />
+              <ListItemText primary="Polls" />
             </Link>
           </ListItem>
+        <Divider />
         <ListItem button>
           <Link to='/' className={classes.item}>
             <ListItemText primary="About" />
