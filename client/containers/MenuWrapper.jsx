@@ -4,15 +4,37 @@ import PropTypes from 'prop-types';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import MenuDrawer from './MenuDrawer.jsx';
-import Shiftable from './HOCs/Shiftable.jsx';
+
+import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
+
+const drawerWidth = 240;
+
+const styles = theme => ({
+  content: {
+    flexGrow: 1,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: 0,
+    height: '100%'
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: drawerWidth
+  },
+})
 
 
 class MenuWrapper extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      openDrawer: false
     };
 
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -20,27 +42,34 @@ class MenuWrapper extends React.Component {
   }
 
   handleDrawerOpen() {
-    this.setState({ open: true });
+    this.setState({ openDrawer: true });
   };
 
   handleDrawerClose() {
-    this.setState({ open: false });
+    this.setState({ openDrawer: false });
   };
 
   render() {
-    const { classes, children } = this.props;
-    const { open } = this.state;
+    const { children, classes, flatHeader } = this.props;
+    const { openDrawer } = this.state;
+
+    // var newChildren = React.Children.map(children, function(child) {
+    //   return React.cloneElement(child, { openDrawer: openDrawer })
+    // });
+
     return (
       <div>
-        <Header openDrawer={open} handleDrawerOpen={this.handleDrawerOpen} />
-        <MenuDrawer open={open} handleDrawerClose={this.handleDrawerClose} />
-        <Shiftable shift={open}>
-          { React.cloneElement(children, {openDrawer: open}) }
-        </Shiftable>
-        <Footer openDrawer={open} />
+        <Header openDrawer={openDrawer} handleDrawerOpen={this.handleDrawerOpen} flat={flatHeader} />
+        <MenuDrawer open={openDrawer} handleDrawerClose={this.handleDrawerClose} />
+        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})}>
+           { children }
+        </div>
+        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})}>
+          <Footer />
+        </div>
       </div>
     );
   }
 }
 
-export default MenuWrapper;
+export default withStyles(styles, { withTheme: true })(MenuWrapper);

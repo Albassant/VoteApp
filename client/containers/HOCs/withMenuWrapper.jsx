@@ -2,11 +2,11 @@ import React from 'react';
 import Menu from '../MenuWrapper.jsx';
 
 
-function withMenuWrapper(WrappedComponent) {
+function withMenuWrapper(WrappedComponent, flatHeader = false) {
   return class extends React.Component {
     render() {
       return (
-        <Menu>
+        <Menu flatHeader={flatHeader}>
           <WrappedComponent {...this.props} />
         </Menu>
       )

@@ -43,7 +43,7 @@ function VotingShare(props) {
     <Card className={classes.container} elevation={0}>
       <CardActions className={classes.actions}>
         <CopyToClipboard onCopy={onCopyClick} text={url}>
-          <Button variant='flat' color='primary' onClick={onCopyClick}>Copy Link</Button>
+          <Button variant='flat' color='primary'>Copy Link</Button>
         </CopyToClipboard>
 
         <FacebookShareButton url={url} className={classes.shareButton} quote={description} hashtag='voteapp'>

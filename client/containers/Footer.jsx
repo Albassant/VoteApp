@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
-
-import Shiftable from './HOCs/Shiftable.jsx';
 
 
 const styles = theme => ({
@@ -41,9 +38,8 @@ const styles = theme => ({
 
 class Footer extends React.Component {
   render() {
-    const { classes, openDrawer } = this.props;
+    const { classes } = this.props;
     return (
-      <Shiftable shift={openDrawer}>
       <footer className={classes.footer}>
         <Typography className={classes.title} variant='subheading' color="inherit" gutterBottom>Quick Links</Typography>
         <div className={classes.container}>
@@ -58,14 +54,12 @@ class Footer extends React.Component {
           <Typography variant='body2' color="inherit" className={classes.copyright}>freeCodeCamp challenge by Valentina</Typography>
         </div>
       </footer>
-      </Shiftable>
     );
   }
 }
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,
-  openDrawer: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Footer);

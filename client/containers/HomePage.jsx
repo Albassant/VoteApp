@@ -152,4 +152,4 @@ HomePage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withMenuWrapper(withStyles(styles, { withTheme: true })(HomePage));
+export default withMenuWrapper(withStyles(styles, { withTheme: true })(HomePage), true);

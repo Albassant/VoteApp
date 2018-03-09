@@ -68,7 +68,6 @@ class UserPollList extends React.Component {
           title='Confirm'
           description={
             `Are you sure you want to delete "${this.pollNameToDelete}"?
-
             This operation cannot be undone.`
           }
         />

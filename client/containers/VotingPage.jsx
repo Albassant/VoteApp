@@ -75,7 +75,6 @@ class VotingPage extends React.Component {
   changeOption(event) {
     const option = event.target.value;
     this.setState({ option });
-    console.log(this.state.option);
   }
 
   handleCopyToClipboard() {
@@ -89,7 +88,7 @@ class VotingPage extends React.Component {
 
   render() {
     const { poll, isLoading, showSnackbar } = this.state;
-    const { classes } = this.props;
+    const { classes, openDrawer } = this.props;
 
     if (!poll) return null;
 
@@ -110,6 +109,7 @@ class VotingPage extends React.Component {
             title={poll.name}
             labels={poll.questions.map(q => q.question)}
             data={poll.questions.map(q => q.rating)}
+            openDrawer={openDrawer}
           />
         }
         { (poll.voted || poll.owner) &&

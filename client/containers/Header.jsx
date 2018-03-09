@@ -11,8 +11,9 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
-
+import AccountCircle from 'material-ui-icons/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -50,11 +51,11 @@ const styles = theme => ({
 
 class Header extends React.Component {
   render() {
-    const { classes, openDrawer, handleDrawerOpen } = this.props;
+    const { classes, openDrawer, handleDrawerOpen, flat } = this.props;
     return (
       <AppBar
         position="fixed"
-        elevation={0}
+        elevation={flat ? 0 : 1}
         className={classNames(classes.appBar, {[classes.appBarShift]: openDrawer})}
       >
         <Toolbar disableGutters={!openDrawer}>
@@ -107,7 +108,8 @@ class Header extends React.Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   openDrawer: PropTypes.bool.isRequired,
-  handleDrawerOpen: PropTypes.func.isRequired
+  handleDrawerOpen: PropTypes.func.isRequired,
+  flat: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Header);
