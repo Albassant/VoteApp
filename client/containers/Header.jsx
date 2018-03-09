@@ -34,24 +34,58 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20,
+    marginRight: 12,
+  },
+  rightButtons: {
+    marginRight: 12,
+  },
+  rightButtonsShift: {
+    marginRight: -12,
   },
   hide: {
     display: 'none',
   },
   logo: {
-    marginRight: 'auto',
+    flex: 1,
     cursor: 'pointer'
   },
   link: {
     textDecoration: 'none',
+  },
+  black: {
+    color: 'rgba(0, 0, 0, 0.87)'
+  },
+  white: {
     color: '#fff'
   }
 });
 
 class Header extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      anchorEl: null
+    };
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleMenu = this.handleMenu.bind(this);
+  }
+
+  handleMenu(event) {
+    this.setState({ anchorEl: event.currentTarget });
+  }
+
+  handleClose() {
+    this.setState({ anchorEl: null });
+  }
+
   render() {
     const { classes, openDrawer, handleDrawerOpen, flat } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
     return (
       <AppBar
         position="fixed"
@@ -73,32 +107,65 @@ class Header extends React.Component {
             noWrap
             className={classes.logo}
           >
-            <Link className={classes.link} to={'/'}>
+            <Link className={classNames(classes.link, classes.white)} to={'/'}>
               VoteApp!
             </Link>
           </Typography>
 
-          { !Auth.isUserAuthenticated() &&
-            <div>
-              <Button color="inherit">
-                <Link to={'/login'} className={classes.link}>
-                  Log in
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to={'/register'} className={classes.link}>
-                  Register
-                </Link>
-              </Button>
-            </div>
-          }
-          { Auth.isUserAuthenticated() &&
-            <Button color="inherit">
-              <Link to={'/logout'} className={classes.link}>
-                Log out
-              </Link>
-            </Button>
-          }
+           {Auth.isUserAuthenticated() && (
+              <div>
+                <IconButton
+                  className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}
+                  aria-owns={open ? 'menu-appbar' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to={'/'} className={classNames(classes.link, classes.black)}>
+                      My Account (TBD)
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to={'/logout'} className={classNames(classes.link, classes.black)}>
+                      Log out
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </div>
+            )}
+
+            { !Auth.isUserAuthenticated() &&
+              <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
+                <Button color="inherit">
+                  <Link to={'/login'} className={classNames(classes.link, classes.white)}>
+                    Log in
+                  </Link>
+                </Button>
+                <Button color="inherit">
+                  <Link to={'/register'} className={classNames(classes.link, classes.white)}>
+                    Register
+                  </Link>
+                </Button>
+              </div>
+            }
+
         </Toolbar>
       </AppBar>
     );
