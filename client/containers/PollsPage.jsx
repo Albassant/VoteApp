@@ -16,10 +16,13 @@ const footerHeight = 182;
 const styles = theme => ({
   container: {
     flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
+    height: `calc(100vh - ${footerHeight}px)`,
     paddingTop: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3,
     boxSizing: 'border-box',
+    overflowY: 'scroll'
+  },
+  content: {
     display: 'flex',
     justifyContent: 'center',
     width: '75%',
@@ -31,6 +34,7 @@ const styles = theme => ({
   toolbar: {
     ...theme.mixins.toolbar,
   },
+
 });
 
 class PollsPage extends React.Component {
@@ -51,10 +55,10 @@ class PollsPage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.container}>
         <div className={classes.toolbar} />
-        <div className={classes.container}>
-          <Tabs tabHeads={this.tabHeads} >
+        <div className={classes.content}>
+          <Tabs tabHeads={this.tabHeads}>
             <UserPollList />
             <PublicPollList />
           </Tabs>
