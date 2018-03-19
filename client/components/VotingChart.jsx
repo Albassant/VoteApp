@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
-
 import { withStyles } from 'material-ui/styles';
 import Card from 'material-ui/Card';
 
@@ -13,8 +12,8 @@ const styles = {
     minWidth: '350px',
     margin: '10px auto',
     textAlign: 'center',
-    paddingLeft: '40px',
-    paddingRight: '40px'
+    padding: '40px',
+    marginTop: '20px'
   },
   actions: {
     justifyContent: 'center',
@@ -31,7 +30,7 @@ const styles = {
 };
 
 
-function VotingChart ({ title, labels, data, classes }) {
+function VotingChart ({ labels, data, classes }) {
   const chartData = {
     labels: labels,
     datasets: [{
@@ -42,9 +41,7 @@ function VotingChart ({ title, labels, data, classes }) {
 
   const options = {
     title: {
-      display: true,
-      text: title,
-      fontSize:24
+      display: false,
     },
     legend: {
       display:false
@@ -79,24 +76,23 @@ function VotingChart ({ title, labels, data, classes }) {
 
   return (
     <Card className={classes.container}>
-    <div className={classes.content}>
-      <Bar data={chartData}
-        width={50}
-        height={25}
-        options={{
-          maintainAspectRatio: true,
-          responsive: true,
-        }}
-        options={options}
-        plugins={plugins}
-      />
+      <div className={classes.content}>
+        <Bar data={chartData}
+          width={50}
+          height={25}
+          options={{
+            maintainAspectRatio: true,
+            responsive: true,
+          }}
+          options={options}
+          plugins={plugins}
+        />
       </div>
     </Card>
   );
 }
 
 VotingChart.propTypes = {
-  title: PropTypes.string.isRequired,
   labels: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired

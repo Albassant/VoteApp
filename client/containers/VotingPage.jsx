@@ -9,6 +9,7 @@ import VotingForm from '../components/VotingForm.jsx';
 import VotingChart from '../components/VotingChart.jsx';
 import VotingShare from '../components/VotingShare.jsx';
 import MessageSnackbar from '../components/MessageSnackbar.jsx';
+import Typography from 'material-ui/Typography';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
@@ -16,15 +17,21 @@ import { withStyles } from 'material-ui/styles';
 
 const footerHeight = 182;
 
-const styles = {
+const styles = theme => ({
   container: {
     flex: 1,
     minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box'
+    paddingTop: theme.spacing.unit * 3,
+    boxSizing: 'border-box',
   },
-}
+  toolbar: {
+    ...theme.mixins.toolbar,
+  },
+  title: {
+    textAlign: 'center',
+    marginTop: '40px'
+  }
+});
 
 function getPollDataFromFlux() {
   return {
@@ -41,7 +48,8 @@ class VotingPage extends React.Component {
     this.state = {
       poll: getPollDataFromFlux(),
       option: '',
-      showSnackbar: false
+      showSnackbar: false,
+      validForm: false,
     }
     this._onChange = this._onChange.bind(this);
 
@@ -74,7 +82,7 @@ class VotingPage extends React.Component {
 
   changeOption(event) {
     const option = event.target.value;
-    this.setState({ option });
+    this.setState({ option, validForm: true });
   }
 
   handleCopyToClipboard() {
@@ -94,17 +102,21 @@ class VotingPage extends React.Component {
 
     return (
       <div className={classes.container}>
+        <div className={classes.toolbar} />
+        <Typography variant='display1' className={classes.title}>
+          {poll.name}
+        </Typography>
         { !poll.voted &&
           <VotingForm
             onSubmit={this.processForm}
             onChange={this.changeOption}
             optionIdx={this.state.option}
             poll={poll}
+            valid={this.state.validForm}
           />
         }
         { (poll.voted || poll.owner) &&
           <VotingChart
-            title={poll.name}
             labels={poll.questions.map(q => q.question)}
             data={poll.questions.map(q => q.rating)}
             openDrawer={openDrawer}
@@ -128,4 +140,4 @@ VotingPage.propTypes = {
 };
 
 
-export default withMenuWrapper(withStyles(styles)(VotingPage));
+export default withMenuWrapper(withStyles(styles, { withTheme: true })(VotingPage));

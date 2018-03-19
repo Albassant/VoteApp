@@ -15,17 +15,16 @@ const styles = theme => ({
   container: {
     width: '50%',
     minWidth: '350px',
-    margin: '10px auto',
+    margin: '0 auto',
     textAlign: 'center',
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing.unit * 3
   },
   actions: {
     justifyContent: 'center',
     marginTop: '10px'
   },
   title: {
-    margin: '20px 0',
-    paddingTop: '20px'
+    marginBottom: '20px',
   }
 })
 
@@ -34,12 +33,13 @@ function VotingForm(props) {
           onSubmit,
           onChange,
           poll,
-          optionIdx
+          optionIdx,
+          valid
         } = props;
   return (
     <Card className={classes.container} elevation={0}>
-      <Typography variant='title' className={classes.title}>
-        {poll.name}
+      <Typography variant='headline' className={classes.title}>
+        Your voice matters!
       </Typography>
 
       <form onSubmit={onSubmit}>
@@ -62,7 +62,7 @@ function VotingForm(props) {
         </FormControl>
 
         <CardActions className={classes.actions}>
-          <Button variant='raised' type="submit" color='primary'>Submit</Button>
+          <Button variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
         </CardActions>
       </form>
     </Card>
@@ -79,3 +79,8 @@ VotingForm.propTypes = {
 
 export default withStyles(styles, { withTheme: true })(VotingForm);
 
+/*
+<Typography variant='title' className={classes.title}>
+        {poll.name}
+      </Typography>
+*/

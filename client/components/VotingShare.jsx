@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { withStyles } from 'material-ui/styles';
-import Card, { CardActions } from 'material-ui/Card';
-
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import {
   FacebookShareButton,
@@ -41,6 +41,9 @@ function VotingShare(props) {
         } = props;
   return (
     <Card className={classes.container} elevation={0}>
+      <CardContent>
+        <Typography variant="subheading">Don't forget to share the poll with your friends!</Typography>
+      </CardContent>
       <CardActions className={classes.actions}>
         <CopyToClipboard onCopy={onCopyClick} text={url}>
           <Button variant='flat' color='primary'>Copy Link</Button>
