@@ -47,7 +47,7 @@ class UserStore extends EventEmitter {
       }
 
       default: {
-          console.log('No such handler in UserStore');
+        //console.log('No such handler in UserStore');
       }
     }
   }

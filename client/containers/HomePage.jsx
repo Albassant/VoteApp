@@ -20,15 +20,11 @@ const styles = theme => ({
     display: 'flex',
     backgroundColor: '#3f51b5',
     color: '#fff',
-    minHeight: '95vh',
+    minHeight: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    boxSizing: 'border-box'
-  },
-  content: {
-    flex: '1 0 100%',
-    display: 'block'
+    boxSizing: 'border-box',
   },
   actions: {
     justifyContent: 'center',
@@ -76,14 +72,19 @@ const styles = theme => ({
   },
   button: {
     backgroundColor: '#fff',
-  }
+  },
+  toolbar: {
+    ...theme.mixins.toolbar,
+  },
 });
-// ${classes.black}
+
 class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
       <div>
+        <div className={classes.toolbar} />
+        <div>
         <div className={classes.container}>
           <div>
             <img src="/logo.png" width='280px' alt="VoteApp logo" />
@@ -104,8 +105,6 @@ class HomePage extends React.Component {
                 <Link to={ Auth.isUserAuthenticated() ? '/polls' : '/register' } className={`${classes.link} ${classes.black}`}>Get Started</Link>
               </Button>
             </CardActions>
-
-
           </div>
         </div>
         <div className={classes.optionsContainer}>
@@ -136,6 +135,7 @@ class HomePage extends React.Component {
               View results of voting on live graphs at any time in easy to understand format.
             </Typography>
           </div>
+        </div>
         </div>
       </div>
     );

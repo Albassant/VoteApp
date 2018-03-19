@@ -53,8 +53,8 @@ class VotingPage extends React.Component {
   }
 
   _onChange() {
-    let poll = getPollDataFromFlux().poll;
-    this.setState({ poll });
+    let state = getPollDataFromFlux();
+    this.setState(state);
   }
 
    componentDidMount() {
@@ -90,11 +90,9 @@ class VotingPage extends React.Component {
     const { poll, isLoading, showSnackbar } = this.state;
     const { classes, openDrawer } = this.props;
 
-    if (!poll) return null;
+    if (isLoading || !poll) return (<LoadingIndicator />);
 
     return (
-      isLoading ?
-      <LoadingIndicator /> :
       <div className={classes.container}>
         { !poll.voted &&
           <VotingForm

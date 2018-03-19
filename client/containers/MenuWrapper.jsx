@@ -16,7 +16,7 @@ const styles = theme => ({
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-    }),
+     }),
     marginLeft: 0,
     height: '100%'
   },
@@ -24,9 +24,12 @@ const styles = theme => ({
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+     }),
     marginLeft: drawerWidth
   },
+  contentWithDrawer: {
+    marginLeft: drawerWidth,
+  }
 })
 
 
@@ -48,23 +51,21 @@ class MenuWrapper extends React.Component {
   handleDrawerClose() {
     this.setState({ openDrawer: false });
   };
-
+// var newChildren = React.Children.map(children, function(child)
+// {
+//   return React.cloneElement(child, { openDrawer: openDrawer })
+// });
   render() {
-    const { children, classes, flatHeader } = this.props;
+    const { classes, children, flatHeader } = this.props;
     const { openDrawer } = this.state;
-
-    // var newChildren = React.Children.map(children, function(child) {
-    //   return React.cloneElement(child, { openDrawer: openDrawer })
-    // });
-
     return (
       <div>
         <Header openDrawer={openDrawer} handleDrawerOpen={this.handleDrawerOpen} flat={flatHeader} />
         <MenuDrawer open={openDrawer} handleDrawerClose={this.handleDrawerClose} />
         <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})}>
-           { children }
+          { children }
         </div>
-        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})}>
+        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})} >
           <Footer />
         </div>
       </div>

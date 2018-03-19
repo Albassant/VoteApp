@@ -18,6 +18,9 @@ import AccountCircle from 'material-ui-icons/AccountCircle';
 const drawerWidth = 240;
 
 const styles = theme => ({
+  // appBar: {
+  //   zIndex: theme.zIndex.drawer + 1,
+  // },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -34,7 +37,9 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 12,
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
   rightButtons: {
     marginRight: 12,
@@ -48,10 +53,16 @@ const styles = theme => ({
   leftGroup: {
     flex: 1,
   },
+  leftButtons: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
   logo: {
     display: 'inline-flex',
     cursor: 'pointer',
-    marginRight: '10px'
+    marginRight: '10px',
+    marginLeft: '12px'
   },
   link: {
     textDecoration: 'none',
@@ -116,12 +127,12 @@ class Header extends React.Component {
                 VoteApp!
               </Link>
             </Typography>
-            <Button color="inherit">
+            <Button color="inherit" className={classes.leftButtons}>
               <Link to={'/'} className={classNames(classes.link, classes.white)}>
                 About
               </Link>
             </Button>
-            <Button color="inherit">
+            <Button color="inherit" className={classes.leftButtons}>
               <Link to={'/public/polls'} className={classNames(classes.link, classes.white)}>
                 Polls
               </Link>

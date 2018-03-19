@@ -25,6 +25,9 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  toolbar: {
+    ...theme.mixins.toolbar,
+  },
   item: {
     textDecoration: 'none',
     '&:hover': {
@@ -33,8 +36,9 @@ const styles = theme => ({
     },
   }
 });
-
+//<div className={classes.toolbar} />
 const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
+  // openDrawer ?
   <Drawer
     variant="persistent"
     open={open}
@@ -45,25 +49,14 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
         <ChevronRightIcon />
       </IconButton>
     </div>
-
-     <Divider />
-
+    <Divider />
       <List>
-        { Auth.isUserAuthenticated() &&
-        <div>
-          <ListItem button>
-            <Link to='/polls/new' className={classes.item}>
-              <ListItemText primary="New Poll" />
-            </Link>
-          </ListItem>
-        </div>
-        }
         <ListItem button>
-            <Link to='/public/polls' className={classes.item}>
-              <ListItemText primary="Polls" />
-            </Link>
+          <Link to='/public/polls' className={classes.item}>
+            <ListItemText primary="Polls" />
+          </Link>
           </ListItem>
-        <Divider />
+
         <ListItem button>
           <Link to='/' className={classes.item}>
             <ListItemText primary="About" />
@@ -71,6 +64,7 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
         </ListItem>
       </List>
   </Drawer>
+  // : null
 )
 
 MenuDrawer.propTypes = {
