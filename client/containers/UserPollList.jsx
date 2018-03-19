@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
@@ -9,6 +10,9 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import withSubscription from './HOCs/withSubscription';
 
 import ConfirmationDialog from '../components/ConfirmationDialog';
+import Button from 'material-ui/Button';
+
+const NewPollLink = props => <Link to="/polls/new" {...props} />
 
 class UserPollList extends React.Component {
 
@@ -52,12 +56,17 @@ class UserPollList extends React.Component {
       :
       <div>
         { hasPolls ?
+          <div>
+          <Button component={NewPollLink} variant="raised" color="primary">
+          Create New Poll
+        </Button>
           <PollsList
             polls={data}
             onDelete={this.handlePollDelete}
             title='My Polls '
             {...this.props}
           />
+          </div>
           :
           <NoPollsView title='My Polls' description="Uh oh, it seems you don't have any polls yet..." />
         }
