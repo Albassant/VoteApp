@@ -68,6 +68,11 @@ class UserStore extends EventEmitter {
     return _user;
   }
 
+  clearLoginData() {
+    _user = '';
+    _message = '';
+  }
+
   emitChange() {
     this.emit(CHANGE_EVENT);
   }
