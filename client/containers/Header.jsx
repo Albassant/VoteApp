@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import classNames from 'classnames';
 
@@ -72,7 +72,19 @@ const styles = theme => ({
   },
   white: {
     color: '#fff'
-  }
+  },
+  navButton: {
+    '&:hover': {
+      backgroundColor: 'inherit',
+      textDecoration: 'underline',
+      color: "rgba(0, 0, 0, 0.54)"
+    },
+    '&:active': {
+      backgroundColor: 'inherit',
+      textDecoration: 'underline',
+      color: "rgba(0, 0, 0, 0.54)"
+    }
+  },
 });
 
 class Header extends React.Component {
@@ -81,7 +93,7 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      anchorEl: null
+      anchorEl: null,
     };
 
     this.handleClose = this.handleClose.bind(this);
@@ -123,19 +135,19 @@ class Header extends React.Component {
               noWrap
               className={classes.logo}
             >
-              <Link className={classNames(classes.link, classes.white)} to={'/'}>
+              <NavLink className={classNames(classes.link, classes.white)} to={'/'}>
                 VoteApp!
-              </Link>
+              </NavLink>
             </Typography>
-            <Button color="inherit" className={classes.leftButtons}>
-              <Link to={'/'} className={classNames(classes.link, classes.white)}>
+            <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
+              <NavLink exact to={'/'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                 About
-              </Link>
+              </NavLink>
             </Button>
             <Button color="inherit" className={classes.leftButtons}>
-              <Link to={'/public/polls'} className={classNames(classes.link, classes.white)}>
+              <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                 Polls
-              </Link>
+              </NavLink>
             </Button>
           </div>
            {Auth.isUserAuthenticated() && (
@@ -164,14 +176,14 @@ class Header extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem onClick={this.handleClose}>
-                    <Link to={'/'} className={classNames(classes.link, classes.black)}>
+                    <NavLink exact to={'/'} className={classNames(classes.link, classes.black)}>
                       My Account (TBD)
-                    </Link>
+                    </NavLink>
                   </MenuItem>
                   <MenuItem onClick={this.handleClose}>
-                    <Link to={'/logout'} className={classNames(classes.link, classes.black)}>
+                    <NavLink to={'/logout'} className={classNames(classes.link, classes.black)}>
                       Log out
-                    </Link>
+                    </NavLink>
                   </MenuItem>
                 </Menu>
               </div>
@@ -180,14 +192,14 @@ class Header extends React.Component {
             { !Auth.isUserAuthenticated() &&
               <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
                 <Button color="inherit">
-                  <Link to={'/login'} className={classNames(classes.link, classes.white)}>
+                  <NavLink to={'/login'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                     Log in
-                  </Link>
+                  </NavLink>
                 </Button>
                 <Button color="inherit">
-                  <Link to={'/register'} className={classNames(classes.link, classes.white)}>
+                  <NavLink to={'/register'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                     Register
-                  </Link>
+                  </NavLink>
                 </Button>
               </div>
             }

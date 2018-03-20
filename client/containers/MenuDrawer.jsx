@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Auth from '../modules/Auth';
 import { withStyles } from 'material-ui/styles';
@@ -9,7 +9,7 @@ import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 
 const drawerWidth = 240;
@@ -52,15 +52,15 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
     <Divider />
       <List>
         <ListItem button>
-          <Link to='/public/polls' className={classes.item}>
+          <NavLink to='/public/polls' className={classes.item} activeStyle={{textDecoration: 'underline'}}>
             <ListItemText primary="Polls" />
-          </Link>
+          </NavLink>
           </ListItem>
 
         <ListItem button>
-          <Link to='/' className={classes.item}>
+          <NavLink exact to='/' className={classes.item} activeStyle={{textDecoration: 'underline'}}>
             <ListItemText primary="About" />
-          </Link>
+          </NavLink>
         </ListItem>
       </List>
   </Drawer>
