@@ -1,7 +1,9 @@
 import React from 'react';
+import Auth from '../modules/Auth';
 
 import PublicPollList from './PublicPollList';
 import UserPollList from './UserPollList';
+import NoPollsView from '../components/NoPollsView';
 
 import Tabs from './Tabs';
 import { withStyles } from 'material-ui/styles';
@@ -59,7 +61,15 @@ class PollsPage extends React.Component {
         <div className={classes.toolbar} />
         <div className={classes.content}>
           <Tabs tabHeads={this.tabHeads} isPublic={isPublic}>
-            <UserPollList />
+            { Auth.isUserAuthenticated()
+              && <UserPollList />
+              || <NoPollsView
+                    title='My Polls'
+                    description="Please, log in first to view your polls"
+                    link='/login'
+                    buttonLabel='Login'
+                  />
+            }
             <PublicPollList />
           </Tabs>
         </div>

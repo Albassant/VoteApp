@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../modules/Auth';
 
 import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
@@ -12,6 +13,7 @@ import MessageSnackbar from '../components/MessageSnackbar.jsx';
 import Typography from 'material-ui/Typography';
 
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
+import NoPollsView from '../components/NoPollsView';
 
 import { withStyles } from 'material-ui/styles';
 
@@ -68,7 +70,11 @@ class VotingPage extends React.Component {
    componentDidMount() {
     const { match: { params } } = this.props;
     PollStore.addChangeListener(this._onChange);
-    PollActions.getPoll(params.id);
+
+    if (Auth.isUserAuthenticated())
+    {
+      PollActions.getPoll(params.id);
+    }
   }
 
   componentWillUnmount() {
@@ -95,6 +101,17 @@ class VotingPage extends React.Component {
   }
 
   render() {
+    if (!Auth.isUserAuthenticated()) {
+      return (
+        <NoPollsView
+          title='Please, authorize'
+          description="Only registered users can view polls and vote. Please, log in first"
+          link='/login'
+          buttonLabel='Login'
+        />
+      );
+    }
+
     const { poll, isLoading, showSnackbar } = this.state;
     const { classes, openDrawer } = this.props;
 

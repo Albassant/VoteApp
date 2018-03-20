@@ -14,7 +14,7 @@ import VotingPage from './containers/VotingPage.jsx';
 
 ReactDOM.render((
     <Router>
-      <div className="root">
+      <div>
         <Route exact path="/" component={HomePage}/>
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />

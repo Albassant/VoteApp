@@ -68,7 +68,12 @@ class UserPollList extends React.Component {
           />
           </div>
           :
-          <NoPollsView title='My Polls' description="Uh oh, it seems you don't have any polls yet..." />
+          <NoPollsView
+            title='My Polls'
+            description="Uh oh, it seems you don't have any polls yet..."
+            link='/polls/new'
+            buttonLabel='Creare New'
+          />
         }
         <ConfirmationDialog
           show={this.state.showConfirmation}

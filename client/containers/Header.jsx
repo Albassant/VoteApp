@@ -79,11 +79,6 @@ const styles = theme => ({
       textDecoration: 'underline',
       color: "rgba(0, 0, 0, 0.54)"
     },
-    '&:active': {
-      backgroundColor: 'inherit',
-      textDecoration: 'underline',
-      color: "rgba(0, 0, 0, 0.54)"
-    }
   },
 });
 
@@ -144,7 +139,7 @@ class Header extends React.Component {
                 About
               </NavLink>
             </Button>
-            <Button color="inherit" className={classes.leftButtons}>
+            <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
               <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                 Polls
               </NavLink>
@@ -191,12 +186,12 @@ class Header extends React.Component {
 
             { !Auth.isUserAuthenticated() &&
               <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
-                <Button color="inherit">
+                <Button color="inherit" className={classes.navButton}>
                   <NavLink to={'/login'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                     Log in
                   </NavLink>
                 </Button>
-                <Button color="inherit">
+                <Button color="inherit" className={classes.navButton}>
                   <NavLink to={'/register'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                     Register
                   </NavLink>

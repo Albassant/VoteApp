@@ -23,7 +23,12 @@ class PublicPollList extends React.Component {
             {...this.props}
           />
           :
-          <NoPollsView title='All Polls' description="Uh oh, it seems no one has created a poll yet... You can be the first!" />
+          <NoPollsView
+            title='All Polls'
+            description="Uh oh, it seems no one has created a poll yet... You can be the first!"
+            link='/polls/new'
+            buttonLabel='Creare New'
+          />
         }
       </div>
     );

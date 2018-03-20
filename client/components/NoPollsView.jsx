@@ -52,6 +52,8 @@ const styles = theme => ({
 function NoPollsView (props) {
   const { title,
           description,
+          link,
+          buttonLabel,
           classes,
         } = props;
   return (
@@ -65,7 +67,7 @@ function NoPollsView (props) {
         </Typography>
         <CardActions className={classes.actions}>
           <Button variant='raised' color='primary'>
-            <Link to={'/polls/new'} className={`${classes.link} ${classes.white}`}>Create Poll</Link>
+            <Link to={link} className={`${classes.link} ${classes.white}`}>{buttonLabel}</Link>
           </Button>
         </CardActions>
       </Card>
@@ -76,7 +78,9 @@ function NoPollsView (props) {
 NoPollsView.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired
 };
 
 export default withStyles(styles, {withTheme: true})(NoPollsView);
