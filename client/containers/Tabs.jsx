@@ -5,9 +5,6 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 
-import MyPollIcon from 'material-ui-icons/Poll';
-import PublicPollIcon from 'material-ui-icons/Public';
-
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
@@ -32,7 +29,7 @@ class TabsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0,
+      value: props.isPublic ? 1 : 0,
     };
 
     this.handleChange = this.handleChange.bind(this);

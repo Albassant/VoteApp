@@ -53,12 +53,12 @@ class PollsPage extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, isPublic } = this.props;
     return (
       <div className={classes.container}>
         <div className={classes.toolbar} />
         <div className={classes.content}>
-          <Tabs tabHeads={this.tabHeads}>
+          <Tabs tabHeads={this.tabHeads} isPublic={isPublic}>
             <UserPollList />
             <PublicPollList />
           </Tabs>
