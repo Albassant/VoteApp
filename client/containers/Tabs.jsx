@@ -37,18 +37,15 @@ class TabsComponent extends React.Component {
   }
 
   handleChange(event, value) {
-    console.log(value);
     this.setState({ value });
   };
 
   handleChangeIndex(index) {
-    console.log(index);
     this.setState({ value: index });
   };
 
   render() {
     const { classes, theme, tabHeads, children } = this.props;
-console.log(children);
     const wrappedChildren = children.map((child, index) => (
       <TabContainer key={index} dir={theme.direction}>{child}</TabContainer>
     ));

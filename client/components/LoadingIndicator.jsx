@@ -2,19 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 
-const footerHeight = 182;
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box'
-  },
-};
+import styles from './commonStyles';
 
 const LoadingIndicator = ({ classes }) => (
   <div className={classes.container}>

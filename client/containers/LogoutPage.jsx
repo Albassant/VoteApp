@@ -2,8 +2,6 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import UserStore from '../stores/UserStore';
 
-import ReactDOM from 'react-dom';
-
 class LogoutPage extends React.Component {
   componentWillMount() {
     // clear token

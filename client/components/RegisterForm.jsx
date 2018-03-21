@@ -7,47 +7,22 @@ import Card, { CardContent, CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
-import green from 'material-ui/colors/green';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
+import commonStyles from './commonStyles';
 
-const footerHeight = 182;
-
-const styles = {
-  container: {
-    flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box',
-  },
-  content: {
-    width: '25%',
-    minWidth: '350px',
-    margin: '0 auto',
-    textAlign: 'center',
-  },
-  actions: {
-    justifyContent: 'center',
-  },
-  field: {
-    margin: '20px 40px'
-  },
-  title: {
-    marginTop: '20px',
-    paddingTop: '20px'
-  },
-  message: {
-    color: green[500],
-    marginTop: '10px'
-  }
-}
+const styles = theme => ({
+  container: commonStyles.container,
+  ...commonStyles.regForms,
+  toolbar: theme.mixins.toolbar
+});
 
 
 function RegisterForm(props) {
   const { classes, errors, message, onChange, onSubmit, user } = props;
   return (
     <div className={classes.container}>
+      <div className={classes.toolbar} />
       <Card className={classes.content}>
         <Typography variant='title' className={classes.title}>
           Register

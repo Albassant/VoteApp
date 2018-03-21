@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
 import Dialog, { DialogActions, DialogContent, DialogTitle, DialogContentText } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
-const styles = {
-
-}
-
 
 function ConfirmationDialog(props) {
-  const { classes,
-          show,
+  const { show,
           title,
           description,
           onContinue,
@@ -46,8 +40,7 @@ ConfirmationDialog.propTypes = {
   show: PropTypes.bool.isRequired,
   onContinue: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ConfirmationDialog);
+export default ConfirmationDialog;
 
