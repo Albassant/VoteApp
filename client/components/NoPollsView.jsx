@@ -13,6 +13,7 @@ import { common, forms } from './commonStyles';
 const styles ={
   container: {
     ...common.container,
+    height: '100%',
     alignItems: 'start'
   },
   content: forms.content,

@@ -15,12 +15,11 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
+import { common } from './commonStyles';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
-  // appBar: {
-  //   zIndex: theme.zIndex.drawer + 1,
-  // },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -64,15 +63,9 @@ const styles = theme => ({
     marginRight: '10px',
     marginLeft: '12px'
   },
-  link: {
-    textDecoration: 'none',
-  },
-  black: {
-    color: 'rgba(0, 0, 0, 0.87)'
-  },
-  white: {
-    color: '#fff'
-  },
+  link: common.link,
+  black: common.black,
+  white: common.white,
   navButton: {
     '&:hover': {
       backgroundColor: 'inherit',

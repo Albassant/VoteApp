@@ -21,6 +21,18 @@ const common = {
   white: {
     color: '#fff'
   },
+  black: {
+    color: 'rgba(0, 0, 0, 0.87)'
+  },
+  blackLight: {
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
+  orange: {
+    color: '#ffb300'
+  },
+  lightOrange: {
+    color: '#ffd54f'
+  },
   title: {
     margin: '20px 0',
     paddingTop: '20px'

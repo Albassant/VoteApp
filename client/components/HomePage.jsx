@@ -14,9 +14,10 @@ import ShareIcon from 'material-ui-icons/Share';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 import classNames from 'classnames';
-import { zoomIn, bounceInDown, bounceInLeft, bounceInRight, fadeIn, fadeInLeft, fadeInRight } from 'react-animations';
 import VisibilitySensor from 'react-visibility-sensor';
 
+import { common  } from './commonStyles';
+import { getStylesForAnimation } from './animations';
 
 const styles = theme => ({
   container: {
@@ -30,22 +31,16 @@ const styles = theme => ({
     boxSizing: 'border-box',
   },
   actions: {
-    justifyContent: 'center',
+    ...common.actions,
     marginTop: 20
   },
   link: {
-    textDecoration: 'none',
+    ...common.link,
     fontWeight: '500'
   },
-  black: {
-    color: 'rgba(0, 0, 0, 0.87)'
-  },
-  blackLight: {
-    color: 'rgba(0, 0, 0, 0.54)'
-  },
-  orange: {
-    color: '#ffb300'
-  },
+  black: common.black,
+  blackLight: common.blackLight,
+  orange: common.orange,
   title: {
     marginBottom: '0.35em',
   },
@@ -71,123 +66,23 @@ const styles = theme => ({
     width: '72px',
     height: '72px'
   },
-  title: {
-    marginBottom: '16px'
-  },
   button: {
     backgroundColor: '#ffb300',
   },
   toolbar: {
     ...theme.mixins.toolbar,
   },
-
   noOpacity: {
     opacity: 0
   },
-
-  fadeIn: {
-    animationName: 'fadeIn',
-    animationDuration: '1s',
-    animationDelay: '1.2s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes fadeIn': {
-    ...fadeIn,
-    to: {
-      opacity: 1
-    },
-  },
-
-  fadeInCenter: {
-    animationName: 'fadeInCenter',
-    animationDuration: '1s',
-    animationDelay: '0.5s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes fadeInCenter': {
-    ...fadeIn,
-    to: {
-      opacity: 1
-    },
-  },
-
-  fadeInLeft: {
-    animationName: 'fadeInLeft',
-    animationDuration: '1s',
-    animationDelay: '0s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes fadeInLeft': {
-    ...fadeInLeft,
-    to: {
-      opacity: 1
-    },
-  },
-
-  fadeInRight: {
-    animationName: 'fadeInRight',
-    animationDuration: '1s',
-    animationDelay: '0s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes fadeInRight': {
-    ...fadeInRight,
-    to: {
-      opacity: 1
-    },
-  },
-
-  zoomIn: {
-    animationName: 'zoomIn',
-    animationDuration: '0.6s',
-    animationDelay: '0s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes zoomIn': {
-    ...zoomIn,
-    to: {
-      opacity: 1
-    },
-  },
-
-  bounceInDown: {
-    animationName: 'bounceInDown',
-    animationDuration: '0.6s',
-    animationDelay: '0.9s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes bounceInDown': {
-    ...bounceInDown,
-    to: {
-      opacity: 1
-    },
-  },
-
-  bounceInLeft: {
-    animationName: 'bounceInLeft',
-    animationDuration: '0.6s',
-    animationDelay: '0.3s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes bounceInLeft': {
-    ...bounceInLeft,
-    to: {
-      opacity: 1
-    },
-  },
-
-  bounceInRight: {
-    animationName: 'bounceInRight',
-    animationDuration: '0.6s',
-    animationDelay: '0.6s',
-    animationFillMode: 'forwards'
-  },
-  '@keyframes bounceInRight': {
-    ...bounceInRight,
-    to: {
-      opacity: 1
-    },
-  }
+  ...getStylesForAnimation('fadeIn', '1s', '1.2s'),
+  ...getStylesForAnimation('fadeInCenter', '1s', '0.5s'),
+  ...getStylesForAnimation('fadeInLeft', '1s', '0s'),
+  ...getStylesForAnimation('fadeInRight', '1s', '0s'),
+  ...getStylesForAnimation('zoomIn', '0.6s', '0s'),
+  ...getStylesForAnimation('bounceInDown', '0.6s', '0.9s'),
+  ...getStylesForAnimation('bounceInLeft', '0.6s', '0.3s'),
+  ...getStylesForAnimation('bounceInRight', '0.6s', '0.6s'),
 });
 
 class HomePage extends React.Component {
@@ -202,10 +97,9 @@ class HomePage extends React.Component {
   }
 
   handleOnVisibilityChange(isVisible) {
-    console.log(isVisible);
-    // if (this.state && isVisible != this.state.optionsVisible) {
-    this.setState({ optionsVisible: isVisible});
-    // }
+    if (this.state && !this.state.optionsVisible) {
+      this.setState({ optionsVisible: isVisible});
+    }
   }
 
   render() {

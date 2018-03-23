@@ -18,6 +18,7 @@ const styles = {
     width: '100%',
     minWidth: '350px',
     textAlign: 'center',
+    height: '100%'
   },
   icons: {
     position: 'absolute',

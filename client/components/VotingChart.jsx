@@ -65,7 +65,7 @@ function VotingChart ({ labels, data, classes }) {
 
         labels.forEach(function(e, i) {
           var bar = meta[key].data[i]._model;
-          bar.backgroundColor = i % 2 == 0 ? '#ffb300' : '#ffd54f';
+          bar.backgroundColor = i % 2 == 0 ? common.orange.color : common.lightOrange.color;
         });
       }
    }];
