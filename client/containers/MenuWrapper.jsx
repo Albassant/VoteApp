@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from './Header.jsx';
+import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
-import MenuDrawer from './MenuDrawer.jsx';
+import MenuDrawer from '../components/MenuDrawer.jsx';
 
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';

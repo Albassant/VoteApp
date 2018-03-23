@@ -13,7 +13,6 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // set the initial component state
     this.state = {
       errors: UserStore.getErrors(),
       message: UserStore.getMessage(),

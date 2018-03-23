@@ -5,7 +5,7 @@ import PublicPollList from './PublicPollList';
 import UserPollList from './UserPollList';
 import NoPollsView from '../components/NoPollsView';
 
-import Tabs from './Tabs';
+import Tabs from '../components/Tabs';
 import { withStyles } from 'material-ui/styles';
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 

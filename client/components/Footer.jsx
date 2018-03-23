@@ -9,10 +9,10 @@ const styles = {
     backgroundColor: '#e0e0e0',
     color: 'rgba(0, 0, 0, 0.87)',
     padding: '16px',
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0
+    // position: 'fixed',
+    // bottom: 0,
+    // left: 0,
+    // right: 0
   },
   title: {
     padding: '16px',

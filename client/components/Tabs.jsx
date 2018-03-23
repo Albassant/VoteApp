@@ -5,9 +5,9 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 
-function TabContainer({ children, dir }) {
+function TabContainer({ children }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3 }}>
       {children}
     </Typography>
   );
@@ -15,7 +15,6 @@ function TabContainer({ children, dir }) {
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
 };
 
 const styles = {
@@ -45,9 +44,9 @@ class TabsComponent extends React.Component {
   };
 
   render() {
-    const { classes, theme, tabHeads, children } = this.props;
+    const { classes, tabHeads, children } = this.props;
     const wrappedChildren = children.map((child, index) => (
-      <TabContainer key={index} dir={theme.direction}>{child}</TabContainer>
+      <TabContainer key={index}>{child}</TabContainer>
     ));
 
     const tabs = tabHeads.map((tab, index) => (
@@ -69,7 +68,6 @@ class TabsComponent extends React.Component {
           </Tabs>
         </div>
         <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
@@ -82,8 +80,7 @@ class TabsComponent extends React.Component {
 
 TabsComponent.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
   tabHeads: PropTypes.array.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(TabsComponent);
+export default withStyles(styles)(TabsComponent);

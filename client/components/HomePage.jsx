@@ -12,7 +12,7 @@ import PollIcon from 'material-ui-icons/Assignment';
 import VoteIcon from 'material-ui-icons/Assessment';
 import ShareIcon from 'material-ui-icons/Share';
 
-import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
+import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 import classNames from 'classnames';
 import { zoomIn, bounceInDown, bounceInLeft, bounceInRight, fadeIn, fadeInLeft, fadeInRight } from 'react-animations';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -55,7 +55,8 @@ const styles = theme => ({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     textAlign: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    overflow: 'hidden'
   },
   option: {
     flex: 1,

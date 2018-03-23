@@ -4,35 +4,32 @@ import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
 import NoPollsView from '../components/NoPollsView';
 
-//TODO: create withLoadingIndicator HOC
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import withSubscription from './HOCs/withSubscription.jsx';
 
-class PublicPollList extends React.Component {
-  render() {
-    const hasPolls = this.props.data.length > 0;
-    return (
-      this.props.isLoading ?
-      <LoadingIndicator />
-      :
-      <div>
-        { hasPolls ?
-          <PollsList
-            polls={this.props.data}
-            title='All Polls'
-            {...this.props}
-          />
-          :
-          <NoPollsView
-            title='All Polls'
-            description="Uh oh, it seems no one has created a poll yet... You can be the first!"
-            link='/polls/new'
-            buttonLabel='Creare New'
-          />
-        }
-      </div>
-    );
-  }
-}
+function PublicPollList(props) {
+  const hasPolls = props.data.length > 0;
+  return (
+    props.isLoading ?
+    <LoadingIndicator />
+    :
+    <div>
+      { hasPolls ?
+        <PollsList
+          polls={props.data}
+          title='All Polls'
+          {...props}
+        />
+        :
+        <NoPollsView
+          title='All Polls'
+          description="Uh oh, it seems no one has created a poll yet... You can be the first!"
+          link='/polls/new'
+          buttonLabel='Creare New'
+        />
+      }
+    </div>
+  )
+};
 
 export default withSubscription(PublicPollList, PollStore.getAllPolls, PollActions.loadAllPolls);

@@ -5,7 +5,6 @@ import PollStore from '../stores/PollStore';
 import PollsList from '../components/PollsList';
 import NoPollsView from '../components/NoPollsView';
 
-//FIXME: create withLoadingIndicator HOC
 import LoadingIndicator from '../components/LoadingIndicator';
 import withSubscription from './HOCs/withSubscription';
 

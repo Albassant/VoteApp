@@ -6,7 +6,7 @@ import LogoutPage from './containers/LogoutPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import RegisterPage from './containers/RegisterPage.jsx';
 
-import HomePage from './containers/HomePage.jsx';
+import HomePage from './components/HomePage.jsx';
 import PollsPage from './containers/PollsPage.jsx';
 import NewPollPage from './containers/NewPollPage.jsx';
 import VotingPage from './containers/VotingPage.jsx';
