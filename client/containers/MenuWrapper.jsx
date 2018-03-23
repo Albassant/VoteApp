@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from './Header.jsx';
-import Footer from './Footer.jsx';
+import Footer from '../components/Footer.jsx';
 import MenuDrawer from './MenuDrawer.jsx';
 
 import { withStyles } from 'material-ui/styles';

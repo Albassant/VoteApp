@@ -9,11 +9,13 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
-import commonStyles from './commonStyles';
+import { common, regForms } from './commonStyles';
 
 const styles = theme => ({
-  container: commonStyles.container,
-  ...commonStyles.regForms,
+  container: common.container,
+  actions: common.actions,
+  title: common.title,
+  ...regForms,
   toolbar: theme.mixins.toolbar
 });
 

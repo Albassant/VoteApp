@@ -11,33 +11,15 @@ import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 
 const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
-const footerHeight = 182;
+import { common, forms } from './commonStyles';
 
 const styles = {
-  container: {
-    flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box'
-  },
-  content: {
-    width: '50%',
-    minWidth: '350px',
-    margin: '0px auto',
-    textAlign: 'center',
-  },
-  actions: {
-    justifyContent: 'center',
-  },
+  container: common.container,
+  ...forms,
+  actions: common.actions,
+  title: common.title,
   button: {
     margin: '10px'
-  },
-  field: {
-    margin: '20px auto',
-    position: 'relative',
-    display: 'inline-block',
-    width: '80%'
   },
   icons: {
     position: 'absolute',
@@ -45,23 +27,18 @@ const styles = {
     top: '0px',
     cursor: 'pointer'
   },
-  title: {
-    margin: '20px 0',
-    paddingTop: '20px'
-  }
 }
 
-function PollForm(props) {
-  const { classes,
-          onSubmit,
-          onChangeName,
-          onChangeOptions,
-          onAddOption,
-          onRemoveOption,
-          poll,
-          valid } = props;
-  return (
-    <div className={classes.container}>
+
+const PollForm = ({ classes,
+                    onSubmit,
+                    onChangeName,
+                    onChangeOptions,
+                    onAddOption,
+                    onRemoveOption,
+                    poll,
+                    valid }) => (
+  <div className={classes.container}>
     <Card className={classes.content}>
       <Typography variant='title' className={classes.title}>
         New Poll
@@ -111,9 +88,9 @@ function PollForm(props) {
 
       </form>
     </Card>
-    </div>
-  )
-};
+  </div>
+)
+
 
 PollForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

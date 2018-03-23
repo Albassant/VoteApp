@@ -10,6 +10,7 @@ import { FormControl, FormControlLabel } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
+import { common } from './commonStyles';
 
 const styles = theme => ({
   container: {
@@ -20,7 +21,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3
   },
   actions: {
-    justifyContent: 'center',
+    ...common.actions,
     marginTop: '10px'
   },
   title: {
@@ -28,46 +29,44 @@ const styles = theme => ({
   }
 })
 
-function VotingForm(props) {
-  const { classes,
-          onSubmit,
-          onChange,
-          poll,
-          optionIdx,
-          valid
-        } = props;
-  return (
-    <Card className={classes.container} elevation={0}>
-      <Typography variant='headline' className={classes.title}>
-        Your voice matters!
-      </Typography>
+const VotingForm = ({ classes,
+                      onSubmit,
+                      onChange,
+                      poll,
+                      optionIdx,
+                      valid
+                    }) => (
+  <Card className={classes.container} elevation={0}>
+    <Typography variant='headline' className={classes.title}>
+      Your voice matters!
+    </Typography>
 
-      <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
 
-        <FormControl component="fieldset">
-          <RadioGroup
-            name={poll._id}
-            className={classes.group}
-            value={optionIdx}
-            onChange={onChange}
-          >
-            { poll.questions ?
-            poll.questions.map((option, key) =>
-              <FormControlLabel
-              key={key}
-              value={`${key}`} control={<Radio />} label={option.question} />
-             ) : null
-            }
-          </RadioGroup>
-        </FormControl>
+      <FormControl component="fieldset">
+        <RadioGroup
+          name={poll._id}
+          className={classes.group}
+          value={optionIdx}
+          onChange={onChange}
+        >
+          { poll.questions ?
+          poll.questions.map((option, key) =>
+            <FormControlLabel
+            key={key}
+            value={`${key}`} control={<Radio />} label={option.question} />
+           ) : null
+          }
+        </RadioGroup>
+      </FormControl>
 
-        <CardActions className={classes.actions}>
-          <Button variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
-        </CardActions>
-      </form>
-    </Card>
-  )
-};
+      <CardActions className={classes.actions}>
+        <Button variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
+      </CardActions>
+    </form>
+  </Card>
+)
+
 
 VotingForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

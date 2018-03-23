@@ -25,54 +25,52 @@ const styles = {
 }
 
 
-function VotingFormDialog(props) {
-  const { classes,
-          show,
-          onSubmit,
-          onChange,
-          onClose,
-          poll,
-          optionIdx
-        } = props;
-  return (
-    <Dialog
-      open={show}
-      onClose={onClose}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogTitle id="form-dialog-title">{poll.name}</DialogTitle>
-      <DialogContent>
-        <FormControl component="fieldset">
-          <RadioGroup
-            name={poll._id}
-            className={classes.group}
-            value={optionIdx}
-            onChange={onChange}
-          >
-            { poll.questions ?
-                poll.questions.map((option, key) =>
-                  <FormControlLabel
-                  key={key}
-                  value={`${key}`} control={<Radio />} label={option.question} />
-                 )
-                :
-                null
-            }
-          </RadioGroup>
-        </FormControl>
-      </DialogContent>
+const VotingFormDialog = ({ classes,
+                            show,
+                            onSubmit,
+                            onChange,
+                            onClose,
+                            poll,
+                            optionIdx
+                          }) => (
+  <Dialog
+    open={show}
+    onClose={onClose}
+    aria-labelledby="form-dialog-title"
+  >
+    <DialogTitle id="form-dialog-title">{poll.name}</DialogTitle>
+    <DialogContent>
+      <FormControl component="fieldset">
+        <RadioGroup
+          name={poll._id}
+          className={classes.group}
+          value={optionIdx}
+          onChange={onChange}
+        >
+          { poll.questions ?
+              poll.questions.map((option, key) =>
+                <FormControlLabel
+                key={key}
+                value={`${key}`} control={<Radio />} label={option.question} />
+               )
+              :
+              null
+          }
+        </RadioGroup>
+      </FormControl>
+    </DialogContent>
 
-      <DialogActions>
-        <Button variant='raised' type="submit" color='primary' onClick={onSubmit}>
-          Submit
-        </Button>
-        <Button variant='raised' type="submit" color='secondary' onClick={onClose}>
-          Cancel
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-};
+    <DialogActions>
+      <Button variant='raised' type="submit" color='primary' onClick={onSubmit}>
+        Submit
+      </Button>
+      <Button variant='raised' type="submit" color='secondary' onClick={onClose}>
+        Cancel
+      </Button>
+    </DialogActions>
+  </Dialog>
+)
+
 
 VotingFormDialog.propTypes = {
   show: PropTypes.bool.isRequired,

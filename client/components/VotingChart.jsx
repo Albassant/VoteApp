@@ -5,6 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { withStyles } from 'material-ui/styles';
 import Card from 'material-ui/Card';
 
+import { common } from './commonStyles';
 
 const styles = {
   container: {
@@ -15,13 +16,8 @@ const styles = {
     padding: '40px',
     marginTop: '20px'
   },
-  actions: {
-    justifyContent: 'center',
-  },
-  title: {
-    margin: '20px 0',
-    paddingTop: '20px'
-  },
+  actions: common.actions,
+  title: common.title,
   content: {
     position: 'relative',
     width:'100%',

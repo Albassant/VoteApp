@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 
-import styles from './commonStyles';
+import { common } from './commonStyles';
 
 const LoadingIndicator = ({ classes }) => (
   <div className={classes.container}>
@@ -10,5 +10,5 @@ const LoadingIndicator = ({ classes }) => (
   </div>
 )
 
-export default withStyles(styles)(LoadingIndicator);
+export default withStyles(common)(LoadingIndicator);
 

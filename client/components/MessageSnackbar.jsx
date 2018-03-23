@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
 import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
@@ -14,7 +14,7 @@ const styles = theme => ({
   },
 });
 
-const MessageSnackbar = ({ show, message, classes, handleClose, showActionButton, handleAction }) => (
+const MessageSnackbar = ({ show, message, classes, handleClose }) => (
   <Snackbar
     anchorOrigin={{
       vertical: 'bottom',
@@ -42,10 +42,3 @@ MessageSnackbar.propTypes = {
 };
 
 export default withStyles(styles, {withTheme: true})(MessageSnackbar);
-
-/*
-<Button key="copy" color="secondary" size="small" onClick={handleAction} hidden={!showActionButton}>
-        Copy Link
-      </Button>,
-
-*/

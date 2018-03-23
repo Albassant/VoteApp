@@ -1,79 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
-const footerHeight = 182;
+import { common, forms } from './commonStyles';
 
-const styles = theme => ({
+const styles ={
   container: {
-    flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-    boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%'
+    ...common.container,
+    alignItems: 'start'
   },
-  content: {
-    position: 'relative',
-    width: '50%',
-    minWidth: '350px',
-    textAlign: 'center',
-    paddingLeft: '40px',
-    paddingRight: '40px',
-  },
+  content: forms.content,
+  title: common.title,
+  actions: common.actions,
   icons: {
     position: 'absolute',
     right: '10px',
     top: '10px',
     cursor: 'pointer'
   },
-  title: {
-    margin: '20px 0',
-    paddingTop: '20px'
-  },
-  actions: {
-    justifyContent: 'center',
-  },
-  link: {
-    textDecoration: 'none',
-  },
-  white: {
-    color: '#fff'
-  }
-})
+  link: common.link,
+  white: common.white,
+}
 
-function NoPollsView (props) {
-  const { title,
-          description,
-          link,
-          buttonLabel,
-          classes,
-        } = props;
-  return (
-    <div className={classes.container}>
-      <Card className={classes.content} elevation={0}>
-        <Typography variant='title' className={classes.title}>
-          {title}
-        </Typography>
-        <Typography variant='subheading' className={classes.title}>
-          {description}
-        </Typography>
-        <CardActions className={classes.actions}>
-          <Button variant='raised' color='primary'>
-            <Link to={link} className={`${classes.link} ${classes.white}`}>{buttonLabel}</Link>
-          </Button>
-        </CardActions>
-      </Card>
-    </div>
-  )
-};
+const NoPollsView = ({ title, description, link, buttonLabel, classes }) => (
+  <div className={classes.container}>
+    <Card className={classes.content} elevation={0}>
+      <Typography variant='title' className={classes.title}>
+        {title}
+      </Typography>
+      <Typography variant='subheading' className={classes.title}>
+        {description}
+      </Typography>
+      <CardActions className={classes.actions}>
+        <Button variant='raised' color='primary'>
+          <Link to={link} className={classNames(classes.link, classes.white)}>{buttonLabel}</Link>
+        </Button>
+      </CardActions>
+    </Card>
+  </div>
+)
 
 NoPollsView.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -83,4 +54,4 @@ NoPollsView.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 };
 
-export default withStyles(styles, {withTheme: true})(NoPollsView);
+export default withStyles(styles)(NoPollsView);

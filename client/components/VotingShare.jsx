@@ -16,16 +16,18 @@ import {
   GooglePlusIcon
 } from 'react-share';
 
+import { common, forms } from './commonStyles';
+
 const styles = theme => ({
   container: {
     width: '50%',
     minWidth: '350px',
     margin: '10px auto',
     textAlign: 'center',
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing.unit * 4,
   },
   actions: {
-    justifyContent: 'center',
+    ...common.actions,
     marginTop: '10px'
   },
   shareButton: {
@@ -33,38 +35,36 @@ const styles = theme => ({
   }
 })
 
-function VotingShare(props) {
-  const { classes,
-          onCopyClick,
-          url,
-          description
-        } = props;
-  return (
-    <Card className={classes.container} elevation={0}>
-      <CardContent>
-        <Typography variant="subheading">Don't forget to share the poll with your friends!</Typography>
-      </CardContent>
-      <CardActions className={classes.actions}>
-        <CopyToClipboard onCopy={onCopyClick} text={url}>
-          <Button variant='flat' color='primary'>Copy Link</Button>
-        </CopyToClipboard>
+const VotingShare = ({ classes,
+                    onCopyClick,
+                    url,
+                    description
+                  }) => (
+  <Card className={classes.container} elevation={0}>
+    <CardContent>
+      <Typography variant="subheading">Don't forget to share the poll with your friends!</Typography>
+    </CardContent>
+    <CardActions className={classes.actions}>
+      <CopyToClipboard onCopy={onCopyClick} text={url}>
+        <Button variant='flat' color='primary'>Copy Link</Button>
+      </CopyToClipboard>
 
-        <FacebookShareButton url={url} className={classes.shareButton} quote={description} hashtag='voteapp'>
-          <FacebookIcon round size={32} />
-        </FacebookShareButton>
+      <FacebookShareButton url={url} className={classes.shareButton} quote={description} hashtag='voteapp'>
+        <FacebookIcon round size={32} />
+      </FacebookShareButton>
 
-        <GooglePlusShareButton url={url} className={classes.shareButton}>
-          <GooglePlusIcon round size={32} />
-        </GooglePlusShareButton>
+      <GooglePlusShareButton url={url} className={classes.shareButton}>
+        <GooglePlusIcon round size={32} />
+      </GooglePlusShareButton>
 
-        <TwitterShareButton url={url} className={classes.shareButton} title={description} hashtag='voteapp'>
-          <TwitterIcon round size={32} />
-        </TwitterShareButton>
+      <TwitterShareButton url={url} className={classes.shareButton} title={description} hashtag='voteapp'>
+        <TwitterIcon round size={32} />
+      </TwitterShareButton>
 
-      </CardActions>
-    </Card>
-  )
-};
+    </CardActions>
+  </Card>
+)
+
 
 VotingShare.propTypes = {
   onCopyClick: PropTypes.func.isRequired,
