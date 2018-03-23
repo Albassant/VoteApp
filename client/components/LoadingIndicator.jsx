@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 
-import { common } from './commonStyles';
+import { common } from './styles/commonStyles';
 
 const styles = {
   container: {

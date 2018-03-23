@@ -16,7 +16,7 @@ import {
   GooglePlusIcon
 } from 'react-share';
 
-import { common, forms } from './commonStyles';
+import { common } from './styles/commonStyles';
 
 const styles = theme => ({
   container: {

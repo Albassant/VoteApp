@@ -10,7 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 import Divider from 'material-ui/Divider';
 
-import { common } from './commonStyles';
+import { common } from './styles/commonStyles';
 
 const styles = {
   content: {

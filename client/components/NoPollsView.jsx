@@ -8,7 +8,7 @@ import Card, { CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
-import { common, forms } from './commonStyles';
+import { common, forms } from './styles/commonStyles';
 
 const styles ={
   container: {

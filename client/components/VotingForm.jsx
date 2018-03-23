@@ -10,7 +10,7 @@ import { FormControl, FormControlLabel } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
-import { common } from './commonStyles';
+import { common } from './styles/commonStyles';
 
 const styles = theme => ({
   container: {

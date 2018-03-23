@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { withStyles } from 'material-ui/styles';
 import Card from 'material-ui/Card';
 
-import { common } from './commonStyles';
+import { common } from './styles/commonStyles';
 
 const styles = {
   container: {

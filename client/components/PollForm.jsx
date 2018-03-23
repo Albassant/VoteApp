@@ -11,7 +11,7 @@ import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 
 const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
-import { common, forms } from './commonStyles';
+import { common, forms } from './styles/commonStyles';
 
 const styles = {
   container: common.container,

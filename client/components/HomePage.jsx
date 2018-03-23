@@ -16,8 +16,8 @@ import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 import classNames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
 
-import { common  } from './commonStyles';
-import { getStylesForAnimation } from './animations';
+import { common  } from './styles/commonStyles';
+import { getStylesForAnimation } from './styles/animations';
 
 const styles = theme => ({
   container: {

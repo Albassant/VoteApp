@@ -9,7 +9,7 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
-import { common, regForms } from './commonStyles';
+import { common, regForms } from './styles/commonStyles';
 
 const styles = theme => ({
   container: common.container,
