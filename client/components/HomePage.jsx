@@ -24,7 +24,7 @@ const styles = theme => ({
     display: 'flex',
     backgroundColor: '#3f51b5',
     color: '#fff',
-    minHeight: '90vh',
+    height: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',

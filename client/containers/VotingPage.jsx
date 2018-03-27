@@ -71,8 +71,10 @@ class VotingPage extends React.Component {
     const { match: { params } } = this.props;
     PollStore.addChangeListener(this._onChange);
 
+    console.log('voting')
     if (Auth.isUserAuthenticated())
     {
+      console.log('voting isUserAuthenticated')
       PollActions.getPoll(params.id);
     }
   }

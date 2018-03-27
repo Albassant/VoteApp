@@ -53,7 +53,7 @@ const VotingForm = ({ classes,
           { poll.questions ?
           poll.questions.map((option, key) =>
             <FormControlLabel
-            key={key}
+            key={option}
             value={`${key}`} control={<Radio />} label={option.question} />
            ) : null
           }

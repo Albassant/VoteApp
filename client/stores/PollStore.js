@@ -85,13 +85,13 @@ class PollStore extends EventEmitter {
 
         case AppConstants.ADD_NEW_POLL_SUCCESS: {
             _poll = action.poll;
-            this.emitMessageReceived();
+            this.emitChange();
             break;
         }
 
         case AppConstants.ADD_NEW_POLL_FAIL: {
             _loadingError = action.error;
-            this.emitMessageReceived();
+            this.emitChange();
             break;
         }
 

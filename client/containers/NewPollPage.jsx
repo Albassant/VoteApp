@@ -25,19 +25,21 @@ class NewPollPage extends React.Component {
     this.removePollOption = this.removePollOption.bind(this);
     this.formValidation = this.formValidation.bind(this);
 
-    this._handleMessageReceived = this._handleMessageReceived.bind(this);
+    this._handleChange = this._handleChange.bind(this);
   }
 
   processForm(event) {
     event.preventDefault();
-    PollStore.addMessageReceivedListener(this._handleMessageReceived);
+    PollStore.addChangeListener(this._handleChange);
+    console.log('create poll');
     PollActions.createPoll(this.state.poll);
   }
 
-  _handleMessageReceived() {
-    PollStore.removeMessageReceivedListener(this._handleMessageReceived);
+  _handleChange() {
+    PollStore.removeChangeListener(this._handleChange);
 
     const poll = PollStore.getPoll();
+    console.log('got id of created poll');
     this.props.history.push(`/polls/${poll._id}`);
   }
 

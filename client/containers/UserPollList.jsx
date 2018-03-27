@@ -71,7 +71,7 @@ class UserPollList extends React.Component {
             title='My Polls'
             description="Uh oh, it seems you don't have any polls yet..."
             link='/polls/new'
-            buttonLabel='Creare New'
+            buttonLabel='Create New'
           />
         }
         <ConfirmationDialog

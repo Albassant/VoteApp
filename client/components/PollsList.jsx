@@ -37,8 +37,8 @@ const PollsList = ({ polls, onDelete, classes}) => (
     <Card className={classes.content} elevation={0}>
       <List className="list">
       {
-        polls.map((poll, key) =>
-        <div key={key}>
+        polls.map((poll) =>
+        <div key={poll._id}>
           <ListItem button>
             <Link to={`/polls/${poll._id}`} className={classes.link}>
               <ListItemText primary={poll.name} secondary={poll.createdAt} />

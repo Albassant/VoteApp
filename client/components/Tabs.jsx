@@ -49,8 +49,8 @@ class TabsComponent extends React.Component {
       <TabContainer key={index}>{child}</TabContainer>
     ));
 
-    const tabs = tabHeads.map((tab, index) => (
-      <Tab key={index} label={tab.label} icon={<tab.icon />} />
+    const tabs = tabHeads.map((tab) => (
+      <Tab key={tab.label} label={tab.label} icon={<tab.icon />} />
     ));
 
     return (

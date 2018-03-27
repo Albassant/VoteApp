@@ -18,7 +18,7 @@ const footerHeight = 182;
 const styles = theme => ({
   container: {
     flex: 1,
-    //height: `calc(100vh - ${footerHeight}px)`,
+    minHeight: `calc(100vh - ${footerHeight}px)`,
     paddingTop: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3,
     boxSizing: 'border-box',

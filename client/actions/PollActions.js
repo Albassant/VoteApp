@@ -48,9 +48,9 @@ const PollActions = {
   },
 
   getPoll(pollId) {
-    AppDispatcher.dispatch({
-      type: ActionTypes.GET_POLL_REQUEST
-    });
+    // AppDispatcher.dispatch({
+    //   type: ActionTypes.GET_POLL_REQUEST
+    // });
 
     API.getPoll(pollId)
       .then(({ data }) =>
@@ -59,29 +59,30 @@ const PollActions = {
           poll: data
         })
       )
-      .catch(err =>
+      .catch(err => {
         AppDispatcher.dispatch({
           type: ActionTypes.GET_POLL_FAIL,
           error: err.response.data.error
         })
-      );
+      });
   },
 
   createPoll(poll) {
     API.createPoll(poll)
       .then(({ data }) => {
-        this.loadPolls();
+        console.log('success');
         AppDispatcher.dispatch({
           type: ActionTypes.ADD_NEW_POLL_SUCCESS,
           poll: data
         })
       })
-      .catch(err =>
-        AppDispatcher.dispatch({
-          type: ActionTypes.ADD_NEW_POLL_FAIL,
-          error: err.response.data.error
-        })
-      );
+      .catch(err => {
+        console.log(err);
+        // AppDispatcher.dispatch({
+        //   type: ActionTypes.ADD_NEW_POLL_FAIL,
+        //   error: err.response.data.error
+        // })
+      });
   },
 
   updatePoll(pollId, optionIdx) {
