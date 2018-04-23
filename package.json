@@ -7,7 +7,7 @@
   "description": "Application for easy poll creation",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "babel-register server",
     "debug": "rimraf ./public/build && webpack && babel-register server",
     "build": "rimraf ./public/build && webpack -p",
     "watch": "webpack --watch",
