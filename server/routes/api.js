@@ -24,7 +24,7 @@ router.get('/polls/:id', (req, res) => {
       data = data.toObject();
       data.owner = data.user == userId;
       data.voted = Boolean(data.votedusers.find(el => el == userId));
-      data.url = `https://voteapp-albassant.c9users.io/polls/${data._id}`;
+      data.url = `${process.env.MY_URL}${data._id}`;
       delete data.votedusers;
       delete data.user;
       //endoftodo
@@ -71,7 +71,7 @@ router.post('/polls', (req, res) => {
       data = data.toObject();
       data.owner = data.user == userId;
       data.voted = Boolean(data.votedusers.find(el => el == userId));
-      data.url = `https://voteapp-albassant.c9users.io/polls/${data._id}`;
+      data.url = `${process.env.MY_URL}${data._id}`;
       delete data.votedusers;
       delete data.user;
       res.status(200).send(data)
