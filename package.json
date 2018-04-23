@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server",
     "debug": "rimraf ./public/build && webpack && babel-register server",
-    "build": "webpack -p",
+    "build": "rimraf ./public/build && webpack -p",
     "watch": "webpack --watch",
     "runServer": "babel-register server"
   },
