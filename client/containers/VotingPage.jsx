@@ -25,13 +25,13 @@ const styles = theme => ({
     minHeight: `calc(100vh - ${footerHeight}px)`,
     paddingTop: theme.spacing.unit * 3,
     boxSizing: 'border-box',
+    overflowY: 'scroll'
   },
   toolbar: {
     ...theme.mixins.toolbar,
   },
   title: {
     textAlign: 'center',
-    marginTop: '40px'
   }
 });
 

@@ -62,7 +62,7 @@ const PollForm = ({ classes,
         <Typography variant="subheading">Options</Typography>
         {
           poll.options.map((opt, i) =>
-             <div key={opt} className={classes.field}>
+             <div key={i} className={classes.field}>
               <TextField
                 name={`${i}`}
                 onChange={onChangeOptions}

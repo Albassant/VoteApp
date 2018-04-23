@@ -56,15 +56,15 @@ class UserPollList extends React.Component {
       <div>
         { hasPolls ?
           <div>
-          <Button component={NewPollLink} variant="raised" color="primary">
-          Create New Poll
-        </Button>
-          <PollsList
-            polls={data}
-            onDelete={this.handlePollDelete}
-            title='My Polls '
-            {...this.props}
-          />
+            <Button component={NewPollLink} variant="raised" color="primary">
+            Create New Poll
+            </Button>
+            <PollsList
+              polls={data}
+              onDelete={this.handlePollDelete}
+              title='My Polls '
+              {...this.props}
+            />
           </div>
           :
           <NoPollsView

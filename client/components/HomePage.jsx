@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
 import PollIcon from 'material-ui-icons/Assignment';
-import VoteIcon from 'material-ui-icons/Assessment';
+import ResultIcon from 'material-ui-icons/Assessment';
 import ShareIcon from 'material-ui-icons/Share';
 
 import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
@@ -131,38 +131,46 @@ class HomePage extends React.Component {
         </div>
         <VisibilitySensor onChange={this.handleOnVisibilityChange} partialVisibility={'bottom'} offset={{bottom: -300}}>
           <div className={classes.optionsContainer}>
-            <div className={classNames(classes.option, classes.noOpacity, optionsVisible && classes.fadeInLeft)}>
-              <PollIcon className={`${classes.icon} ${classes.orange}`} />
-              <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-                Create efficient polls
-              </Typography>
-              <Typography component="p">
-                Easy to create polls. Just name your poll, add as many options as you want and save it with one click.
-              </Typography>
-            </div>
-            <div className={classNames(classes.option, classes.noOpacity, optionsVisible && classes.fadeInCenter)}>
-              <ShareIcon className={`${classes.icon} ${classes.orange}`} />
-              <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-                Share to get results
-              </Typography>
-              <Typography component="p">
-                Share your polls and polls you like with your friends via direct link or via popular social networks in a one-click way
-              </Typography>
-            </div>
-            <div className={classNames(classes.option, classes.noOpacity, optionsVisible && classes.fadeInRight)}>
-              <VoteIcon className={`${classes.icon} ${classes.orange}`} />
-              <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
-                Collect accurate results
-              </Typography>
-              <Typography component="p">
-                View results of voting on live graphs at any time in easy to understand format.
-              </Typography>
-            </div>
+            <FloatingOption Icon={PollIcon}
+              title="Create efficient polls"
+              description="Easy to create polls. Just name your poll, add as many options as you want and save it with one click"
+              classes={classes}
+              visible={optionsVisible}
+              animationClass={classes.fadeInLeft}
+            />
+            <FloatingOption Icon={ShareIcon}
+              title="Share to get results"
+              description="Share your polls and polls you like with your friends via direct link or via popular social networks in a one-click way"
+              classes={classes}
+              visible={optionsVisible}
+              animationClass={classes.fadeInCenter}
+            />
+            <FloatingOption Icon={ResultIcon}
+              title="Collect accurate results"
+              description="View results of voting on live graphs at any time in easy to understand format"
+              classes={classes}
+              visible={optionsVisible}
+              animationClass={classes.fadeInRight}
+            />
           </div>
         </VisibilitySensor>
       </div>
     );
   }
+}
+
+function FloatingOption({ Icon, title, description, classes, visible, animationClass }) {
+  return (
+    <div className={classNames(classes.option, classes.noOpacity, visible && animationClass)}>
+      <Icon className={`${classes.icon} ${classes.orange}`} />
+      <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
+        {title}
+      </Typography>
+      <Typography component="p">
+        {description}
+      </Typography>
+    </div>
+  )
 }
 
 HomePage.propTypes = {
