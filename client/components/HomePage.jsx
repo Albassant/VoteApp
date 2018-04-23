@@ -67,7 +67,7 @@ const styles = theme => ({
     height: '72px'
   },
   button: {
-    backgroundColor: '#ffb300',
+    backgroundColor: '#fff',
   },
   toolbar: {
     ...theme.mixins.toolbar,
