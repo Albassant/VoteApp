@@ -31,15 +31,12 @@ class NewPollPage extends React.Component {
   processForm(event) {
     event.preventDefault();
     PollStore.addChangeListener(this._handleChange);
-    console.log('create poll');
     PollActions.createPoll(this.state.poll);
   }
 
   _handleChange() {
     PollStore.removeChangeListener(this._handleChange);
-
     const poll = PollStore.getPoll();
-    console.log('got id of created poll');
     this.props.history.push(`/polls/${poll._id}`);
   }
 

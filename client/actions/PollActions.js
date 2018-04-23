@@ -38,8 +38,6 @@ const PollActions = {
         })
       )
       .catch(err => {
-
-        console.log(err);
         AppDispatcher.dispatch({
           type: ActionTypes.RECEIVE_POLLS_FAIL,
           error: err
@@ -70,18 +68,16 @@ const PollActions = {
   createPoll(poll) {
     API.createPoll(poll)
       .then(({ data }) => {
-        console.log('success');
         AppDispatcher.dispatch({
           type: ActionTypes.ADD_NEW_POLL_SUCCESS,
           poll: data
         })
       })
       .catch(err => {
-        console.log(err);
-        // AppDispatcher.dispatch({
-        //   type: ActionTypes.ADD_NEW_POLL_FAIL,
-        //   error: err.response.data.error
-        // })
+        AppDispatcher.dispatch({
+          type: ActionTypes.ADD_NEW_POLL_FAIL,
+          error: err.response.data.error
+        })
       });
   },
 

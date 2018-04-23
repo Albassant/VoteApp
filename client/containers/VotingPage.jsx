@@ -71,10 +71,8 @@ class VotingPage extends React.Component {
     const { match: { params } } = this.props;
     PollStore.addChangeListener(this._onChange);
 
-    console.log('voting')
     if (Auth.isUserAuthenticated())
     {
-      console.log('voting isUserAuthenticated')
       PollActions.getPoll(params.id);
     }
   }
@@ -94,7 +92,6 @@ class VotingPage extends React.Component {
   }
 
   handleCopyToClipboard() {
-    console.log('on copy to clipboard');
     this.setState({ showSnackbar: true });
   }
 

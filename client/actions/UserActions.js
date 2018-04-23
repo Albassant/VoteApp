@@ -26,15 +26,12 @@ const UserActions = {
   register(userData) {
     API.register(userData)
       .then(({ data }) => {
-        console.log(data.message);
         AppDispatcher.dispatch({
           type: ActionTypes.REGISTER_SUCCESS,
           message: data.message
         })
       })
       .catch(error => {
-        console.log('register failed ', error.response.data.message);
-        console.log('errors ', error.response.data.errors);
         AppDispatcher.dispatch({
           type: ActionTypes.REGISTER_FAIL,
           errors: error.response.data.errors
