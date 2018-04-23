@@ -3,7 +3,7 @@ import Auth from '../modules/Auth';
 
 const HTTP = function() {
   return axios.create({
-    baseURL: `https://voteapp-albassant.c9users.io/`,
+    baseURL: `https://still-inlet-27997.herokuapp.com/`,
     headers: {
       Authorization: `Bearer ${Auth.getToken()}`
     }
