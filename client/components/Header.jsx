@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import classNames from 'classnames';
 
@@ -130,8 +130,10 @@ class Header extends React.Component {
             <Button
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
-              component={({props}) =>
-                <NavLink exact to='/' {...props} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}/>}
+              component={
+                ({props}) =>
+                  <Link to='/' {...props} />
+              }
             >
               About
             </Button>
@@ -208,3 +210,7 @@ Header.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(Header);
+
+/*
+ className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}
+ */
