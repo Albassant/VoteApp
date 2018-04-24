@@ -130,7 +130,15 @@ class Header extends React.Component {
             <Button
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
-              component={(props) => <Link to='/' {...props}>About</Link>}
+              component={(props) => (
+                <Link to='/'
+                  className={classNames(classes.link, classes.white)}
+                  activeStyle={{textDecoration: 'underline'}}
+                  {...props}
+                >
+                  About
+                </Link>)
+              }
             />
             <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
               <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
@@ -205,7 +213,3 @@ Header.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(Header);
-
-/*
- className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}
- */
