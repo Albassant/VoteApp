@@ -130,10 +130,7 @@ class Header extends React.Component {
             <Button
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
-              component={
-                ({props}) =>
-                  <Link to='/' {...props} />
-              }
+              component={(props) => <Link to='/' {...props} />}
             >
               About
             </Button>
