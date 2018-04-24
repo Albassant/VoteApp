@@ -133,7 +133,7 @@ class Header extends React.Component {
               component={(props) => (
                 <Link to='/'
                   className={classNames(classes.link, classes.white)}
-                  activeStyle={{textDecoration: 'underline'}}
+                  activeStyle={{textDecoration: 'underline', color: "rgba(0, 0, 0, 0.54)"}}
                   {...props}
                 >
                   About
