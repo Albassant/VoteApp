@@ -127,10 +127,13 @@ class Header extends React.Component {
                 VoteApp!
               </NavLink>
             </Typography>
-            <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
-              <NavLink exact to={'/'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
-                About
-              </NavLink>
+            <Button
+              color="inherit"
+              className={classNames(classes.leftButtons, classes.navButton)}
+              component={({props}) =>
+                <NavLink exact to='/' {...props} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}/>}
+            >
+              About
             </Button>
             <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
               <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
