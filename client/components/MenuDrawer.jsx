@@ -51,16 +51,20 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
     </div>
     <Divider />
       <List>
-        <ListItem button>
-          <NavLink to='/public/polls' className={classes.item} activeStyle={{textDecoration: 'underline'}}>
-            <ListItemText primary="Polls" />
-          </NavLink>
-          </ListItem>
+        <ListItem
+          button
+          className={classes.item}
+          component={(props) => <NavLink to='/public/polls' activeStyle={{textDecoration: 'underline'}} {...props} />}
+        >
+          <ListItemText primary="Polls" />
+        </ListItem>
 
-        <ListItem button>
-          <NavLink exact to='/' className={classes.item} activeStyle={{textDecoration: 'underline'}}>
-            <ListItemText primary="About" />
-          </NavLink>
+        <ListItem
+          button
+          className={classes.item}
+          component={(props) => <NavLink exact to='/' activeStyle={{textDecoration: 'underline'}} {...props} />}
+        >
+          <ListItemText primary="About" />
         </ListItem>
       </List>
   </Drawer>

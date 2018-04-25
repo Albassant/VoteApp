@@ -13,6 +13,7 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
+import MoreIcon from 'material-ui-icons/MoreVert';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
 import { common } from './styles/commonStyles';
@@ -45,6 +46,16 @@ const styles = theme => ({
   },
   rightButtonsShift: {
     marginRight: -12,
+  },
+  separate: {
+     [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  group: {
+     [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
   hide: {
     display: 'none',
@@ -185,20 +196,59 @@ class Header extends React.Component {
 
             { !Auth.isUserAuthenticated() &&
               <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
-                <Button
-                  color="inherit"
-                  className={classes.navButton}
-                  component={(props) => <NavLink to={'/login'} activeStyle={{textDecoration: 'underline'}} {...props} />}
-                >
-                  Log in
-                </Button>
-                <Button
-                  color="inherit"
-                  className={classes.navButton}
-                  component={(props) => <NavLink to={'/register'} activeStyle={{textDecoration: 'underline'}} {...props} />}
-                >
-                  Register
-                </Button>
+                <div className={classes.separate}>
+                  <Button
+                    color="inherit"
+                    className={classes.navButton}
+                    component={(props) => <NavLink to={'/login'} activeStyle={{textDecoration: 'underline'}} {...props} />}
+                  >
+                    Log in
+                  </Button>
+                  <Button
+                    color="inherit"
+                    className={classes.navButton}
+                    component={(props) => <NavLink to={'/register'} activeStyle={{textDecoration: 'underline'}} {...props} />}
+                  >
+                    Register
+                  </Button>
+                </div>
+                <div className={classes.group}>
+                  <IconButton
+                    aria-owns={open ? 'menu-login' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleMenu}
+                    color="inherit"
+                  >
+                    <MoreIcon />
+                  </IconButton>
+                  <Menu
+                    id="menu-login"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={this.handleClose}
+                  >
+                    <MenuItem
+                      onClick={this.handleClose}
+                      component={(props) => <NavLink exact to={'/login'} className={classNames(classes.link, classes.black)} {...props} />}
+                    >
+                      Log in
+                    </MenuItem>
+                    <MenuItem
+                      onClick={this.handleClose}
+                      component={(props) => <NavLink to={'/register'} className={classNames(classes.link, classes.black)} {...props} />}
+                    >
+                      Register
+                    </MenuItem>
+                  </Menu>
+                </div>
               </div>
             }
         </Toolbar>
