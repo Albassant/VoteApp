@@ -67,10 +67,10 @@ const styles = theme => ({
   black: common.black,
   white: common.white,
   navButton: {
+    textDecoration: 'none',
     '&:hover': {
       backgroundColor: 'inherit',
       textDecoration: 'underline',
-      color: "rgba(0, 0, 0, 0.54)"
     },
   },
 });
@@ -131,15 +131,17 @@ class Header extends React.Component {
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
               component={(props) => (
-                <Link to='/'
-                  className={classNames(classes.link, classes.white)}
-                  activeStyle={{textDecoration: 'underline', color: "rgba(0, 0, 0, 0.54)"}}
+                <NavLink exact to='/'
+
+                  activeStyle={{textDecoration: 'underline'}}
                   {...props}
                 >
                   About
-                </Link>)
+                </NavLink>)
               }
-            />
+            >
+              About
+            </Button>
             <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
               <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
                 Polls
