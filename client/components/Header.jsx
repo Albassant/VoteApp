@@ -61,7 +61,8 @@ const styles = theme => ({
     display: 'inline-flex',
     cursor: 'pointer',
     marginRight: '10px',
-    marginLeft: '12px'
+    marginLeft: '12px',
+    textDecoration: 'none',
   },
   link: common.link,
   black: common.black,
@@ -122,30 +123,23 @@ class Header extends React.Component {
               color="inherit"
               noWrap
               className={classes.logo}
+              component={(props) => <NavLink to={'/'} {...props} />}
             >
-              <NavLink className={classNames(classes.link, classes.white)} to={'/'}>
-                VoteApp!
-              </NavLink>
+              VoteApp!
             </Typography>
             <Button
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
-              component={(props) => (
-                <NavLink exact to='/'
-
-                  activeStyle={{textDecoration: 'underline'}}
-                  {...props}
-                >
-                  About
-                </NavLink>)
-              }
+              component={(props) => <NavLink exact to='/' activeStyle={{textDecoration: 'underline'}} {...props} />}
             >
               About
             </Button>
-            <Button color="inherit" className={classNames(classes.leftButtons, classes.navButton)}>
-              <NavLink to={'/public/polls'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
-                Polls
-              </NavLink>
+            <Button
+              color="inherit"
+              className={classNames(classes.leftButtons, classes.navButton)}
+              component={(props) => <NavLink to='/public/polls' activeStyle={{textDecoration: 'underline'}} {...props} />}
+            >
+              Polls
             </Button>
           </div>
            {Auth.isUserAuthenticated() && (
@@ -173,15 +167,17 @@ class Header extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>
-                    <NavLink exact to={'/'} className={classNames(classes.link, classes.black)}>
-                      My Account (TBD)
-                    </NavLink>
+                  <MenuItem
+                    onClick={this.handleClose}
+                    component={(props) => <NavLink exact to={'/'} className={classNames(classes.link, classes.black)} {...props} />}
+                  >
+                    My Account (TBD)
                   </MenuItem>
-                  <MenuItem onClick={this.handleClose}>
-                    <NavLink to={'/logout'} className={classNames(classes.link, classes.black)}>
-                      Log out
-                    </NavLink>
+                  <MenuItem
+                    onClick={this.handleClose}
+                    component={(props) => <NavLink to={'/logout'} className={classNames(classes.link, classes.black)} {...props} />}
+                  >
+                    Log out
                   </MenuItem>
                 </Menu>
               </div>
@@ -189,15 +185,19 @@ class Header extends React.Component {
 
             { !Auth.isUserAuthenticated() &&
               <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
-                <Button color="inherit" className={classes.navButton}>
-                  <NavLink to={'/login'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
-                    Log in
-                  </NavLink>
+                <Button
+                  color="inherit"
+                  className={classes.navButton}
+                  component={(props) => <NavLink to={'/login'} activeStyle={{textDecoration: 'underline'}} {...props} />}
+                >
+                  Log in
                 </Button>
-                <Button color="inherit" className={classes.navButton}>
-                  <NavLink to={'/register'} className={classNames(classes.link, classes.white)} activeStyle={{textDecoration: 'underline'}}>
-                    Register
-                  </NavLink>
+                <Button
+                  color="inherit"
+                  className={classes.navButton}
+                  component={(props) => <NavLink to={'/register'} activeStyle={{textDecoration: 'underline'}} {...props} />}
+                >
+                  Register
                 </Button>
               </div>
             }
