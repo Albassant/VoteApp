@@ -35,6 +35,10 @@ class LoginPage extends React.Component {
     UserStore.removeChangeListener(this._onResponseReceived);
   }
 
+  _onWindowResize() {
+    this.form.scrollIntoView();
+  }
+
   _onResponseReceived() {
     this.setState({ errors: UserStore.getErrors(), message: UserStore.getMessage() }, () => {
       if (UserStore.isSuccessful()) {

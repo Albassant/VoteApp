@@ -47,12 +47,12 @@ const styles = theme => ({
   rightButtonsShift: {
     marginRight: -12,
   },
-  separate: {
+  big: {
      [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
-  group: {
+  small: {
      [theme.breakpoints.up('md')]: {
       display: 'none',
     },
@@ -128,16 +128,7 @@ class Header extends React.Component {
           >
             <MenuIcon />
           </IconButton>
-          <div className={classes.leftGroup}>
-            <Typography
-              variant='title'
-              color="inherit"
-              noWrap
-              className={classes.logo}
-              component={(props) => <NavLink to={'/'} {...props} />}
-            >
-              VoteApp!
-            </Typography>
+          <div className={classNames(classes.leftGroup)}>
             <Button
               color="inherit"
               className={classNames(classes.leftButtons, classes.navButton)}
@@ -196,7 +187,7 @@ class Header extends React.Component {
 
             { !Auth.isUserAuthenticated() &&
               <div className={classNames(classes.rightButtons, {[classes.rightButtonsShift]: openDrawer})}>
-                <div className={classes.separate}>
+                <div className={classes.big}>
                   <Button
                     color="inherit"
                     className={classes.navButton}
@@ -212,7 +203,7 @@ class Header extends React.Component {
                     Register
                   </Button>
                 </div>
-                <div className={classes.group}>
+                <div className={classes.small}>
                   <IconButton
                     aria-owns={open ? 'menu-login' : null}
                     aria-haspopup="true"

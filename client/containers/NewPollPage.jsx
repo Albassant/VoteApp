@@ -3,7 +3,6 @@ import PollActions from '../actions/PollActions';
 import PollStore from '../stores/PollStore';
 
 import PollForm from '../components/PollForm';
-import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 
 class NewPollPage extends React.Component {
   constructor(props) {
@@ -97,4 +96,4 @@ class NewPollPage extends React.Component {
   }
 }
 
-export default withMenuWrapper(NewPollPage);
+export default NewPollPage;

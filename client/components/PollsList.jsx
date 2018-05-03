@@ -18,7 +18,7 @@ const styles = {
     width: '100%',
     minWidth: '350px',
     textAlign: 'center',
-    height: '100%'
+    height: '100%',
   },
   icons: {
     position: 'absolute',
@@ -26,12 +26,11 @@ const styles = {
     top: '0px',
     cursor: 'pointer'
   },
-  title: common.title,
   actions: common.actions,
   link: common.link,
   white: common.white,
 }
-//<Typography variant='title' className={classes.title}>{title}</Typography>
+//<Typography variant='title' className={classes.formTitle}>{title}</Typography>
 const PollsList = ({ polls, onDelete, classes}) => (
   <div>
     <Card className={classes.content} elevation={0}>

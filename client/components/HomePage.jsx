@@ -19,16 +19,25 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { common  } from './styles/commonStyles';
 import { getStylesForAnimation } from './styles/animations';
 
+
 const styles = theme => ({
   container: {
     display: 'flex',
     backgroundColor: '#3f51b5',
     color: '#fff',
-    height: '90vh',
+    minHeight: '90vh',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
     boxSizing: 'border-box',
+    paddingBottom: '64px',
+    paddingLeft: '32px',
+    paddingRight: '32px',
+  },
+  logo: {
+    height: '35vw',
+    width: 'auto',
+    maxHeight: '275px',
   },
   actions: {
     ...common.actions,
@@ -47,11 +56,13 @@ const styles = theme => ({
   optionsContainer: {
     display: 'flex',
     minHeight: '400px',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center', //fallback
+    justifyContent: 'space-around',
     alignItems: 'center',
     textAlign: 'center',
     flexWrap: 'wrap',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    paddingTop: '32px',
   },
   option: {
     flex: 1,
@@ -62,9 +73,11 @@ const styles = theme => ({
     },
   },
   icon: {
-    marginTop: '16px',
     width: '72px',
     height: '72px'
+  },
+  optionDesc: {
+    marginBottom: '32px',
   },
   button: {
     backgroundColor: '#fff',
@@ -96,6 +109,11 @@ class HomePage extends React.Component {
     this.handleOnVisibilityChange = this.handleOnVisibilityChange.bind(this);
   }
 
+  componentDidMount() {
+    this.optionsContainer = document.getElementById('options-container');
+    console.log(this.optionsContainer);
+  }
+
   handleOnVisibilityChange(isVisible) {
     if (this.state && !this.state.optionsVisible) {
       this.setState({ optionsVisible: isVisible});
@@ -110,7 +128,7 @@ class HomePage extends React.Component {
         <div className={classes.toolbar} />
         <div className={classes.container}>
           <div>
-            <img src="/logo.png" width='280px' alt="VoteApp logo" className={classNames(classes.noOpacity, classes.bounceInDown)}/>
+            <img src="/logo.png" width='280px' alt="VoteApp logo" className={classNames(classes.logo, classes.noOpacity, classes.bounceInDown)}/>
             <Typography variant='display2' color='inherit' className={classNames(classes.title, classes.noOpacity, classes.zoomIn)}>
               VoteApp!
             </Typography>
@@ -123,14 +141,17 @@ class HomePage extends React.Component {
               </Typography>
             }
             <CardActions className={classNames(classes.actions, classes.noOpacity, classes.fadeIn)}>
-              <Button variant='raised' className={classes.button}>
-                <Link to={ Auth.isUserAuthenticated() ? '/polls' : '/register' } className={`${classes.link} ${classes.black}`}>Get Started</Link>
+              <Button variant='raised'
+                className={classes.button}
+                component={(props) => <Link to={ Auth.isUserAuthenticated() ? '/polls' : '/register' } {...props} />}
+              >
+                Get Started
               </Button>
             </CardActions>
           </div>
         </div>
-        <VisibilitySensor onChange={this.handleOnVisibilityChange} partialVisibility={'bottom'} offset={{bottom: -300}}>
-          <div className={classes.optionsContainer}>
+        <div id="options-container" className={classes.optionsContainer}>
+          <VisibilitySensor onChange={this.handleOnVisibilityChange} minTopValue={10} >
             <FloatingOption Icon={PollIcon}
               title="Create efficient polls"
               description="Easy to create polls. Just name your poll, add as many options as you want and save it with one click"
@@ -138,6 +159,8 @@ class HomePage extends React.Component {
               visible={optionsVisible}
               animationClass={classes.fadeInLeft}
             />
+          </VisibilitySensor>
+          <VisibilitySensor onChange={this.handleOnVisibilityChange} minTopValue={10} >
             <FloatingOption Icon={ShareIcon}
               title="Share to get results"
               description="Share your polls and polls you like with your friends via direct link or via popular social networks in a one-click way"
@@ -145,6 +168,8 @@ class HomePage extends React.Component {
               visible={optionsVisible}
               animationClass={classes.fadeInCenter}
             />
+          </VisibilitySensor>
+          <VisibilitySensor onChange={this.handleOnVisibilityChange} minTopValue={10} >
             <FloatingOption Icon={ResultIcon}
               title="Collect accurate results"
               description="View results of voting on live graphs at any time in easy to understand format"
@@ -152,8 +177,8 @@ class HomePage extends React.Component {
               visible={optionsVisible}
               animationClass={classes.fadeInRight}
             />
-          </div>
-        </VisibilitySensor>
+          </VisibilitySensor>
+        </div>
       </div>
     );
   }
@@ -166,7 +191,7 @@ function FloatingOption({ Icon, title, description, classes, visible, animationC
       <Typography variant="headline" component="h2" className={`${classes.blackLight} ${classes.title}`}>
         {title}
       </Typography>
-      <Typography component="p">
+      <Typography component="p" className={classes.optionDesc}>
         {description}
       </Typography>
     </div>

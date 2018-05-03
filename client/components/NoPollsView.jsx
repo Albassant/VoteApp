@@ -14,10 +14,10 @@ const styles ={
   container: {
     ...common.container,
     height: '100%',
-    alignItems: 'start'
+    alignItems: 'start',
+    paddingTop: 0,
   },
   content: forms.content,
-  title: common.title,
   actions: common.actions,
   icons: {
     position: 'absolute',
@@ -32,10 +32,10 @@ const styles ={
 const NoPollsView = ({ title, description, link, buttonLabel, classes }) => (
   <div className={classes.container}>
     <Card className={classes.content} elevation={0}>
-      <Typography variant='title' className={classes.title}>
+      <Typography variant='title' gutterBottom>
         {title}
       </Typography>
-      <Typography variant='subheading' className={classes.title}>
+      <Typography variant='subheading' gutterBottom>
         {description}
       </Typography>
       <CardActions className={classes.actions}>

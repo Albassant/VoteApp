@@ -10,11 +10,12 @@ import HomePage from './components/HomePage.jsx';
 import PollsPage from './containers/PollsPage.jsx';
 import NewPollPage from './containers/NewPollPage.jsx';
 import VotingPage from './containers/VotingPage.jsx';
-
+import CssBaseline from 'material-ui/CssBaseline';
 
 ReactDOM.render((
     <Router>
       <div>
+        <CssBaseline />
         <Route exact path="/" component={HomePage}/>
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={LoginPage} />

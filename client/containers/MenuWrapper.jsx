@@ -11,6 +11,10 @@ import classNames from 'classnames';
 const drawerWidth = 240;
 
 const styles = theme => ({
+  contentWithoutFooter: {
+    minHeight: '100%',
+    paddingBottom: '182px',
+  },
   content: {
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
@@ -18,7 +22,6 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
      }),
     marginLeft: 0,
-    height: '100%'
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

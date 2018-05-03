@@ -17,7 +17,6 @@ const styles = {
     marginTop: '20px'
   },
   actions: common.actions,
-  title: common.title,
   content: {
     position: 'relative',
     width:'100%',

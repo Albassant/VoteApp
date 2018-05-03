@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import withMenuWrapper from '../containers/HOCs/withMenuWrapper.jsx';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -11,13 +12,12 @@ import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 
 const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
-import { common, forms } from './styles/commonStyles';
+import { common, forms, regForms } from './styles/commonStyles';
 
-const styles = {
+const styles = theme => ({
   container: common.container,
   ...forms,
   actions: common.actions,
-  title: common.title,
   button: {
     margin: '10px'
   },
@@ -27,7 +27,8 @@ const styles = {
     top: '0px',
     cursor: 'pointer'
   },
-}
+  toolbar: theme.mixins.toolbar
+});
 
 
 const PollForm = ({ classes,
@@ -38,56 +39,59 @@ const PollForm = ({ classes,
                     onRemoveOption,
                     poll,
                     valid }) => (
-  <div className={classes.container}>
-    <Card className={classes.content}>
-      <Typography variant='title' className={classes.title}>
-        New Poll
-      </Typography>
+  <div>
+    <div className={classes.toolbar} />
+    <div className={classes.container}>
+      <Card className={classes.content}>
+        <Typography variant='title' gutterBottom={true}>
+          New Poll
+        </Typography>
 
-      <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
 
-        <Typography variant="subheading">Name your poll</Typography>
-        <div className={classes.field}>
-          <TextField
-            name="name"
-            label={hints[0]}
-            onChange={onChangeName}
-            value={poll.name}
-            fullWidth
-            multiline
-            autoFocus={true}
-          />
-        </div>
+          <Typography variant="subheading">Name your poll</Typography>
+          <div className={classes.field}>
+            <TextField
+              name="name"
+              label={hints[0]}
+              onChange={onChangeName}
+              value={poll.name}
+              fullWidth
+              multiline
+              autoFocus={true}
+            />
+          </div>
 
-        <Typography variant="subheading">Options</Typography>
-        {
-          poll.options.map((opt, i) =>
-             <div key={i} className={classes.field}>
-              <TextField
-                name={`${i}`}
-                onChange={onChangeOptions}
-                label={i < 3 && hints[i+1] || 'Your Option'}
-                value={opt}
-                fullWidth
-                multiline
-              />
-              {
-                i > 1 &&
-                <IconButton color="secondary" className={classes.icons} onClick={onRemoveOption}>
-                  <RemoveIcon />
-                </IconButton>
-              }
-            </div>
-          )
-        }
+          <Typography variant="subheading">Options</Typography>
+          {
+            poll.options.map((opt, i) =>
+               <div key={i} className={classes.field}>
+                <TextField
+                  name={`${i}`}
+                  onChange={onChangeOptions}
+                  label={i < 3 && hints[i+1] || 'Your Option'}
+                  value={opt}
+                  fullWidth
+                  multiline
+                />
+                {
+                  i > 1 &&
+                  <IconButton color="secondary" className={classes.icons} onClick={onRemoveOption}>
+                    <RemoveIcon />
+                  </IconButton>
+                }
+              </div>
+            )
+          }
 
-        <CardActions className={classes.actions}>
-          <Button className={classes.button} variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
-          <Button className={classes.button} variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
-        </CardActions>
+          <CardActions className={classes.actions}>
+            <Button className={classes.button} variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
+            <Button className={classes.button} variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
+          </CardActions>
 
-      </form>
-    </Card>
+        </form>
+      </Card>
+    </div>
   </div>
 )
 
@@ -102,5 +106,5 @@ PollForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PollForm);
+export default withMenuWrapper(withStyles(styles, {withTheme: true})(PollForm));
 
