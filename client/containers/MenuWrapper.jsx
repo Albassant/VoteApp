@@ -8,30 +8,22 @@ import MenuDrawer from '../components/MenuDrawer.jsx';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 
-const drawerWidth = 240;
-
 const styles = theme => ({
-  contentWithoutFooter: {
-    minHeight: '100%',
-    paddingBottom: '182px',
+  fade: {
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: '1',
+    position: 'fixed',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    opacity: 1,
+    willChange: 'opacity',
+    transition: 'opacity 195ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
   },
-  content: {
-    flexGrow: 1,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-     }),
-    marginLeft: 0,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-     }),
-    marginLeft: drawerWidth
-  },
-  contentWithDrawer: {
-    marginLeft: drawerWidth,
+  hide: {
+    opacity: '0',
+    display: 'none'
   }
 })
 
@@ -65,10 +57,11 @@ class MenuWrapper extends React.Component {
       <div>
         <Header openDrawer={openDrawer} handleDrawerOpen={this.handleDrawerOpen} flat={flatHeader} />
         <MenuDrawer open={openDrawer} handleDrawerClose={this.handleDrawerClose} />
-        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})}>
+        <div>
           { children }
+          <div className={classNames(classes.fade, {[classes.hide]: !openDrawer})}></div>
         </div>
-        <div className={classNames(classes.content, {[classes.contentShift]: openDrawer})} >
+        <div>
           <Footer />
         </div>
       </div>

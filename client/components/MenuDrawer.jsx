@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import { withStyles } from 'material-ui/styles';
 
-import Drawer from 'material-ui/Drawer';
+import Drawer from 'material-ui/SwipeableDrawer';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
@@ -15,7 +15,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 const drawerWidth = 240;
 
 const styles = theme => ({
-  drawerPaper: {
+  list: {
     width: drawerWidth,
   },
   drawerHeader: {
@@ -42,7 +42,7 @@ const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
   <Drawer
     variant="persistent"
     open={open}
-    classes={{ paper: classes.drawerPaper }}
+    classes={{ paper: classes.list }}
   >
     <div className={classes.drawerHeader}>
       <IconButton onClick={handleDrawerClose}>
