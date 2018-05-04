@@ -18,7 +18,7 @@ const footerHeight = 182;
 const styles = theme => ({
   container: {
     flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
+    //minHeight: `calc(100vh - ${footerHeight}px)`,
     paddingTop: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3,
     boxSizing: 'border-box',
@@ -53,12 +53,12 @@ class PollsPage extends React.Component {
       }
     ];
   }
-
+//<div className={classes.toolbar} />
   render() {
     const { classes, isPublic } = this.props;
     return (
       <div className={classes.container}>
-        <div className={classes.toolbar} />
+
         <div className={classes.content}>
           <Tabs tabHeads={this.tabHeads} isPublic={isPublic}>
             { Auth.isUserAuthenticated()

@@ -18,7 +18,8 @@ const styles = theme => ({
     minWidth: '350px',
     margin: '0 auto',
     textAlign: 'center',
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 3,
+    backgroundColor: 'inherit'
   },
   actions: {
     ...common.actions,

@@ -20,16 +20,6 @@ import { withStyles } from 'material-ui/styles';
 const footerHeight = 182;
 
 const styles = theme => ({
-  container: {
-    flex: 1,
-    minHeight: `calc(100vh - ${footerHeight}px)`,
-    paddingTop: theme.spacing.unit * 3,
-    boxSizing: 'border-box',
-    overflowY: 'scroll'
-  },
-  toolbar: {
-    ...theme.mixins.toolbar,
-  },
   title: {
     textAlign: 'center',
   }
@@ -115,10 +105,8 @@ class VotingPage extends React.Component {
     const { classes, openDrawer } = this.props;
 
     if (isLoading || !poll) return (<LoadingIndicator />);
-
     return (
-      <div className={classes.container}>
-        <div className={classes.toolbar} />
+      <div>
         <Typography variant='display1' className={classes.title}>
           {poll.name}
         </Typography>

@@ -21,9 +21,6 @@ import { getStylesForAnimation } from './styles/animations';
 
 
 const styles = theme => ({
-  content: {
-
-  },
   container: {
     display: 'flex',
     backgroundColor: '#3f51b5',
@@ -32,7 +29,6 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    boxSizing: 'border-box',
     paddingBottom: '64px',
     paddingLeft: '32px',
     paddingRight: '32px',
@@ -42,10 +38,7 @@ const styles = theme => ({
     width: 'auto',
     maxHeight: '275px',
   },
-  actions: {
-    ...common.actions,
-    marginTop: 20
-  },
+  actions: common.actions,
   link: {
     ...common.link,
     fontWeight: '500'
@@ -127,8 +120,7 @@ class HomePage extends React.Component {
     const { classes } = this.props;
     const { optionsVisible } = this.state;
     return (
-      <div className={classes.content}>
-        <div className={classes.toolbar} />
+      <div>
         <div className={classes.container}>
           <div>
             <img src="/logo.png" width='280px' alt="VoteApp logo" className={classNames(classes.logo, classes.noOpacity, classes.bounceInDown)}/>

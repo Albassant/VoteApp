@@ -17,7 +17,10 @@ const styles ={
     alignItems: 'start',
     paddingTop: 0,
   },
-  content: forms.content,
+  content: {
+    ...forms.content,
+    backgroundColor: 'inherit'
+  },
   actions: common.actions,
   icons: {
     position: 'absolute',

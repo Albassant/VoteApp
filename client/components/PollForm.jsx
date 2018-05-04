@@ -12,10 +12,9 @@ import RemoveIcon from 'material-ui-icons/RemoveCircleOutline';
 
 const hints = ['Your favourite hot beverage', 'Coffee', 'Tea'];
 
-import { common, forms, regForms } from './styles/commonStyles';
+import { common, forms } from './styles/commonStyles';
 
 const styles = theme => ({
-  container: common.container,
   ...forms,
   actions: common.actions,
   button: {
@@ -27,7 +26,6 @@ const styles = theme => ({
     top: '0px',
     cursor: 'pointer'
   },
-  toolbar: theme.mixins.toolbar
 });
 
 
@@ -39,60 +37,55 @@ const PollForm = ({ classes,
                     onRemoveOption,
                     poll,
                     valid }) => (
-  <div>
-    <div className={classes.toolbar} />
-    <div className={classes.container}>
-      <Card className={classes.content}>
-        <Typography variant='title' gutterBottom={true}>
-          New Poll
-        </Typography>
+  <Card className={classes.content}>
+    <Typography variant='title' gutterBottom={true}>
+      New Poll
+    </Typography>
 
-        <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
 
-          <Typography variant="subheading">Name your poll</Typography>
-          <div className={classes.field}>
+      <Typography variant="subheading">Name your poll</Typography>
+      <div className={classes.field}>
+        <TextField
+          name="name"
+          label={hints[0]}
+          onChange={onChangeName}
+          value={poll.name}
+          fullWidth
+          multiline
+          autoFocus={true}
+        />
+      </div>
+
+      <Typography variant="subheading">Options</Typography>
+      {
+        poll.options.map((opt, i) =>
+           <div key={i} className={classes.field}>
             <TextField
-              name="name"
-              label={hints[0]}
-              onChange={onChangeName}
-              value={poll.name}
+              name={`${i}`}
+              onChange={onChangeOptions}
+              label={i < 3 && hints[i+1] || 'Your Option'}
+              value={opt}
               fullWidth
               multiline
-              autoFocus={true}
             />
+            {
+              i > 1 &&
+              <IconButton color="secondary" className={classes.icons} onClick={onRemoveOption}>
+                <RemoveIcon />
+              </IconButton>
+            }
           </div>
+        )
+      }
 
-          <Typography variant="subheading">Options</Typography>
-          {
-            poll.options.map((opt, i) =>
-               <div key={i} className={classes.field}>
-                <TextField
-                  name={`${i}`}
-                  onChange={onChangeOptions}
-                  label={i < 3 && hints[i+1] || 'Your Option'}
-                  value={opt}
-                  fullWidth
-                  multiline
-                />
-                {
-                  i > 1 &&
-                  <IconButton color="secondary" className={classes.icons} onClick={onRemoveOption}>
-                    <RemoveIcon />
-                  </IconButton>
-                }
-              </div>
-            )
-          }
+      <CardActions className={classes.actions}>
+        <Button className={classes.button} variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
+        <Button className={classes.button} variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
+      </CardActions>
 
-          <CardActions className={classes.actions}>
-            <Button className={classes.button} variant='raised' color='primary' onClick={onAddOption}>Add option</Button>
-            <Button className={classes.button} variant='raised' type="submit" color='primary' disabled={!valid}>Submit</Button>
-          </CardActions>
-
-        </form>
-      </Card>
-    </div>
-  </div>
+    </form>
+  </Card>
 )
 
 

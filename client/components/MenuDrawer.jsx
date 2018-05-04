@@ -37,11 +37,13 @@ const styles = theme => ({
   }
 });
 //<div className={classes.toolbar} />
-const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
+const MenuDrawer = ({ classes, open, handleDrawerClose, handleDrawerOpen }) => (
   // openDrawer ?
   <Drawer
     variant="persistent"
     open={open}
+    onClose={handleDrawerClose}
+    onOpen={handleDrawerOpen}
     classes={{ paper: classes.list }}
   >
     <div className={classes.drawerHeader}>
@@ -75,6 +77,7 @@ MenuDrawer.propTypes = {
   open: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   handleDrawerClose: PropTypes.func,
+  handleDrawerOpen: PropTypes.func,
 }
 
 export default withStyles(styles, { withTheme: true })(MenuDrawer);

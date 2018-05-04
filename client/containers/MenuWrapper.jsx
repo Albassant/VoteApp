@@ -27,12 +27,16 @@ const styles = theme => ({
   },
   container: {
     position: 'relative',
-    minHeight: '100%',
-    paddingBottom: '190px'
+    minHeight: '100vh',
+    paddingBottom: '182px'
   },
   content: {
     width: '100%',
     minHeight: '100%',
+    paddingBottom: theme.spacing.unit * 3,
+  },
+  contentTopPadding: {
+    paddingTop: theme.spacing.unit * 4,
   },
   footer: {
     position: 'absolute',
@@ -40,7 +44,10 @@ const styles = theme => ({
     bottom: 0,
     left: 0,
     height: '182px'
-  }
+  },
+  toolbar: {
+    ...theme.mixins.toolbar,
+  },
 })
 
 
@@ -51,17 +58,13 @@ class MenuWrapper extends React.Component {
       openDrawer: false
     };
 
-    this.handleDrawerClose = this.handleDrawerClose.bind(this);
-    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
-  handleDrawerOpen() {
-    this.setState({ openDrawer: true });
+  toggleDrawer(open) {
+    this.setState({ openDrawer: open });
   };
 
-  handleDrawerClose() {
-    this.setState({ openDrawer: false });
-  };
 // var newChildren = React.Children.map(children, function(child)
 // {
 //   return React.cloneElement(child, { openDrawer: openDrawer })
@@ -71,16 +74,17 @@ class MenuWrapper extends React.Component {
     const { openDrawer } = this.state;
     return (
       <div>
-        <Header openDrawer={openDrawer} handleDrawerOpen={this.handleDrawerOpen} flat={flatHeader} />
-        <MenuDrawer open={openDrawer} handleDrawerClose={this.handleDrawerClose} />
+        <Header openDrawer={openDrawer} handleDrawerOpen={() => this.toggleDrawer(true)} flat={flatHeader} />
+        <MenuDrawer open={openDrawer} handleDrawerClose={() => this.toggleDrawer(false)} handleDrawerOpen={() => this.toggleDrawer(true)} />
         <div className={classes.container}>
-        <div className={classes.content}>
-          { children }
-          <div className={classNames(classes.fade, {[classes.hide]: !openDrawer})}></div>
-        </div>
-        <div className={classes.footer}>
-          <Footer />
-        </div>
+          <div className={classes.toolbar} />
+          <div className={classNames(classes.content, {[classes.contentTopPadding]: !flatHeader})}>
+            { children }
+            <div className={classNames(classes.fade, {[classes.hide]: !openDrawer})}></div>
+          </div>
+          <div className={classes.footer}>
+            <Footer />
+          </div>
         </div>
       </div>
     );

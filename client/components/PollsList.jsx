@@ -64,7 +64,6 @@ const PollsList = ({ polls, onDelete, classes}) => (
 PollsList.propTypes = {
   classes: PropTypes.object.isRequired,
   polls: PropTypes.array.isRequired,
-  // title: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(PollsList);

@@ -3,13 +3,9 @@ import green from 'material-ui/colors/green';
 const footerHeight = 182;
 
 const common = {
-  container: {
-    height: `calc(100% - ${footerHeight}px)`,
-    paddingTop: '84px',
-    paddingBottom: '64px',
-  },
   actions: {
     justifyContent: 'center',
+    marginTop: '10px'
   },
   link: {
     textDecoration: 'none'
@@ -33,11 +29,11 @@ const common = {
 
 const forms = {
   content: {
-    width: '25%',
+    width: '50%',
     minWidth: '280px',
     textAlign: 'center',
     padding: '40px',
-    margin: '0 auto'
+    margin: '0 auto',
   },
   field: {
     margin: '20px 0',
@@ -47,16 +43,10 @@ const forms = {
 
 const regForms = {
   content: {
-    width: '25%',
-    minWidth: '280px',
-    textAlign: 'center',
-    padding: '40px',
-    margin: '0 auto'
+    ...forms.content,
+    width: '30%'
   },
-  field: {
-    margin: '20px 0px',
-    position: 'relative',
-  },
+  field: forms.field,
   message: {
     color: green[500],
     marginTop: '10px'

@@ -25,10 +25,10 @@ const styles = theme => ({
     margin: '10px auto',
     textAlign: 'center',
     padding: theme.spacing.unit * 4,
+    backgroundColor: 'inherit'
   },
   actions: {
     ...common.actions,
-    marginTop: '10px'
   },
   shareButton: {
     cursor: 'pointer'
