@@ -21,6 +21,9 @@ import { getStylesForAnimation } from './styles/animations';
 
 
 const styles = theme => ({
+  content: {
+
+  },
   container: {
     display: 'flex',
     backgroundColor: '#3f51b5',
@@ -124,7 +127,7 @@ class HomePage extends React.Component {
     const { classes } = this.props;
     const { optionsVisible } = this.state;
     return (
-      <div>
+      <div className={classes.content}>
         <div className={classes.toolbar} />
         <div className={classes.container}>
           <div>

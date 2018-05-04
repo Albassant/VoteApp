@@ -16,21 +16,21 @@ const styles = {
   content: {
     position: 'relative',
     width: '100%',
-    minWidth: '350px',
-    textAlign: 'center',
     height: '100%',
+    textAlign: 'center',
+    backgroundColor: 'inherit'
   },
   icons: {
     position: 'absolute',
     right: '0px',
-    top: '0px',
+    top: '-24px',
     cursor: 'pointer'
   },
   actions: common.actions,
   link: common.link,
   white: common.white,
 }
-//<Typography variant='title' className={classes.formTitle}>{title}</Typography>
+
 const PollsList = ({ polls, onDelete, classes}) => (
   <div>
     <Card className={classes.content} elevation={0}>

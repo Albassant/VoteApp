@@ -24,6 +24,22 @@ const styles = theme => ({
   hide: {
     opacity: '0',
     display: 'none'
+  },
+  container: {
+    position: 'relative',
+    minHeight: '100%',
+    paddingBottom: '190px'
+  },
+  content: {
+    width: '100%',
+    minHeight: '100%',
+  },
+  footer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
+    height: '182px'
   }
 })
 
@@ -57,12 +73,14 @@ class MenuWrapper extends React.Component {
       <div>
         <Header openDrawer={openDrawer} handleDrawerOpen={this.handleDrawerOpen} flat={flatHeader} />
         <MenuDrawer open={openDrawer} handleDrawerClose={this.handleDrawerClose} />
-        <div>
+        <div className={classes.container}>
+        <div className={classes.content}>
           { children }
           <div className={classNames(classes.fade, {[classes.hide]: !openDrawer})}></div>
         </div>
-        <div>
+        <div className={classes.footer}>
           <Footer />
+        </div>
         </div>
       </div>
     );

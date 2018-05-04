@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 
 function TabContainer({ children }) {
   return (
-    <Typography color="inherit" component="div" style={{ padding: 8 * 3 }}>
+    <Typography color="inherit" component="div" style={{ paddingTop: 8 * 3 }}>
       {children}
     </Typography>
   );
@@ -19,7 +19,7 @@ TabContainer.propTypes = {
 
 const styles = {
   root: {
-    width: '75%',
+    width: '90%',
     zIndex: 0
   }
 };
