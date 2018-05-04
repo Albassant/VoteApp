@@ -15,7 +15,7 @@ import { common } from './styles/commonStyles';
 const styles = theme => ({
   container: {
     width: '50%',
-    minWidth: '350px',
+    minWidth: '320px',
     margin: '0 auto',
     textAlign: 'center',
     padding: theme.spacing.unit * 3,

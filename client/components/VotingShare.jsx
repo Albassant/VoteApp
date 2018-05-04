@@ -21,7 +21,7 @@ import { common } from './styles/commonStyles';
 const styles = theme => ({
   container: {
     width: '50%',
-    minWidth: '320px',
+    minWidth: '300px',
     margin: '10px auto',
     textAlign: 'center',
     padding: theme.spacing.unit * 4,
@@ -29,9 +29,16 @@ const styles = theme => ({
   },
   actions: {
     ...common.actions,
+    [theme.breakpoints.down('xs')]: {
+      display: 'block'
+    },
   },
   shareButton: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    [theme.breakpoints.down('xs')]: {
+      width: '40px',
+      margin: '10px auto'
+    },
   }
 })
 

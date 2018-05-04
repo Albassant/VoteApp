@@ -19,7 +19,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       padding: '20px 0px',
-      width: '100%',
+      width: '90%',
       minWidth: '300px'
     },
   },
