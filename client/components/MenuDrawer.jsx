@@ -5,14 +5,14 @@ import { NavLink } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import { withStyles } from 'material-ui/styles';
 
-import Drawer from 'material-ui/SwipeableDrawer';
+import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const styles = theme => ({
   list: {
@@ -25,9 +25,6 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
-  toolbar: {
-    ...theme.mixins.toolbar,
-  },
   item: {
     textDecoration: 'none',
     '&:hover': {
@@ -36,15 +33,12 @@ const styles = theme => ({
     },
   }
 });
-//<div className={classes.toolbar} />
-const MenuDrawer = ({ classes, open, handleDrawerClose, handleDrawerOpen }) => (
-  // openDrawer ?
+
+const MenuDrawer = ({ classes, open, handleDrawerClose }) => (
   <Drawer
     variant="persistent"
     open={open}
     onClose={handleDrawerClose}
-    onOpen={handleDrawerOpen}
-    classes={{ paper: classes.list }}
   >
     <div className={classes.drawerHeader}>
       <IconButton onClick={handleDrawerClose}>
@@ -52,7 +46,7 @@ const MenuDrawer = ({ classes, open, handleDrawerClose, handleDrawerOpen }) => (
       </IconButton>
     </div>
     <Divider />
-      <List>
+      <List className={classes.list}>
         <ListItem
           button
           className={classes.item}
@@ -70,14 +64,12 @@ const MenuDrawer = ({ classes, open, handleDrawerClose, handleDrawerOpen }) => (
         </ListItem>
       </List>
   </Drawer>
-  // : null
 )
 
 MenuDrawer.propTypes = {
   open: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   handleDrawerClose: PropTypes.func,
-  handleDrawerOpen: PropTypes.func,
 }
 
 export default withStyles(styles, { withTheme: true })(MenuDrawer);

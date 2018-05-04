@@ -18,7 +18,7 @@ import AccountCircle from 'material-ui-icons/AccountCircle';
 
 import { common } from './styles/commonStyles';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const styles = theme => ({
   appBar: {

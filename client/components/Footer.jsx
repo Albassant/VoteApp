@@ -6,10 +6,6 @@ import Typography from 'material-ui/Typography';
 
 const styles = {
   footer: {
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
-    // right: 0,
     backgroundColor: '#e0e0e0',
     color: 'rgba(0, 0, 0, 0.87)',
     padding: '16px',

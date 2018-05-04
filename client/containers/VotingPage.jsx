@@ -15,15 +15,6 @@ import Typography from 'material-ui/Typography';
 import withMenuWrapper from './HOCs/withMenuWrapper.jsx';
 import NoPollsView from '../components/NoPollsView';
 
-import { withStyles } from 'material-ui/styles';
-
-const footerHeight = 182;
-
-const styles = theme => ({
-  title: {
-    textAlign: 'center',
-  }
-});
 
 function getPollDataFromFlux() {
   return {
@@ -102,12 +93,11 @@ class VotingPage extends React.Component {
     }
 
     const { poll, isLoading, showSnackbar } = this.state;
-    const { classes, openDrawer } = this.props;
 
     if (isLoading || !poll) return (<LoadingIndicator />);
     return (
       <div>
-        <Typography variant='display1' className={classes.title}>
+        <Typography variant='display1' style={{textAlign: 'center', marginBottom: '20px'}}>
           {poll.name}
         </Typography>
         { !poll.voted &&
@@ -123,7 +113,6 @@ class VotingPage extends React.Component {
           <VotingChart
             labels={poll.questions.map(q => q.question)}
             data={poll.questions.map(q => q.rating)}
-            openDrawer={openDrawer}
           />
         }
         { (poll.voted || poll.owner) &&
@@ -139,9 +128,4 @@ class VotingPage extends React.Component {
   }
 }
 
-VotingPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-
-export default withMenuWrapper(withStyles(styles, { withTheme: true })(VotingPage));
+export default withMenuWrapper(VotingPage);

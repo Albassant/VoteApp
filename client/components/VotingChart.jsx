@@ -7,22 +7,29 @@ import Card from 'material-ui/Card';
 
 import { common } from './styles/commonStyles';
 
-const styles = {
+const styles = theme => ({
   container: {
     width: '50%',
-    minWidth: '350px',
-    margin: '10px auto',
+    margin: '0 auto',
     textAlign: 'center',
     padding: '40px',
-    marginTop: '20px'
+    [theme.breakpoints.down('sm')]: {
+      padding: '20px 0px',
+      width: '90%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: '20px 0px',
+      width: '100%',
+      minWidth: '300px'
+    },
   },
   actions: common.actions,
   content: {
     position: 'relative',
-    width:'100%',
+    width: '100%',
     height:'auto',
   }
-};
+});
 
 
 function VotingChart ({ labels, data, classes }) {
@@ -35,6 +42,8 @@ function VotingChart ({ labels, data, classes }) {
   };
 
   const options = {
+    maintainAspectRatio: true,
+    responsive: true,
     title: {
       display: false,
     },
@@ -73,12 +82,6 @@ function VotingChart ({ labels, data, classes }) {
     <Card className={classes.container}>
       <div className={classes.content}>
         <Bar data={chartData}
-          width={50}
-          height={25}
-          options={{
-            maintainAspectRatio: true,
-            responsive: true,
-          }}
           options={options}
           plugins={plugins}
         />
@@ -93,4 +96,4 @@ VotingChart.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(VotingChart);
+export default withStyles(styles, {withTheme: true})(VotingChart);
