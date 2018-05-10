@@ -111,7 +111,7 @@ class VotingPage extends React.Component {
         }
         { (poll.voted || poll.owner) &&
           <VotingChart
-            labels={poll.questions.map(q => q.question)}
+            datalabels={poll.questions.map(q => q.question)}
             data={poll.questions.map(q => q.rating)}
           />
         }

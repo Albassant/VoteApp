@@ -7,14 +7,18 @@ import Card from 'material-ui/Card';
 
 import { common } from './styles/commonStyles';
 
+import distinctColors from 'distinct-colors';
+import chroma from 'chroma-js';
+
+
 const styles = theme => ({
   container: {
-    width: '50%',
+    width: '75%',
     margin: '0 auto',
     textAlign: 'center',
     padding: '40px',
     [theme.breakpoints.down('sm')]: {
-      padding: '20px 0px',
+      padding: '40px 0px',
       width: '90%',
     },
     [theme.breakpoints.down('xs')]: {
@@ -32,13 +36,26 @@ const styles = theme => ({
 });
 
 
-function VotingChart ({ labels, data, classes }) {
+function VotingChart ({ datalabels, data, classes }) {
+
+  const palette = distinctColors({count: data.length});
+  const fillColors = palette.map(c => `rgba(${c.alpha(0.25).rgba()})`);
+  const outlineColors = palette.map(c => `rgba(${c.rgba()})`);
+  const datasets = data.map((d, i) => {
+      return {
+        label: datalabels[i],
+        data: [d],
+        backgroundColor: fillColors[i],
+        borderColor: outlineColors[i],
+        borderWidth: 1
+      }
+    });
+
+    console.log(datasets);
+
   const chartData = {
-    labels: labels,
-    datasets: [{
-      label: 'Votes',
-      data: data
-    }]
+    labels: ['Votes'],
+    datasets: datasets
   };
 
   const options = {
@@ -48,12 +65,19 @@ function VotingChart ({ labels, data, classes }) {
       display: false,
     },
     legend: {
-      display:false
+      display: true,
+      position: 'bottom',
     },
     scales: {
+      xAxes: [{
+        ticks: {
+          display: true,
+          autoSkip: false,
+        }
+      }],
       yAxes: [{
         ticks: {
-          beginAtZero:true,
+          beginAtZero: true,
           min: 0,
           callback: function(value, index, values) {
             if (Math.floor(value) === value) {
@@ -62,28 +86,14 @@ function VotingChart ({ labels, data, classes }) {
           }
         }
       }]
-    }
+    },
   };
-
-  const plugins = [{
-      beforeDatasetsDraw  : function(chart) {
-        const labels = chart.data.labels;
-        const meta = chart.data.datasets[0]._meta;
-        const key = Object.keys(meta)[0];
-
-        labels.forEach(function(e, i) {
-          var bar = meta[key].data[i]._model;
-          bar.backgroundColor = i % 2 == 0 ? common.orange.color : common.lightOrange.color;
-        });
-      }
-   }];
 
   return (
     <Card className={classes.container}>
       <div className={classes.content}>
         <Bar data={chartData}
           options={options}
-          plugins={plugins}
         />
       </div>
     </Card>
@@ -91,7 +101,7 @@ function VotingChart ({ labels, data, classes }) {
 }
 
 VotingChart.propTypes = {
-  labels: PropTypes.array.isRequired,
+  datalabels: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired
 };
