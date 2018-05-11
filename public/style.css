@@ -6,3 +6,48 @@ body {
   height: 100%;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+.legend {
+  text-align: left;
+  margin-left: 0;
+  padding-left: 40px;
+  font-size: 0.85rem;
+}
+
+.legend ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.legend li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.legend li > div {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  line-height: 2;
+}
+
+.legend .rect {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+@media screen and (max-width: 600px) {
+    .legend {
+      padding-left: 10px;
+      font-size: 0.75rem;
+    }
+    .legend li > div {
+      line-height: 1.2;
+    }
+    .legend .rect {
+      width: 20px;
+      height: 10px;
+    }
+}
