@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.1.0",
     "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.35",
-    "mongoose": "^4.11.13",
+    "mongoose": "^5.8.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prop-types": "^15.6.1",
